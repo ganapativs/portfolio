@@ -1,0 +1,36 @@
+:root {
+  --color-black: #181819;
+  --color-grey: #313030;
+  --color-white: #f0f3f9;
+  --color-blue: #4527a0;
+  --color-pink: #E1BEE7;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-black);
+  font-size: 16px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+a {
+  text-decoration: none;
+}
+
+a, a:focus, a:active, a:hover {
+  color: var(--color-pink);
+}
+
+a:focus, a:active, a:hover {
+  text-decoration: underline;
+}
