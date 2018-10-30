@@ -15,6 +15,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -25,6 +30,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "eslint-plugin-prettier": "^3.0.0"
+    "eslint-plugin-prettier": "^3.0.0",
+    "husky": "^1.1.2",
+    "pretty-quick": "^1.8.0"
   }
 }

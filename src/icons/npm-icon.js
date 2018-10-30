@@ -11,7 +11,7 @@ export default props => (
     <path
       fill="none"
       stroke="#cb3837"
-      stroke-width="22"
+      strokeWidth="22"
       d="M166 333h90m146-101v68m-45-68v68m-112-68v45m-11 34h213V199H65v112h113V210m-45 22v68m157-90v90"
     />
   </svg>

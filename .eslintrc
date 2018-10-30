@@ -4,6 +4,11 @@
         "prettier"
     ],
     "rules": {
-        "prettier/prettier": "error"
+        "prettier/prettier": ["error", {
+            "singleQuote": true,
+            "printWidth": 80,
+            "trailingComma": "all",
+            "jsxBracketSameLine": true
+        }]
     }
 }

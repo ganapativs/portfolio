@@ -9,16 +9,3 @@
   justify-content: center;
   color: var(--color-white);
 }
-
-.app--comments {
-  font-size: 20px;
-}
-
-.app--comment {
-  color: var(--color-grey);
-  font-style: italic;
-}
-
-.app--comment-text {
-  font-style: italic;
-}
