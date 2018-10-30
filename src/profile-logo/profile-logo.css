@@ -1,4 +1,3 @@
-
 .user__logo {
   width: 120px;
   height: 120px;
@@ -8,7 +7,12 @@
   margin: 30px auto;
 }
 
-.user__logo--bg, .user__logo--bg-rotate {
+.user__logo svg {
+  animation: wiggle 12s ease-out infinite both alternate;
+}
+
+.user__logo--bg,
+.user__logo--bg-rotate {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -25,18 +29,35 @@
   animation: spin 8s linear infinite;
 }
 
+@keyframes wiggle {
+  0% {
+    transform: translate3d(-5px, 5px, 0);
+  }
+  33.33% {
+    transform: translate3d(5px, -5px, 0);
+  }
+  66.66% {
+    transform: translate3d(-5px, -5px, 0);
+  }
+  100% {
+    transform: translate3d(5px, 5px, 0);
+  }
+}
+
 @keyframes morph {
   0% {
     border-radius: 50%;
-    border-radius: 40% 60% 40% 60% / 35% 30% 70% 65% ;
+    border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
     background: var(--color-orange);
-    box-shadow: inset 6px -6px 12px var(--color-red), inset 4px 0px 10px var(--color-blue);
+    box-shadow: inset 6px -6px 12px var(--color-red),
+      inset 4px 0px 10px var(--color-blue);
   }
   100% {
     border-radius: 50%;
     background: var(--color-red);
-    border-radius: 35% 65% 55% 45% / 48% 48% 52% 52% ;
-    box-shadow: inset 6px -6px 12px var(--color-orange), inset 4px 0px 10px var(--color-blue);
+    border-radius: 35% 65% 55% 45% / 48% 48% 52% 52%;
+    box-shadow: inset 6px -6px 12px var(--color-orange),
+      inset 4px 0px 10px var(--color-blue);
   }
 }
 
