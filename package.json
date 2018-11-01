@@ -23,7 +23,14 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,json,css}": ["eslint --fix", "git add"]
+    "src/**/*.{js,json}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "src/**/*.css": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -37,6 +44,7 @@
   "devDependencies": {
     "eslint-plugin-prettier": "^3.0.0",
     "husky": "^1.1.2",
-    "lint-staged": "^8.0.4"
+    "lint-staged": "^8.0.4",
+    "prettier": "^1.14.3"
   }
 }

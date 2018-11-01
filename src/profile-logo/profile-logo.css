@@ -10,7 +10,7 @@
 .user__logo--svg-wrapper {
   opacity: 1;
   transform: scale(1) rotate(0deg);
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  transition: opacity 0.3s 0.1s ease-out, transform 0.3s 0.1s ease-out;
 }
 
 .user__logo:hover .user__logo--svg-wrapper {
@@ -49,25 +49,25 @@
 }
 
 .user__logo--image {
-  width: 120%;
-  height: 120%;
-  left: -10%;
-  top: -10%;
+  width: 110%;
+  height: 110%;
+  left: -5%;
+  top: -5%;
   border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
   background-image: url("./images/ganapativs.jpg");
   background-size: cover;
   opacity: 0;
-  transform: scale(0.8) rotate(-5deg);
-  transition: opacity 0.25s ease-out, transform 0.25s ease-out,
-    border-radius 0.25s ease-out;
+  transform: scale(0.95) rotate(-5deg);
+  transition: opacity 0.1s ease-out, transform 0.2s ease-out,
+    border-radius 0.1s ease-out;
 }
 
 .user__logo:hover .user__logo--image {
   opacity: 1;
   transform: scale(1) rotate(0deg);
-  border-radius: 0;
+  border-radius: 50%;
   transition: opacity 0.4s ease-in, transform 0.4 ease-in,
-    border-radius 0.4s ease-in;
+    border-radius 0.8s ease-in;
 }
 
 @keyframes wiggle {
