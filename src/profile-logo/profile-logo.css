@@ -4,11 +4,11 @@
   padding: 30px 18px;
   text-align: center;
   position: relative;
-  margin: 30px auto;
+  margin: 50px auto;
 }
 
 .user__logo svg {
-  animation: wiggle 12s ease-out infinite both alternate;
+  animation: wiggle 10s ease-out infinite both alternate;
 }
 
 .user__logo--bg,
@@ -22,42 +22,48 @@
 }
 
 .user__logo--bg {
-  animation: morph 4s ease-in-out infinite both alternate;
+  animation: morph 8s ease-in-out infinite both alternate;
 }
 
 .user__logo--bg-rotate {
-  animation: spin 8s linear infinite;
+  animation: spin 12s linear infinite;
 }
 
 @keyframes wiggle {
   0% {
-    transform: translate3d(-5px, 5px, 0);
+    transform: scale(0.85) translate3d(-3px, 3px, 0);
   }
   33.33% {
-    transform: translate3d(5px, -5px, 0);
+    transform: translate3d(3px, -3px, 0);
   }
   66.66% {
-    transform: translate3d(-5px, -5px, 0);
+    transform: translate3d(-3px, -3px, 0);
   }
   100% {
-    transform: translate3d(5px, 5px, 0);
+    transform: scale(.95) translate3d(3px, 3px, 0);
   }
 }
 
 @keyframes morph {
   0% {
+    transform: scale(0.95);
     border-radius: 50%;
     border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
     background: var(--color-orange);
     box-shadow: inset 6px -6px 12px var(--color-red),
-      inset 4px 0px 10px var(--color-blue);
+      inset 4px 0px 10px var(--color-blue),
+      0 0 0 0 rgba(255,255,255, 0.15),
+      0 0 0 0 rgba(255,255,255, 0.03);
   }
   100% {
+    transform: scale(1.1);
     border-radius: 50%;
     background: var(--color-red);
     border-radius: 35% 65% 55% 45% / 48% 48% 52% 52%;
     box-shadow: inset 6px -6px 12px var(--color-orange),
-      inset 4px 0px 10px var(--color-blue);
+      inset 4px 0px 10px var(--color-blue),
+      0 0 0 20px transparent,
+      0 0 0 40px transparent;
   }
 }
 

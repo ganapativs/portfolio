@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import Links from './links/links';
-import ProfileLogo from './profile-logo/profile-logo';
+import React, { Suspense } from 'react';
 import './App.css';
+
+const ProfileLinks = React.lazy(() => import('./profile-links/profile-links'));
+const ProfileLogo = React.lazy(() => import('./profile-logo/profile-logo'));
 
 // .app__comments {
 //   font-size: 20px;
@@ -25,17 +26,17 @@ import './App.css';
 //             <div className="app__comment">&nbsp;*/</div>
 //           </Row>
 
-class App extends Component {
-  render() {
-    return (
-      <div className="app">
-        <header className="app__header">
+export default React.memo(function App(props) {
+  return (
+    <div className="app">
+      <header className="app__header">
+        <Suspense fallback={<div style={{ height: 220 }} />}>
           <ProfileLogo />
-          <Links />
-        </header>
-      </div>
-    );
-  }
-}
-
-export default App;
+        </Suspense>
+        <Suspense fallback={null}>
+          <ProfileLinks />
+        </Suspense>
+      </header>
+    </div>
+  );
+});
