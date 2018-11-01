@@ -7,12 +7,26 @@
   margin: 50px auto;
 }
 
+.user__logo--svg-wrapper {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.user__logo:hover .user__logo--svg-wrapper {
+  opacity: 0;
+  transform: scale(0.8) rotate(5deg);
+  transition: opacity 0.1s ease-in, transform 0.1s ease-in;
+}
+
 .user__logo svg {
   animation: wiggle 10s ease-out infinite both alternate;
 }
 
 .user__logo--bg,
-.user__logo--bg-rotate {
+.user__logo--bg-rotate,
+.user__logo--image--wrapper,
+.user__logo--image {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -22,11 +36,38 @@
 }
 
 .user__logo--bg {
+  overflow: hidden;
   animation: morph 8s ease-in-out infinite both alternate;
 }
 
 .user__logo--bg-rotate {
   animation: spin 12s linear infinite;
+}
+
+.user__logo--image--wrapper {
+  animation: spin 12s linear infinite reverse;
+}
+
+.user__logo--image {
+  width: 120%;
+  height: 120%;
+  left: -10%;
+  top: -10%;
+  border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
+  background-image: url("./images/ganapativs.jpg");
+  background-size: cover;
+  opacity: 0;
+  transform: scale(0.8) rotate(-5deg);
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out,
+    border-radius 0.25s ease-out;
+}
+
+.user__logo:hover .user__logo--image {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  border-radius: 0;
+  transition: opacity 0.4s ease-in, transform 0.4 ease-in,
+    border-radius 0.4s ease-in;
 }
 
 @keyframes wiggle {
@@ -40,7 +81,7 @@
     transform: translate3d(-3px, -3px, 0);
   }
   100% {
-    transform: scale(.95) translate3d(3px, 3px, 0);
+    transform: scale(0.95) translate3d(3px, 3px, 0);
   }
 }
 
@@ -51,9 +92,8 @@
     border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
     background: var(--color-orange);
     box-shadow: inset 6px -6px 12px var(--color-red),
-      inset 4px 0px 10px var(--color-blue),
-      0 0 0 0 rgba(255,255,255, 0.15),
-      0 0 0 0 rgba(255,255,255, 0.03);
+      inset 4px 0px 10px var(--color-blue), 0 0 0 0 rgba(255, 255, 255, 0.15),
+      0 0 0 0 rgba(255, 255, 255, 0.03);
   }
   100% {
     transform: scale(1.1);
@@ -61,14 +101,16 @@
     background: var(--color-red);
     border-radius: 35% 65% 55% 45% / 48% 48% 52% 52%;
     box-shadow: inset 6px -6px 12px var(--color-orange),
-      inset 4px 0px 10px var(--color-blue),
-      0 0 0 20px transparent,
+      inset 4px 0px 10px var(--color-blue), 0 0 0 20px transparent,
       0 0 0 40px transparent;
   }
 }
 
 @keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
   to {
-    transform: rotate(1turn);
+    transform: rotate(360deg);
   }
 }
