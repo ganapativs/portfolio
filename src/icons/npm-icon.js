@@ -1,12 +1,11 @@
-import React from "react";
+import React from 'react';
 export default props => (
   <svg
     {...props}
     xmlns="http://www.w3.org/2000/svg"
     aria-label="npm"
     role="img"
-    viewBox="0 0 512 512"
-  >
+    viewBox="0 0 512 512">
     <rect width="512" height="512" rx="15%" fill="#fff" />
     <path
       fill="none"

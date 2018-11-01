@@ -1,12 +1,11 @@
-import React from "react";
+import React from 'react';
 export default props => (
   <svg
     {...props}
     xmlns="http://www.w3.org/2000/svg"
     aria-label="Twitter"
     role="img"
-    viewBox="0 0 512 512"
-  >
+    viewBox="0 0 512 512">
     <rect width="512" height="512" rx="15%" fill="#1da1f3" />
     <path
       fill="#fff"

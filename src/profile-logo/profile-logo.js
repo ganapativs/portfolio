@@ -1,6 +1,6 @@
-import React from "react";
-import Logo from "../logo/meetguns";
-import "./profile-logo.css";
+import React from 'react';
+import Logo from '../logo/meetguns';
+import './profile-logo.css';
 
 export default React.memo(function ProfileLogo(props) {
   return (
