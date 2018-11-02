@@ -30,7 +30,7 @@ export default React.memo(function App(props) {
   return (
     <div className="app">
       <header className="app__header">
-        <Suspense fallback={<div style={{ height: 220 }} />}>
+        <Suspense maxDuration={500} fallback={<div style={{ height: 220 }} />}>
           <ProfileLogo />
         </Suspense>
         <Suspense fallback={null}>
