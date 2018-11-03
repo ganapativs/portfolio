@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import './App.css';
 
+const WithFonts = React.lazy(() => import('./with-fonts/with-fonts'));
 const ProfileLinks = React.lazy(() => import('./profile-links/profile-links'));
 const ProfileLogo = React.lazy(() => import('./profile-logo/profile-logo'));
 
@@ -28,15 +29,21 @@ const ProfileLogo = React.lazy(() => import('./profile-logo/profile-logo'));
 
 export default React.memo(function App(props) {
   return (
-    <div className="app">
-      <header className="app__header">
-        <Suspense maxDuration={500} fallback={<div style={{ height: 220 }} />}>
-          <ProfileLogo />
-        </Suspense>
-        <Suspense fallback={null}>
-          <ProfileLinks />
-        </Suspense>
-      </header>
-    </div>
+    <Suspense maxDuration={200} fallback={'Loading...'}>
+      <WithFonts>
+        <div className="app">
+          <header className="app__header">
+            <Suspense
+              maxDuration={200}
+              fallback={<div style={{ height: 220 }} />}>
+              <ProfileLogo />
+            </Suspense>
+            <Suspense fallback={null}>
+              <ProfileLinks />
+            </Suspense>
+          </header>
+        </div>
+      </WithFonts>
+    </Suspense>
   );
 });

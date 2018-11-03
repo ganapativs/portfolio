@@ -12,7 +12,7 @@ export default React.memo(function ProfileLinks(props) {
   const iconWidth = isMobile ? 30 : 16;
 
   return (
-    <Row className="app__links text-center animated fadeInUp faster delay-1s">
+    <Row className="app__links text-center animated fadeInUp faster">
       <Row className="app__link disp-i-block">
         <GitHubIcon width={iconWidth} style={{ verticalAlign: 'sub' }} />{' '}
         {isMobile ? null : (
