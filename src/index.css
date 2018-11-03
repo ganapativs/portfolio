@@ -11,6 +11,10 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 16px;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -20,7 +24,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--color-black);
-  font-size: 16px;
+}
+
+html.wf-active body{
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
 }
 
 code {

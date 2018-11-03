@@ -8,7 +8,7 @@ const FontResource = createResource(
     new Promise(resolve => {
       WebFont.load({
         google: {
-          families: FontFamilies.split(','),
+          families: FontFamilies.split('|').map(f => f.trim()),
         },
         // Adds `wf-active` class to html
         // use actual font when this class is applied
@@ -21,17 +21,24 @@ const FontResource = createResource(
 );
 
 function WithFonts(props) {
-  const { FontFamilies } = props;
+  const { FontFamilies, children } = props;
+
+  if (!FontFamilies) {
+    return children;
+  }
+
   const fontLoaded = FontResource.read(FontFamilies);
 
+  // Handle font loading error only once
+  // Optionally add retry logic when route changes
   useEffect(() => {
     if (!fontLoaded) {
-      // Report error to server with browser info
+      // Report error to server with browser & network info
       console.error(`Requested fonts couldn't be loaded: ${FontFamilies}`);
     }
   }, []);
 
-  return props.children;
+  return children;
 }
 
 WithFonts.propTypes = {
@@ -39,7 +46,7 @@ WithFonts.propTypes = {
 };
 
 WithFonts.defaultProps = {
-  FontFamilies: 'Lato:400,Droid Sans',
+  FontFamilies: '',
 };
 
 export default WithFonts;

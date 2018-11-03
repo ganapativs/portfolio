@@ -1,9 +1,8 @@
 import React, { Suspense } from 'react';
 import './App.css';
 
+const Header = React.lazy(() => import('./header/header'));
 const WithFonts = React.lazy(() => import('./with-fonts/with-fonts'));
-const ProfileLinks = React.lazy(() => import('./profile-links/profile-links'));
-const ProfileLogo = React.lazy(() => import('./profile-logo/profile-logo'));
 
 // .app__comments {
 //   font-size: 20px;
@@ -30,18 +29,9 @@ const ProfileLogo = React.lazy(() => import('./profile-logo/profile-logo'));
 export default React.memo(function App(props) {
   return (
     <Suspense maxDuration={200} fallback={'Loading...'}>
-      <WithFonts>
+      <WithFonts FontFamilies="Fira Mono|Source Sans Pro:300,400">
         <div className="app">
-          <header className="app__header">
-            <Suspense
-              maxDuration={200}
-              fallback={<div style={{ height: 220 }} />}>
-              <ProfileLogo />
-            </Suspense>
-            <Suspense fallback={null}>
-              <ProfileLinks />
-            </Suspense>
-          </header>
+          <Header />
         </div>
       </WithFonts>
     </Suspense>
