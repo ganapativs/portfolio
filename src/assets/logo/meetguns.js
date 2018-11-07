@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({ color = 'var(--color-black)', ...rest }) => (
+export default ({ color = 'var(--color-dark)', ...rest }) => (
   <svg
     id="Layer_1"
     data-name="Layer 1"

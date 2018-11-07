@@ -1,10 +1,18 @@
+import React from 'react';
+import { createGlobalStyle } from 'styled-components/macro';
+
+const GlobalStyles = createGlobalStyle`
 :root {
-  --color-black: #181819;
-  --color-grey: #313030;
-  --color-white: rgb(240, 243, 249);
+  --color-dark: ${props => (props.theme === 'dark' ? '#181819' : '#f0f3f9')};
+  --color-dark-light: #313030;
+  --color-light: ${props => (props.theme === 'dark' ? '#f0f3f9' : '#181819')};
+  --color-light-op-1: rgba(255, 255, 255, 0.2);
+  --color-light-op-2: rgba(255, 255, 255, 0.1);
+  --color-light-op-3: rgba(255, 255, 255, 0.05);
   --color-blue: #673AB7;
   --color-orange: #ff7146;
   --color-red: #f1404b;
+  --color-transparent: transparent;
 }
 
 * {
@@ -23,17 +31,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--color-black);
+  background-color: var(--color-dark);
 }
 
 html.wf-active body{
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 400;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
 }
 
 a {
@@ -103,41 +106,6 @@ a:focus, a:active, a:hover {
 .mar-bottom {
   margin-bottom: 10px;
 }
+`;
 
-.flex-row {
-  display: flex;
-  flex-direction: row;
-}
-
-.flex-column {
-  display: flex;
-  flex-direction: column;
-}
-
-.flex-align-center {
-  align-items: center;
-}
-
-.flex-justify-center {
-  justify-content: center;
-}
-
-.flex-1 {
-  flex: 1;
-}
-
-.flex-2 {
-  flex: 2;
-}
-
-.flex-3 {
-  flex: 3;
-}
-
-.full-width {
-  width: 100%;
-}
-
-.full-height {
-  height: 100%;
-}
+export default React.memo(GlobalStyles);

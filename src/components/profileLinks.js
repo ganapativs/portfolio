@@ -1,10 +1,27 @@
 import React from 'react';
 import useWindowSize from '@rehooks/window-size';
-import Row from '../row/row';
-import GitHubIcon from '../icons/github-icon.js';
-import NPMIcon from '../icons/npm-icon.js';
-import TwitterIcon from '../icons/twitter-icon.js';
-import './profile-links.css';
+import styled from 'styled-components/macro';
+import Row from './row';
+import GitHubIcon from '../assets/icons/github-icon.js';
+import NPMIcon from '../assets/icons/npm-icon.js';
+import TwitterIcon from '../assets/icons/twitter-icon.js';
+
+const Div = styled.div`
+  html.wf-active & {
+    font-family: 'Fira Mono', monospace;
+  }
+
+  .app__link {
+    text-align: left;
+    padding: 8px 10px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .app__link {
+      padding: 5px 10px;
+    }
+  }
+`;
 
 export default React.memo(function ProfileLinks(props) {
   let { innerWidth } = useWindowSize();
@@ -12,7 +29,7 @@ export default React.memo(function ProfileLinks(props) {
   const iconWidth = isMobile ? 30 : 16;
 
   return (
-    <Row className="app__links text-center animated fadeInUp faster">
+    <Div className="animated fadeInUp faster">
       <Row className="app__link disp-i-block">
         <GitHubIcon width={iconWidth} style={{ verticalAlign: 'sub' }} />{' '}
         {isMobile ? null : (
@@ -46,6 +63,6 @@ export default React.memo(function ProfileLinks(props) {
           </a>
         )}
       </Row>
-    </Row>
+    </Div>
   );
 });

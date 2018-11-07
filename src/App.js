@@ -1,15 +1,23 @@
-import React, { Suspense } from 'react';
-import './App.css';
+import React, { Suspense, useContext } from 'react';
+import styled from 'styled-components/macro';
+import ThemeContext from './contexts/themeContext';
+import Spinner from './components/spinner';
+import GlobalStyles from './globalStyles';
 
-const Header = React.lazy(() => import('./header/header'));
-const WithFonts = React.lazy(() => import('./with-fonts/with-fonts'));
+const Header = React.lazy(() => import('./components/header'));
+const WithFonts = React.lazy(() => import('./components/withFonts'));
+
+const Div = styled.div`
+  margin: 0 auto;
+  max-width: 500px;
+`;
 
 // .app__comments {
 //   font-size: 20px;
 // }
 
 // .app__comment {
-//   color: var(--color-grey);
+//   color: var(--color-dark-light);
 //   font-style: italic;
 // }
 
@@ -26,14 +34,25 @@ const WithFonts = React.lazy(() => import('./with-fonts/with-fonts'));
 //             <div className="app__comment">&nbsp;*/</div>
 //           </Row>
 
-export default React.memo(function App(props) {
+const App = React.memo(props => {
+  const theme = useContext(ThemeContext);
+  const { setTheme } = props;
+
   return (
-    <Suspense maxDuration={200} fallback={'Loading...'}>
-      <WithFonts FontFamilies="Fira Mono|Source Sans Pro:300,400">
-        <div className="app">
-          <Header />
-        </div>
-      </WithFonts>
-    </Suspense>
+    <>
+      <GlobalStyles theme={theme} />
+      <Suspense maxDuration={200} fallback={<Spinner />}>
+        <WithFonts FontFamilies="Fira Mono|Source Sans Pro:300,400">
+          <Div>
+            <div onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+              THeme
+            </div>
+            <Header />
+          </Div>
+        </WithFonts>
+      </Suspense>
+    </>
   );
 });
+
+export default App;

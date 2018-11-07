@@ -1,7 +1,0 @@
-.section {
-   padding: 10px;
-}
-
-.section-shadow {
-    box-shadow: 0 4px 10px var(--color-secondary);
-}
