@@ -44,8 +44,10 @@ const App = React.memo(props => {
       <Suspense maxDuration={200} fallback={<Spinner />}>
         <WithFonts FontFamilies="Fira Mono|Source Sans Pro:300,400">
           <Div>
-            <div onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
-              THeme
+            <div
+              style={{ color: 'var(--color-light)' }}
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+              Theme - {theme}
             </div>
             <Header />
           </Div>

@@ -6,9 +6,18 @@ const GlobalStyles = createGlobalStyle`
   --color-dark: ${props => (props.theme === 'dark' ? '#181819' : '#f0f3f9')};
   --color-dark-light: #313030;
   --color-light: ${props => (props.theme === 'dark' ? '#f0f3f9' : '#181819')};
-  --color-light-op-1: rgba(255, 255, 255, 0.2);
-  --color-light-op-2: rgba(255, 255, 255, 0.1);
-  --color-light-op-3: rgba(255, 255, 255, 0.05);
+  --color-light-op-1: ${props =>
+    props.theme === 'dark'
+      ? 'rgba(255, 255, 255, 0.2)'
+      : 'rgba(24, 24, 25, 0.2)'};
+  --color-light-op-2: ${props =>
+    props.theme === 'dark'
+      ? 'rgba(255, 255, 255, 0.1)'
+      : 'rgba(24, 24, 25, 0.1)'};
+  --color-light-op-3: ${props =>
+    props.theme === 'dark'
+      ? 'rgba(255, 255, 255, 0.05)'
+      : 'rgba(24, 24, 25, 0.05)'};
   --color-blue: #673AB7;
   --color-orange: #ff7146;
   --color-red: #f1404b;

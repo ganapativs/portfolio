@@ -6,9 +6,8 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   // styled component has issues with StrictMode like findDOMNode etc
-  // <StrictMode>
+  // But ReactDOM.createRoot uses StrictMode enabled by default
   <AppWithTheme />,
-  // </StrictMode>,
 );
 
 // If you want your app to work offline and load faster, you can change
