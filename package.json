@@ -2,19 +2,6 @@
   "name": "demo",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@rehooks/window-size": "^1.0.2",
-    "animate.css": "^3.7.0",
-    "classnames": "^2.2.6",
-    "prop-types": "^15.6.2",
-    "react": "^16.7.0-alpha.0",
-    "react-cache": "^2.0.0-alpha.1",
-    "react-dom": "^16.7.0-alpha.0",
-    "react-dynamic-import": "^0.2.2",
-    "react-scripts": "2.0.5",
-    "styled-components": "^4.0.3",
-    "webfontloader": "^1.6.28"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -47,8 +34,21 @@
   ],
   "devDependencies": {
     "eslint-plugin-prettier": "^3.0.0",
-    "husky": "^1.1.2",
-    "lint-staged": "^8.0.4",
-    "prettier": "^1.14.3"
+    "husky": "^1.2.0",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.2"
+  },
+  "dependencies": {
+    "@rehooks/window-size": "^1.0.2",
+    "animate.css": "^3.7.0",
+    "classnames": "^2.2.6",
+    "prop-types": "^15.6.2",
+    "react": "^16.7.0-alpha.2",
+    "react-cache": "^2.0.0-alpha.1",
+    "react-dom": "^16.7.0-alpha.2",
+    "react-dynamic-import": "^1.0.3",
+    "react-scripts": "^2.1.1",
+    "styled-components": "^4.1.1",
+    "webfontloader": "^1.6.28"
   }
 }
