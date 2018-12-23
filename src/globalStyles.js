@@ -64,60 +64,8 @@ a:focus, a:active, a:hover {
   text-decoration: underline;
 }
 
-.txt-center {
-  text-align: center;
-}
-
-.txt-left {
-  text-align: left;
-}
-
-.txt-right {
-  text-align: right;
-}
-
-.disp-i-block {
-  display: inline-block;
-}
-
-.pad {
-  padding: 10px;
-}
-
-.pad-left {
-  padding-left: 10px;
-}
-
-.pad-right {
-  padding-right: 10px;
-}
-
-.pad-top {
-  padding-top: 10px;
-}
-
-.pad-bottom {
-  padding-bottom: 10px;
-}
-
-.mar {
-  margin: 10px;
-}
-
-.mar-left {
-  margin-left: 10px;
-}
-
-.mar-right {
-  margin-right: 10px;
-}
-
-.mar-top {
-  margin-top: 10px;
-}
-
-.mar-bottom {
-  margin-bottom: 10px;
+.animation-delay-half-s {
+  animation-delay: 0.5s;
 }
 `;
 

@@ -17,8 +17,10 @@ const DevDesignation = styled.h3`
 const DevInfo = () => {
   return (
     <>
-      <DevName className="animated fadeInUp faster">Ganapati V S</DevName>
-      <DevDesignation className="animated fadeInUp faster">
+      <DevName className="animated fadeInUp faster animation-delay-half-s">
+        Ganapati V S
+      </DevName>
+      <DevDesignation className="animated fadeInUp faster animation-delay-half-s">
         JavaScript Developer, Lead{' '}
         <a
           href="https://twitter.com/tracxn"

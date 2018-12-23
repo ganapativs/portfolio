@@ -13,6 +13,7 @@ const Div = styled.div`
   .app__link {
     text-align: left;
     padding: 8px 10px;
+    display: inline-block;
   }
 
   @media screen and (min-width: 768px) {
@@ -32,8 +33,8 @@ export default React.memo(function ProfileLinks() {
   const iconWidth = isMobile ? 30 : 16;
 
   return (
-    <Div className="animated fadeInUp faster">
-      <Row className="app__link disp-i-block">
+    <Div className="animated fadeInUp faster animation-delay-half-s">
+      <Row className="app__link">
         <GitHubIcon width={iconWidth} style={{ verticalAlign: 'sub' }} />{' '}
         {isMobile ? null : (
           <a
@@ -44,7 +45,7 @@ export default React.memo(function ProfileLinks() {
           </a>
         )}
       </Row>
-      <Row className="app__link disp-i-block">
+      <Row className="app__link">
         <TwitterIcon width={iconWidth} style={{ verticalAlign: 'sub' }} />{' '}
         {isMobile ? null : (
           <a
@@ -55,7 +56,7 @@ export default React.memo(function ProfileLinks() {
           </a>
         )}
       </Row>
-      <Row className="app__link disp-i-block">
+      <Row className="app__link">
         <NPMIcon width={iconWidth} style={{ verticalAlign: 'sub' }} />{' '}
         {isMobile ? null : (
           <a

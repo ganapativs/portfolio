@@ -36,7 +36,7 @@ const Flex = styled.div`
   display: flex;
 `;
 
-const SquareLoader = props => (
+const SquareLoader = () => (
   <Div>
     <Flex>
       <DivSquare delay={0.2} />
