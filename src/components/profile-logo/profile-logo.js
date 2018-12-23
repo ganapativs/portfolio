@@ -139,7 +139,7 @@ export default React.memo(
     return (
       <UserLogoWrapper className="animated jello">
         <div className={`animated rotateIn${directions[randomNo]}`}>
-          <div className="animated fadeInDown">
+          <div className="animated fadeInUp">
             <UserLogo className="animated zoomInDown">
               <UserLogoBGRotate>
                 <UserLogoBG>
