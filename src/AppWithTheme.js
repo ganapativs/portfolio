@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import App from './App';
 import ThemeContext from './contexts/themeContext';
+import { TurnOffTransitionStyles } from './globalStyles';
 
 const defaultTheme = 'dark';
 
@@ -30,13 +31,31 @@ const setTheme = (theme = 'dark') => {
 class AppWithTheme extends PureComponent {
   state = {
     theme: getTheme(),
+    themingInProgress: false,
   };
-  setTheme = theme => this.setState({ theme }, () => setTheme(theme));
+  setTheme = theme => {
+    const { themingInProgress } = this.state;
+    if (themingInProgress) {
+      return;
+    }
+
+    this.setState({ themingInProgress: true }, () => {
+      requestAnimationFrame(() => {
+        this.setState({ theme }, () => {
+          requestAnimationFrame(() => {
+            this.setState({ themingInProgress: false });
+            setTheme(theme);
+          });
+        });
+      });
+    });
+  };
   render() {
-    const { theme } = this.state;
+    const { theme, themingInProgress } = this.state;
 
     return (
       <ThemeContext.Provider value={theme}>
+        <TurnOffTransitionStyles active={themingInProgress} />
         <App setTheme={this.setTheme} />
       </ThemeContext.Provider>
     );

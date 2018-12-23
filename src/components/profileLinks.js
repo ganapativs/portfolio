@@ -2,8 +2,10 @@ import React from 'react';
 import useWindowSize from '@rehooks/window-size';
 import styled from 'styled-components/macro';
 import GitHubIcon from '../assets/icons/github-icon.js';
-import NPMIcon from '../assets/icons/npm-icon.js';
 import TwitterIcon from '../assets/icons/twitter-icon.js';
+import LinkedInIcon from '../assets/icons/linkedin-icon.js';
+import DribbbleIcon from '../assets/icons/dribbble-icon.js';
+import NPMIcon from '../assets/icons/npm-icon.js';
 
 const Div = styled.div`
   html.wf-active & {
@@ -14,6 +16,14 @@ const Div = styled.div`
     text-align: left;
     padding: 8px 10px;
     display: inline-block;
+
+    :first-child {
+      padding-left: 0;
+    }
+
+    :last-child {
+      padding-right: 0;
+    }
   }
 
   @media screen and (min-width: 768px) {
@@ -27,46 +37,50 @@ const Row = styled.div`
   padding: 10px;
 `;
 
-export default React.memo(function ProfileLinks() {
+const socialLinks = [
+  {
+    link: 'https://github.com/ganapativs',
+    Component: GitHubIcon,
+  },
+  {
+    link: 'https://twitter.com/ganapativs',
+    Component: TwitterIcon,
+  },
+  {
+    link: 'https://www.linkedin.com/in/ganapativs/',
+    Component: LinkedInIcon,
+  },
+  {
+    link: 'https://dribbble.com/ganapativs',
+    Component: DribbbleIcon,
+  },
+  {
+    link: 'https://www.npmjs.com/~ganapativs',
+    Component: NPMIcon,
+  },
+];
+
+export default function ProfileLinks() {
   let { innerWidth } = useWindowSize();
   const isMobile = innerWidth < 768;
-  const iconWidth = isMobile ? 30 : 16;
+  const iconWidth = isMobile ? 36 : 40;
 
   return (
     <Div className="animated fadeInUp faster animation-delay-half-s">
-      <Row className="app__link">
-        <GitHubIcon width={iconWidth} style={{ verticalAlign: 'sub' }} />{' '}
-        {isMobile ? null : (
-          <a
-            href="https://github.com/ganapativs"
-            target="_blank"
-            rel="noopener noreferrer">
-            ganapativs
+      {socialLinks.map(({ link, Component }, index) => (
+        <Row
+          className="app__link animated fadeInUp faster"
+          key={link}
+          style={{ animationDelay: `${index * 0.1 + 0.2}s` }}>
+          <a href={link} target="_blank" rel="noopener noreferrer">
+            <Component
+              width={iconWidth}
+              height={iconWidth}
+              style={{ verticalAlign: 'sub' }}
+            />{' '}
           </a>
-        )}
-      </Row>
-      <Row className="app__link">
-        <TwitterIcon width={iconWidth} style={{ verticalAlign: 'sub' }} />{' '}
-        {isMobile ? null : (
-          <a
-            href="https://twitter.com/ganapativs"
-            target="_blank"
-            rel="noopener noreferrer">
-            @ganapativs
-          </a>
-        )}
-      </Row>
-      <Row className="app__link">
-        <NPMIcon width={iconWidth} style={{ verticalAlign: 'sub' }} />{' '}
-        {isMobile ? null : (
-          <a
-            href="https://www.npmjs.com/~ganapativs"
-            target="_blank"
-            rel="noopener noreferrer">
-            ~ganapativs
-          </a>
-        )}
-      </Row>
+        </Row>
+      ))}
     </Div>
   );
-});
+}

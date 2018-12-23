@@ -17,18 +17,21 @@ const Div = styled.div`
   }
 `;
 
-const Header = props => {
-  return (
-    <Div>
-      <Suspense maxDuration={200} fallback={<div style={{ height: 220 }} />}>
-        <ProfileLogo />
-      </Suspense>
-      <Suspense fallback={null}>
-        <DevInfo />
-        <ProfileLinks />
-      </Suspense>
-    </Div>
-  );
-};
+const Header = React.memo(
+  () => {
+    return (
+      <Div>
+        <Suspense maxDuration={200} fallback={<div style={{ height: 220 }} />}>
+          <ProfileLogo />
+        </Suspense>
+        <Suspense fallback={null}>
+          <DevInfo />
+          <ProfileLinks />
+        </Suspense>
+      </Div>
+    );
+  },
+  () => true, // Never re-render
+);
 
 export default Header;

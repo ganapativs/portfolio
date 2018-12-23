@@ -6,6 +6,8 @@ const GlobalStyles = createGlobalStyle`
   --color-dark: ${props => (props.theme === 'dark' ? '#181819' : '#f0f3f9')};
   --color-dark-light: #313030;
   --color-light: ${props => (props.theme === 'dark' ? '#f0f3f9' : '#181819')};
+  --color-light-dark: ${props =>
+    props.theme === 'dark' ? '#505053' : '#A7B9DC'};
   --color-light-op-1: ${props =>
     props.theme === 'dark'
       ? 'rgba(255, 255, 255, 0.2)'
@@ -70,3 +72,9 @@ a:focus, a:active, a:hover {
 `;
 
 export default React.memo(GlobalStyles);
+
+export const TurnOffTransitionStyles = createGlobalStyle`
+* {
+  transition: ${props => (props.active ? 'none !important' : null)};
+}
+`;

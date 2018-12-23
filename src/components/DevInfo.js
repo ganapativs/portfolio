@@ -10,6 +10,17 @@ const DevName = styled.h1`
     text-align: center;
     font-size: 40px;
   }
+
+  span {
+    display: none;
+
+    @media screen and (min-width: 768px) {
+      font-size: 24px;
+      color: var(--color-light-dark);
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
 `;
 
 const DevDescription = styled.h3`
@@ -36,7 +47,7 @@ const DevInfo = () => {
   return (
     <>
       <DevName className="animated fadeInUp faster animation-delay-half-s">
-        Ganapati V S
+        Ganapati V S <span>(@ganapativs)</span>
       </DevName>
       <DevDescription className="animated fadeInUp faster animation-delay-half-s">
         Hi{' '}
