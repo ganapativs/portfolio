@@ -10,7 +10,7 @@ const WithFonts = React.lazy(() => import('./components/withFonts'));
 
 const Div = styled.div`
   margin: 0 auto;
-  max-width: 530px;
+  max-width: 580px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -18,7 +18,7 @@ const Div = styled.div`
   padding: 15px;
 
   @media screen and (min-width: 768px) {
-    margin: 0 0 0 50px;
+    margin: 0 0 0 60px;
     justify-content: flex-start;
     align-items: center;
   }

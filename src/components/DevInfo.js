@@ -12,7 +12,7 @@ const DevName = styled.h1`
   }
 `;
 
-const DevDesignation = styled.h3`
+const DevDescription = styled.h3`
   font-size: 20px;
   font-weight: 300;
   margin: 5px 0 24px 0;
@@ -22,6 +22,14 @@ const DevDesignation = styled.h3`
     font-size: 18px;
     line-height: 1.6;
   }
+
+  span {
+    font-size: 18px;
+
+    @media screen and (max-width: 767px) {
+      font-size: 16px;
+    }
+  }
 `;
 
 const DevInfo = () => {
@@ -30,15 +38,20 @@ const DevInfo = () => {
       <DevName className="animated fadeInUp faster animation-delay-half-s">
         Ganapati V S
       </DevName>
-      <DevDesignation className="animated fadeInUp faster animation-delay-half-s">
-        JavaScript Developer, Lead{' '}
+      <DevDescription className="animated fadeInUp faster animation-delay-half-s">
+        Hi{' '}
+        <span role="img" aria-label="hi">
+          👋
+        </span>{' '}
+        I'm a JavaScript developer with over 4 years of experience. Currently
+        working{' '}
         <a
           href="https://twitter.com/tracxn"
           rel="noopener noreferrer"
           target="_blank">
           @Tracxn
         </a>
-        , Open Source Enthusiast, Created{' '}
+        . I like contributing to open source & have created{' '}
         <a
           href="https://bttn.surge.sh/"
           rel="noopener noreferrer"
@@ -59,8 +72,10 @@ const DevInfo = () => {
           target="_blank">
           more
         </a>{' '}
-        🎉
-      </DevDesignation>
+        <span role="img" aria-label="party">
+          🎉
+        </span>
+      </DevDescription>
     </>
   );
 };
