@@ -6,7 +6,6 @@ const ProfileLogo = React.lazy(() => import('./profile-logo/profile-logo'));
 const DevInfo = React.lazy(() => import('./DevInfo'));
 
 const Div = styled.div`
-  min-height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;
