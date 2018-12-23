@@ -5,13 +5,23 @@ const DevName = styled.h1`
   font-size: 48px;
   margin: 15px 0;
   font-weight: 400;
+
+  @media screen and (max-width: 767px) {
+    text-align: center;
+    font-size: 40px;
+  }
 `;
 
 const DevDesignation = styled.h3`
-  text-align: center;
   font-size: 20px;
   font-weight: 300;
   margin: 5px 0 24px 0;
+
+  @media screen and (max-width: 767px) {
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.6;
+  }
 `;
 
 const DevInfo = () => {

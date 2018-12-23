@@ -11,6 +11,10 @@ const Div = styled.div`
   align-items: center;
   justify-content: center;
   color: var(--color-light);
+
+  @media screen and (min-width: 768px) {
+    align-items: flex-start;
+  }
 `;
 
 const Header = props => {
