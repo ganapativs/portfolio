@@ -1,8 +1,9 @@
 import React, { Suspense, useContext } from 'react';
 import styled from 'styled-components/macro';
 import ThemeContext from './contexts/themeContext';
-import Spinner from './components/spinner';
+import SquareLoader from './components/squareLoader';
 import GlobalStyles from './globalStyles';
+import { FixedCentered } from './utils';
 
 const Header = React.lazy(() => import('./components/header'));
 const WithFonts = React.lazy(() => import('./components/withFonts'));
@@ -34,6 +35,12 @@ const Div = styled.div`
 //             <div className="app__comment">&nbsp;*/</div>
 //           </Row>
 
+const FallbackLoader = () => (
+  <FixedCentered>
+    <SquareLoader />
+  </FixedCentered>
+);
+
 const App = React.memo(props => {
   const theme = useContext(ThemeContext);
   const { setTheme } = props;
@@ -41,7 +48,7 @@ const App = React.memo(props => {
   return (
     <>
       <GlobalStyles theme={theme} />
-      <Suspense maxDuration={200} fallback={<Spinner />}>
+      <Suspense maxDuration={200} fallback={<FallbackLoader />}>
         <WithFonts FontFamilies="Fira Mono|Source Sans Pro:300,400">
           <Div>
             <div

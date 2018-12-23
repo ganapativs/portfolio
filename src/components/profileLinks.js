@@ -23,7 +23,7 @@ const Div = styled.div`
   }
 `;
 
-export default React.memo(function ProfileLinks(props) {
+export default React.memo(function ProfileLinks() {
   let { innerWidth } = useWindowSize();
   const isMobile = innerWidth < 768;
   const iconWidth = isMobile ? 30 : 16;
