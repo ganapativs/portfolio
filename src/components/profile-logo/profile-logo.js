@@ -119,21 +119,42 @@ const UserLogo = styled.div`
   }
 `;
 
+const UserLogoWrapper = styled.div`
+  animation-delay: 0.5s;
+`;
+
+const directions = [
+  '',
+  'UpLeft',
+  'UpRight',
+  'DownLeft',
+  'DownRight',
+  'no-rotate',
+];
+
 export default React.memo(
   function ProfileLogo() {
+    const randomNo = Math.floor(Math.random() * directions.length + 1);
+
     return (
-      <UserLogo className="animated fadeInDown faster">
-        <UserLogoBGRotate>
-          <UserLogoBG>
-            <UserLogoImageWrapper>
-              <UserLogoImage />
-            </UserLogoImageWrapper>
-          </UserLogoBG>
-        </UserLogoBGRotate>
-        <UserLogoSVGWrapper>
-          <Logo height={60} />
-        </UserLogoSVGWrapper>
-      </UserLogo>
+      <UserLogoWrapper className="animated jello">
+        <div className={`animated rotateIn${directions[randomNo]}`}>
+          <div className="animated fadeInDown">
+            <UserLogo className="animated zoomInDown">
+              <UserLogoBGRotate>
+                <UserLogoBG>
+                  <UserLogoImageWrapper>
+                    <UserLogoImage />
+                  </UserLogoImageWrapper>
+                </UserLogoBG>
+              </UserLogoBGRotate>
+              <UserLogoSVGWrapper>
+                <Logo height={60} />
+              </UserLogoSVGWrapper>
+            </UserLogo>
+          </div>
+        </div>
+      </UserLogoWrapper>
     );
   },
   () => true, // Never re-render
