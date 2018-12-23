@@ -10,7 +10,17 @@ const WithFonts = React.lazy(() => import('./components/withFonts'));
 
 const Div = styled.div`
   margin: 0 auto;
-  max-width: 500px;
+  max-width: 530px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100%;
+  padding: 15px;
+
+  @media screen and (min-width: 768px) and (min-height: 550px) {
+    margin-top: -5%;
+    align-items: center;
+  }
 `;
 
 // .app__comments {
@@ -52,7 +62,12 @@ const App = React.memo(props => {
         <WithFonts FontFamilies="Fira Mono|Source Sans Pro:300,400">
           <Div>
             <div
-              style={{ color: 'var(--color-light)' }}
+              style={{
+                color: 'var(--color-light)',
+                position: 'fixed',
+                top: 0,
+                right: 0,
+              }}
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
               Theme - {theme}
             </div>

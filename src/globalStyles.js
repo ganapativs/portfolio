@@ -43,6 +43,10 @@ body {
   background-color: var(--color-dark);
 }
 
+html, body, #root {
+  height: 100%;
+}
+
 html.wf-active body{
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 400;

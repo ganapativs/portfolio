@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 
 const ProfileLinks = React.lazy(() => import('./profileLinks'));
 const ProfileLogo = React.lazy(() => import('./profile-logo/profile-logo'));
+const DevInfo = React.lazy(() => import('./DevInfo'));
 
 const Div = styled.div`
   min-height: 50vh;
@@ -20,6 +21,7 @@ const Header = props => {
         <ProfileLogo />
       </Suspense>
       <Suspense fallback={null}>
+        <DevInfo />
         <ProfileLinks />
       </Suspense>
     </Div>

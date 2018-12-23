@@ -1,7 +1,6 @@
 import React from 'react';
 import useWindowSize from '@rehooks/window-size';
 import styled from 'styled-components/macro';
-import Row from './row';
 import GitHubIcon from '../assets/icons/github-icon.js';
 import NPMIcon from '../assets/icons/npm-icon.js';
 import TwitterIcon from '../assets/icons/twitter-icon.js';
@@ -21,6 +20,10 @@ const Div = styled.div`
       padding: 5px 10px;
     }
   }
+`;
+
+const Row = styled.div`
+  padding: 10px;
 `;
 
 export default React.memo(function ProfileLinks() {

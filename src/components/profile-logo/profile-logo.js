@@ -95,7 +95,7 @@ const UserLogo = styled.div`
   padding: 30px 18px;
   text-align: center;
   position: relative;
-  margin: 50px auto;
+  margin: 50px auto 30px auto;
 
   &:hover ${UserLogoSVGWrapper} {
     opacity: 0;
@@ -122,7 +122,7 @@ const UserLogo = styled.div`
 export default React.memo(
   function ProfileLogo() {
     return (
-      <UserLogo className="animated fadeIn">
+      <UserLogo className="animated fadeInDown faster">
         <UserLogoBGRotate>
           <UserLogoBG>
             <UserLogoImageWrapper>
