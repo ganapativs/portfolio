@@ -64,7 +64,7 @@ const App = React.memo(props => {
     <>
       <GlobalStyles theme={theme} />
       <Suspense maxDuration={200} fallback={<FallbackLoader />}>
-        <WithFonts FontFamilies="Fira Mono|Source Sans Pro:300,400">
+        <WithFonts FontFamilies="Source Sans Pro:300,400">
           <Div>
             <div
               style={{

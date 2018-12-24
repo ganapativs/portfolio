@@ -5,12 +5,15 @@ import GitHubIcon from '../assets/icons/github-icon.js';
 import TwitterIcon from '../assets/icons/twitter-icon.js';
 import LinkedInIcon from '../assets/icons/linkedin-icon.js';
 import DribbbleIcon from '../assets/icons/dribbble-icon.js';
-import NPMIcon from '../assets/icons/npm-icon.js';
+
+const Icons = styled.div`
+  padding: 10px;
+`;
 
 const Div = styled.div`
-  html.wf-active & {
-    font-family: 'Fira Mono', monospace;
-  }
+  width: 100%;
+  vertical-align: middle;
+  text-align: center;
 
   .app__link {
     text-align: left;
@@ -27,14 +30,12 @@ const Div = styled.div`
   }
 
   @media screen and (min-width: 768px) {
+    text-align: left;
+
     .app__link {
       padding: 5px 10px;
     }
   }
-`;
-
-const Row = styled.div`
-  padding: 10px;
 `;
 
 const socialLinks = [
@@ -54,32 +55,28 @@ const socialLinks = [
     link: 'https://dribbble.com/ganapativs',
     Component: DribbbleIcon,
   },
-  {
-    link: 'https://www.npmjs.com/~ganapativs',
-    Component: NPMIcon,
-  },
 ];
 
 export default function ProfileLinks() {
   let { innerWidth } = useWindowSize();
   const isMobile = innerWidth < 768;
-  const iconWidth = isMobile ? 36 : 40;
+  const iconWidth = isMobile ? 28 : 26;
 
   return (
     <Div className="animated fadeInUp faster animation-delay-half-s">
       {socialLinks.map(({ link, Component }, index) => (
-        <Row
+        <Icons
           className="app__link animated fadeInUp faster"
           key={link}
-          style={{ animationDelay: `${index * 0.1 + 0.2}s` }}>
+          style={{ animationDelay: `${index * 0.1 + 0.4}s` }}>
           <a href={link} target="_blank" rel="noopener noreferrer">
             <Component
               width={iconWidth}
               height={iconWidth}
               style={{ verticalAlign: 'sub' }}
-            />{' '}
+            />
           </a>
-        </Row>
+        </Icons>
       ))}
     </Div>
   );

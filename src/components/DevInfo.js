@@ -15,7 +15,7 @@ const DevName = styled.h1`
     display: none;
 
     @media screen and (min-width: 768px) {
-      font-size: 24px;
+      font-size: 20px;
       color: var(--color-light-dark);
       display: inline-block;
       vertical-align: middle;
@@ -47,7 +47,13 @@ const DevInfo = () => {
   return (
     <>
       <DevName className="animated fadeInUp faster animation-delay-half-s">
-        Ganapati V S <span>(@ganapativs)</span>
+        Ganapati V S{' '}
+        <a
+          href="https://twitter.com/tracxn"
+          rel="noopener noreferrer"
+          target="_blank">
+          <span>(@ganapativs)</span>
+        </a>
       </DevName>
       <DevDescription className="animated fadeInUp faster animation-delay-half-s">
         Hi{' '}

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'normalize.css';
 import 'animate.css';
 import AppWithTheme from './AppWithTheme';
 import * as serviceWorker from './serviceWorker';
