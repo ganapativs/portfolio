@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'normalize.css';
 import 'animate.css';
-import AppWithTheme from './appWithTheme';
+import AppWithTheme from './appWithThemex';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
