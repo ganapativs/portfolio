@@ -49,7 +49,7 @@ const DevInfo = () => {
       <DevName className="animated fadeInUp faster animation-delay-half-s">
         Ganapati V S{' '}
         <a
-          href="https://twitter.com/tracxn"
+          href="https://twitter.com/ganapativs"
           rel="noopener noreferrer"
           target="_blank">
           <span>(@ganapativs)</span>
