@@ -19,6 +19,11 @@ const DevName = styled.h1`
       color: var(--color-light-dark);
       display: inline-block;
       vertical-align: middle;
+      transition: color 0.2s ease-in;
+
+      &:hover {
+        color: var(--color-light);
+      }
     }
   }
 `;

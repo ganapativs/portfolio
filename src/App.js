@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 import ThemeContext from './contexts/themeContext';
 import SquareLoader from './components/squareLoader';
 import GlobalStyles from './globalStyles';
+import ColorPalette from './colorPalette';
 import { FixedCentered } from './utils';
 
 const Header = React.lazy(() => import('./components/header'));
@@ -28,28 +29,6 @@ const Div = styled.div`
   }
 `;
 
-// .app__comments {
-//   font-size: 20px;
-// }
-
-// .app__comment {
-//   color: var(--color-dark-light);
-//   font-style: italic;
-// }
-
-// .app__comment-text {
-//   font-style: italic;
-// }
-
-// <Row className="app__comments">
-//             <div className="app__comment">{'/**'}</div>
-//             <div>
-//               <span className="app__comment">&nbsp;*</span>
-//               <span className="app__comment-text">&nbsp;Ganapati V S</span>
-//             </div>
-//             <div className="app__comment">&nbsp;*/</div>
-//           </Row>
-
 const FallbackLoader = () => (
   <FixedCentered>
     <SquareLoader />
@@ -62,7 +41,7 @@ const App = React.memo(props => {
 
   return (
     <>
-      <GlobalStyles theme={theme} />
+      <GlobalStyles theme={ColorPalette[theme]} />
       <Suspense maxDuration={200} fallback={<FallbackLoader />}>
         <WithFonts FontFamilies="Source Sans Pro:300,400">
           <Div>
