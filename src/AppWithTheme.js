@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import App from './App';
+import App from './app';
 import ThemeContext from './contexts/themeContext';
 import { TurnOffTransitionStyles } from './globalStyles';
 

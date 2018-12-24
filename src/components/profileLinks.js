@@ -1,11 +1,11 @@
 import React from 'react';
 import useWindowSize from '@rehooks/window-size';
 import styled from 'styled-components/macro';
-import GitHubIcon from '../assets/icons/github-icon.js';
-import TwitterIcon from '../assets/icons/twitter-icon.js';
-import LinkedInIcon from '../assets/icons/linkedin-icon.js';
-import DribbbleIcon from '../assets/icons/dribbble-icon.js';
-import EmailIcon from '../assets/icons/email-icon.js';
+import GitHubIcon from '../assets/icons/githubIcon.js';
+import TwitterIcon from '../assets/icons/twitterIcon.js';
+import LinkedInIcon from '../assets/icons/linkedinIcon.js';
+import DribbbleIcon from '../assets/icons/dribbbleIcon.js';
+import EmailIcon from '../assets/icons/emailIcon.js';
 
 const Icons = styled.div`
   padding: 10px;

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components/macro';
-import ApplePolygon from '../assets/apple-icon-polygon/apple-icon-polygon';
+import ApplePolygon from '../assets/apple-icon-polygon/appleIconPolygon';
 
 const blink = keyframes`
   0%, 25% {
