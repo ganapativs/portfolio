@@ -8,6 +8,9 @@ import { FixedCentered } from './utils';
 
 const Header = React.lazy(() => import('./components/header'));
 const WithFonts = React.lazy(() => import('./components/withFonts'));
+const BackgroundMesh = React.lazy(() =>
+  import('./components/background-mesh/background-mesh'),
+);
 
 const Div = styled.div`
   margin: 0 auto;
@@ -44,6 +47,7 @@ const App = React.memo(props => {
       <GlobalStyles theme={ColorPalette[theme]} />
       <Suspense maxDuration={200} fallback={<FallbackLoader />}>
         <WithFonts FontFamilies="Source Sans Pro:300,400">
+          <BackgroundMesh />
           <Div>
             <div
               style={{

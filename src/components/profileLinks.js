@@ -5,6 +5,7 @@ import GitHubIcon from '../assets/icons/github-icon.js';
 import TwitterIcon from '../assets/icons/twitter-icon.js';
 import LinkedInIcon from '../assets/icons/linkedin-icon.js';
 import DribbbleIcon from '../assets/icons/dribbble-icon.js';
+import EmailIcon from '../assets/icons/email-icon.js';
 
 const Icons = styled.div`
   padding: 10px;
@@ -54,6 +55,10 @@ const socialLinks = [
   {
     link: 'https://dribbble.com/ganapativs',
     Component: DribbbleIcon,
+  },
+  {
+    link: 'mailto:vsg.inbox+meetguns+com@gmail.com?Subject=Hello!',
+    Component: EmailIcon,
   },
 ];
 
