@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 
 const ProfileLinks = React.lazy(() => import('./profileLinks'));
 const ProfileLogo = React.lazy(() => import('./profile-logo/profileLogo'));
-const DevInfo = React.lazy(() => import('./devInfo'));
+const DevInfo = React.lazy(() => import('./devInfox'));
 
 const Div = styled.div`
   display: flex;
