@@ -12,6 +12,12 @@ const BackgroundLoader = React.lazy(() =>
   import('./components/background-mesh/backgroundLoader'),
 );
 
+const LayoutWidth = styled.div`
+  max-width: 1600px;
+  margin: 0 auto;
+  height: 100%;
+`;
+
 const Div = styled.div`
   margin: 0 auto;
   max-width: 580px;
@@ -48,19 +54,21 @@ const App = React.memo(props => {
       <Suspense maxDuration={200} fallback={<FallbackLoader />}>
         <WithFonts FontFamilies="Source Sans Pro:300,400">
           <BackgroundLoader />
-          <Div>
-            <div
-              style={{
-                color: 'var(--color-light)',
-                position: 'fixed',
-                top: 0,
-                right: 0,
-              }}
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
-              Theme - {theme}
-            </div>
-            <Header />
-          </Div>
+          <LayoutWidth>
+            <Div>
+              <div
+                style={{
+                  color: 'var(--color-light)',
+                  position: 'fixed',
+                  top: 0,
+                  right: 0,
+                }}
+                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+                Theme - {theme}
+              </div>
+              <Header />
+            </Div>
+          </LayoutWidth>
         </WithFonts>
       </Suspense>
     </>
