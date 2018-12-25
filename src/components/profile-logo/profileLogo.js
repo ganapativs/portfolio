@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components/macro';
 import Logo from '../../assets/logo/meetguns';
 import BackgroundImage from './images/ganapativs.jpg';
+import { getRandomInt } from '../../utils';
 
 const Wiggle = keyframes`
   0% {
@@ -132,7 +133,7 @@ const directions = [
   'no-rotate',
 ];
 
-const randomAnimationIndex = Math.floor(Math.random() * directions.length + 1);
+const randomAnimationIndex = getRandomInt(0, directions.length - 1);
 
 export default function ProfileLogo() {
   return (
