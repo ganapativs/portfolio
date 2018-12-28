@@ -29,21 +29,20 @@ const DevName = styled.h1`
 `;
 
 const DevDescription = styled.h3`
-  font-size: 20px;
-  font-weight: 300;
+  font-size: 18px;
+  font-weight: 400;
   margin: 5px 0 24px 0;
 
   @media screen and (max-width: 767px) {
     text-align: center;
-    font-size: 18px;
-    line-height: 1.6;
+    font-size: 16px;
   }
 
   span {
-    font-size: 18px;
+    font-size: 16px;
 
     @media screen and (max-width: 767px) {
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 `;
@@ -65,8 +64,8 @@ const DevInfo = () => {
         <span role="img" aria-label="hi">
           👋
         </span>{' '}
-        I'm a JavaScript developer with over 4 years of experience. Currently
-        working{' '}
+        I'm a Full-Stack JavaScript developer with over 4 years of experience.
+        Currently working{' '}
         <a
           href="https://twitter.com/tracxn"
           rel="noopener noreferrer"

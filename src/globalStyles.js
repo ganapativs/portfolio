@@ -19,6 +19,16 @@ const GlobalStyles = createGlobalStyle`
   box-sizing: border-box;
 }
 
+::-moz-selection {
+  background: var(--color-red);
+  color: var(--color-light);
+}
+
+::selection {
+  background: var(--color-red);
+  color: var(--color-light);
+}
+
 html {
   font-size: 16px;
 }
@@ -32,6 +42,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--color-dark);
+  line-height: 1.42857143;
 }
 
 html, body, #root {
