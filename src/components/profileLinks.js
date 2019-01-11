@@ -57,7 +57,7 @@ const socialLinks = [
     Component: DribbbleIcon,
   },
   {
-    link: 'mailto:vsg.inbox+meetguns+com@gmail.com?Subject=Hello!',
+    link: 'mailto:vsg.inbox+meetguns+com@gmail.com?Subject=Hello 👋',
     Component: EmailIcon,
   },
 ];

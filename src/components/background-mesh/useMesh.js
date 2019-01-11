@@ -23,6 +23,8 @@ export const STATUS = {
 
 export const BLOCK_SIZE = 40;
 
+const MAX_RANDOM_SQUARES = 20;
+
 const useMesh = () => {
   const { innerWidth, innerHeight } = useWindowSize();
   const [mesh, setMesh] = useState([[]]);
@@ -88,10 +90,13 @@ const useMesh = () => {
       [0, verticalBlocks.current],
       [verticalBlocks.current, horizontalBlocks.current],
       [horizontalBlocks.current, 0],
-      (horizontalBlocks.current * verticalBlocks.current) / 4,
+      Math.min(
+        MAX_RANDOM_SQUARES,
+        Math.floor((horizontalBlocks.current * verticalBlocks.current) / 4),
+      ),
     );
 
-    console.log(mesh, randomTrianglePoints);
+    console.log(randomTrianglePoints);
   }, []);
 
   return mesh;
