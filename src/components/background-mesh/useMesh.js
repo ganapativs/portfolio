@@ -16,9 +16,9 @@ export const COLORS = [
   '#61E8E1',
 ];
 
-export const STATUS = {
+export const VISIBILITY = {
+  HIDDEN: 0,
   VISIBLE: 1,
-  HIDDEN: 2,
 };
 
 export const BLOCK_SIZE = 40;
@@ -30,6 +30,7 @@ const useMesh = () => {
   const [mesh, setMesh] = useState([[]]);
   const horizontalBlocks = useRef(0);
   const verticalBlocks = useRef(0);
+  const intermediate = useRef(null);
 
   useEffect(
     () => {
@@ -53,7 +54,8 @@ const useMesh = () => {
               const colorIndex = getRandomInt(0, COLORS.length - 1);
 
               newMesh[i][j] = {
-                status: STATUS.VISIBLE,
+                active: false,
+                visibility: VISIBILITY.VISIBLE,
                 color: COLORS[colorIndex],
                 colorIndex,
                 posX: i,
@@ -70,16 +72,17 @@ const useMesh = () => {
             if (newMesh[i][j]) {
               newMesh[i][j] = {
                 ...newMesh[i][j],
-                status:
+                visibility:
                   i >= verticalBlocks.current || j >= horizontalBlocks.current
-                    ? STATUS.HIDDEN
-                    : STATUS.VISIBLE,
+                    ? VISIBILITY.HIDDEN
+                    : VISIBILITY.VISIBLE,
               };
             }
           }
         }
       }
 
+      intermediate.current = newMesh;
       setMesh(newMesh);
     },
     [innerWidth, innerHeight],
@@ -87,16 +90,22 @@ const useMesh = () => {
 
   useEffect(() => {
     const randomTrianglePoints = RandomPointsInTriangle(
-      [0, verticalBlocks.current],
-      [verticalBlocks.current, horizontalBlocks.current],
-      [horizontalBlocks.current, 0],
+      [horizontalBlocks.current - 1, 0],
+      [horizontalBlocks.current - 1, verticalBlocks.current - 1],
+      [0, verticalBlocks.current - 1],
       Math.min(
         MAX_RANDOM_SQUARES,
         Math.floor((horizontalBlocks.current * verticalBlocks.current) / 4),
       ),
     );
 
-    console.log(randomTrianglePoints);
+    randomTrianglePoints.forEach(e => {
+      const [x, y] = e;
+      intermediate.current[y][x].active = true;
+    });
+
+    setMesh(intermediate.current);
+    intermediate.current = null;
   }, []);
 
   return mesh;

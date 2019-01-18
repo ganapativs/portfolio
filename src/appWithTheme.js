@@ -54,7 +54,7 @@ class AppWithTheme extends PureComponent {
     const { theme, themingInProgress } = this.state;
 
     return (
-      <ThemeContext.Provider value={theme}>
+      <ThemeContext.Provider value={{ theme, themingInProgress }}>
         <TurnOffTransitionStyles active={themingInProgress} />
         <App setTheme={this.setTheme} />
       </ThemeContext.Provider>

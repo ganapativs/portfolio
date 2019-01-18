@@ -45,7 +45,7 @@ const FallbackLoader = () => (
 );
 
 const App = React.memo(props => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const { setTheme } = props;
 
   return (
@@ -53,9 +53,10 @@ const App = React.memo(props => {
       <GlobalStyles theme={ColorPalette[theme]} />
       <Suspense maxDuration={200} fallback={<FallbackLoader />}>
         <WithFonts FontFamilies="Source Sans Pro:300,400">
-          <BackgroundLoader />
           <LayoutWidth>
             <Div>
+              <BackgroundLoader />
+              <Header />
               <div
                 style={{
                   color: 'var(--color-light)',
@@ -66,7 +67,6 @@ const App = React.memo(props => {
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
                 Theme - {theme}
               </div>
-              <Header />
             </Div>
           </LayoutWidth>
         </WithFonts>
