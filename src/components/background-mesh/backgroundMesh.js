@@ -65,7 +65,7 @@ const BackgroundMesh = React.memo(
                       key={`${i}_${j}_${column.visibility}`}
                       className="animated fadeInUp"
                       style={{
-                        display: column.visibility ? 'block' : 'none',
+                        visibility: column.visibility ? 'visible' : 'hidden',
                         animationDelay: `${(fromTop ? mesh.length - i : i) *
                           0.02 +
                           (fromRight ? row.length - j : j) * 0.005}s`,
