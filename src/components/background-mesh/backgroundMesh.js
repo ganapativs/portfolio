@@ -1,7 +1,19 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components/macro';
 import useMesh, { BLOCK_SIZE } from './useMesh';
 import ThemeContext from '../../contexts/themeContext';
+
+const smallFadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+`;
 
 const DivWrapper = styled.div`
   position: fixed;
@@ -9,6 +21,9 @@ const DivWrapper = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-name: ${smallFadeIn};
 `;
 
 const Div = styled.div`
@@ -50,30 +65,20 @@ const BackgroundMesh = React.memo(
   () => {
     const { theme } = useContext(ThemeContext);
     const mesh = useMesh();
-    const fromRight = Math.random() > 0.5;
-    const fromTop = Math.random() > 0.5;
 
     if (!mesh[0].length) {
       return null;
     }
 
-    console.log(mesh);
-    console.time('h');
     const Child = mesh.map((row, i) => {
       return (
         <Row key={i}>
           {row.map((column, j) => {
-            const animationDelay =
-              (fromTop ? mesh.length - i : i) * 0.02 +
-              (fromRight ? row.length - j : j) * 0.005;
-
             return (
               <Column
-                key={`${i}_${j}_${column.visibility}`}
-                className="animated fadeIn"
+                key={`${j}_${column.visibility}`}
                 style={{
                   visibility: column.visibility ? 'visible' : 'hidden',
-                  animationDelay: `${animationDelay}s`,
                 }}>
                 <Circle theme={theme} />
               </Column>
@@ -82,7 +87,6 @@ const BackgroundMesh = React.memo(
         </Row>
       );
     });
-    console.timeEnd('h');
 
     return (
       <DivWrapper>
