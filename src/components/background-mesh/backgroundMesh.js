@@ -15,7 +15,7 @@ const Div = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate3d(-50%, -50%, 0);
 `;
 
 const Row = styled.div`
@@ -53,31 +53,40 @@ const BackgroundMesh = React.memo(
     const fromRight = Math.random() > 0.5;
     const fromTop = Math.random() > 0.5;
 
-    return (
-      <DivWrapper>
-        <Div>
-          {mesh.map((row, i) => {
+    if (!mesh[0].length) {
+      return null;
+    }
+
+    console.log(mesh);
+    console.time('h');
+    const Child = mesh.map((row, i) => {
+      return (
+        <Row key={i}>
+          {row.map((column, j) => {
+            const animationDelay =
+              (fromTop ? mesh.length - i : i) * 0.02 +
+              (fromRight ? row.length - j : j) * 0.005;
+
             return (
-              <Row key={i}>
-                {row.map((column, j) => {
-                  return (
-                    <Column
-                      key={`${i}_${j}_${column.visibility}`}
-                      className="animated fadeInUp"
-                      style={{
-                        visibility: column.visibility ? 'visible' : 'hidden',
-                        animationDelay: `${(fromTop ? mesh.length - i : i) *
-                          0.02 +
-                          (fromRight ? row.length - j : j) * 0.005}s`,
-                      }}>
-                      <Circle theme={theme} />
-                    </Column>
-                  );
-                })}
-              </Row>
+              <Column
+                key={`${i}_${j}_${column.visibility}`}
+                className="animated fadeIn"
+                style={{
+                  visibility: column.visibility ? 'visible' : 'hidden',
+                  animationDelay: `${animationDelay}s`,
+                }}>
+                <Circle theme={theme} />
+              </Column>
             );
           })}
-        </Div>
+        </Row>
+      );
+    });
+    console.timeEnd('h');
+
+    return (
+      <DivWrapper>
+        <Div>{Child}</Div>
       </DivWrapper>
     );
   },
