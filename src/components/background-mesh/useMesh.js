@@ -23,7 +23,8 @@ export const VISIBILITY = {
 
 export const BLOCK_SIZE = 40;
 
-const MAX_RANDOM_SQUARES = 20;
+const initialWindowWidth = window.innerWidth;
+const MAX_RANDOM_SQUARES = initialWindowWidth > 768 ? 40 : 20;
 
 const useMesh = () => {
   const { innerWidth, innerHeight } = useWindowSize();
@@ -31,6 +32,15 @@ const useMesh = () => {
   const horizontalBlocks = useRef(0);
   const verticalBlocks = useRef(0);
   const intermediate = useRef(null);
+
+  const toggleCircle = dot => {
+    const { posX, posY, active } = dot;
+    mesh[posY][posX].active = !active;
+
+    requestAnimationFrame(() => {
+      setMesh(mesh);
+    });
+  };
 
   useEffect(
     () => {
@@ -58,8 +68,8 @@ const useMesh = () => {
                 visibility: VISIBILITY.VISIBLE,
                 color: COLORS[colorIndex],
                 colorIndex,
-                posX: i,
-                posY: j,
+                posX: j,
+                posY: i,
               };
             }
           }
@@ -108,7 +118,7 @@ const useMesh = () => {
     intermediate.current = null;
   }, []);
 
-  return mesh;
+  return [mesh, toggleCircle];
 };
 
 export default useMesh;

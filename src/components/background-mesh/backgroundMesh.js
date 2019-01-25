@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled, { keyframes } from 'styled-components/macro';
 import useMesh, { BLOCK_SIZE } from './useMesh';
-import ThemeContext from '../../contexts/themeContext';
 
 const smallFadeIn = keyframes`
   from {
@@ -43,49 +42,59 @@ const Column = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 const Circle = styled.div`
-  background: var(--color-light-op-3);
+  background: ${props =>
+    props.theme === 'light'
+      ? 'var(--color-light-op-2)'
+      : 'var(--color-light-op-3)'};
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  opacity: ${props => (props.theme === 'light' ? 0.7 : 0.3)};
-  transition: opacity 0.1s ease-out, width 0.1s ease-out, height 0.1s ease-out;
+  opacity: ${props => (props.theme === 'light' ? 0.2 : 0.2)};
+  transition: all 0.1s ease-out;
 
   ${Column}:hover & {
-    opacity: ${props => (props.theme === 'light' ? 0.9 : 0.5)};
+    opacity: ${props => (props.theme === 'light' ? 0.4 : 0.4)};
     width: 20px;
     height: 20px;
-    transition: opacity 0.2s ease-in, width 0.2s ease-in, height 0.2s ease-in;
+    transition: all 0.2s ease-in;
   }
 `;
 
 const BackgroundMesh = React.memo(
-  () => {
-    const { theme } = useContext(ThemeContext);
-    const mesh = useMesh();
+  ({ theme }) => {
+    const [mesh, toggleCircle] = useMesh();
 
     if (!mesh[0].length) {
       return null;
     }
 
     const Child = mesh.map((row, i) => {
-      return (
+      return row[0].visibility ? (
         <Row key={i}>
           {row.map((column, j) => {
             return (
               <Column
                 key={`${j}_${column.visibility}`}
-                style={{
-                  visibility: column.visibility ? 'visible' : 'hidden',
-                }}>
-                <Circle theme={theme} />
+                onClick={() => toggleCircle(column)}>
+                <Circle
+                  theme={theme}
+                  color={column.color}
+                  style={{
+                    background: column.active ? column.color : null,
+                    opacity: column.active ? 0.7 : null,
+                    width: column.active ? 12 : null,
+                    height: column.active ? 12 : null,
+                  }}
+                />
               </Column>
             );
           })}
         </Row>
-      );
+      ) : null;
     });
 
     return (
