@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components/macro';
+import styled, { keyframes, css } from 'styled-components/macro';
 import useMesh, { BLOCK_SIZE } from './useMesh';
 
 const smallFadeIn = keyframes`
@@ -21,6 +21,7 @@ const DivWrapper = styled.div`
   width: 100%;
   height: 100%;
   animation-duration: 1s;
+  animation-delay: 300ms;
   animation-fill-mode: both;
   animation-name: ${smallFadeIn};
 `;
@@ -45,6 +46,19 @@ const Column = styled.div`
   cursor: pointer;
 `;
 
+const Spin = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+`;
+
+const SpinAnimationMixin = css`
+  animation: ${Spin} 8s linear infinite;
+`;
+
 const Circle = styled.div`
   background: ${props =>
     props.theme === 'light'
@@ -54,10 +68,12 @@ const Circle = styled.div`
   height: 10px;
   border-radius: 50%;
   opacity: ${props => (props.theme === 'light' ? 0.2 : 0.2)};
+  opacity: 0;
   transition: all 0.1s ease-out;
+  ${props => (props.active ? SpinAnimationMixin : 'none')};
 
   ${Column}:hover & {
-    opacity: ${props => (props.theme === 'light' ? 0.4 : 0.4)};
+    opacity: ${props => (props.theme === 'light' ? 0.6 : 0.6)};
     width: 20px;
     height: 20px;
     transition: all 0.2s ease-in;
@@ -83,12 +99,20 @@ const BackgroundMesh = React.memo(
                 <Circle
                   theme={theme}
                   color={column.color}
-                  style={{
-                    background: column.active ? column.color : null,
-                    opacity: column.active ? 0.7 : null,
-                    width: column.active ? 12 : null,
-                    height: column.active ? 12 : null,
-                  }}
+                  active={column.active}
+                  style={
+                    column.active
+                      ? {
+                          background: column.color,
+                          opacity: 0.5,
+                          width: 12,
+                          height: 12,
+                          transform: `rotate(${column.rotation}deg)`,
+                          borderRadius: '40% 60% 40% 60% / 35% 30% 70% 65%',
+                          animationDuration: `${column.rotationSpeed}s`,
+                        }
+                      : {}
+                  }
                 />
               </Column>
             );
