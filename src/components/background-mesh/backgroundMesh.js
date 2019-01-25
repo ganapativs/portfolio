@@ -21,7 +21,7 @@ const DivWrapper = styled.div`
   width: 100%;
   height: 100%;
   animation-duration: 1s;
-  animation-delay: 300ms;
+  animation-delay: 250ms;
   animation-fill-mode: both;
   animation-name: ${smallFadeIn};
 `;

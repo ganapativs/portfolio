@@ -29,8 +29,7 @@ const useMesh = () => {
   const horizontalBlocks = useRef(0);
   const verticalBlocks = useRef(0);
   const intermediate = useRef(null);
-  const maxRandomPoints = innerWidth > 1023 ? 20 : 15;
-  const isMobile = innerWidth < 768;
+  const maxRandomPoints = innerWidth > 1023 ? 30 : innerWidth > 767 ? 20 : 15;
 
   const toggleCircle = dot => {
     const { posX, posY, active } = dot;
@@ -100,12 +99,20 @@ const useMesh = () => {
   );
 
   useEffect(() => {
-    // In mobile, create random points in entire screen(split into two triangles diagonally)
-    const totalPoints = isMobile
-      ? Math.floor(maxRandomPoints / 2)
-      : maxRandomPoints;
+    // Create random points in entire screen(split into two triangles diagonally)
+    const totalPoints = Math.floor(maxRandomPoints / 2);
 
-    const randomTrianglePoints = RandomPointsInTriangle(
+    const firstRandomTrianglePoints = RandomPointsInTriangle(
+      [0, 0],
+      [horizontalBlocks.current - 1, 0],
+      [0, verticalBlocks.current - 1],
+      Math.min(
+        totalPoints,
+        Math.floor((horizontalBlocks.current * verticalBlocks.current) / 4),
+      ),
+    );
+
+    const secondRandomTrianglePoints = RandomPointsInTriangle(
       [horizontalBlocks.current - 1, 0],
       [horizontalBlocks.current - 1, verticalBlocks.current - 1],
       [0, verticalBlocks.current - 1],
@@ -115,22 +122,7 @@ const useMesh = () => {
       ),
     );
 
-    // First half triangle of screen
-    if (isMobile) {
-      const mobileRandomTrianglePoints = RandomPointsInTriangle(
-        [0, 0],
-        [horizontalBlocks.current - 1, 0],
-        [0, verticalBlocks.current - 1],
-        Math.min(
-          totalPoints,
-          Math.floor((horizontalBlocks.current * verticalBlocks.current) / 4),
-        ),
-      );
-
-      randomTrianglePoints.push(...mobileRandomTrianglePoints);
-    }
-
-    randomTrianglePoints.forEach(e => {
+    [...firstRandomTrianglePoints, ...secondRandomTrianglePoints].forEach(e => {
       const [x, y] = e;
       intermediate.current[y][x].active = true;
     });
