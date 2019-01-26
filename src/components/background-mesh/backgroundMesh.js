@@ -78,9 +78,10 @@ const BackgroundMesh = React.memo(
           {row.map((column, j) => {
             return (
               <Column
-                className="animated fadeInUp"
+                className="animated fadeInUp faster"
                 style={{
-                  animationDelay: `${i * 0.015 + j * 0.015}s`,
+                  animationDelay: `${(mesh.length - i) * 0.015 +
+                    (row.length - j) * 0.015}s`,
                 }}
                 key={`${j}_${column.visibility}`}
                 onClick={() => toggleCircle(column)}>

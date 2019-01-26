@@ -29,7 +29,7 @@ const useMesh = () => {
   const horizontalBlocks = useRef(0);
   const verticalBlocks = useRef(0);
   const intermediate = useRef(null);
-  const maxRandomPoints = innerWidth > 1023 ? 30 : innerWidth > 767 ? 20 : 15;
+  const maxRandomPoints = innerWidth > 1023 ? 20 : innerWidth > 767 ? 15 : 10;
 
   const toggleCircle = dot => {
     const { posX, posY, active } = dot;
@@ -40,63 +40,60 @@ const useMesh = () => {
     });
   };
 
-  useEffect(
-    () => {
-      horizontalBlocks.current = Math.ceil(innerWidth / BLOCK_SIZE);
-      verticalBlocks.current = Math.ceil(innerHeight / BLOCK_SIZE);
+  useEffect(() => {
+    horizontalBlocks.current = Math.ceil(innerWidth / BLOCK_SIZE);
+    verticalBlocks.current = Math.ceil(innerHeight / BLOCK_SIZE);
 
-      const newMesh = [...mesh.map(e => [...e])];
-      const hasLessRows = newMesh.length < verticalBlocks.current;
-      const hasLessColumns = newMesh[0].length < horizontalBlocks.current;
+    const newMesh = [...mesh.map(e => [...e])];
+    const hasLessRows = newMesh.length < verticalBlocks.current;
+    const hasLessColumns = newMesh[0].length < horizontalBlocks.current;
 
-      if (hasLessRows || hasLessColumns) {
-        // Scenario - when window is expanded in horizontal/vertical direction
-        // Compute new mesh elements in viewport
-        for (let i = 0; i < verticalBlocks.current; i++) {
-          if (!newMesh[i]) {
-            newMesh[i] = [];
-          }
-
-          for (let j = 0; j < horizontalBlocks.current; j++) {
-            if (!newMesh[i][j]) {
-              const colorIndex = getRandomInt(0, COLORS.length - 1);
-
-              newMesh[i][j] = {
-                active: false,
-                visibility: VISIBILITY.VISIBLE,
-                color: COLORS[colorIndex],
-                colorIndex,
-                posX: j,
-                posY: i,
-                rotation: Math.random() * 360,
-                rotationSpeed: Math.random() * (12 - 8) + 8,
-              };
-            }
-          }
+    if (hasLessRows || hasLessColumns) {
+      // Scenario - when window is expanded in horizontal/vertical direction
+      // Compute new mesh elements in viewport
+      for (let i = 0; i < verticalBlocks.current; i++) {
+        if (!newMesh[i]) {
+          newMesh[i] = [];
         }
-      } else {
-        // Scenario - when window is sized down in horizontal/vertical direction
-        // Update visibility status of invisible rows/columns
-        for (let i = 0; i < newMesh.length; i++) {
-          for (let j = 0; j < newMesh[0].length; j++) {
-            if (newMesh[i][j]) {
-              newMesh[i][j] = {
-                ...newMesh[i][j],
-                visibility:
-                  i >= verticalBlocks.current || j >= horizontalBlocks.current
-                    ? VISIBILITY.HIDDEN
-                    : VISIBILITY.VISIBLE,
-              };
-            }
+
+        for (let j = 0; j < horizontalBlocks.current; j++) {
+          if (!newMesh[i][j]) {
+            const colorIndex = getRandomInt(0, COLORS.length - 1);
+
+            newMesh[i][j] = {
+              active: false,
+              visibility: VISIBILITY.VISIBLE,
+              color: COLORS[colorIndex],
+              colorIndex,
+              posX: j,
+              posY: i,
+              rotation: Math.random() * 360,
+              rotationSpeed: Math.random() * (12 - 8) + 8,
+            };
           }
         }
       }
+    } else {
+      // Scenario - when window is sized down in horizontal/vertical direction
+      // Update visibility status of invisible rows/columns
+      for (let i = 0; i < newMesh.length; i++) {
+        for (let j = 0; j < newMesh[0].length; j++) {
+          if (newMesh[i][j]) {
+            newMesh[i][j] = {
+              ...newMesh[i][j],
+              visibility:
+                i >= verticalBlocks.current || j >= horizontalBlocks.current
+                  ? VISIBILITY.HIDDEN
+                  : VISIBILITY.VISIBLE,
+            };
+          }
+        }
+      }
+    }
 
-      intermediate.current = newMesh;
-      setMesh(newMesh);
-    },
-    [innerWidth, innerHeight],
-  );
+    intermediate.current = newMesh;
+    setMesh(newMesh);
+  }, [innerWidth, innerHeight]);
 
   useEffect(() => {
     const randomTrianglePoints = RandomPointsInTriangle(

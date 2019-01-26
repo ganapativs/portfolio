@@ -42,14 +42,14 @@ const Div = styled.div`
 
 const socialLinks = [
   {
-    link: 'https://github.com/ganapativs',
-    Component: GitHubIcon,
-    title: 'GitHub',
-  },
-  {
     link: 'https://twitter.com/ganapativs',
     Component: TwitterIcon,
     title: 'Twitter',
+  },
+  {
+    link: 'https://github.com/ganapativs',
+    Component: GitHubIcon,
+    title: 'GitHub',
   },
   {
     link: 'https://stackoverflow.com/users/2627022',

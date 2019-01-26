@@ -6,6 +6,7 @@ import GlobalStyles from './globalStyles';
 import ColorPalette from './colorPalette';
 import { FixedCentered } from './utils';
 import useWindowSize from '@rehooks/window-size';
+import HalfMoon from './assets/icons/halfMoon.js';
 
 const Header = React.lazy(() => import('./components/header'));
 const WithFonts = React.lazy(() => import('./components/withFonts'));
@@ -39,6 +40,14 @@ const Div = styled.div`
   }
 `;
 
+const ThemeSwitcher = styled.div`
+  color: var(--color-light);
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+`;
+
 const FallbackLoader = () => (
   <FixedCentered>
     <SquareLoader />
@@ -55,7 +64,7 @@ const App = React.memo(props => {
   useEffect(() => {
     setTimeout(() => {
       requestAnimationFrame(() => activateBg(true));
-    }, 500);
+    }, 1100);
   }, []);
 
   return (
@@ -67,16 +76,18 @@ const App = React.memo(props => {
             <Div>
               {mountBg && innerWidth > 767 ? <BackgroundLoader /> : null}
               <Header />
-              <div
-                style={{
-                  color: 'var(--color-light)',
-                  position: 'fixed',
-                  top: 0,
-                  right: 0,
+              <ThemeSwitcher
+                role="button"
+                tabIndex={0}
+                onKeyPress={e => {
+                  if (e.which === 13 || e.which === 32) {
+                    setTheme(theme === 'dark' ? 'light' : 'dark');
+                  }
                 }}
+                className="animated fadeInDown delay-1s faster"
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
-                Theme - {theme}
-              </div>
+                <HalfMoon />
+              </ThemeSwitcher>
             </Div>
           </LayoutWidth>
         </WithFonts>
