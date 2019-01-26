@@ -99,30 +99,17 @@ const useMesh = () => {
   );
 
   useEffect(() => {
-    // Create random points in entire screen(split into two triangles diagonally)
-    const totalPoints = Math.floor(maxRandomPoints / 2);
-
-    const firstRandomTrianglePoints = RandomPointsInTriangle(
-      [0, 0],
-      [horizontalBlocks.current - 1, 0],
-      [0, verticalBlocks.current - 1],
-      Math.min(
-        totalPoints,
-        Math.floor((horizontalBlocks.current * verticalBlocks.current) / 4),
-      ),
-    );
-
-    const secondRandomTrianglePoints = RandomPointsInTriangle(
+    const randomTrianglePoints = RandomPointsInTriangle(
       [horizontalBlocks.current - 1, 0],
       [horizontalBlocks.current - 1, verticalBlocks.current - 1],
       [0, verticalBlocks.current - 1],
       Math.min(
-        totalPoints,
+        maxRandomPoints,
         Math.floor((horizontalBlocks.current * verticalBlocks.current) / 4),
       ),
     );
 
-    [...firstRandomTrianglePoints, ...secondRandomTrianglePoints].forEach(e => {
+    randomTrianglePoints.forEach(e => {
       const [x, y] = e;
       intermediate.current[y][x].active = true;
     });

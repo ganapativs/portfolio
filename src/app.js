@@ -5,6 +5,7 @@ import SquareLoader from './components/squareLoader';
 import GlobalStyles from './globalStyles';
 import ColorPalette from './colorPalette';
 import { FixedCentered } from './utils';
+import useWindowSize from '@rehooks/window-size';
 
 const Header = React.lazy(() => import('./components/header'));
 const WithFonts = React.lazy(() => import('./components/withFonts'));
@@ -47,6 +48,7 @@ const FallbackLoader = () => (
 const App = React.memo(props => {
   const { theme } = useContext(ThemeContext);
   const [mountBg, activateBg] = useState(false);
+  const { innerWidth } = useWindowSize();
   const { setTheme } = props;
 
   // Mount after basic animation
@@ -63,7 +65,7 @@ const App = React.memo(props => {
         <WithFonts FontFamilies="Source Sans Pro:300,400">
           <LayoutWidth>
             <Div>
-              {mountBg ? <BackgroundLoader /> : null}
+              {mountBg && innerWidth > 767 ? <BackgroundLoader /> : null}
               <Header />
               <div
                 style={{

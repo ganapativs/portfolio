@@ -3,7 +3,8 @@ import App from './app';
 import ThemeContext from './contexts/themeContext';
 import { TurnOffTransitionStyles } from './globalStyles';
 
-const defaultTheme = 'light';
+// Default light mode in desktop and dark mode in mobile
+const defaultTheme = window.innerWidth > 767 ? 'light' : 'dark';
 
 const getTheme = () => {
   if (window.localStorage) {

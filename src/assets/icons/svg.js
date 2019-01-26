@@ -1,12 +1,12 @@
 import styled from 'styled-components/macro';
 
 export const Path = styled.path`
-  transition: fill 0.2s ease-in;
-  fill: var(--color-light-dark);
+  transition: fill 0.1s ease-out;
+  fill: var(--color-light);
 `;
 
 export const Svg = styled.svg`
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 
   @media screen and (min-width: 768px) {
     &:hover {
@@ -15,6 +15,7 @@ export const Svg = styled.svg`
   }
 
   &:hover ${Path} {
-    fill: var(--color-light);
+    transition: fill 0.2s ease-in-out;
+    fill: var(--color-light-dark);
   }
 `;
