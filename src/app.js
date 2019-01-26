@@ -1,4 +1,4 @@
-import React, { Suspense, useContext } from 'react';
+import React, { Suspense, useContext, useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
 import ThemeContext from './contexts/themeContext';
 import SquareLoader from './components/squareLoader';
@@ -46,7 +46,15 @@ const FallbackLoader = () => (
 
 const App = React.memo(props => {
   const { theme } = useContext(ThemeContext);
+  const [mountBg, activateBg] = useState(false);
   const { setTheme } = props;
+
+  // Mount after basic animation
+  useEffect(() => {
+    setTimeout(() => {
+      requestAnimationFrame(() => activateBg(true));
+    }, 500);
+  }, []);
 
   return (
     <>
@@ -55,7 +63,7 @@ const App = React.memo(props => {
         <WithFonts FontFamilies="Source Sans Pro:300,400">
           <LayoutWidth>
             <Div>
-              <BackgroundLoader />
+              {mountBg ? <BackgroundLoader /> : null}
               <Header />
               <div
                 style={{

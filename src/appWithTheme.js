@@ -3,7 +3,7 @@ import App from './app';
 import ThemeContext from './contexts/themeContext';
 import { TurnOffTransitionStyles } from './globalStyles';
 
-const defaultTheme = 'dark';
+const defaultTheme = 'light';
 
 const getTheme = () => {
   if (window.localStorage) {
@@ -20,7 +20,7 @@ const getTheme = () => {
   return defaultTheme;
 };
 
-const setTheme = (theme = 'dark') => {
+const setTheme = (theme = defaultTheme) => {
   if (window.localStorage) {
     return window.localStorage.setItem('theme', theme);
   }

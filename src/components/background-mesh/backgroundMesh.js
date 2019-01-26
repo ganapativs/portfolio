@@ -2,28 +2,12 @@ import React from 'react';
 import styled, { keyframes, css } from 'styled-components/macro';
 import useMesh, { BLOCK_SIZE } from './useMesh';
 
-const smallFadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translate3d(0, 30px, 0);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-`;
-
 const DivWrapper = styled.div`
   position: fixed;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  animation-duration: 1s;
-  animation-delay: 250ms;
-  animation-fill-mode: both;
-  animation-name: ${smallFadeIn};
 `;
 
 const Div = styled.div`
@@ -94,6 +78,10 @@ const BackgroundMesh = React.memo(
           {row.map((column, j) => {
             return (
               <Column
+                className="animated fadeInUp"
+                style={{
+                  animationDelay: `${i * 0.015 + j * 0.015}s`,
+                }}
                 key={`${j}_${column.visibility}`}
                 onClick={() => toggleCircle(column)}>
                 <Circle
