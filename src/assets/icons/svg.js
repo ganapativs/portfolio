@@ -2,7 +2,7 @@ import styled from 'styled-components/macro';
 
 export const Path = styled.path`
   transition: fill 0.1s ease-out;
-  fill: var(--color-light);
+  fill: var(--color-light-dark);
 `;
 
 export const Svg = styled.svg`
@@ -16,6 +16,6 @@ export const Svg = styled.svg`
 
   &:hover ${Path} {
     transition: fill 0.2s ease-in-out;
-    fill: var(--color-light-dark);
+    fill: var(--color-light);
   }
 `;
