@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { keyframes, css } from 'styled-components/macro';
 import useMesh, { BLOCK_SIZE } from './useMesh';
 
@@ -67,10 +67,18 @@ const Circle = styled.div`
 const BackgroundMesh = React.memo(
   ({ theme }) => {
     const [mesh, toggleCircle] = useMesh();
+    const [showAllDots, showInvisibleDots] = useState(false);
 
     if (!mesh[0].length) {
       return null;
     }
+
+    // Mount after basic animation
+    useEffect(() => {
+      setTimeout(() => {
+        requestAnimationFrame(() => showInvisibleDots(true));
+      }, 1100);
+    }, []);
 
     const Child = mesh.map((row, i) => {
       return row[0].visibility ? (
@@ -78,31 +86,33 @@ const BackgroundMesh = React.memo(
           {row.map((column, j) => {
             return (
               <Column
-                className="animated fadeInUp faster"
+                className="animated fadeInUp"
                 style={{
                   animationDelay: `${(mesh.length - i) * 0.015 +
                     (row.length - j) * 0.015}s`,
                 }}
                 key={`${j}_${column.visibility}`}
                 onClick={() => toggleCircle(column)}>
-                <Circle
-                  theme={theme}
-                  color={column.color}
-                  active={column.active}
-                  style={
-                    column.active
-                      ? {
-                          background: column.color,
-                          opacity: 0.5,
-                          width: 12,
-                          height: 12,
-                          transform: `rotate(${column.rotation}deg)`,
-                          borderRadius: '40% 60% 40% 60% / 35% 30% 70% 65%',
-                          animationDuration: `${column.rotationSpeed}s`,
-                        }
-                      : {}
-                  }
-                />
+                {column.active || showAllDots ? (
+                  <Circle
+                    theme={theme}
+                    color={column.color}
+                    active={column.active}
+                    style={
+                      column.active
+                        ? {
+                            background: column.color,
+                            opacity: 0.5,
+                            width: 12,
+                            height: 12,
+                            transform: `rotate(${column.rotation}deg)`,
+                            borderRadius: '40% 60% 40% 60% / 35% 30% 70% 65%',
+                            animationDuration: `${column.rotationSpeed}s`,
+                          }
+                        : {}
+                    }
+                  />
+                ) : null}
               </Column>
             );
           })}

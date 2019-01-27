@@ -29,7 +29,7 @@ const useMesh = () => {
   const horizontalBlocks = useRef(0);
   const verticalBlocks = useRef(0);
   const intermediate = useRef(null);
-  const maxRandomPoints = innerWidth > 1023 ? 20 : innerWidth > 767 ? 15 : 10;
+  const maxRandomPoints = innerWidth > 1023 ? 16 : innerWidth > 767 ? 12 : 8;
 
   const toggleCircle = dot => {
     const { posX, posY, active } = dot;
@@ -96,17 +96,30 @@ const useMesh = () => {
   }, [innerWidth, innerHeight]);
 
   useEffect(() => {
-    const randomTrianglePoints = RandomPointsInTriangle(
+    // Create random points in entire screen(split into two triangles diagonally)
+    const totalPoints = Math.floor(maxRandomPoints / 2);
+
+    const firstRandomTrianglePoints = RandomPointsInTriangle(
+      [0, 0],
       [horizontalBlocks.current - 1, 0],
-      [horizontalBlocks.current - 1, verticalBlocks.current - 1],
       [0, verticalBlocks.current - 1],
       Math.min(
-        maxRandomPoints,
+        totalPoints,
         Math.floor((horizontalBlocks.current * verticalBlocks.current) / 4),
       ),
     );
 
-    randomTrianglePoints.forEach(e => {
+    const secondRandomTrianglePoints = RandomPointsInTriangle(
+      [horizontalBlocks.current - 1, 0],
+      [horizontalBlocks.current - 1, verticalBlocks.current - 1],
+      [0, verticalBlocks.current - 1],
+      Math.min(
+        totalPoints,
+        Math.floor((horizontalBlocks.current * verticalBlocks.current) / 4),
+      ),
+    );
+
+    [...firstRandomTrianglePoints, ...secondRandomTrianglePoints].forEach(e => {
       const [x, y] = e;
       intermediate.current[y][x].active = true;
     });

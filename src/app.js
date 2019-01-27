@@ -1,11 +1,10 @@
-import React, { Suspense, useContext, useState, useEffect } from 'react';
+import React, { Suspense, useContext } from 'react';
 import styled from 'styled-components/macro';
 import ThemeContext from './contexts/themeContext';
 import SquareLoader from './components/squareLoader';
 import GlobalStyles from './globalStyles';
 import ColorPalette from './colorPalette';
 import { FixedCentered } from './utils';
-import useWindowSize from '@rehooks/window-size';
 import HalfMoon from './assets/icons/halfMoon.js';
 
 const Header = React.lazy(() => import('./components/header'));
@@ -43,8 +42,9 @@ const Div = styled.div`
 const ThemeSwitcher = styled.div`
   color: var(--color-light);
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 10px;
+  right: 10px;
+  padding: 8px;
   cursor: pointer;
 `;
 
@@ -56,16 +56,7 @@ const FallbackLoader = () => (
 
 const App = React.memo(props => {
   const { theme } = useContext(ThemeContext);
-  const [mountBg, activateBg] = useState(false);
-  const { innerWidth } = useWindowSize();
   const { setTheme } = props;
-
-  // Mount after basic animation
-  useEffect(() => {
-    setTimeout(() => {
-      requestAnimationFrame(() => activateBg(true));
-    }, 1100);
-  }, []);
 
   return (
     <>
@@ -74,7 +65,7 @@ const App = React.memo(props => {
         <WithFonts FontFamilies="Source Sans Pro:300,400">
           <LayoutWidth>
             <Div>
-              {mountBg && innerWidth > 767 ? <BackgroundLoader /> : null}
+              <BackgroundLoader />
               <Header />
               <ThemeSwitcher
                 role="button"
