@@ -47,6 +47,10 @@ const DevDescription = styled.h3`
   }
 `;
 
+const Separator = styled.div`
+  margin-bottom: 8px;
+`;
+
 const DevInfo = () => {
   return (
     <>
@@ -61,7 +65,7 @@ const DevInfo = () => {
       </DevName>
       <DevDescription className="animated fadeInUp faster animation-delay-half-s">
         Hi{' '}
-        <span role="img" aria-label="hi">
+        <span role="img" aria-label="Hi!">
           👋
         </span>{' '}
         I'm a Full-Stack JavaScript developer with over 4 years of experience.
@@ -93,8 +97,26 @@ const DevInfo = () => {
           target="_blank">
           more
         </a>{' '}
-        <span role="img" aria-label="party">
+        <span role="img" aria-label="Yay!!!">
           🎉
+        </span>
+        <Separator />I spend most part of my day on{' '}
+        <span role="img" aria-label="Coding">
+          👨🏻‍💻
+        </span>
+        and I play{' '}
+        <span role="img" aria-label="Soccer">
+          ⚽️
+        </span>
+        <span role="img" aria-label="Badminton">
+          🏸
+        </span>
+        <span role="img" aria-label="FIFA gaming">
+          🎮
+        </span>{' '}
+        in my free time{' '}
+        <span role="img" aria-label="Celebrates">
+          🙌
         </span>
       </DevDescription>
     </>
