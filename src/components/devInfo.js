@@ -100,7 +100,7 @@ const DevInfo = () => {
         <span role="img" aria-label="Yay!!!">
           🎉
         </span>
-        <Separator />I spend most part of my day on{' '}
+        <Separator />I spend most of my day on{' '}
         <span role="img" aria-label="Coding">
           👨🏻‍💻
         </span>
