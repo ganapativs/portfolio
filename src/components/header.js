@@ -2,30 +2,36 @@ import React, { Suspense } from 'react';
 import styled from 'styled-components/macro';
 
 const ProfileLinks = React.lazy(() => import('./profileLinks'));
-const ProfileLogo = React.lazy(() => import('./profile-logo/profile-logo'));
-const DevInfo = React.lazy(() => import('./DevInfo'));
+const ProfileLogo = React.lazy(() => import('./profile-logo/profileLogo'));
+const DevInfo = React.lazy(() => import('./devInfo'));
 
 const Div = styled.div`
-  min-height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   color: var(--color-light);
+
+  @media screen and (min-width: 768px) {
+    align-items: flex-start;
+  }
 `;
 
-const Header = props => {
-  return (
-    <Div>
-      <Suspense maxDuration={200} fallback={<div style={{ height: 220 }} />}>
-        <ProfileLogo />
-      </Suspense>
-      <Suspense fallback={null}>
-        <DevInfo />
-        <ProfileLinks />
-      </Suspense>
-    </Div>
-  );
-};
+const Header = React.memo(
+  () => {
+    return (
+      <Div>
+        <Suspense maxDuration={200} fallback={<div style={{ height: 220 }} />}>
+          <ProfileLogo />
+        </Suspense>
+        <Suspense fallback={null}>
+          <DevInfo />
+          <ProfileLinks />
+        </Suspense>
+      </Div>
+    );
+  },
+  () => true, // Never re-render
+);
 
 export default Header;

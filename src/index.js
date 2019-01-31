@@ -1,8 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'normalize.css';
 import 'animate.css';
-import AppWithTheme from './AppWithTheme';
+import AppWithTheme from './appWithTheme';
 import * as serviceWorker from './serviceWorker';
+/**
+ * Show outline only on keyboard interaction
+ *
+ * Adds 'js-focus-visible' class to body and 'focus-visible' class to focused element
+ *
+ * https://github.com/WICG/focus-visible
+ * https://davidwalsh.name/css-focus
+ */
+import 'focus-visible';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   // styled component has issues with StrictMode like findDOMNode etc

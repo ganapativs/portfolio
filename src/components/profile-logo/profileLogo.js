@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components/macro';
 import Logo from '../../assets/logo/meetguns';
 import BackgroundImage from './images/ganapativs.jpg';
+import { getRandomInt } from '../../utils';
 
 const Wiggle = keyframes`
   0% {
@@ -132,30 +133,27 @@ const directions = [
   'no-rotate',
 ];
 
-export default React.memo(
-  function ProfileLogo() {
-    const randomNo = Math.floor(Math.random() * directions.length + 1);
+const randomAnimationIndex = getRandomInt(0, directions.length - 1);
 
-    return (
-      <UserLogoWrapper className="animated jello">
-        <div className={`animated rotateIn${directions[randomNo]}`}>
-          <div className="animated fadeInUp">
-            <UserLogo className="animated zoomInDown">
-              <UserLogoBGRotate>
-                <UserLogoBG>
-                  <UserLogoImageWrapper>
-                    <UserLogoImage />
-                  </UserLogoImageWrapper>
-                </UserLogoBG>
-              </UserLogoBGRotate>
-              <UserLogoSVGWrapper>
-                <Logo height={60} />
-              </UserLogoSVGWrapper>
-            </UserLogo>
-          </div>
+export default function ProfileLogo() {
+  return (
+    <UserLogoWrapper className="animated jello">
+      <div className={`animated rotateIn${directions[randomAnimationIndex]}`}>
+        <div className="animated fadeInUp">
+          <UserLogo className="animated zoomInDown">
+            <UserLogoBGRotate>
+              <UserLogoBG>
+                <UserLogoImageWrapper>
+                  <UserLogoImage />
+                </UserLogoImageWrapper>
+              </UserLogoBG>
+            </UserLogoBGRotate>
+            <UserLogoSVGWrapper>
+              <Logo height={60} />
+            </UserLogoSVGWrapper>
+          </UserLogo>
         </div>
-      </UserLogoWrapper>
-    );
-  },
-  () => true, // Never re-render
-);
+      </div>
+    </UserLogoWrapper>
+  );
+}
