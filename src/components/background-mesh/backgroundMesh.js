@@ -54,7 +54,7 @@ const Circle = styled.div`
   opacity: ${props => (props.theme === 'light' ? 0.2 : 0.2)};
   opacity: 0;
   transition: all 0.1s ease-out;
-  ${props => (props.active ? SpinAnimationMixin : 'none')};
+  ${props => (props.active ? SpinAnimationMixin : null)};
 
   ${Column}:hover & {
     opacity: ${props => (props.theme === 'light' ? 0.6 : 0.6)};
@@ -63,6 +63,57 @@ const Circle = styled.div`
     transition: all 0.2s ease-in;
   }
 `;
+
+const ColumnRenderer = React.memo(
+  ({ showAllDots, toggleCircle, theme, mesh, row, column, i, j }) => {
+    return (
+      <Column
+        className="animated fadeInUp"
+        style={{
+          animationDelay: `${(mesh.length - i) * 0.015 +
+            (row.length - j) * 0.015}s`,
+        }}
+        onClick={() => toggleCircle(column)}>
+        {column.active || showAllDots ? (
+          <Circle
+            theme={theme}
+            color={column.color}
+            active={column.active}
+            style={
+              column.active
+                ? {
+                    background: column.color,
+                    opacity: 0.5,
+                    width: 12,
+                    height: 12,
+                    transform: `rotate(${column.rotation}deg)`,
+                    borderRadius: '40% 60% 40% 60% / 35% 30% 70% 65%',
+                    animationDuration: `${column.rotationSpeed}s`,
+                  }
+                : {}
+            }
+          />
+        ) : null}
+      </Column>
+    );
+  },
+  (
+    { column: { active, visibility }, showAllDots },
+    {
+      column: { active: nextActive, visibility: nextVisibility },
+      showAllDots: nextShowAllDots,
+    },
+  ) => {
+    if (
+      active !== nextActive ||
+      visibility !== nextVisibility ||
+      showAllDots !== nextShowAllDots
+    ) {
+      return false;
+    }
+    return true;
+  },
+);
 
 const BackgroundMesh = React.memo(
   ({ theme }) => {
@@ -85,35 +136,17 @@ const BackgroundMesh = React.memo(
         <Row key={i}>
           {row.map((column, j) => {
             return (
-              <Column
-                className="animated fadeInUp"
-                style={{
-                  animationDelay: `${(mesh.length - i) * 0.015 +
-                    (row.length - j) * 0.015}s`,
-                }}
+              <ColumnRenderer
+                theme={theme}
+                mesh={mesh}
+                row={row}
+                column={column}
+                i={i}
+                j={j}
+                toggleCircle={toggleCircle}
+                showAllDots={showAllDots}
                 key={`${j}_${column.visibility}`}
-                onClick={() => toggleCircle(column)}>
-                {column.active || showAllDots ? (
-                  <Circle
-                    theme={theme}
-                    color={column.color}
-                    active={column.active}
-                    style={
-                      column.active
-                        ? {
-                            background: column.color,
-                            opacity: 0.5,
-                            width: 12,
-                            height: 12,
-                            transform: `rotate(${column.rotation}deg)`,
-                            borderRadius: '40% 60% 40% 60% / 35% 30% 70% 65%',
-                            animationDuration: `${column.rotationSpeed}s`,
-                          }
-                        : {}
-                    }
-                  />
-                ) : null}
-              </Column>
+              />
             );
           })}
         </Row>

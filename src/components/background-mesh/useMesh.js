@@ -31,15 +31,6 @@ const useMesh = () => {
   const intermediate = useRef(null);
   const maxRandomPoints = innerWidth > 1023 ? 16 : innerWidth > 767 ? 12 : 8;
 
-  const toggleCircle = dot => {
-    const { posX, posY, active } = dot;
-    mesh[posY][posX].active = !active;
-
-    requestAnimationFrame(() => {
-      setMesh(mesh);
-    });
-  };
-
   useEffect(() => {
     horizontalBlocks.current = Math.ceil(innerWidth / BLOCK_SIZE);
     verticalBlocks.current = Math.ceil(innerHeight / BLOCK_SIZE);
@@ -125,8 +116,18 @@ const useMesh = () => {
     });
 
     setMesh(intermediate.current);
-    intermediate.current = null;
   }, []);
+
+  const toggleCircle = dot => {
+    const { posX, posY, active } = dot;
+    const newMesh = JSON.parse(JSON.stringify(intermediate.current));
+    newMesh[posY][posX].active = !active;
+    intermediate.current = newMesh;
+
+    requestAnimationFrame(() => {
+      setMesh(newMesh);
+    });
+  };
 
   return [mesh, toggleCircle];
 };
