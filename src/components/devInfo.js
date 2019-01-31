@@ -76,7 +76,7 @@ const DevInfo = () => {
           target="_blank">
           @Tracxn
         </a>
-        . I like contributing to open source & have created{' '}
+        . <Separator />I like contributing to open source and have created{' '}
         <a
           href="https://bttn.surge.sh/"
           rel="noopener noreferrer"
@@ -87,6 +87,7 @@ const DevInfo = () => {
         <a
           href="https://www.npmjs.com/package/react-dynamic-import"
           rel="noopener noreferrer"
+          style={{ whiteSpace: 'nowrap' }}
           target="_blank">
           react-dynamic-import
         </a>{' '}
@@ -100,11 +101,12 @@ const DevInfo = () => {
         <span role="img" aria-label="Yay!!!">
           🎉
         </span>
-        <Separator />I spend most of my day on{' '}
+        <Separator />
+        Usually, I'll be{' '}
         <span role="img" aria-label="Coding">
           👨🏻‍💻
-        </span>
-        and I play{' '}
+        </span>{' '}
+        for most of the day and I enjoy playing{' '}
         <span role="img" aria-label="Soccer">
           ⚽️
         </span>

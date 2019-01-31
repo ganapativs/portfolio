@@ -21,7 +21,7 @@ const LayoutWidth = styled.div`
 
 const Div = styled.div`
   margin: 0 auto;
-  max-width: 580px;
+  max-width: 540px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
