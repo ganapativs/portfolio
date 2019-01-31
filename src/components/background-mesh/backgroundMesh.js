@@ -83,7 +83,7 @@ const ColumnRenderer = React.memo(
               column.active
                 ? {
                     background: column.color,
-                    opacity: 0.5,
+                    opacity: 0.6,
                     width: 12,
                     height: 12,
                     transform: `rotate(${column.rotation}deg)`,
