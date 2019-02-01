@@ -75,7 +75,7 @@ const App = React.memo(props => {
                     setTheme(theme === 'dark' ? 'light' : 'dark');
                   }
                 }}
-                className="animated fadeInDown delay-1s faster"
+                className="animated fadeInDown delay-2s"
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
                 <HalfMoon />
               </ThemeSwitcher>

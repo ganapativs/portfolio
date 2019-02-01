@@ -3,8 +3,13 @@ import App from './app';
 import ThemeContext from './contexts/themeContext';
 import { TurnOffTransitionStyles } from './globalStyles';
 
-// Default light mode in desktop and dark mode in mobile
-const defaultTheme = window.innerWidth > 767 ? 'light' : 'dark';
+// https://twitter.com/levelsio/status/1089418602401296384
+let prefersDarkMode =
+  (window.matchMedia &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches) ||
+  false;
+
+const defaultTheme = prefersDarkMode ? 'dark' : 'light';
 
 const getTheme = () => {
   if (window.localStorage) {

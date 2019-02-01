@@ -68,7 +68,7 @@ const ColumnRenderer = React.memo(
   ({ showAllDots, toggleCircle, theme, mesh, row, column, i, j }) => {
     return (
       <Column
-        className="animated fadeInUp"
+        className="animated fadeInUp faster"
         style={{
           animationDelay: `${(mesh.length - i) * 0.015 +
             (row.length - j) * 0.015}s`,
@@ -120,16 +120,16 @@ const BackgroundMesh = React.memo(
     const [mesh, toggleCircle] = useMesh();
     const [showAllDots, showInvisibleDots] = useState(false);
 
-    if (!mesh[0].length) {
-      return null;
-    }
-
     // Mount after basic animation
     useEffect(() => {
       setTimeout(() => {
         requestAnimationFrame(() => showInvisibleDots(true));
-      }, 1100);
+      }, 800);
     }, []);
+
+    if (!mesh[0].length) {
+      return null;
+    }
 
     const Child = mesh.map((row, i) => {
       return row[0].visibility ? (
