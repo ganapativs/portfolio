@@ -126,6 +126,7 @@ const useMesh = () => {
 
     requestAnimationFrame(() => {
       setMesh(newMesh);
+      window.ga('send', 'event', 'BG Circle', 'toggle', 'BG Interaction');
     });
   };
 
