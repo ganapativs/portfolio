@@ -76,7 +76,7 @@ const App = React.memo(props => {
                     setTheme(theme === 'dark' ? 'light' : 'dark');
                   }
                 }}
-                className="animated fadeInDown delay-2s"
+                className="animated fadeInDown delay-1s"
                 onClick={() => {
                   const nextTheme = theme === 'dark' ? 'light' : 'dark';
                   setTheme(nextTheme);

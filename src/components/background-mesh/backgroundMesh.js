@@ -124,7 +124,7 @@ const BackgroundMesh = React.memo(
     useEffect(() => {
       setTimeout(() => {
         requestAnimationFrame(() => showInvisibleDots(true));
-      }, 1100);
+      }, 1500);
     }, []);
 
     if (!mesh[0].length) {
