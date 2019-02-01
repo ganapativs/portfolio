@@ -12,7 +12,7 @@ const BackgroundLoader = React.memo(
     useEffect(() => {
       setTimeout(() => {
         requestAnimationFrame(() => mountBg(true));
-      }, 800);
+      }, 1100);
     }, []);
 
     return bgActive ? (
