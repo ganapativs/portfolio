@@ -6,6 +6,7 @@ import GlobalStyles from './globalStyles';
 import ColorPalette from './colorPalette';
 import { FixedCentered } from './utils';
 import HalfMoon from './assets/icons/halfMoon.js';
+import { captureEvent } from './ga';
 
 const Header = React.lazy(() => import('./components/header'));
 const WithFonts = React.lazy(() => import('./components/withFonts'));
@@ -76,7 +77,11 @@ const App = React.memo(props => {
                   }
                 }}
                 className="animated fadeInDown delay-2s"
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+                onClick={() => {
+                  const nextTheme = theme === 'dark' ? 'light' : 'dark';
+                  setTheme(nextTheme);
+                  captureEvent(nextTheme, 'change', 'Theme');
+                }}>
                 <HalfMoon />
               </ThemeSwitcher>
             </Div>

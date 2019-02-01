@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import App from './app';
 import ThemeContext from './contexts/themeContext';
 import { TurnOffTransitionStyles } from './globalStyles';
+import { captureEvent } from './ga';
 
 // https://twitter.com/levelsio/status/1089418602401296384
 let prefersDarkMode =
@@ -20,6 +21,12 @@ const getTheme = () => {
 
     // If no theme was set, set default theme and return
     setTheme(defaultTheme);
+    captureEvent(
+      prefersDarkMode ? 'yes' : 'no',
+      'default',
+      'Prefers Dark Mode',
+    );
+    captureEvent(defaultTheme, 'change', 'Theme');
     return defaultTheme;
   }
 

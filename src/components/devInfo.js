@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components/macro';
+import { captureEvent } from '../ga';
 
 const DevName = styled.h1`
   font-size: 48px;
@@ -69,8 +70,11 @@ const DevInfo = () => {
       <DevName className="animated fadeInUp faster animation-delay-half-s">
         Ganapati V S{' '}
         <a
-          href="https://twitter.com/ganapativs"
+          href="https://twitter.com/ganapativs?ref=meetguns.com"
           rel="noopener noreferrer"
+          onClick={() =>
+            captureEvent('Personal Twitter', 'click', 'Social Links')
+          }
           target="_blank">
           <span>(@ganapativs)</span>
         </a>
@@ -83,30 +87,40 @@ const DevInfo = () => {
         I'm a Full-Stack JavaScript developer with over 4 years of experience.
         Currently working{' '}
         <a
-          href="https://twitter.com/tracxn"
+          href="https://twitter.com/tracxn?ref=meetguns.com"
           rel="noopener noreferrer"
+          onClick={() =>
+            captureEvent('Tracxn Twitter', 'click', 'Social Links')
+          }
           target="_blank">
           @Tracxn
         </a>
         . <Separator />I like contributing to open source and have created{' '}
         <a
-          href="https://bttn.surge.sh/"
+          href="https://bttn.surge.sh/?ref=meetguns.com"
           rel="noopener noreferrer"
+          onClick={() => captureEvent('bttn.surge.sh', 'click', 'Social Links')}
           target="_blank">
           bttn.css
         </a>
         ,{' '}
         <a
-          href="https://www.npmjs.com/package/react-dynamic-import"
+          href="https://www.npmjs.com/package/react-dynamic-import?ref=meetguns.com"
           rel="noopener noreferrer"
+          onClick={() =>
+            captureEvent('react-dynamic-import NPM', 'click', 'Social Links')
+          }
           style={{ whiteSpace: 'nowrap' }}
           target="_blank">
           react-dynamic-import
         </a>{' '}
         and{' '}
         <a
-          href="https://github.com/ganapativs"
+          href="https://github.com/ganapativs?ref=meetguns.com"
           rel="noopener noreferrer"
+          onClick={() =>
+            captureEvent('Personal GitHub', 'click', 'Social Links')
+          }
           target="_blank">
           more
         </a>{' '}

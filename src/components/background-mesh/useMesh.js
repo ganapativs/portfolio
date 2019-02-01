@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import useWindowSize from '@rehooks/window-size';
 import { getRandomInt } from '../../utils';
 import RandomPointsInTriangle from './randomPointsInTriangle';
+import { captureEvent } from '../../ga';
 
 export const COLORS = [
   '#222A68',
@@ -126,7 +127,7 @@ const useMesh = () => {
 
     requestAnimationFrame(() => {
       setMesh(newMesh);
-      window.ga('send', 'event', 'BG Circle', 'toggle', 'BG Interaction');
+      captureEvent('BG Circle', 'toggle', 'BG Interaction');
     });
   };
 

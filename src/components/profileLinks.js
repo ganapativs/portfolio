@@ -7,6 +7,7 @@ import StackoverflowIcon from '../assets/icons/stackoverflowIcon.js';
 import LinkedInIcon from '../assets/icons/linkedinIcon.js';
 import DribbbleIcon from '../assets/icons/dribbbleIcon.js';
 import EmailIcon from '../assets/icons/emailIcon.js';
+import { captureEvent } from '../ga.js';
 
 const Icons = styled.div`
   padding: 10px;
@@ -42,34 +43,40 @@ const Div = styled.div`
 
 const socialLinks = [
   {
-    link: 'https://twitter.com/ganapativs',
+    link: 'https://twitter.com/ganapativs?ref=meetguns.com',
     Component: TwitterIcon,
     title: 'Twitter',
+    seo: 'Personal Twitter',
   },
   {
-    link: 'https://github.com/ganapativs',
+    link: 'https://github.com/ganapativs?ref=meetguns.com',
     Component: GitHubIcon,
     title: 'GitHub',
+    seo: 'Personal GitHub',
   },
   {
-    link: 'https://stackoverflow.com/users/2627022',
+    link: 'https://stackoverflow.com/users/2627022?ref=meetguns.com',
     Component: StackoverflowIcon,
     title: 'Stack Overflow',
+    seo: 'Personal Stack Overflow',
   },
   {
-    link: 'https://www.linkedin.com/in/ganapativs/',
+    link: 'https://www.linkedin.com/in/ganapativs/?ref=meetguns.com',
     Component: LinkedInIcon,
     title: 'LinkedIn',
+    seo: 'Personal LinkedIn',
   },
   {
-    link: 'https://dribbble.com/ganapativs',
+    link: 'https://dribbble.com/ganapativs?ref=meetguns.com',
     Component: DribbbleIcon,
     title: 'Dribbble',
+    seo: 'Personal Dribbble',
   },
   {
     link: 'mailto:vsg.inbox+meetguns+com@gmail.com?Subject=Hello 👋',
     Component: EmailIcon,
     title: 'Email',
+    seo: 'Personal Email',
   },
 ];
 
@@ -80,13 +87,17 @@ export default function ProfileLinks() {
 
   return (
     <Div className="animated fadeInUp faster animation-delay-half-s">
-      {socialLinks.map(({ link, Component, title }, index) => (
+      {socialLinks.map(({ link, Component, title, seo }, index) => (
         <Icons
           className="app__link animated fadeInUp faster"
           key={link}
           title={title}
           style={{ animationDelay: `${index * 0.1 + 0.4}s` }}>
-          <a href={link} target="_blank" rel="noopener noreferrer">
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => captureEvent(seo, 'click', 'Social Links')}>
             <Component
               width={iconWidth}
               height={iconWidth}
