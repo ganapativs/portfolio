@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components/macro';
 
 const DevName = styled.h1`
   font-size: 48px;
@@ -28,10 +28,22 @@ const DevName = styled.h1`
   }
 `;
 
+const SmallFadeInUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translate3d(0, 80px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+`;
+
 const DevDescription = styled.h3`
   font-size: 18px;
   font-weight: 400;
   margin: 5px 0 24px 0;
+  animation-name: ${SmallFadeInUp};
 
   @media screen and (max-width: 767px) {
     text-align: center;
@@ -63,7 +75,7 @@ const DevInfo = () => {
           <span>(@ganapativs)</span>
         </a>
       </DevName>
-      <DevDescription className="animated fadeInUp faster animation-delay-half-s">
+      <DevDescription className="animated faster animation-delay-half-s">
         Hi{' '}
         <span role="img" aria-label="Hi!">
           👋
@@ -102,17 +114,17 @@ const DevInfo = () => {
           🎉
         </span>
         <Separator />
-        Usually, I'll be{' '}
+        Most of the time I'll be{' '}
         <span role="img" aria-label="Coding">
           👨🏻‍💻
         </span>{' '}
-        for most of the day and I enjoy playing{' '}
+        and I enjoy playing{' '}
         <span role="img" aria-label="Soccer">
           ⚽️
-        </span>
+        </span>{' '}
         <span role="img" aria-label="Badminton">
           🏸
-        </span>
+        </span>{' '}
         <span role="img" aria-label="FIFA gaming">
           🎮
         </span>{' '}

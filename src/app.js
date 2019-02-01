@@ -1,5 +1,4 @@
 import React, { Suspense, useContext } from 'react';
-import useWindowSize from '@rehooks/window-size';
 import styled from 'styled-components/macro';
 import ThemeContext from './contexts/themeContext';
 import SquareLoader from './components/squareLoader';
@@ -57,8 +56,6 @@ const FallbackLoader = () => (
 
 const App = React.memo(props => {
   const { theme } = useContext(ThemeContext);
-  const { innerWidth } = useWindowSize();
-  const isMobile = innerWidth < 768;
   const { setTheme } = props;
 
   return (
@@ -68,7 +65,7 @@ const App = React.memo(props => {
         <WithFonts FontFamilies="Source Sans Pro:300,400">
           <LayoutWidth>
             <Div>
-              {isMobile ? null : <BackgroundLoader />}
+              <BackgroundLoader />
               <Header />
               <ThemeSwitcher
                 role="button"
