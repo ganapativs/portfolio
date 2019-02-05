@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import styled from 'styled-components/macro';
 
 const ProfileLinks = React.lazy(() => import('./profileLinks'));
-const ProfileLogo = React.lazy(() => import('./profile-logo/profileLogo'));
+const ProfileLogo = React.lazy(() => import('./profileLogo'));
 const DevInfo = React.lazy(() => import('./devInfo'));
 
 const Div = styled.div`

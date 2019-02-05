@@ -1,8 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components/macro';
-import Logo from '../../assets/logo/meetguns';
-import BackgroundImage from './images/ganapativs.jpg';
-import { getRandomInt } from '../../utils';
+import Logo from '../assets/logo/meetguns';
+import { getRandomInt } from '../utils';
 
 const Wiggle = keyframes`
   0% {
@@ -75,7 +74,7 @@ const UserLogoImage = styled(UserLogoBGCommon)`
   left: -5%;
   top: -5%;
   border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
-  background-image: url(${BackgroundImage});
+  background-image: url('./images/ganapativs.jpg');
   background-size: cover;
   opacity: 0;
   transform: scale(0.95) rotate(-10deg) translateY(10%);
