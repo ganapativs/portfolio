@@ -122,7 +122,7 @@ const DevInfo = () => {
             captureEvent('Personal GitHub', 'click', 'Social Links')
           }
           target="_blank">
-          more
+          many more
         </a>{' '}
         <span role="img" aria-label="Yay!!!">
           🎉
