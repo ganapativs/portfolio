@@ -12,13 +12,18 @@ const DevName = styled.h1`
     font-size: 40px;
   }
 
-  span {
+  a {
     display: none;
 
     @media screen and (min-width: 768px) {
+      display: inline-block;
+    }
+  }
+
+  span {
+    @media screen and (min-width: 768px) {
       font-size: 20px;
       color: var(--color-light-dark);
-      display: inline-block;
       vertical-align: middle;
       transition: color 0.2s ease-in;
 

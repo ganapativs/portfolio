@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'normalize.css';
-import 'animate.css';
+import './assets/animate-custom.css';
 import AppWithTheme from './appWithTheme';
 import * as serviceWorker from './serviceWorker';
 /**

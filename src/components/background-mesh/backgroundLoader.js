@@ -1,7 +1,6 @@
-import React, { Suspense, useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import ThemeContext from '../../contexts/themeContext';
-
-const BackgroundMesh = React.lazy(() => import('./backgroundMesh'));
+import BackgroundMesh from './backgroundMesh';
 
 const BackgroundLoader = React.memo(
   () => {
@@ -15,11 +14,7 @@ const BackgroundLoader = React.memo(
       }, 1100);
     }, []);
 
-    return bgActive ? (
-      <Suspense fallback={null}>
-        <BackgroundMesh theme={theme} />
-      </Suspense>
-    ) : null;
+    return bgActive ? <BackgroundMesh theme={theme} /> : null;
   },
   () => true, // Never re-render
 );
