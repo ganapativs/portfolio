@@ -5,7 +5,8 @@ import SquareLoader from './components/squareLoader';
 import GlobalStyles from './globalStyles';
 import ColorPalette from './colorPalette';
 import { FixedCentered } from './utils';
-import HalfMoon from './assets/icons/halfMoon.js';
+import HalfMoonIcon from './assets/icons/halfMoonIcon.js';
+import CodeIcon from './assets/icons/codeIcon.js';
 import { captureEvent } from './ga';
 
 const Header = React.lazy(() => import('./components/header'));
@@ -49,6 +50,15 @@ const ThemeSwitcher = styled.div`
   cursor: pointer;
 `;
 
+const OpenSource = styled.a`
+  color: var(--color-light);
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  padding: 8px;
+  cursor: pointer;
+`;
+
 const FallbackLoader = () => (
   <FixedCentered>
     <SquareLoader />
@@ -76,14 +86,23 @@ const App = React.memo(props => {
                     setTheme(theme === 'dark' ? 'light' : 'dark');
                   }
                 }}
+                title="Change theme"
                 className="animated fadeInDown delay-1s"
                 onClick={() => {
                   const nextTheme = theme === 'dark' ? 'light' : 'dark';
                   setTheme(nextTheme);
                   captureEvent(nextTheme, 'change', 'Theme');
                 }}>
-                <HalfMoon />
+                <HalfMoonIcon />
               </ThemeSwitcher>
+              <OpenSource
+                title="View source code on GitHub"
+                className="animated fadeInUp delay-1s"
+                href="https://github.com/ganapativs/portfolio"
+                target="_blank"
+                rel="noopener noreferrer">
+                <CodeIcon />
+              </OpenSource>
             </Div>
           </LayoutWidth>
         </WithFonts>
