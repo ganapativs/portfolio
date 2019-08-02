@@ -1,3 +1,9 @@
 /*
-  X-Frame-Options: DENY
+  X-Frame-Options: SAMEORIGIN
   X-XSS-Protection: 1; mode=block
+/images/*
+  Cache-Control: public, max-age=604800, s-max-age=604800
+/static/css/*.css
+  Cache-Control: public, max-age=604800, s-max-age=604800
+/static/js/*.js
+  Cache-Control: public, max-age=604800, s-max-age=604800
