@@ -89,7 +89,7 @@ const DevInfo = () => {
         <span role="img" aria-label="Hi!">
           👋
         </span>{' '}
-        I'm a Full-Stack JavaScript developer with over 4 years of experience.
+        I'm a Full-Stack JavaScript developer with over 5 years of experience.
         Currently working{' '}
         <a
           href="https://twitter.com/tracxn?ref=meetguns.com"
@@ -100,13 +100,20 @@ const DevInfo = () => {
           target="_blank">
           @Tracxn
         </a>
-        . <Separator />I like contributing to open source and have created{' '}
+        . <Separator />I love open source and have created{' '}
         <a
-          href="https://bttn.surge.sh/?ref=meetguns.com"
+          href="https://www.npmjs.com/package/react-delightful-scroller?ref=meetguns.com"
           rel="noopener noreferrer"
-          onClick={() => captureEvent('bttn.surge.sh', 'click', 'Social Links')}
+          onClick={() =>
+            captureEvent(
+              'react-delightful-scroller NPM',
+              'click',
+              'Social Links',
+            )
+          }
+          style={{ whiteSpace: 'nowrap' }}
           target="_blank">
-          bttn.css
+          react-delightful-scroller
         </a>
         ,{' '}
         <a
@@ -118,6 +125,14 @@ const DevInfo = () => {
           style={{ whiteSpace: 'nowrap' }}
           target="_blank">
           react-dynamic-import
+        </a>
+        ,{' '}
+        <a
+          href="https://bttn.surge.sh/?ref=meetguns.com"
+          rel="noopener noreferrer"
+          onClick={() => captureEvent('bttn.surge.sh', 'click', 'Social Links')}
+          target="_blank">
+          bttn.css
         </a>{' '}
         and{' '}
         <a
@@ -137,7 +152,7 @@ const DevInfo = () => {
         <span role="img" aria-label="Coding">
           👨🏻‍💻
         </span>{' '}
-        and I enjoy playing{' '}
+        and I play{' '}
         <span role="img" aria-label="Soccer">
           ⚽️
         </span>{' '}

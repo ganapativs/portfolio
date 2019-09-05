@@ -21,8 +21,8 @@ const Header = React.memo(
   () => {
     return (
       <Div>
-        <Suspense maxDuration={200} fallback={<div style={{ height: 220 }} />}>
-          <ProfileLogo />
+        <Suspense fallback={<div style={{ height: 220 }} />}>
+          <ProfileLogo ppOnly />
         </Suspense>
         <Suspense fallback={null}>
           <DevInfo />

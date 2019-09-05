@@ -6,14 +6,13 @@ import GlobalStyles from './globalStyles';
 import ColorPalette from './colorPalette';
 import { FixedCentered } from './utils';
 import HalfMoonIcon from './assets/icons/halfMoonIcon.js';
-import CodeIcon from './assets/icons/codeIcon.js';
 import { captureEvent } from './ga';
 
 const Header = React.lazy(() => import('./components/header'));
-const WithFonts = React.lazy(() => import('./components/withFonts'));
 const BackgroundLoader = React.lazy(() =>
   import('./components/background-mesh/backgroundLoader'),
 );
+const ProfileLogo = React.lazy(() => import('./components/profileLogo'));
 
 const LayoutWidth = styled.div`
   max-width: 1600px;
@@ -53,10 +52,21 @@ const ThemeSwitcher = styled.div`
 const OpenSource = styled.a`
   color: var(--color-light);
   position: fixed;
-  bottom: 10px;
-  right: 10px;
+  bottom: 0px;
+  right: 0px;
   padding: 8px;
   cursor: pointer;
+`;
+
+const MeetgunsLogo = styled.a`
+  position: fixed;
+  bottom: 10px;
+  right: -30px;
+  padding: 8px;
+  cursor: pointer;
+  transform: scale(0.3) translateY(260px);
+  filter: invert(1);
+  opacity: 0.6;
 `;
 
 const FallbackLoader = () => (
@@ -72,40 +82,46 @@ const App = React.memo(props => {
   return (
     <>
       <GlobalStyles theme={ColorPalette[theme]} />
-      <Suspense maxDuration={200} fallback={<FallbackLoader />}>
-        <WithFonts FontFamilies="Source Sans Pro:300,400">
-          <LayoutWidth>
-            <Div>
-              <BackgroundLoader />
-              <Header />
-              <ThemeSwitcher
-                role="button"
-                tabIndex={0}
-                onKeyPress={e => {
-                  if (e.which === 13 || e.which === 32) {
-                    setTheme(theme === 'dark' ? 'light' : 'dark');
-                  }
-                }}
-                title="Change theme"
-                className="animated fadeInDown delay-1s"
-                onClick={() => {
-                  const nextTheme = theme === 'dark' ? 'light' : 'dark';
-                  setTheme(nextTheme);
-                  captureEvent(nextTheme, 'change', 'Theme');
-                }}>
-                <HalfMoonIcon />
-              </ThemeSwitcher>
+      <Suspense fallback={<FallbackLoader />}>
+        <LayoutWidth>
+          <Div>
+            <BackgroundLoader />
+            <Header />
+            <ThemeSwitcher
+              role="button"
+              tabIndex={0}
+              onKeyPress={e => {
+                if (e.which === 13 || e.which === 32) {
+                  setTheme(theme === 'dark' ? 'light' : 'dark');
+                }
+              }}
+              title={
+                theme === 'dark'
+                  ? 'Switch to light theme'
+                  : 'Switch to dark theme'
+              }
+              className="animated fadeInDown delay-1s"
+              onClick={() => {
+                const nextTheme = theme === 'dark' ? 'light' : 'dark';
+                setTheme(nextTheme);
+                captureEvent(nextTheme, 'change', 'Theme');
+              }}>
+              <HalfMoonIcon />
+            </ThemeSwitcher>
+            <Suspense fallback={null}>
               <OpenSource
                 title="View source code on GitHub"
-                className="animated fadeInUp delay-1s"
+                className="animated fadeInUp delay-2s"
                 href="https://github.com/ganapativs/portfolio"
                 target="_blank"
                 rel="noopener noreferrer">
-                <CodeIcon />
+                <MeetgunsLogo>
+                  <ProfileLogo noHover />
+                </MeetgunsLogo>
               </OpenSource>
-            </Div>
-          </LayoutWidth>
-        </WithFonts>
+            </Suspense>
+          </Div>
+        </LayoutWidth>
       </Suspense>
     </>
   );

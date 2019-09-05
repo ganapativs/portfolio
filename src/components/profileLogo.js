@@ -74,7 +74,7 @@ const UserLogoImage = styled(UserLogoBGCommon)`
   left: -5%;
   top: -5%;
   border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
-  background-image: url('./images/ganapativs.jpg');
+  background-image: url('./images/ganapativs.png');
   background-size: cover;
   opacity: 0;
   transform: scale(0.95) rotate(-10deg) translateY(10%);
@@ -97,14 +97,14 @@ const UserLogo = styled.div`
   position: relative;
   margin: 50px auto 30px auto;
 
-  &:hover ${UserLogoSVGWrapper} {
+  &.ppOnly ${UserLogoSVGWrapper}, &:not(.noHover):hover ${UserLogoSVGWrapper} {
     opacity: 0;
     transform: scale(0.8) rotate(5deg);
     transition: opacity 0.1s ease-in, transform 0.1s ease-in;
     transition-delay: 0.2s;
   }
 
-  &:hover ${UserLogoImage} {
+  &.ppOnly ${UserLogoImage}, &:not(.noHover):hover ${UserLogoImage} {
     opacity: 1;
     transform: scale(1) rotate(0deg) translateY(0);
     filter: grayscale(0%);
@@ -134,12 +134,15 @@ const directions = [
 
 const randomAnimationIndex = getRandomInt(0, directions.length - 1);
 
-export default function ProfileLogo() {
+export default function ProfileLogo({ ppOnly = false, noHover = false }) {
   return (
     <UserLogoWrapper className="animated jello">
       <div className={`animated rotateIn${directions[randomAnimationIndex]}`}>
         <div className="animated fadeInUp">
-          <UserLogo className="animated zoomInDown">
+          <UserLogo
+            className={`animated zoomInDown ${ppOnly ? 'ppOnly' : ''} ${
+              noHover ? 'noHover' : ''
+            }`}>
             <UserLogoBGRotate>
               <UserLogoBG>
                 <UserLogoImageWrapper>
