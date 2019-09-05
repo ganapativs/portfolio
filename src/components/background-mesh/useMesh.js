@@ -97,6 +97,7 @@ const useMesh = () => {
 
     intermediate.current = newMesh;
     setMesh(newMesh);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [innerWidth, innerHeight]);
 
   useEffect(() => {
@@ -129,6 +130,7 @@ const useMesh = () => {
     });
 
     setMesh(intermediate.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return [mesh, toggleCircle];

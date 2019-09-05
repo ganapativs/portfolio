@@ -14,11 +14,7 @@ import * as serviceWorker from './serviceWorker';
  */
 import 'focus-visible';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  // styled component has issues with StrictMode like findDOMNode etc
-  // But ReactDOM.createRoot uses StrictMode enabled by default
-  <AppWithTheme />,
-);
+ReactDOM.render(<AppWithTheme />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
