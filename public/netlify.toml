@@ -1,0 +1,27 @@
+# The following redirect is intended for use with most SPAs that handle
+# routing internally.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options: SAMEORIGIN
+    X-XSS-Protection: 1; mode=block
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control: public, max-age=604800, s-max-age=604800
+
+[[headers]]
+  for = "/static/css/*.css"
+  [headers.values]
+    Cache-Control: public, max-age=604800, s-max-age=604800
+
+[[headers]]
+  for = "/static/js/*.js"
+  [headers.values]
+    Cache-Control: public, max-age=604800, s-max-age=604800
