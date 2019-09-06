@@ -19,7 +19,7 @@ const ProfileInfo = styled.div`
   }
 `;
 
-const Header = React.memo(
+const AboutMe = React.memo(
   () => {
     return (
       <Div>
@@ -38,4 +38,4 @@ const Header = React.memo(
   () => true, // Never re-render
 );
 
-export default Header;
+export default AboutMe;

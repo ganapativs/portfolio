@@ -8,7 +8,7 @@ import { FixedCentered } from './utils';
 import HalfMoonIcon from './assets/icons/halfMoonIcon.js';
 import { captureEvent } from './ga';
 
-const Header = React.lazy(() => import('./components/header'));
+const AboutMe = React.lazy(() => import('./components/aboutMe'));
 const BackgroundLoader = React.lazy(() =>
   import('./components/background-mesh/backgroundLoader'),
 );
@@ -84,7 +84,7 @@ const App = React.memo(props => {
         <LayoutWidth>
           <Div>
             <BackgroundLoader />
-            <Header />
+            <AboutMe />
             <ThemeSwitcher
               role="button"
               tabIndex={0}
