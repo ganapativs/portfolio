@@ -15,17 +15,15 @@ const BackgroundLoader = React.lazy(() =>
 const ProfileLogo = React.lazy(() => import('./components/profileLogo'));
 
 const LayoutWidth = styled.div`
-  max-width: 1600px;
+  max-width: 900px;
   margin: 0 auto;
   height: 100%;
 `;
 
 const Div = styled.div`
-  margin: 0 auto;
-  max-width: 540px;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: center;
   min-height: 100%;
   padding: 15px;
 

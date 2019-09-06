@@ -7,13 +7,15 @@ const DevInfo = React.lazy(() => import('./devInfo'));
 
 const Div = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   color: var(--color-light);
+`;
 
+const ProfileInfo = styled.div`
   @media screen and (min-width: 768px) {
-    align-items: flex-start;
+    padding-left: 100px;
   }
 `;
 
@@ -25,8 +27,10 @@ const Header = React.memo(
           <ProfileLogo ppOnly />
         </Suspense>
         <Suspense fallback={null}>
-          <DevInfo />
-          <ProfileLinks />
+          <ProfileInfo>
+            <DevInfo />
+            <ProfileLinks />
+          </ProfileInfo>
         </Suspense>
       </Div>
     );
