@@ -1,2 +1,0 @@
-# Redirect default Netlify subdomain to primary domain
-http://meetguns.netlify.com/* http://meetguns.com/:splat 301!
