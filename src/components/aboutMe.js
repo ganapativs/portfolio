@@ -1,9 +1,8 @@
-import React, { Suspense } from 'react';
-import styled from 'styled-components/macro';
-
-const ProfileLinks = React.lazy(() => import('./profileLinks'));
-const ProfileLogo = React.lazy(() => import('./profileLogo'));
-const DevInfo = React.lazy(() => import('./devInfo'));
+import React from 'react';
+import styled from 'styled-components';
+import ProfileLinks from './profileLinks';
+import ProfileLogo from './profileLogo';
+import DevInfo from './devInfo';
 
 const Div = styled.div`
   display: flex;
@@ -28,15 +27,11 @@ const AboutMe = React.memo(
   () => {
     return (
       <Div>
-        <Suspense fallback={<div style={{ height: 220 }} />}>
-          <ProfileLogo ppOnly />
-        </Suspense>
-        <Suspense fallback={null}>
-          <ProfileInfo>
-            <DevInfo />
-            <ProfileLinks />
-          </ProfileInfo>
-        </Suspense>
+        <ProfileLogo ppOnly />
+        <ProfileInfo>
+          <DevInfo />
+          <ProfileLinks />
+        </ProfileInfo>
       </Div>
     );
   },

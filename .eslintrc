@@ -1,8 +1,7 @@
 {
-    "extends": "react-app",
+    "extends": "@ganapativs/react",
     "plugins": [
-        "react-hooks",
-        "prettier"
+        "react-hooks"
     ],
     "rules": {
         "react-hooks/rules-of-hooks": "error",
@@ -11,6 +10,10 @@
             "printWidth": 80,
             "trailingComma": "all",
             "jsxBracketSameLine": true
-        }]
+        }],
+        "react/prop-types": 0,
+        "react/display-name": 1,
+        "no-param-reassign": 1,
+        "no-nested-ternary": 1
     }
 }

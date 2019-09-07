@@ -1,14 +1,9 @@
 {
   "name": "portfolio",
-  "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "serve": "serve -s build"
-  },
+  "description": "Ganapati V S - Portfolio",
+  "version": "0.1.0",
+  "author": "Ganapati V S <vsg.inbox@gmail.com>",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -24,32 +19,54 @@
       "git add"
     ]
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "dependencies": {
+    "@rehooks/window-size": "^1.0.2",
+    "babel-plugin-styled-components": "^1.10.6",
+    "classnames": "^2.2.6",
+    "focus-visible": "^5.0.2",
+    "gatsby": "^2.15.9",
+    "gatsby-image": "^2.2.17",
+    "gatsby-plugin-google-analytics": "^2.1.14",
+    "gatsby-plugin-manifest": "^2.2.14",
+    "gatsby-plugin-offline": "^3.0.3",
+    "gatsby-plugin-prefetch-google-fonts": "^1.4.3",
+    "gatsby-plugin-react-helmet": "^3.1.6",
+    "gatsby-plugin-sharp": "^2.2.20",
+    "gatsby-plugin-styled-components": "^3.1.4",
+    "gatsby-source-filesystem": "^2.1.21",
+    "gatsby-transformer-sharp": "^2.2.13",
+    "normalize.css": "^8.0.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-helmet": "^5.2.1",
+    "styled-components": "^4.3.2"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
   "devDependencies": {
-    "eslint-plugin-prettier": "^3.1.0",
+    "@ganapativs/eslint-config-react": "^0.0.3",
     "eslint-plugin-react-hooks": "^2.0.1",
     "husky": "^3.0.5",
     "lint-staged": "^9.2.5",
     "prettier": "^1.18.2"
   },
-  "dependencies": {
-    "@rehooks/window-size": "^1.0.2",
-    "classnames": "^2.2.6",
-    "focus-visible": "^5.0.2",
-    "normalize.css": "^8.0.1",
-    "prop-types": "^15.7.2",
-    "react": "16.9.0",
-    "react-dom": "16.9.0",
-    "react-scripts": "^3.1.1",
-    "serve": "^11.1.0",
-    "styled-components": "^4.3.2"
+  "keywords": [
+    "portfolio",
+    "react",
+    "performance",
+    "gatsby"
+  ],
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "format": "eslint src --ext .js --ext .json --fix && prettier --write \"**/*.{css,md}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ganapativs/portfolio"
+  },
+  "bugs": {
+    "url": "https://github.com/ganapativs/portfolio/issues"
   }
 }

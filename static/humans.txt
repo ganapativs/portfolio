@@ -1,0 +1,10 @@
+/* PEOPLE */
+	DEVELOPER: Ganapati V S
+	Contact: vsg.inbox [at] gmail.com
+	Twitter: @ganapativs
+	From: Bengaluru, India
+
+/* SITE */
+	Language: English
+	Doctype: HTML5
+	IDE: Visual Studio Code

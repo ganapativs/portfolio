@@ -1,6 +1,6 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components/macro';
-import { captureEvent } from '../ga';
+import styled, { keyframes } from 'styled-components';
+import { captureEvent } from '../utils/ga';
 
 const DevName = styled.h1`
   font-size: 48px;
@@ -89,8 +89,8 @@ const DevInfo = () => {
         <span role="img" aria-label="Hi!">
           👋
         </span>{' '}
-        I'm a Full-Stack JavaScript developer with over 5 years of experience.
-        Currently working{' '}
+        I&#39;m a Full-Stack JavaScript developer with over 5 years of
+        experience. Currently working{' '}
         <a
           href="https://twitter.com/tracxn?ref=meetguns.com"
           rel="noopener noreferrer"
@@ -148,7 +148,7 @@ const DevInfo = () => {
           🎉
         </span>
         <Separator />
-        Most of the time I'll be{' '}
+        Most of the time I&#39;ll be{' '}
         <span role="img" aria-label="Coding">
           👨🏻‍💻
         </span>{' '}

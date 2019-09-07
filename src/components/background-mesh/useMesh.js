@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import useWindowSize from '@rehooks/window-size';
 import { getRandomInt } from '../../utils';
 import RandomPointsInTriangle from './randomPointsInTriangle';
-import { captureEvent } from '../../ga';
+import { captureEvent } from '../../utils/ga';
 
 export const COLORS = [
   '#222A68',
@@ -55,12 +55,12 @@ const useMesh = () => {
     if (hasLessRows || hasLessColumns) {
       // Scenario - when window is expanded in horizontal/vertical direction
       // Compute new mesh elements in viewport
-      for (let i = 0; i < verticalBlocks.current; i++) {
+      for (let i = 0; i < verticalBlocks.current; i += 1) {
         if (!newMesh[i]) {
           newMesh[i] = [];
         }
 
-        for (let j = 0; j < horizontalBlocks.current; j++) {
+        for (let j = 0; j < horizontalBlocks.current; j += 1) {
           if (!newMesh[i][j]) {
             const colorIndex = getRandomInt(0, COLORS.length - 1);
 
@@ -80,8 +80,8 @@ const useMesh = () => {
     } else {
       // Scenario - when window is sized down in horizontal/vertical direction
       // Update visibility status of invisible rows/columns
-      for (let i = 0; i < newMesh.length; i++) {
-        for (let j = 0; j < newMesh[0].length; j++) {
+      for (let i = 0; i < newMesh.length; i += 1) {
+        for (let j = 0; j < newMesh[0].length; j += 1) {
           if (newMesh[i][j]) {
             newMesh[i][j] = {
               ...newMesh[i][j],

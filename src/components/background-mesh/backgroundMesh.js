@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled, { keyframes, css } from 'styled-components/macro';
+import styled, { keyframes, css } from 'styled-components';
 import useMesh, { BLOCK_SIZE } from './useMesh';
 
 const DivWrapper = styled.div`

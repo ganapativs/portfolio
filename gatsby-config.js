@@ -1,0 +1,56 @@
+module.exports = {
+  siteMetadata: {
+    title: `Ganapati V S - Portfolio`,
+    description: `Full-Stack JavaScript developer building stuffs using bleeding edge technologies 🎉`,
+    author: `@ganapativs`,
+  },
+  plugins: [
+    `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images`,
+      },
+    },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        short_name: 'meetguns',
+        name: 'meetguns',
+        icon: 'src/images/icons/android-icon-512x512.png',
+        start_url: '/',
+        scope: '/',
+        display: 'standalone',
+        theme_color: '#181819',
+        background_color: '#181819',
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-52929584-1",
+      },
+    },
+    `gatsby-plugin-styled-components`,
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Oswald`,
+            subsets: [`latin`],
+          },
+          {
+            family: `Source Sans Pro`,
+            variants: [`300`, `400`]
+          },
+        ],
+      },
+    },
+    // https://gatsby.dev/offline
+    `gatsby-plugin-offline`,
+  ],
+};

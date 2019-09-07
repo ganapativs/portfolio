@@ -17,11 +17,11 @@
     Cache-Control = "public, max-age=604800, s-max-age=604800"
 
 [[headers]]
-  for = "/static/css/*.css"
+  for = "/*.css"
   [headers.values]
     Cache-Control = "public, max-age=604800, s-max-age=604800"
 
 [[headers]]
-  for = "/static/js/*.js"
+  for = "/*.js"
   [headers.values]
     Cache-Control = "public, max-age=604800, s-max-age=604800"

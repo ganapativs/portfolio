@@ -8,7 +8,7 @@ const RandomPointsInTriangle = (
 ) => {
   const arr = new Array(pointsCount).fill(0);
 
-  return arr.reduce((prev, curr) => {
+  return arr.reduce(prev => {
     const r1 = Math.random();
     const r2 = Math.random();
 

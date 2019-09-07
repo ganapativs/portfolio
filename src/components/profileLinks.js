@@ -1,13 +1,12 @@
 import React from 'react';
-import useWindowSize from '@rehooks/window-size';
-import styled from 'styled-components/macro';
-import GitHubIcon from '../assets/icons/githubIcon.js';
-import TwitterIcon from '../assets/icons/twitterIcon.js';
-import StackoverflowIcon from '../assets/icons/stackoverflowIcon.js';
-import LinkedInIcon from '../assets/icons/linkedinIcon.js';
-import DribbbleIcon from '../assets/icons/dribbbleIcon.js';
-import EmailIcon from '../assets/icons/emailIcon.js';
-import { captureEvent } from '../ga.js';
+import styled from 'styled-components';
+import GitHubIcon from '../assets/icons/githubIcon';
+import TwitterIcon from '../assets/icons/twitterIcon';
+import StackoverflowIcon from '../assets/icons/stackoverflowIcon';
+import LinkedInIcon from '../assets/icons/linkedinIcon';
+import DribbbleIcon from '../assets/icons/dribbbleIcon';
+import EmailIcon from '../assets/icons/emailIcon';
+import { captureEvent } from '../utils/ga';
 
 const Icons = styled.div`
   padding: 10px;
@@ -81,10 +80,6 @@ const socialLinks = [
 ];
 
 export default function ProfileLinks() {
-  let { innerWidth } = useWindowSize();
-  const isMobile = innerWidth < 768;
-  const iconWidth = isMobile ? 28 : 26;
-
   return (
     <Div className="animated fadeInUp faster animation-delay-half-s">
       {socialLinks.map(({ link, Component, title, seo }, index) => (
@@ -99,8 +94,8 @@ export default function ProfileLinks() {
             rel="noopener noreferrer"
             onClick={() => captureEvent(seo, 'click', 'Social Links')}>
             <Component
-              width={iconWidth}
-              height={iconWidth}
+              width={26}
+              height={26}
               style={{ verticalAlign: 'sub' }}
             />
           </a>

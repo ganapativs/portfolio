@@ -1,16 +1,37 @@
+import 'normalize.css';
+import '../assets/animate-custom.css';
 import React, { PureComponent } from 'react';
 import App from './app';
-import ThemeContext from './contexts/themeContext';
-import { TurnOffTransitionStyles } from './globalStyles';
-import { captureEvent } from './ga';
+import ThemeContext from '../contexts/themeContext';
+import { TurnOffTransitionStyles } from '../utils/globalStyles';
+import { captureEvent } from '../utils/ga';
+/**
+ * Show outline only on keyboard interaction
+ *
+ * Adds 'js-focus-visible' class to body and 'focus-visible' class to focused element
+ *
+ * https://github.com/WICG/focus-visible
+ * https://davidwalsh.name/css-focus
+ */
+import 'focus-visible';
 
-// https://twitter.com/levelsio/status/1089418602401296384
-let prefersDarkMode =
-  (window.matchMedia &&
-    window.matchMedia('(prefers-color-scheme: dark)').matches) ||
-  false;
+const getDefaultTheme = () => {
+  // https://twitter.com/levelsio/status/1089418602401296384
+  const prefersDarkMode =
+    (window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches) ||
+    false;
 
-const defaultTheme = prefersDarkMode ? 'dark' : 'light';
+  return prefersDarkMode ? 'dark' : 'light';
+};
+
+const setTheme = (theme = getDefaultTheme()) => {
+  if (window.localStorage) {
+    return window.localStorage.setItem('theme', theme);
+  }
+
+  return null;
+};
 
 const getTheme = () => {
   if (window.localStorage) {
@@ -19,10 +40,11 @@ const getTheme = () => {
       return theme;
     }
 
+    const defaultTheme = getDefaultTheme();
     // If no theme was set, set default theme and return
     setTheme(defaultTheme);
     captureEvent(
-      prefersDarkMode ? 'yes' : 'no',
+      defaultTheme === 'dark' ? 'yes' : 'no',
       'default',
       'Prefers Dark Mode',
     );
@@ -30,22 +52,21 @@ const getTheme = () => {
     return defaultTheme;
   }
 
-  return defaultTheme;
-};
-
-const setTheme = (theme = defaultTheme) => {
-  if (window.localStorage) {
-    return window.localStorage.setItem('theme', theme);
-  }
-
-  return null;
+  return getDefaultTheme();
 };
 
 class AppWithTheme extends PureComponent {
   state = {
-    theme: getTheme(),
+    theme: 'light',
     themingInProgress: false,
   };
+
+  componentDidMount() {
+    this.setState({
+      theme: getTheme(),
+    });
+  }
+
   setTheme = theme => {
     const { themingInProgress } = this.state;
     if (themingInProgress) {
@@ -63,13 +84,14 @@ class AppWithTheme extends PureComponent {
       });
     });
   };
+
   render() {
     const { theme, themingInProgress } = this.state;
 
     return (
       <ThemeContext.Provider value={{ theme, themingInProgress }}>
         <TurnOffTransitionStyles active={themingInProgress} />
-        <App setTheme={this.setTheme} />
+        <App setTheme={this.setTheme}>{this.props.children}</App>
       </ThemeContext.Provider>
     );
   }
