@@ -19,11 +19,12 @@ const Div = styled.div`
   justify-content: flex-start;
   align-items: center;
   min-height: 100%;
-  padding: 15px;
+  padding: 50px 15px;
 
   @media screen and (min-width: 768px) {
     justify-content: flex-start;
     align-items: center;
+    padding: 150px 15px;
   }
 
   @media screen and (min-height: 550px) {
@@ -60,7 +61,7 @@ const MeetgunsLogo = styled.a`
   opacity: 0.6;
 `;
 
-const App = React.memo(props => {
+const Container = React.memo(props => {
   const [showBg, setShowBg] = useState(false);
   const { theme } = useContext(ThemeContext);
   const { setTheme } = props;
@@ -113,4 +114,4 @@ const App = React.memo(props => {
   );
 });
 
-export default App;
+export default Container;

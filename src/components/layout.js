@@ -2,7 +2,7 @@ import 'normalize.css';
 import '../assets/animate-custom.css';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import App from './app';
+import Container from './container';
 import ThemeContext from '../contexts/themeContext';
 import { TurnOffTransitionStyles } from '../utils/globalStyles';
 import { captureEvent } from '../utils/ga';
@@ -102,7 +102,7 @@ class AppWithTheme extends PureComponent {
       <WaitForTheme className={themeReady ? 'go' : ''}>
         <ThemeContext.Provider value={{ theme, themingInProgress }}>
           <TurnOffTransitionStyles active={themingInProgress} />
-          <App setTheme={this.setTheme}>{this.props.children}</App>
+          <Container setTheme={this.setTheme}>{this.props.children}</Container>
         </ThemeContext.Provider>
       </WaitForTheme>
     );
