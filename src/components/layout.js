@@ -1,6 +1,7 @@
 import 'normalize.css';
 import '../assets/animate-custom.css';
 import React, { PureComponent } from 'react';
+import styled from 'styled-components';
 import App from './app';
 import ThemeContext from '../contexts/themeContext';
 import { TurnOffTransitionStyles } from '../utils/globalStyles';
@@ -14,6 +15,13 @@ import { captureEvent } from '../utils/ga';
  * https://davidwalsh.name/css-focus
  */
 import 'focus-visible';
+
+const WaitForTheme = styled.div`
+  opacity: 0;
+  &.go {
+    opacity: 1;
+  }
+`;
 
 const getDefaultTheme = () => {
   // https://twitter.com/levelsio/status/1089418602401296384
@@ -58,12 +66,14 @@ const getTheme = () => {
 class AppWithTheme extends PureComponent {
   state = {
     theme: 'light',
+    themeReady: false,
     themingInProgress: false,
   };
 
   componentDidMount() {
     this.setState({
       theme: getTheme(),
+      themeReady: true,
     });
   }
 
@@ -86,13 +96,15 @@ class AppWithTheme extends PureComponent {
   };
 
   render() {
-    const { theme, themingInProgress } = this.state;
+    const { theme, themeReady, themingInProgress } = this.state;
 
     return (
-      <ThemeContext.Provider value={{ theme, themingInProgress }}>
-        <TurnOffTransitionStyles active={themingInProgress} />
-        <App setTheme={this.setTheme}>{this.props.children}</App>
-      </ThemeContext.Provider>
+      <WaitForTheme className={themeReady ? 'go' : ''}>
+        <ThemeContext.Provider value={{ theme, themingInProgress }}>
+          <TurnOffTransitionStyles active={themingInProgress} />
+          <App setTheme={this.setTheme}>{this.props.children}</App>
+        </ThemeContext.Provider>
+      </WaitForTheme>
     );
   }
 }

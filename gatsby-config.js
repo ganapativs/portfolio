@@ -20,7 +20,7 @@ module.exports = {
       options: {
         short_name: 'meetguns',
         name: 'meetguns',
-        icon: 'src/images/icons/android-icon-512x512.png',
+        icon: 'src/images/icon-512x512.png',
         start_url: '/',
         scope: '/',
         display: 'standalone',
