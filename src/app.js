@@ -28,12 +28,11 @@ const Div = styled.div`
   padding: 15px;
 
   @media screen and (min-width: 768px) {
-    margin: 0 0 0 60px;
     justify-content: flex-start;
     align-items: center;
   }
 
-  @media screen and (min-width: 768px) and (min-height: 550px) {
+  @media screen and (min-height: 550px) {
     margin-top: -5%;
   }
 `;

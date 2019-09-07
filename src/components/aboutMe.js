@@ -11,11 +11,16 @@ const Div = styled.div`
   align-items: center;
   justify-content: center;
   color: var(--color-light);
+  flex-direction: column;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 
 const ProfileInfo = styled.div`
   @media screen and (min-width: 768px) {
-    padding-left: 100px;
+    padding-left: 80px;
   }
 `;
 
