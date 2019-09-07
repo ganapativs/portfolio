@@ -24,8 +24,8 @@ module.exports = {
         start_url: '/',
         scope: '/',
         display: 'standalone',
-        theme_color: '#181819',
-        background_color: '#181819',
+        theme_color: '#0f0f10',
+        background_color: '#0f0f10',
       },
     },
     {
