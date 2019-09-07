@@ -2,7 +2,7 @@
   "name": "portfolio",
   "private": true,
   "description": "Ganapati V S - Portfolio",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Ganapati V S <vsg.inbox@gmail.com>",
   "husky": {
     "hooks": {
