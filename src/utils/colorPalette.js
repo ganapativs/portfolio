@@ -7,8 +7,8 @@ const commonColors = {
 
 const dark = {
   ...commonColors,
-  dark: '#181819',
-  light: '#f0f3f9',
+  dark: '#0f0f10',
+  light: '#f3f8f9',
   lightDark: '#747475',
   lightOp1: 'rgba(255, 255, 255, 0.2)',
   lightOp2: 'rgba(255, 255, 255, 0.1)',
@@ -17,12 +17,12 @@ const dark = {
 
 const light = {
   ...commonColors,
-  dark: '#f0f3f9',
-  light: '#181819',
+  dark: '#f3f8f9',
+  light: '#0f0f10',
   lightDark: '#909295',
-  lightOp1: 'rgba(24, 24, 25, 0.2)',
-  lightOp2: 'rgba(24, 24, 25, 0.1)',
-  lightOp3: 'rgba(24, 24, 25, 0.05)',
+  lightOp1: 'rgba(0, 0, 0, 0.2)',
+  lightOp2: 'rgba(0, 0, 0, 0.1)',
+  lightOp3: 'rgba(0, 0, 0, 0.05)',
 };
 
 const theme = { light, dark };

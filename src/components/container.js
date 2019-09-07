@@ -49,7 +49,7 @@ const OpenSource = styled.a`
   cursor: pointer;
 `;
 
-const MeetgunsLogo = styled.a`
+const MeetgunsLogo = styled.span`
   position: fixed;
   bottom: 10px;
   right: -30px;
