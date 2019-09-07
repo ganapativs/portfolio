@@ -93,7 +93,7 @@ const Container = React.memo(props => {
           </ThemeSwitcher>
           <OpenSource
             title="View source code on GitHub"
-            className="animated fadeInUp delay-2s"
+            className="animated fadeInUp delay-1s"
             href="https://github.com/ganapativs/portfolio"
             target="_blank"
             rel="noopener noreferrer">
