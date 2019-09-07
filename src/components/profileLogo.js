@@ -97,6 +97,13 @@ const UserLogo = styled.div`
   position: relative;
   margin: 50px auto 30px auto;
 
+  @media screen and (min-width: 768px) {
+    &.ppOnly {
+      width: 160px;
+      height: 160px;
+    }
+  }
+
   &.ppOnly ${UserLogoSVGWrapper}, &:not(.noHover):hover ${UserLogoSVGWrapper} {
     opacity: 0;
     transform: scale(0.8) rotate(5deg);

@@ -7,17 +7,24 @@ const DevInfo = React.lazy(() => import('./devInfo'));
 
 const Div = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   color: var(--color-light);
+  flex-direction: column;
 
   @media screen and (min-width: 768px) {
-    align-items: flex-start;
+    flex-direction: row;
   }
 `;
 
-const Header = React.memo(
+const ProfileInfo = styled.div`
+  @media screen and (min-width: 768px) {
+    padding-left: 80px;
+  }
+`;
+
+const AboutMe = React.memo(
   () => {
     return (
       <Div>
@@ -25,8 +32,10 @@ const Header = React.memo(
           <ProfileLogo ppOnly />
         </Suspense>
         <Suspense fallback={null}>
-          <DevInfo />
-          <ProfileLinks />
+          <ProfileInfo>
+            <DevInfo />
+            <ProfileLinks />
+          </ProfileInfo>
         </Suspense>
       </Div>
     );
@@ -34,4 +43,4 @@ const Header = React.memo(
   () => true, // Never re-render
 );
 
-export default Header;
+export default AboutMe;

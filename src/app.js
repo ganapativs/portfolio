@@ -8,34 +8,31 @@ import { FixedCentered } from './utils';
 import HalfMoonIcon from './assets/icons/halfMoonIcon.js';
 import { captureEvent } from './ga';
 
-const Header = React.lazy(() => import('./components/header'));
+const AboutMe = React.lazy(() => import('./components/aboutMe'));
 const BackgroundLoader = React.lazy(() =>
   import('./components/background-mesh/backgroundLoader'),
 );
 const ProfileLogo = React.lazy(() => import('./components/profileLogo'));
 
 const LayoutWidth = styled.div`
-  max-width: 1600px;
+  max-width: 900px;
   margin: 0 auto;
   height: 100%;
 `;
 
 const Div = styled.div`
-  margin: 0 auto;
-  max-width: 540px;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: center;
   min-height: 100%;
   padding: 15px;
 
   @media screen and (min-width: 768px) {
-    margin: 0 0 0 60px;
     justify-content: flex-start;
     align-items: center;
   }
 
-  @media screen and (min-width: 768px) and (min-height: 550px) {
+  @media screen and (min-height: 550px) {
     margin-top: -5%;
   }
 `;
@@ -86,7 +83,7 @@ const App = React.memo(props => {
         <LayoutWidth>
           <Div>
             <BackgroundLoader />
-            <Header />
+            <AboutMe />
             <ThemeSwitcher
               role="button"
               tabIndex={0}
