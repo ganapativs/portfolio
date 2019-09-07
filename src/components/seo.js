@@ -31,7 +31,7 @@ function SEO() {
       />
       <meta
         httpEquiv="Content-Security-Policy"
-        content="default-src 'self'; prefetch-src *; base-uri 'self'; script-src 'self' 'unsafe-inline' https://www.google-analytics.com; block-all-mixed-content; connect-src 'self' ws: ; img-src 'self' https://www.google-analytics.com; manifest-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com;"
+        content="default-src 'self' https://www.google.com/analytics https://twitter.com https://github.com https://stackoverflow.com https://www.linkedin.com https://dribbble.com https://www.instagram.com https://www.facebook.com https://www.google-analytics.com ; base-uri 'self'; script-src 'self' 'unsafe-inline' https://www.google-analytics.com; block-all-mixed-content; connect-src 'self' ws: ; img-src 'self' https://www.google-analytics.com; manifest-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com;"
       />
       <meta name="description" content={site.siteMetadata.description} />
       <meta name="robots" content="index,follow" />
@@ -69,7 +69,6 @@ function SEO() {
         href="https://www.facebook.com/Ganapati.V.S"
         type="text/html"
       />
-      <link rel="me" href="mailto:vsg.inbox+meetguns+com@gmail.com" />
       <meta property="og:url" content="https://meetguns.com" />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={site.siteMetadata.title} />

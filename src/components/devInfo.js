@@ -23,13 +23,7 @@ const DevName = styled.h1`
   span {
     @media screen and (min-width: 768px) {
       font-size: 20px;
-      color: var(--color-light-dark);
       vertical-align: middle;
-      transition: color 0.2s ease-in;
-
-      &:hover {
-        color: var(--color-light);
-      }
     }
   }
 `;

@@ -1,11 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import ThemeContext from '../contexts/themeContext';
 import GlobalStyles from '../utils/globalStyles';
 import ColorPalette from '../utils/colorPalette';
 import HalfMoonIcon from '../assets/icons/halfMoonIcon';
 import { captureEvent } from '../utils/ga';
-import BackgroundLoader from './background-mesh/backgroundLoader';
 import ProfileLogo from './profileLogo';
 
 const LayoutWidth = styled.div`
@@ -62,20 +61,14 @@ const MeetgunsLogo = styled.a`
 `;
 
 const Container = React.memo(props => {
-  const [showBg, setShowBg] = useState(false);
   const { theme } = useContext(ThemeContext);
   const { setTheme } = props;
-
-  useEffect(() => {
-    setShowBg(true);
-  }, []);
 
   return (
     <>
       <GlobalStyles theme={ColorPalette[theme]} />
       <LayoutWidth>
         <Div>
-          {showBg ? <BackgroundLoader /> : null}
           {props.children}
           <ThemeSwitcher
             role="button"
