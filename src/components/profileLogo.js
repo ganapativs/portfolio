@@ -2,7 +2,6 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import Img from 'gatsby-image';
 import Logo from '../assets/logo/meetguns';
-import { getRandomInt } from '../utils';
 
 const Wiggle = keyframes`
   0% {
@@ -129,24 +128,11 @@ const UserLogoWrapper = styled.div`
   animation-delay: 0.5s;
 `;
 
-const directions = [
-  '',
-  'UpLeft',
-  'UpRight',
-  'DownLeft',
-  'DownRight',
-  'no-rotate',
-];
-
-const randomAnimationIndex = getRandomInt(0, directions.length - 1);
-
 export default function ProfileLogo({
   ppOnly = false,
   noHover = false,
   profileLogo,
 }) {
-  // Set up the array of image data and `media` keys.
-  // You can have as many entries as you'd like.
   const sources = profileLogo
     ? [
         profileLogo.mobileImage.childImageSharp.fluid,
@@ -159,8 +145,7 @@ export default function ProfileLogo({
 
   return (
     <UserLogoWrapper className="animated jello">
-      <div className={`animated rotateIn${directions[randomAnimationIndex]}`}>
-        <div className="animated fadeInUp">
+     <div className="animated fadeInUp">
           <UserLogo
             className={`animated zoomInDown ${ppOnly ? 'ppOnly' : ''} ${
               noHover ? 'noHover' : ''
@@ -179,7 +164,6 @@ export default function ProfileLogo({
             </UserLogoSVGWrapper>
           </UserLogo>
         </div>
-      </div>
     </UserLogoWrapper>
   );
 }
