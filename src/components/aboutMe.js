@@ -24,10 +24,10 @@ const ProfileInfo = styled.div`
 `;
 
 const AboutMe = React.memo(
-  () => {
+  ({ profileLogo }) => {
     return (
       <Div>
-        <ProfileLogo ppOnly />
+        <ProfileLogo ppOnly profileLogo={profileLogo} />
         <ProfileInfo>
           <DevInfo />
           <ProfileLinks />

@@ -730,7 +730,7 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.2.0", "@babel/runtime@^7.3.4":
+"@babel/runtime@^7.2.0", "@babel/runtime@^7.3.4", "@babel/runtime@^7.6.0":
   version "7.6.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.6.0.tgz#4fc1d642a9fd0299754e8b5de62c631cf5568205"
   integrity sha512-89eSBLJsxNxOERC0Op4vd+0Bqm6wRMqMbFtV3i0/fbaWw/mJ8Q3eBvgX0G4SyrOOLCtbu98HspF8o09MRT+KzQ==
@@ -5336,6 +5336,11 @@ gatsby-core-utils@^1.0.7:
   resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.0.7.tgz#0f41dd91da2f2acb59e102ad4c6a4cffeb176b05"
   integrity sha512-G4C/n8tzZVUgs+nLs8Gho7OfgcOWsoKij6az25vCATC9daqrCh1R0ouInqCtIBk7pBim/jt7UAtlClXpp6HyqQ==
 
+gatsby-core-utils@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.0.8.tgz#e765a1338d65ff1de65238c7f0a9967e07da20fa"
+  integrity sha512-080Jl8NamTbCGliKxXpMjEO1XUYU5FAow+VPR/j6hJk+Kl/gFmpE1mqa5QnHRGLZQhBP/h2T0mUwnSJn9m/Jsw==
+
 gatsby-graphiql-explorer@^0.2.13:
   version "0.2.13"
   resolved "https://registry.yarnpkg.com/gatsby-graphiql-explorer/-/gatsby-graphiql-explorer-0.2.13.tgz#5df71ea5603adc0be895846bca7890e337c2c15d"
@@ -5343,12 +5348,12 @@ gatsby-graphiql-explorer@^0.2.13:
   dependencies:
     "@babel/runtime" "^7.5.5"
 
-gatsby-image@^2.2.17:
-  version "2.2.17"
-  resolved "https://registry.yarnpkg.com/gatsby-image/-/gatsby-image-2.2.17.tgz#3c776be5406baa7341416eca41d112ef37a2234b"
-  integrity sha512-6H/V2GlN1lz4CoRy/WD/W7Mm81PY+GVutchjfaAtqdBi4lSsJ6JKXFcgHlmTawrKyoKxwRyPRat5OAWtuJjYnA==
+gatsby-image@^2.2.18:
+  version "2.2.18"
+  resolved "https://registry.yarnpkg.com/gatsby-image/-/gatsby-image-2.2.18.tgz#5d9cee30432c7259d9c6df2468ec2322b9dcc0c3"
+  integrity sha512-08ueBEwl02Uc9izdI6FldSUJTeB41yE727wOG2PfO3dIC/LYQCIoXxJuOLdC3qpdJPoRNebo3djjW+o2O2ZkKg==
   dependencies:
-    "@babel/runtime" "^7.5.5"
+    "@babel/runtime" "^7.6.0"
     object-fit-images "^3.2.4"
     prop-types "^15.7.2"
 
@@ -5446,16 +5451,16 @@ gatsby-plugin-react-helmet@^3.1.6:
   dependencies:
     "@babel/runtime" "^7.5.5"
 
-gatsby-plugin-sharp@^2.2.20:
-  version "2.2.20"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-sharp/-/gatsby-plugin-sharp-2.2.20.tgz#89e265cbdef195568d8f8a3032ed35958b4e17ff"
-  integrity sha512-pvzF6CmaimYddQlB3MG5PuGlIoH39SWMmKxAoJyVNuSTcrkcBborOCKKStqtgXtTGy+8xBp+mZQK87M+FiZjeg==
+gatsby-plugin-sharp@^2.2.21:
+  version "2.2.21"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-sharp/-/gatsby-plugin-sharp-2.2.21.tgz#2ebf09c50b4ca24306f9484b789395264f10eedc"
+  integrity sha512-pV+EQA+R+miJtg893xvn+uEZX6xc3TbWI7/TKMWyH5yWA3mcWYPVoLTXZzaq+hWn0LLGuS9AEFyQMi4V/roWuA==
   dependencies:
-    "@babel/runtime" "^7.5.5"
+    "@babel/runtime" "^7.6.0"
     async "^2.6.3"
     bluebird "^3.5.5"
     fs-extra "^8.1.0"
-    gatsby-core-utils "^1.0.7"
+    gatsby-core-utils "^1.0.8"
     got "^8.3.2"
     imagemin "^6.1.0"
     imagemin-mozjpeg "^8.0.0"
@@ -5530,12 +5535,12 @@ gatsby-telemetry@^1.1.22:
     stack-utils "1.0.2"
     uuid "3.3.3"
 
-gatsby-transformer-sharp@^2.2.13:
-  version "2.2.13"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-sharp/-/gatsby-transformer-sharp-2.2.13.tgz#b86eabfe3a0341e5ad5de3e56d2c049a70f9676f"
-  integrity sha512-lx6F7jK3irbW9ORegt84JmSOuYR89gKS4F5MX/pirZbU0b5WVec43IcNVnbMDCb2Xx5v1Mtoan87sb0LPibzNA==
+gatsby-transformer-sharp@^2.2.14:
+  version "2.2.14"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-sharp/-/gatsby-transformer-sharp-2.2.14.tgz#ca26a2a82f2bbe03f6e5c1509a53a1324f12229f"
+  integrity sha512-2W8Md3qKd8IV+oRMDKmZTNJrzfo3AhznIXEPieec9V4X2fgfGfmq8FW6lxds9OT2RTVJTdFuucll5GZulDHTVQ==
   dependencies:
-    "@babel/runtime" "^7.5.5"
+    "@babel/runtime" "^7.6.0"
     bluebird "^3.5.5"
     fs-extra "^8.1.0"
     potrace "^2.1.2"

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import Img from 'gatsby-image';
 import Logo from '../assets/logo/meetguns';
 import { getRandomInt } from '../utils';
-import PPImage from '../images/ganapativs.png';
 
 const Wiggle = keyframes`
   0% {
@@ -75,8 +75,6 @@ const UserLogoImage = styled(UserLogoBGCommon)`
   left: -5%;
   top: -5%;
   border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
-  background-image: url(${PPImage});
-  background-size: cover;
   opacity: 0;
   transform: scale(1) rotate(-10deg) translateY(10%);
   filter: grayscale(100%);
@@ -142,7 +140,23 @@ const directions = [
 
 const randomAnimationIndex = getRandomInt(0, directions.length - 1);
 
-export default function ProfileLogo({ ppOnly = false, noHover = false }) {
+export default function ProfileLogo({
+  ppOnly = false,
+  noHover = false,
+  profileLogo,
+}) {
+  // Set up the array of image data and `media` keys.
+  // You can have as many entries as you'd like.
+  const sources = profileLogo
+    ? [
+        profileLogo.mobileImage.childImageSharp.fluid,
+        {
+          ...profileLogo.desktopImage.childImageSharp.fluid,
+          media: `(min-width: 768px)`,
+        },
+      ]
+    : [];
+
   return (
     <UserLogoWrapper className="animated jello">
       <div className={`animated rotateIn${directions[randomAnimationIndex]}`}>
@@ -154,7 +168,9 @@ export default function ProfileLogo({ ppOnly = false, noHover = false }) {
             <UserLogoBGRotate>
               <UserLogoBG>
                 <UserLogoImageWrapper>
-                  <UserLogoImage />
+                  <UserLogoImage>
+                    {profileLogo ? <Img fluid={sources} /> : null}
+                  </UserLogoImage>
                 </UserLogoImageWrapper>
               </UserLogoBG>
             </UserLogoBGRotate>
