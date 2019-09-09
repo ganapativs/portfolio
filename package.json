@@ -25,6 +25,7 @@
     "focus-visible": "^5.0.2",
     "gatsby": "^2.15.9",
     "gatsby-image": "^2.2.17",
+    "gatsby-plugin-dark-mode": "^1.1.0",
     "gatsby-plugin-google-analytics": "^2.1.14",
     "gatsby-plugin-manifest": "^2.2.14",
     "gatsby-plugin-offline": "^3.0.3",

@@ -2,29 +2,38 @@ import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
-:root {
-  --color-dark: ${props => props.theme.dark};
-  --color-light: ${props => props.theme.light};
-  --color-light-dark: ${props => props.theme.lightDark};
-  --color-light-op-1: ${props => props.theme.lightOp1};
-  --color-light-op-2: ${props => props.theme.lightOp2};
-  --color-light-op-3: ${props => props.theme.lightOp3};
-  --color-blue: ${props => props.theme.blue};
-  --color-orange: ${props => props.theme.orange};
-  --color-red: ${props => props.theme.red};
-  --color-transparent: ${props => props.theme.transparent};
+body {
+  --color-dark: #f3f8f9;
+  --color-light: #0f0f10;
+  --color-light-dark: #909295;
+  --color-light-op-1: rgba(0, 0, 0, 0.2);
+  --color-light-op-2: rgba(0, 0, 0, 0.1);
+  --color-light-op-3: rgba(0, 0, 0, 0.05);
+  --color-blue: #673AB7;
+  --color-orange: #ff7146;
+  --color-red: #f1404b;
+  --color-transparent: transparent;
+}
+
+body.dark {
+  --color-dark: #0f0f10;
+  --color-light: #f3f8f9;
+  --color-light-dark: #747475;
+  --color-light-op-1: rgba(255, 255, 255, 0.2);
+  --color-light-op-2: rgba(255, 255, 255, 0.1);
+  --color-light-op-3: rgba(255, 255, 255, 0.05);
 }
 
 * {
   box-sizing: border-box;
 }
 
-::-moz-selection {
+body ::-moz-selection {
   background: var(--color-red);
   color: var(--color-light);
 }
 
-::selection {
+body ::selection {
   background: var(--color-red);
   color: var(--color-light);
 }
@@ -80,9 +89,3 @@ a:focus, a:active, a:hover {
 `;
 
 export default React.memo(GlobalStyles);
-
-export const TurnOffTransitionStyles = createGlobalStyle`
-* {
-  transition: ${props => (props.active ? 'none !important' : null)};
-}
-`;

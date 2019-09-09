@@ -78,7 +78,7 @@ const UserLogoImage = styled(UserLogoBGCommon)`
   background-image: url(${PPImage});
   background-size: cover;
   opacity: 0;
-  transform: scale(0.95) rotate(-10deg) translateY(10%);
+  transform: scale(1) rotate(-10deg) translateY(10%);
   filter: grayscale(100%);
   transition: opacity 0.1s ease-out, transform 0.2s ease-out,
     border-radius 0.1s ease-out, filter 0.2s ease-out;
