@@ -22,6 +22,16 @@
     Cache-Control = "public, max-age=604800, s-max-age=604800"
 
 [[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, s-max-age=604800"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, s-max-age=604800"
+
+[[headers]]
   for = "/*.js"
   [headers.values]
     Cache-Control = "public, max-age=604800, s-max-age=604800"
