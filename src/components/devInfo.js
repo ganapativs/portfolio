@@ -94,7 +94,8 @@ const DevInfo = () => {
           target="_blank">
           @Tracxn
         </a>
-        . <Separator />I love open source and have created{' '}
+        . <Separator />I love coding, contributing to the open source and have
+        created{' '}
         <a
           href="https://www.npmjs.com/package/react-delightful-scroller?ref=meetguns.com"
           rel="noopener noreferrer"
@@ -141,12 +142,7 @@ const DevInfo = () => {
         <span role="img" aria-label="Yay!!!">
           🎉
         </span>
-        <Separator />
-        Most of the time I&#39;ll be{' '}
-        <span role="img" aria-label="Coding">
-          👨🏻‍💻
-        </span>{' '}
-        and I play{' '}
+        <Separator />I like to travel, click pictures and I play{' '}
         <span role="img" aria-label="Soccer">
           ⚽️
         </span>{' '}

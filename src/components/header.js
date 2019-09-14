@@ -5,7 +5,7 @@ import { Location } from '@reach/router';
 import styled, { keyframes } from 'styled-components';
 import Logo from '../assets/logo/meetguns';
 
-export const FadeIn = keyframes`
+const FadeIn = keyframes`
   from {
     opacity: 0;
   }
@@ -37,6 +37,21 @@ const LogoWrapper = styled.div`
   background-image: linear-gradient(var(--color-dark), transparent),
     radial-gradient(circle at bottom left, var(--color-light-op-3), transparent);
   border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
+  background-clip: content-box;
+
+  @media screen and (hover: hover) {
+    border: 0 solid transparent;
+    border-bottom-width: 4px;
+    transition: all 0.3s ease-out, border-color 0.4s ease;
+
+    &:hover {
+      transition: all 0.5s ease-in, border-color 0.25s ease-in-out,
+        transform 0.25s ease;
+      border-color: var(--color-light-op-1);
+      background: var(--color-light-op-3);
+      transform: translateY(-3px) scale(1.05);
+    }
+  }
 `;
 
 const Left = styled.div`
@@ -58,9 +73,19 @@ const RouteLinks = styled.div`
     margin: 0 15px;
     text-transform: uppercase;
     font-weight: bold;
+    text-decoration: none;
 
     &.active {
       color: var(--color-red);
+    }
+
+    @media screen and (hover: hover) {
+      transition: all 0.1s ease-out;
+
+      &:hover {
+        transition: all 0.2s ease-in;
+        color: var(--color-red);
+      }
     }
   }
 `;

@@ -130,8 +130,18 @@ const UserLogo = styled.div`
   }
 `;
 
-const UserLogoWrapper = styled.div`
+const W1 = styled.div`
   animation-delay: 0.5s;
+`;
+
+const W2 = styled.div`
+  width: 160px;
+  height: 120px;
+
+  @media screen and (min-width: 768px) {
+    width: 200px;
+    height: 160px;
+  }
 `;
 
 export default function ProfileLogo({
@@ -150,8 +160,8 @@ export default function ProfileLogo({
     : [];
 
   return (
-    <UserLogoWrapper className="animated jello">
-      <div className="animated fadeInUp">
+    <W1 className="animated jello">
+      <W2 className="animated fadeInUp">
         <UserLogo
           className={`animated zoomInDown ${ppOnly ? 'ppOnly' : ''} ${
             noHover ? 'noHover' : ''
@@ -169,7 +179,7 @@ export default function ProfileLogo({
             <Logo height={60} />
           </UserLogoSVGWrapper>
         </UserLogo>
-      </div>
-    </UserLogoWrapper>
+      </W2>
+    </W1>
   );
 }

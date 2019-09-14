@@ -19,23 +19,20 @@ const Div = styled.div`
 
 const ProfileInfo = styled.div`
   @media screen and (min-width: 768px) {
-    padding-left: 80px;
+    padding-left: 50px;
   }
 `;
 
-const AboutMe = React.memo(
-  ({ profileLogo }) => {
-    return (
-      <Div>
-        <ProfileLogo ppOnly profileLogo={profileLogo} />
-        <ProfileInfo>
-          <DevInfo />
-          <ProfileLinks />
-        </ProfileInfo>
-      </Div>
-    );
-  },
-  () => true, // Never re-render
-);
+const AboutMe = ({ profileLogo }) => {
+  return (
+    <Div>
+      <ProfileLogo ppOnly profileLogo={profileLogo} />
+      <ProfileInfo>
+        <DevInfo />
+        <ProfileLinks />
+      </ProfileInfo>
+    </Div>
+  );
+};
 
 export default AboutMe;
