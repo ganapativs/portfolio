@@ -93,16 +93,16 @@ const RouteLinks = styled.div`
     text-transform: uppercase;
     font-weight: bold;
     text-decoration: none;
+    transition: all 0.2s ease-out;
 
     &.active {
+      transition: all 0.25s ease-in;
       color: var(--color-red);
     }
 
     @media screen and (hover: hover) {
-      transition: all 0.1s ease-out;
-
       &:hover {
-        transition: all 0.2s ease-in;
+        transition: all 0.25s ease-in;
         color: var(--color-red);
       }
     }
