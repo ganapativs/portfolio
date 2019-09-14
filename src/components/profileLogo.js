@@ -63,11 +63,17 @@ const UserLogoBG = styled(UserLogoBGCommon)`
 `;
 
 const UserLogoBGRotate = styled(UserLogoBGCommon)`
-  animation: ${Spin} 12s linear infinite;
+  @media screen and (min-width: 768px) {
+    animation: ${Spin} 12s linear infinite;
+  }
 `;
+
 const UserLogoImageWrapper = styled(UserLogoBGCommon)`
-  animation: ${Spin} 12s linear infinite reverse;
+  @media screen and (min-width: 768px) {
+    animation: ${Spin} 12s linear infinite reverse;
+  }
 `;
+
 const UserLogoImage = styled(UserLogoBGCommon)`
   width: 110%;
   height: 110%;
@@ -145,25 +151,25 @@ export default function ProfileLogo({
 
   return (
     <UserLogoWrapper className="animated jello">
-     <div className="animated fadeInUp">
-          <UserLogo
-            className={`animated zoomInDown ${ppOnly ? 'ppOnly' : ''} ${
-              noHover ? 'noHover' : ''
-            }`}>
-            <UserLogoBGRotate>
-              <UserLogoBG>
-                <UserLogoImageWrapper>
-                  <UserLogoImage>
-                    {profileLogo ? <Img fluid={sources} /> : null}
-                  </UserLogoImage>
-                </UserLogoImageWrapper>
-              </UserLogoBG>
-            </UserLogoBGRotate>
-            <UserLogoSVGWrapper>
-              <Logo height={60} />
-            </UserLogoSVGWrapper>
-          </UserLogo>
-        </div>
+      <div className="animated fadeInUp">
+        <UserLogo
+          className={`animated zoomInDown ${ppOnly ? 'ppOnly' : ''} ${
+            noHover ? 'noHover' : ''
+          }`}>
+          <UserLogoBGRotate>
+            <UserLogoBG>
+              <UserLogoImageWrapper>
+                <UserLogoImage>
+                  {profileLogo ? <Img fluid={sources} /> : null}
+                </UserLogoImage>
+              </UserLogoImageWrapper>
+            </UserLogoBG>
+          </UserLogoBGRotate>
+          <UserLogoSVGWrapper>
+            <Logo height={60} />
+          </UserLogoSVGWrapper>
+        </UserLogo>
+      </div>
     </UserLogoWrapper>
   );
 }
