@@ -1,12 +1,12 @@
 import React from 'react';
 
-export default ({ color = 'var(--color-dark)', ...rest }) => (
+const SVG = ({ color = 'var(--color-dark)', ...rest }) => (
   <svg
     data-name="Layer 1"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 84 131.615"
     {...rest}>
-    <title>Meetguns.com logo</title>
+    <title>Meetguns.com | Ganapati V S | logo</title>
     <g data-name="Layer 1">
       <g data-name="G logo">
         <g style={{ isolation: 'isolate' }}>
@@ -32,3 +32,5 @@ export default ({ color = 'var(--color-dark)', ...rest }) => (
     </g>
   </svg>
 );
+
+export default SVG;

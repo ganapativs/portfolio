@@ -83,6 +83,12 @@ a:focus, a:active, a:hover {
   text-decoration: underline;
 }
 
+@media screen and (max-width: 767px) {
+  .hide-xs {
+    display: none;
+  }
+}
+
 .animation-delay-half-s {
   animation-delay: 0.5s;
 }

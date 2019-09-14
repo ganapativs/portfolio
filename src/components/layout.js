@@ -6,7 +6,6 @@ import { ThemeToggler } from 'gatsby-plugin-dark-mode';
 import GlobalStyles from '../utils/globalStyles';
 import HalfMoonIcon from '../assets/icons/halfMoonIcon';
 import { captureEvent } from '../utils/ga';
-import ProfileLogo from './profileLogo';
 /**
  * Show outline only on keyboard interaction
  *
@@ -16,11 +15,17 @@ import ProfileLogo from './profileLogo';
  * https://davidwalsh.name/css-focus
  */
 import 'focus-visible';
+import Header from './header';
 
 const LayoutWidth = styled.div`
-  max-width: 900px;
+  max-width: ${props => (props.full ? '100%' : '900px')};
   margin: 0 auto;
   height: 100%;
+  padding: 30px 30px;
+
+  @media screen and (min-width: 768px) {
+    padding: 50px 30px;
+  }
 `;
 
 const Div = styled.div`
@@ -28,16 +33,10 @@ const Div = styled.div`
   justify-content: flex-start;
   align-items: center;
   min-height: 100%;
-  padding: 50px 15px;
 
   @media screen and (min-width: 768px) {
     justify-content: flex-start;
     align-items: center;
-    padding: 150px 15px;
-  }
-
-  @media screen and (min-height: 550px) {
-    margin-top: -5%;
   }
 `;
 
@@ -50,37 +49,18 @@ const ThemeSwitcher = styled.div`
   cursor: pointer;
 `;
 
-const OpenSource = styled.a`
-  color: var(--color-light);
-  position: fixed;
-  bottom: 0px;
-  right: 0px;
-  padding: 8px;
-  cursor: pointer;
-`;
-
-const MeetgunsLogo = styled.span`
-  position: fixed;
-  bottom: 10px;
-  right: -30px;
-  padding: 8px;
-  cursor: pointer;
-  transform: scale(0.3) translateY(260px);
-  filter: invert(1);
-  opacity: 0.6;
-`;
-
 const switchTheme = (theme, toggleTheme) => {
   const nextTheme = theme === 'dark' ? 'light' : 'dark';
   toggleTheme(nextTheme);
   captureEvent(nextTheme, 'change', 'Theme');
 };
 
-const Layout = React.memo(props => {
+const Layout = props => {
   return (
     <>
       <GlobalStyles />
-      <LayoutWidth>
+      <LayoutWidth full={props.full}>
+        <Header />
         <Div>
           {props.children}
           <ThemeToggler>
@@ -106,20 +86,10 @@ const Layout = React.memo(props => {
               </ThemeSwitcher>
             )}
           </ThemeToggler>
-          <OpenSource
-            title="View source code on GitHub"
-            className="animated fadeInUp delay-1s"
-            href="https://github.com/ganapativs/portfolio"
-            target="_blank"
-            rel="noopener noreferrer">
-            <MeetgunsLogo>
-              <ProfileLogo noHover />
-            </MeetgunsLogo>
-          </OpenSource>
         </Div>
       </LayoutWidth>
     </>
   );
-});
+};
 
-export default Layout;
+export default React.memo(Layout);
