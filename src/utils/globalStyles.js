@@ -92,6 +92,16 @@ a:focus, a:active, a:hover {
 .animation-delay-half-s {
   animation-delay: 0.5s;
 }
+
+button, input[type="submit"], input[type="reset"] {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
 `;
 
 export default React.memo(GlobalStyles);

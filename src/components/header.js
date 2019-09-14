@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Location } from '@reach/router';
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, createGlobalStyle } from 'styled-components';
 import Logo from '../assets/logo/meetguns';
 
 const FadeIn = keyframes`
@@ -18,7 +18,6 @@ const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 30px 0 30px 0;
-  background: var(--color-dark);
   animation-name: ${FadeIn};
 
   @media screen and (min-width: 768px) {
@@ -34,22 +33,42 @@ const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(var(--color-dark), transparent),
-    radial-gradient(circle at bottom left, var(--color-light-op-3), transparent);
   border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
-  background-clip: content-box;
+  background: linear-gradient(-45deg, var(--color-light-op-2), transparent);
 
   @media screen and (hover: hover) {
     border: 0 solid transparent;
-    border-bottom-width: 4px;
-    transition: all 0.3s ease-out, border-color 0.4s ease;
+    /* border: 3px solid; */
+    transition: all 0.3s ease-out, border-color 0.4s ease-out,
+      border-width 0.15s ease-out, border-radius 0.15s ease-out;
 
-    &:hover {
+    &:hover,
+    &.init-hover-animate-state {
       transition: all 0.5s ease-in, border-color 0.25s ease-in-out,
-        transform 0.25s ease;
-      border-color: var(--color-light-op-1);
-      background: var(--color-light-op-3);
+        border-width 0.15s ease-in-out, transform 0.25s ease,
+        border-radius 0.25s ease, box-shadow 0.25s ease-in;
+      border-width: 2px;
+      border-bottom-width: 6px;
+      border-right-width: 6px;
+      border-radius: 35% 65% 55% 45% / 48% 48% 52% 52%;
+      border-color: var(--color-red);
+      background: linear-gradient(
+        -45deg,
+        var(--color-light-op-2),
+        var(--color-dark)
+      );
       transform: translateY(-3px) scale(1.05);
+      box-shadow: 2px 5px 25px -5px var(--color-orange);
+    }
+
+    svg {
+      transition: transform 0.15s ease-out;
+    }
+
+    &:hover svg,
+    &.init-hover-animate-state svg {
+      transition: transform 0.15s ease-in-out;
+      transform: scale(1.05) translateX(-2px);
     }
   }
 `;
@@ -90,6 +109,13 @@ const RouteLinks = styled.div`
   }
 `;
 
+const SepiaEffectGlobalStyle = createGlobalStyle`
+  body {
+    transition: filter .5s ease-in-out;
+    filter: ${props => (props.sepia ? 'sepia(1)' : '')}
+  }
+`;
+
 const links = [
   {
     link: '/',
@@ -106,43 +132,62 @@ const links = [
 ];
 
 const Header = () => {
+  const [logoActiveAnimateState, setLogoAnimateState] = useState(true);
+  const [sepia, setSepia] = useState(false);
+
+  // Animate hover state to normal state initially on logo
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLogoAnimateState(false);
+    }, 250);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <HeaderWrapper className="animated faster">
-      <Left>
-        <Link to="/">
-          <LogoWrapper>
-            <Logo color="var(--color-red)" height={30} />
-          </LogoWrapper>
-        </Link>
-        <Location>
-          {({ location }) => (
+    <Location>
+      {({ location: { pathname } }) => (
+        <HeaderWrapper className="animated faster">
+          <SepiaEffectGlobalStyle sepia={sepia} />
+          <Left>
+            <button
+              onClick={() => {
+                setSepia(!sepia);
+              }}>
+              <LogoWrapper
+                className={
+                  logoActiveAnimateState ? 'init-hover-animate-state' : ''
+                }>
+                <Logo color="var(--color-red)" height={30} />
+              </LogoWrapper>
+            </button>
             <RouteLinks>
               {links.map(({ link, name }) => (
                 <Link
                   key={link}
                   title={name}
-                  className={location.pathname === link ? 'active' : ''}
+                  className={pathname === link ? 'active' : ''}
                   to={link}>
                   {name}
                 </Link>
               ))}
             </RouteLinks>
-          )}
-        </Location>
-      </Left>
-      <Right>
-        <RouteLinks>
-          <a
-            title="View source code on GitHub"
-            className="hide-xs"
-            target="_blank"
-            href={'https://github.com/ganapativs/portfolio'}
-            rel="noopener noreferrer">
-            Source
-          </a>
-        </RouteLinks>
-      </Right>
-    </HeaderWrapper>
+          </Left>
+          <Right>
+            <RouteLinks>
+              <a
+                title="View source code on GitHub"
+                className="hide-xs"
+                target="_blank"
+                href={'https://github.com/ganapativs/portfolio'}
+                rel="noopener noreferrer">
+                Source
+              </a>
+            </RouteLinks>
+          </Right>
+        </HeaderWrapper>
+      )}
+    </Location>
   );
 };
 
