@@ -31,7 +31,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: "UA-52929584-1",
+        trackingId: 'UA-52929584-1',
       },
     },
     `gatsby-plugin-styled-components`,
@@ -45,7 +45,7 @@ module.exports = {
           },
           {
             family: `Source Sans Pro`,
-            variants: [`300`, `400`]
+            variants: [`300`, `400`],
           },
         ],
       },
