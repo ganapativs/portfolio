@@ -1,7 +1,7 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components';
+import Img from 'gatsby-image';
 import Logo from '../assets/logo/meetguns';
-import { getRandomInt } from '../utils';
 
 const Wiggle = keyframes`
   0% {
@@ -63,21 +63,25 @@ const UserLogoBG = styled(UserLogoBGCommon)`
 `;
 
 const UserLogoBGRotate = styled(UserLogoBGCommon)`
-  animation: ${Spin} 12s linear infinite;
+  @media screen and (min-width: 768px) {
+    animation: ${Spin} 12s linear infinite;
+  }
 `;
+
 const UserLogoImageWrapper = styled(UserLogoBGCommon)`
-  animation: ${Spin} 12s linear infinite reverse;
+  @media screen and (min-width: 768px) {
+    animation: ${Spin} 12s linear infinite reverse;
+  }
 `;
+
 const UserLogoImage = styled(UserLogoBGCommon)`
   width: 110%;
   height: 110%;
   left: -5%;
   top: -5%;
   border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
-  background-image: url('./images/ganapativs.png');
-  background-size: cover;
   opacity: 0;
-  transform: scale(0.95) rotate(-10deg) translateY(10%);
+  transform: scale(1) rotate(-10deg) translateY(10%);
   filter: grayscale(100%);
   transition: opacity 0.1s ease-out, transform 0.2s ease-out,
     border-radius 0.1s ease-out, filter 0.2s ease-out;
@@ -130,38 +134,41 @@ const UserLogoWrapper = styled.div`
   animation-delay: 0.5s;
 `;
 
-const directions = [
-  '',
-  'UpLeft',
-  'UpRight',
-  'DownLeft',
-  'DownRight',
-  'no-rotate',
-];
+export default function ProfileLogo({
+  ppOnly = false,
+  noHover = false,
+  profileLogo,
+}) {
+  const sources = profileLogo
+    ? [
+        profileLogo.mobileImage.childImageSharp.fluid,
+        {
+          ...profileLogo.desktopImage.childImageSharp.fluid,
+          media: `(min-width: 768px)`,
+        },
+      ]
+    : [];
 
-const randomAnimationIndex = getRandomInt(0, directions.length - 1);
-
-export default function ProfileLogo({ ppOnly = false, noHover = false }) {
   return (
     <UserLogoWrapper className="animated jello">
-      <div className={`animated rotateIn${directions[randomAnimationIndex]}`}>
-        <div className="animated fadeInUp">
-          <UserLogo
-            className={`animated zoomInDown ${ppOnly ? 'ppOnly' : ''} ${
-              noHover ? 'noHover' : ''
-            }`}>
-            <UserLogoBGRotate>
-              <UserLogoBG>
-                <UserLogoImageWrapper>
-                  <UserLogoImage />
-                </UserLogoImageWrapper>
-              </UserLogoBG>
-            </UserLogoBGRotate>
-            <UserLogoSVGWrapper>
-              <Logo height={60} />
-            </UserLogoSVGWrapper>
-          </UserLogo>
-        </div>
+      <div className="animated fadeInUp">
+        <UserLogo
+          className={`animated zoomInDown ${ppOnly ? 'ppOnly' : ''} ${
+            noHover ? 'noHover' : ''
+          }`}>
+          <UserLogoBGRotate>
+            <UserLogoBG>
+              <UserLogoImageWrapper>
+                <UserLogoImage>
+                  {profileLogo ? <Img fluid={sources} /> : null}
+                </UserLogoImage>
+              </UserLogoImageWrapper>
+            </UserLogoBG>
+          </UserLogoBGRotate>
+          <UserLogoSVGWrapper>
+            <Logo height={60} />
+          </UserLogoSVGWrapper>
+        </UserLogo>
       </div>
     </UserLogoWrapper>
   );

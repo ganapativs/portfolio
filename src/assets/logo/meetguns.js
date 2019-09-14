@@ -2,14 +2,13 @@ import React from 'react';
 
 export default ({ color = 'var(--color-dark)', ...rest }) => (
   <svg
-    id="Layer_1"
     data-name="Layer 1"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 84 131.615"
     {...rest}>
     <title>Meetguns.com logo</title>
-    <g id="Layer_1-2" data-name="Layer 1">
-      <g id="G_logo" data-name="G logo">
+    <g data-name="Layer 1">
+      <g data-name="G logo">
         <g style={{ isolation: 'isolate' }}>
           <g style={{ isolation: 'isolate' }}>
             <path
