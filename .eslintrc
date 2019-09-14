@@ -1,5 +1,10 @@
 {
     "extends": "@ganapativs/react",
+    "env": {
+        "browser": true,
+        "amd": true,
+        "node": true
+    },
     "rules": {
         "react/prop-types": 0,
         "react/display-name": 1,

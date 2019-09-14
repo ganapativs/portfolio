@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
-function SEO() {
+function SEO({ title = '' }) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -19,8 +19,8 @@ function SEO() {
 
   return (
     <Helmet
-      title={site.siteMetadata.title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      title={title}
+      titleTemplate={`${site.siteMetadata.title} | %s`}
       htmlAttributes={{
         lang: 'en',
       }}>
