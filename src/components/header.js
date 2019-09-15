@@ -26,7 +26,7 @@ const HeaderWrapper = styled.div`
 `;
 
 const LogoWrapper = styled.div`
-  background: var(--color-light-op-3);
+  background: var(--color-dark);
   border-radius: 50%;
   width: 60px;
   height: 60px;
@@ -34,31 +34,25 @@ const LogoWrapper = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
-  background: linear-gradient(-45deg, var(--color-light-op-2), transparent);
+  background: linear-gradient(0deg, var(--color-light-op-3), transparent);
+  box-shadow: 0 0 var(--color-orange), inset 0 0 var(--color-red),
+    inset 0 0 var(--color-red), inset 0 0 var(--color-red),
+    inset 0 0 var(--color-red);
 
   @media screen and (hover: hover) {
-    border: 0 solid transparent;
-    /* border: 3px solid; */
     transition: all 0.3s ease-out, border-color 0.4s ease-out,
-      border-width 0.15s ease-out, border-radius 0.15s ease-out;
+      border-radius 0.15s ease-out, box-shadow 0.25s linear;
 
     &:hover,
     &.init-hover-animate-state {
       transition: all 0.5s ease-in, border-color 0.25s ease-in-out,
-        border-width 0.15s ease-in-out, transform 0.25s ease,
-        border-radius 0.25s ease, box-shadow 0.25s ease-in;
-      border-width: 2px;
-      border-bottom-width: 6px;
-      border-right-width: 6px;
+        transform 0.25s ease, border-radius 0.25s ease, box-shadow 0.25s ease-in;
+      background: linear-gradient(0deg, transparent, transparent);
       border-radius: 35% 65% 55% 45% / 48% 48% 52% 52%;
-      border-color: var(--color-red);
-      background: linear-gradient(
-        -45deg,
-        var(--color-light-op-2),
-        var(--color-dark)
-      );
       transform: translateY(-3px) scale(1.05);
-      box-shadow: 2px 5px 25px -5px var(--color-orange);
+      box-shadow: 2px 5px 25px -5px var(--color-orange),
+        inset 0 -4px 2px var(--color-red), inset -4px 0 2px var(--color-red),
+        inset 0 2px 4px var(--color-red), inset 2px 0px 4px var(--color-red);
     }
 
     svg {
