@@ -61,33 +61,31 @@ const Layout = props => {
       <GlobalStyles />
       <LayoutWidth full={props.full}>
         <Header />
-        <Div>
-          {props.children}
-          <ThemeToggler>
-            {({ theme, toggleTheme }) => (
-              <ThemeSwitcher
-                role="button"
-                tabIndex={0}
-                onKeyPress={e => {
-                  if (e.which === 13 || e.which === 32) {
-                    switchTheme(theme, toggleTheme);
-                  }
-                }}
-                title={
-                  theme === 'dark'
-                    ? 'Switch to light theme'
-                    : 'Switch to dark theme'
-                }
-                className="animated fadeInDown delay-1s"
-                onClick={() => {
-                  switchTheme(theme, toggleTheme);
-                }}>
-                <HalfMoonIcon />
-              </ThemeSwitcher>
-            )}
-          </ThemeToggler>
-        </Div>
+        <Div>{props.children}</Div>
       </LayoutWidth>
+      <ThemeToggler>
+        {({ theme, toggleTheme }) => (
+          <ThemeSwitcher
+            role="button"
+            tabIndex={0}
+            onKeyPress={e => {
+              if (e.which === 13 || e.which === 32) {
+                switchTheme(theme, toggleTheme);
+              }
+            }}
+            title={
+              theme === 'dark'
+                ? 'Switch to light theme'
+                : 'Switch to dark theme'
+            }
+            className="animated fadeInDown delay-1s"
+            onClick={() => {
+              switchTheme(theme, toggleTheme);
+            }}>
+            <HalfMoonIcon />
+          </ThemeSwitcher>
+        )}
+      </ThemeToggler>
     </>
   );
 };
