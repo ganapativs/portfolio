@@ -130,10 +130,8 @@ const Switcher = styled.div`
   &:after {
     content: '';
     position: absolute;
-    width: 12px;
-    height: 12px;
     border-radius: 50%;
-    background: red;
+    background: transparent;
     transition: all 0.25s ease-in-out;
   }
 

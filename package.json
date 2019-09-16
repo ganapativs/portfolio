@@ -22,7 +22,10 @@
   "dependencies": {
     "babel-plugin-styled-components": "^1.10.6",
     "classnames": "^2.2.6",
+    "dms2dec": "^1.1.0",
+    "fast-exif": "^1.0.1",
     "focus-visible": "^5.0.2",
+    "fraction.js": "^4.0.12",
     "gatsby": "^2.15.9",
     "gatsby-image": "^2.2.18",
     "gatsby-plugin-dark-mode": "^1.1.0",
@@ -33,6 +36,7 @@
     "gatsby-plugin-react-helmet": "^3.1.6",
     "gatsby-plugin-sharp": "^2.2.21",
     "gatsby-plugin-styled-components": "^3.1.4",
+    "gatsby-plugin-webpack-size": "^1.0.0",
     "gatsby-source-filesystem": "^2.1.21",
     "gatsby-transformer-sharp": "^2.2.14",
     "intersection-observer": "^0.7.0",

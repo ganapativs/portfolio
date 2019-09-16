@@ -51,6 +51,7 @@ module.exports = {
       },
     },
     `gatsby-plugin-dark-mode`,
+    `gatsby-plugin-webpack-size`,
     // https://gatsby.dev/offline
     `gatsby-plugin-offline`,
   ],
