@@ -3,8 +3,16 @@ import { Link } from 'gatsby';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Location } from '@reach/router';
 import styled, { createGlobalStyle } from 'styled-components';
+import { ThemeToggler } from 'gatsby-plugin-dark-mode';
 import Logo from '../assets/logo/meetguns';
 import { FadeIn } from '../utils/keyframes';
+import { captureEvent } from '../utils/ga';
+
+const switchTheme = (theme, toggleTheme) => {
+  const nextTheme = theme === 'dark' ? 'light' : 'dark';
+  toggleTheme(nextTheme);
+  captureEvent(nextTheme, 'change', 'Theme');
+};
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -112,6 +120,50 @@ const RouteLinks = styled.div`
   }
 `;
 
+const Switcher = styled.div`
+  position: relative;
+  width: 44px;
+  height: 24px;
+  cursor: pointer;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: red;
+    transition: all 0.25s ease-in-out;
+  }
+
+  &:before {
+    left: 0;
+    top: ${props => (props.theme === 'light' ? '0px' : '6px')};
+    width: ${props => (props.theme === 'light' ? '24px' : '12px')};
+    height: ${props => (props.theme === 'light' ? '24px' : '12px')};
+    background: ${props =>
+      props.theme === 'light' ? 'var(--color-dark)' : 'var(--color-light)'};
+    box-shadow: ${props =>
+      props.theme === 'light' ? '0 1px 2px 1px var(--color-red);' : ''};
+  }
+
+  &:after {
+    left: ${props => (props.theme === 'dark' ? '20px' : '32px')};
+    top: ${props => (props.theme === 'dark' ? '0px' : '6px')};
+    width: ${props => (props.theme === 'dark' ? '24px' : '12px')};
+    height: ${props => (props.theme === 'dark' ? '24px' : '12px')};
+    background: ${props =>
+      props.theme === 'dark' ? 'var(--color-dark)' : 'var(--color-light)'};
+    box-shadow: ${props =>
+      props.theme === 'dark' ? '0 1px 2px 1px var(--color-red);' : ''};
+  }
+
+  @media screen and (max-width: 767px) {
+    transform: scale(0.8) translateX(5px);
+  }
+`;
+
 const SepiaEffectGlobalStyle = createGlobalStyle`
   body {
     transition: filter .5s ease-in-out;
@@ -176,7 +228,32 @@ const Header = () => {
               ))}
             </RouteLinks>
           </Left>
-          <Right></Right>
+          <Right>
+            <div>
+              <ThemeToggler>
+                {({ theme, toggleTheme }) => (
+                  <div
+                    role="button"
+                    tabIndex={0}
+                    onKeyPress={e => {
+                      if (e.which === 13 || e.which === 32) {
+                        switchTheme(theme, toggleTheme);
+                      }
+                    }}
+                    title={
+                      theme === 'dark'
+                        ? 'Switch to light theme'
+                        : 'Switch to dark theme'
+                    }
+                    onClick={() => {
+                      switchTheme(theme, toggleTheme);
+                    }}>
+                    <Switcher theme={theme} />
+                  </div>
+                )}
+              </ThemeToggler>
+            </div>
+          </Right>
         </HeaderWrapper>
       )}
     </Location>

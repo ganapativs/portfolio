@@ -2,10 +2,7 @@ import 'normalize.css';
 import '../assets/animate-custom.css';
 import React from 'react';
 import styled from 'styled-components';
-import { ThemeToggler } from 'gatsby-plugin-dark-mode';
 import GlobalStyles from '../utils/globalStyles';
-import HalfMoonIcon from '../assets/icons/halfMoonIcon';
-import { captureEvent } from '../utils/ga';
 /**
  * Show outline only on keyboard interaction
  *
@@ -39,20 +36,6 @@ const Div = styled.div`
   flex: 1;
 `;
 
-const ThemeSwitcher = styled.div`
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  padding: 8px;
-  cursor: pointer;
-`;
-
-const switchTheme = (theme, toggleTheme) => {
-  const nextTheme = theme === 'dark' ? 'light' : 'dark';
-  toggleTheme(nextTheme);
-  captureEvent(nextTheme, 'change', 'Theme');
-};
-
 const Layout = props => {
   return (
     <>
@@ -62,29 +45,6 @@ const Layout = props => {
         <Div>{props.children}</Div>
         <Footer></Footer>
       </LayoutWidth>
-      <ThemeToggler>
-        {({ theme, toggleTheme }) => (
-          <ThemeSwitcher
-            role="button"
-            tabIndex={0}
-            onKeyPress={e => {
-              if (e.which === 13 || e.which === 32) {
-                switchTheme(theme, toggleTheme);
-              }
-            }}
-            title={
-              theme === 'dark'
-                ? 'Switch to light theme'
-                : 'Switch to dark theme'
-            }
-            className="animated fadeInDown delay-1s"
-            onClick={() => {
-              switchTheme(theme, toggleTheme);
-            }}>
-            <HalfMoonIcon />
-          </ThemeSwitcher>
-        )}
-      </ThemeToggler>
     </>
   );
 };
