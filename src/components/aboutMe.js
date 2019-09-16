@@ -6,14 +6,12 @@ import DevInfo from './devInfo';
 
 const Div = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-light);
+  align-items: flex-start;
   flex-direction: column;
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
+    align-items: center;
   }
 `;
 
@@ -26,7 +24,7 @@ const ProfileInfo = styled.div`
 const AboutMe = ({ profileLogo }) => {
   return (
     <Div>
-      <ProfileLogo ppOnly profileLogo={profileLogo} />
+      <ProfileLogo profileLogo={profileLogo} />
       <ProfileInfo>
         <DevInfo />
         <ProfileLinks />

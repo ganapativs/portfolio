@@ -2,26 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Location } from '@reach/router';
-import styled, { keyframes, createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import Logo from '../assets/logo/meetguns';
-
-const FadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
+import { FadeIn } from '../utils/keyframes';
 
 const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 30px 0 30px 0;
+  padding: 30px 0;
   animation-name: ${FadeIn};
+  font-size: 14px;
 
   @media screen and (min-width: 768px) {
-    padding: 30px 0 100px 0;
+    padding: 60px 0;
+    font-size: inherit;
   }
 `;
 
@@ -34,10 +28,25 @@ const LogoWrapper = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
+  margin-right: 24px;
   background: linear-gradient(0deg, var(--color-light-op-3), transparent);
   box-shadow: 0 0 var(--color-orange), inset 0 0 var(--color-red),
     inset 0 0 var(--color-red), inset 0 0 var(--color-red),
     inset 0 0 var(--color-red);
+
+  svg {
+    height: 30px;
+  }
+
+  @media screen and (max-width: 767px) {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+
+    svg {
+      height: 20px;
+    }
+  }
 
   @media screen and (hover: hover) {
     transition: all 0.3s ease-out, border-color 0.4s ease-out,
@@ -70,10 +79,6 @@ const LogoWrapper = styled.div`
 const Left = styled.div`
   display: inline-flex;
   align-items: center;
-
-  ${LogoWrapper} {
-    margin-right: 24px;
-  }
 `;
 const Right = styled.div`
   display: inline-flex;
@@ -99,6 +104,10 @@ const RouteLinks = styled.div`
         transition: all 0.25s ease-in;
         color: var(--color-red);
       }
+    }
+
+    @media screen and (max-width: 767px) {
+      margin: 0 8px;
     }
   }
 `;
@@ -152,7 +161,7 @@ const Header = () => {
                 className={
                   logoActiveAnimateState ? 'init-hover-animate-state' : ''
                 }>
-                <Logo color="var(--color-red)" height={30} />
+                <Logo color="var(--color-red)" />
               </LogoWrapper>
             </button>
             <RouteLinks>
@@ -167,18 +176,7 @@ const Header = () => {
               ))}
             </RouteLinks>
           </Left>
-          <Right>
-            <RouteLinks>
-              <a
-                title="View source code on GitHub"
-                className="hide-xs"
-                target="_blank"
-                href={'https://github.com/ganapativs/portfolio'}
-                rel="noopener noreferrer">
-                Source
-              </a>
-            </RouteLinks>
-          </Right>
+          <Right></Right>
         </HeaderWrapper>
       )}
     </Location>

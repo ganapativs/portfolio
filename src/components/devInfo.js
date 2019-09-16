@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { captureEvent } from '../utils/ga';
+import ExternalLink from './externalLink';
 
 const DevName = styled.h1`
   font-size: 48px;
@@ -8,7 +9,6 @@ const DevName = styled.h1`
   font-weight: 400;
 
   @media screen and (max-width: 767px) {
-    text-align: center;
     font-size: 40px;
   }
 
@@ -46,7 +46,6 @@ const DevDescription = styled.h3`
   animation-name: ${SmallFadeInUp};
 
   @media screen and (max-width: 767px) {
-    text-align: center;
     font-size: 16px;
   }
 
@@ -68,15 +67,13 @@ const DevInfo = () => {
     <>
       <DevName className="animated fadeInUp faster animation-delay-half-s">
         Ganapati V S{' '}
-        <a
+        <ExternalLink
           href="https://twitter.com/ganapativs?ref=meetguns.com"
-          rel="noopener noreferrer"
           onClick={() =>
             captureEvent('Personal Twitter', 'click', 'Social Links')
-          }
-          target="_blank">
+          }>
           <span>(@ganapativs)</span>
-        </a>
+        </ExternalLink>
       </DevName>
       <DevDescription className="animated faster animation-delay-half-s">
         Hi{' '}
@@ -85,20 +82,17 @@ const DevInfo = () => {
         </span>{' '}
         I&#39;m a Full-Stack JavaScript developer with over 5 years of
         experience. Currently working{' '}
-        <a
+        <ExternalLink
           href="https://twitter.com/tracxn?ref=meetguns.com"
-          rel="noopener noreferrer"
           onClick={() =>
             captureEvent('Tracxn Twitter', 'click', 'Social Links')
-          }
-          target="_blank">
+          }>
           @Tracxn
-        </a>
+        </ExternalLink>
         . <Separator />I love coding, contributing to the open source and have
         created{' '}
-        <a
+        <ExternalLink
           href="https://www.npmjs.com/package/react-delightful-scroller?ref=meetguns.com"
-          rel="noopener noreferrer"
           onClick={() =>
             captureEvent(
               'react-delightful-scroller NPM',
@@ -106,39 +100,34 @@ const DevInfo = () => {
               'Social Links',
             )
           }
-          style={{ whiteSpace: 'nowrap' }}
-          target="_blank">
+          style={{ whiteSpace: 'nowrap' }}>
           react-delightful-scroller
-        </a>
+        </ExternalLink>
         ,{' '}
-        <a
+        <ExternalLink
           href="https://www.npmjs.com/package/react-dynamic-import?ref=meetguns.com"
-          rel="noopener noreferrer"
           onClick={() =>
             captureEvent('react-dynamic-import NPM', 'click', 'Social Links')
           }
-          style={{ whiteSpace: 'nowrap' }}
-          target="_blank">
+          style={{ whiteSpace: 'nowrap' }}>
           react-dynamic-import
-        </a>
+        </ExternalLink>
         ,{' '}
-        <a
+        <ExternalLink
           href="https://bttn.surge.sh/?ref=meetguns.com"
-          rel="noopener noreferrer"
-          onClick={() => captureEvent('bttn.surge.sh', 'click', 'Social Links')}
-          target="_blank">
+          onClick={() =>
+            captureEvent('bttn.surge.sh', 'click', 'Social Links')
+          }>
           bttn.css
-        </a>{' '}
+        </ExternalLink>{' '}
         and{' '}
-        <a
+        <ExternalLink
           href="https://github.com/ganapativs?ref=meetguns.com"
-          rel="noopener noreferrer"
           onClick={() =>
             captureEvent('Personal GitHub', 'click', 'Social Links')
-          }
-          target="_blank">
+          }>
           many more
-        </a>{' '}
+        </ExternalLink>{' '}
         <span role="img" aria-label="Yay!!!">
           🎉
         </span>

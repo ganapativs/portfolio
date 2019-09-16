@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import Img from 'gatsby-image';
-import Logo from '../assets/logo/meetguns';
+import { Spin } from '../utils/keyframes';
 
 const Wiggle = keyframes`
   0% {
@@ -18,33 +18,40 @@ const Wiggle = keyframes`
   }
 `;
 
-const Spin = keyframes`
-  from {
-    transform: rotate(0deg);
+const MorphShadow = keyframes`
+  0% {
+    box-shadow: 0 0 0 0 var(--color-light-op-1),
+      0 0 0 0 var(--color-light-op-2), 0 0 0 0 var(--color-light-op-3);
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    box-shadow: 0 0 0 10px var(--color-transparent),
+      0 0 0 25px var(--color-transparent), 0 0 0 45px var(--color-transparent);
   }
 `;
 
-const Morph = keyframes`
+const MorphShadowMobile = keyframes`
+  0% {
+    box-shadow: 0 0 0 0 var(--color-light-op-1),
+      0 0 0 0 var(--color-light-op-2), 0 0 0 0 var(--color-light-op-3);
+  }
+  100% {
+    box-shadow: 0 0 0 10px var(--color-transparent),
+      0 0 0 17px var(--color-transparent), 0 0 0 25px var(--color-transparent);
+  }
+`;
+
+const MorphRest = keyframes`
   0% {
     transform: scale(0.95);
     border-radius: 50%;
     border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
     background: var(--color-orange);
-    box-shadow: inset 6px -6px 12px var(--color-red),
-      inset 4px 0px 10px var(--color-blue), 0 0 0 0 var(--color-light-op-1),
-      0 0 0 0 var(--color-light-op-2), 0 0 0 0 var(--color-light-op-3);
   }
   100% {
     transform: scale(1.1);
     border-radius: 50%;
     background: var(--color-red);
     border-radius: 35% 65% 55% 45% / 48% 48% 52% 52%;
-    box-shadow: inset 6px -6px 12px var(--color-orange),
-      inset 4px 0px 10px var(--color-blue), 0 0 0 10px var(--color-transparent),
-      0 0 0 25px var(--color-transparent), 0 0 0 45px var(--color-transparent);
   }
 `;
 
@@ -59,7 +66,13 @@ const UserLogoBGCommon = styled.div`
 
 const UserLogoBG = styled(UserLogoBGCommon)`
   overflow: hidden;
-  animation: ${Morph} 8s ease-in-out infinite both alternate;
+  animation: ${MorphRest} 8s ease-in-out infinite both alternate,
+    ${MorphShadowMobile} 8s ease-in-out infinite both alternate;
+
+  @media screen and (min-width: 768px) {
+    animation: ${MorphRest} 8s ease-in-out infinite both alternate,
+      ${MorphShadow} 8s ease-in-out infinite both alternate;
+  }
 `;
 
 const UserLogoBGRotate = styled(UserLogoBGCommon)`
@@ -87,35 +100,20 @@ const UserLogoImage = styled(UserLogoBGCommon)`
     border-radius 0.1s ease-out, filter 0.2s ease-out;
 `;
 
-const UserLogoSVGWrapper = styled.div`
-  opacity: 1;
-  transform: scale(1) rotate(0deg);
-  transition: opacity 0.3s 0.1s ease-out, transform 0.3s 0.1s ease-out;
-`;
-
 const UserLogo = styled.div`
   width: 120px;
   height: 120px;
   padding: 30px 18px;
   text-align: center;
   position: relative;
-  margin: 50px auto 30px auto;
+  margin: 0 auto;
 
   @media screen and (min-width: 768px) {
-    &.ppOnly {
-      width: 160px;
-      height: 160px;
-    }
+    width: 160px;
+    height: 160px;
   }
 
-  &.ppOnly ${UserLogoSVGWrapper}, &:not(.noHover):hover ${UserLogoSVGWrapper} {
-    opacity: 0;
-    transform: scale(0.8) rotate(5deg);
-    transition: opacity 0.1s ease-in, transform 0.1s ease-in;
-    transition-delay: 0.2s;
-  }
-
-  &.ppOnly ${UserLogoImage}, &:not(.noHover):hover ${UserLogoImage} {
+  ${UserLogoImage} {
     opacity: 1;
     transform: scale(1) rotate(0deg) translateY(0);
     filter: grayscale(0%);
@@ -137,18 +135,16 @@ const W1 = styled.div`
 const W2 = styled.div`
   width: 160px;
   height: 120px;
+  margin: 30px 0 15px -15px;
 
   @media screen and (min-width: 768px) {
+    margin: 50px 0 25px 0;
     width: 200px;
     height: 160px;
   }
 `;
 
-export default function ProfileLogo({
-  ppOnly = false,
-  noHover = false,
-  profileLogo,
-}) {
+export default function ProfileLogo({ profileLogo }) {
   const sources = profileLogo
     ? [
         profileLogo.mobileImage.childImageSharp.fluid,
@@ -162,10 +158,7 @@ export default function ProfileLogo({
   return (
     <W1 className="animated jello">
       <W2 className="animated fadeInUp">
-        <UserLogo
-          className={`animated zoomInDown ${ppOnly ? 'ppOnly' : ''} ${
-            noHover ? 'noHover' : ''
-          }`}>
+        <UserLogo className="animated zoomInDown">
           <UserLogoBGRotate>
             <UserLogoBG>
               <UserLogoImageWrapper>
@@ -175,9 +168,6 @@ export default function ProfileLogo({
               </UserLogoImageWrapper>
             </UserLogoBG>
           </UserLogoBGRotate>
-          <UserLogoSVGWrapper>
-            <Logo height={60} />
-          </UserLogoSVGWrapper>
         </UserLogo>
       </W2>
     </W1>

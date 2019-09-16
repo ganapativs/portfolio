@@ -16,32 +16,30 @@ import { captureEvent } from '../utils/ga';
  */
 import 'focus-visible';
 import Header from './header';
+import Footer from './footer';
 
 const LayoutWidth = styled.div`
   max-width: ${props => (props.full ? '100%' : '900px')};
   margin: 0 auto;
   height: 100%;
-  padding: 30px 30px;
+  min-height: 100vh;
+  padding: 0 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   @media screen and (min-width: 768px) {
-    padding: 50px 30px;
+    padding: 0 30px;
   }
 `;
 
 const Div = styled.div`
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  min-height: 100%;
-
-  @media screen and (min-width: 768px) {
-    justify-content: flex-start;
-    align-items: center;
-  }
+  align-items: flex-start;
+  flex: 1;
 `;
 
 const ThemeSwitcher = styled.div`
-  color: var(--color-light);
   position: fixed;
   top: 10px;
   right: 10px;
@@ -62,6 +60,7 @@ const Layout = props => {
       <LayoutWidth full={props.full}>
         <Header />
         <Div>{props.children}</Div>
+        <Footer></Footer>
       </LayoutWidth>
       <ThemeToggler>
         {({ theme, toggleTheme }) => (
