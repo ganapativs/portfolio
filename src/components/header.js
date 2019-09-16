@@ -48,7 +48,7 @@ const LogoWrapper = styled.div`
     }
   }
 
-  @media screen and (hover: hover) {
+  @media screen and (hover: hover) and (pointer: fine) {
     transition: all 0.3s ease-out, border-color 0.4s ease-out,
       border-radius 0.15s ease-out, box-shadow 0.25s linear;
 
@@ -99,7 +99,7 @@ const RouteLinks = styled.div`
       color: var(--color-red);
     }
 
-    @media screen and (hover: hover) {
+    @media screen and (hover: hover) and (pointer: fine) {
       &:hover {
         transition: all 0.25s ease-in;
         color: var(--color-red);
