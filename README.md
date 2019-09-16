@@ -6,6 +6,14 @@ Live website: [meetguns.com](https://meetguns.com)
 
 Check `scripts` section of `package.json`
 
+### Git LFS
+
+This project uses Git LFS to manage photographs. Read below resources to know more.
+
+- [git-lfs.github.com](https://git-lfs.github.com/)
+- [github.com/git-lfs/git-lfs](https://github.com/git-lfs/git-lfs/wiki/Tutorial)
+- [help.github.com](https://help.github.com/en/articles/configuring-git-large-file-storage)
+
 ## Contribute
 
 Thanks for taking time to contribute, this project uses [gatsby](https://github.com/gatsbyjs/gatsby). please checkout [src](src) to understand how things work.

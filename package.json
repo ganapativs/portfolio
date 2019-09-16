@@ -4,21 +4,6 @@
   "description": "Ganapati V S - Portfolio",
   "version": "0.2.0",
   "author": "Ganapati V S <vsg.inbox@gmail.com>",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js,json}": [
-      "eslint --fix",
-      "git add"
-    ],
-    "src/**/*.css": [
-      "prettier --write",
-      "git add"
-    ]
-  },
   "dependencies": {
     "babel-plugin-styled-components": "^1.10.6",
     "classnames": "^2.2.6",
@@ -51,8 +36,6 @@
     "@ganapativs/eslint-config-react": "^0.0.7",
     "eslint": "^6.4.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "husky": "^3.0.5",
-    "lint-staged": "^9.2.5",
     "prettier": "^1.18.2"
   },
   "keywords": [
