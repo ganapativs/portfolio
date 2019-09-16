@@ -166,7 +166,7 @@ const Switcher = styled.div`
 
 const SepiaEffectGlobalStyle = createGlobalStyle`
   body {
-    transition: filter .5s ease-in-out;
+    transition: filter .5s ease-in-out, background 0.1s ease-in;
     filter: ${props => (props.sepia ? 'sepia(1)' : '')}
   }
 `;
