@@ -37,11 +37,20 @@ const Div = styled.div`
 `;
 
 const Layout = props => {
+  const { location } = props;
+
+  // Gatsby plugin offline messes up hydration and removes some styled component classes
+  // Temp workaround is to render empty layout in offline page by default
+  // https://github.com/gatsbyjs/gatsby/issues/11738#issuecomment-488660043
+  if (location.pathname === '/offline-plugin-app-shell-fallback/') {
+    return null;
+  }
+
   return (
     <>
       <GlobalStyles />
       <LayoutWidth full={props.full}>
-        <Header />
+        <Header location={location} />
         <Div>{props.children}</Div>
         <Footer></Footer>
       </LayoutWidth>

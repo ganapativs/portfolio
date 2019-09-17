@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Location } from '@reach/router';
 import styled, { createGlobalStyle } from 'styled-components';
 import { ThemeToggler } from 'gatsby-plugin-dark-mode';
 import Logo from '../assets/logo/meetguns';
@@ -132,7 +130,7 @@ const Switcher = styled.div`
     position: absolute;
     border-radius: 50%;
     background: transparent;
-    transition: all 0.25s ease-in-out;
+    transition: all 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
   }
 
   &:before {
@@ -143,7 +141,7 @@ const Switcher = styled.div`
     background: ${props =>
       props.theme === 'light' ? 'var(--color-dark)' : 'var(--color-light)'};
     box-shadow: ${props =>
-      props.theme === 'light' ? '0 1px 2px 1px var(--color-red);' : ''};
+      props.theme === 'light' ? '0 1px 2px 1px var(--color-red)' : ''};
   }
 
   &:after {
@@ -154,7 +152,7 @@ const Switcher = styled.div`
     background: ${props =>
       props.theme === 'dark' ? 'var(--color-dark)' : 'var(--color-light)'};
     box-shadow: ${props =>
-      props.theme === 'dark' ? '0 1px 2px 1px var(--color-red);' : ''};
+      props.theme === 'dark' ? '0 1px 2px 1px var(--color-red)' : ''};
   }
 
   @media screen and (max-width: 767px) {
@@ -175,16 +173,16 @@ const links = [
     name: 'About',
   },
   {
-    link: '/photography',
+    link: '/photography/',
     name: 'Photography',
   },
   {
-    link: '/blog',
+    link: '/blog/',
     name: 'blog',
   },
 ];
 
-const Header = () => {
+const Header = ({ location: { pathname } }) => {
   const [logoActiveAnimateState, setLogoAnimateState] = useState(true);
   const [sepia, setSepia] = useState(false);
 
@@ -198,63 +196,59 @@ const Header = () => {
   }, []);
 
   return (
-    <Location>
-      {({ location: { pathname } }) => (
-        <HeaderWrapper className="animated faster">
-          <SepiaEffectGlobalStyle sepia={sepia} />
-          <Left>
-            <button
-              onClick={() => {
-                setSepia(!sepia);
-              }}>
-              <LogoWrapper
-                className={
-                  logoActiveAnimateState ? 'init-hover-animate-state' : ''
-                }>
-                <Logo color="var(--color-red)" />
-              </LogoWrapper>
-            </button>
-            <RouteLinks>
-              {links.map(({ link, name }) => (
-                <Link
-                  key={link}
-                  title={name}
-                  className={pathname === link ? 'active' : ''}
-                  to={link}>
-                  {name}
-                </Link>
-              ))}
-            </RouteLinks>
-          </Left>
-          <Right>
-            <div>
-              <ThemeToggler>
-                {({ theme, toggleTheme }) => (
-                  <div
-                    role="button"
-                    tabIndex={0}
-                    onKeyPress={e => {
-                      if (e.which === 13 || e.which === 32) {
-                        switchTheme(theme, toggleTheme);
-                      }
-                    }}
-                    title={
-                      theme === 'dark'
-                        ? 'Switch to light theme'
-                        : 'Switch to dark theme'
-                    }
-                    onClick={() => {
-                      switchTheme(theme, toggleTheme);
-                    }}>
-                    <Switcher theme={theme} />
-                  </div>
-                )}
-              </ThemeToggler>
-            </div>
-          </Right>
-        </HeaderWrapper>
-      )}
-    </Location>
+    <HeaderWrapper className="animated faster">
+      <SepiaEffectGlobalStyle sepia={sepia} />
+      <Left>
+        <button
+          onClick={() => {
+            setSepia(!sepia);
+          }}>
+          <LogoWrapper
+            className={
+              logoActiveAnimateState ? 'init-hover-animate-state' : ''
+            }>
+            <Logo color="var(--color-red)" />
+          </LogoWrapper>
+        </button>
+        <RouteLinks>
+          {links.map(({ link, name }) => (
+            <Link
+              key={`${link}_${pathname === link}`}
+              title={name}
+              className={pathname === link ? 'active' : ''}
+              to={link}>
+              {name}
+            </Link>
+          ))}
+        </RouteLinks>
+      </Left>
+      <Right>
+        <div>
+          <ThemeToggler>
+            {({ theme, toggleTheme }) => (
+              <div
+                role="button"
+                tabIndex={0}
+                onKeyPress={e => {
+                  if (e.which === 13 || e.which === 32) {
+                    switchTheme(theme, toggleTheme);
+                  }
+                }}
+                title={
+                  theme === 'dark'
+                    ? 'Switch to light theme'
+                    : 'Switch to dark theme'
+                }
+                onClick={() => {
+                  switchTheme(theme, toggleTheme);
+                }}>
+                <Switcher theme={theme} />
+              </div>
+            )}
+          </ThemeToggler>
+        </div>
+      </Right>
+    </HeaderWrapper>
   );
 };
 
