@@ -1,3 +1,8 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+require('dotenv').config({
+  path: '.env',
+});
+
 module.exports = {
   siteMetadata: {
     title: `Ganapati V S - Portfolio`,
@@ -48,6 +53,15 @@ module.exports = {
             variants: [`300`, `400`],
           },
         ],
+      },
+    },
+    {
+      resolve: 'gatsby-source-s3-image',
+      options: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        bucketName: 'meetguns-photography',
+        region: 'ap-south-1',
       },
     },
     `gatsby-plugin-dark-mode`,
