@@ -3,7 +3,6 @@ import { Link } from 'gatsby';
 import styled, { createGlobalStyle } from 'styled-components';
 import { ThemeToggler } from 'gatsby-plugin-dark-mode';
 import Logo from '../assets/logo/meetguns';
-import { FadeIn } from '../utils/keyframes';
 import { captureEvent } from '../utils/ga';
 
 const switchTheme = (theme, toggleTheme) => {
@@ -16,7 +15,6 @@ const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 30px 0;
-  animation-name: ${FadeIn};
   font-size: 14px;
 
   @media screen and (min-width: 768px) {
@@ -196,7 +194,7 @@ const Header = ({ location: { pathname } }) => {
   }, []);
 
   return (
-    <HeaderWrapper className="animated faster">
+    <HeaderWrapper className="animated fadeIn faster">
       <SepiaEffectGlobalStyle sepia={sepia} />
       <Left>
         <button

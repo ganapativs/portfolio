@@ -59,7 +59,7 @@ html, body, #root {
   height: 100%;
 }
 
-body{
+body {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 400;
 }

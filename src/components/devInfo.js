@@ -7,6 +7,7 @@ const DevName = styled.h1`
   font-size: 48px;
   margin: 15px 0;
   font-weight: 400;
+  font-family: 'Source Sans Pro', sans-serif;
 
   @media screen and (max-width: 767px) {
     font-size: 40px;
@@ -39,11 +40,12 @@ const SmallFadeInUp = keyframes`
   }
 `;
 
-const DevDescription = styled.h3`
+const DevDescription = styled.p`
   font-size: 18px;
   font-weight: 400;
   margin: 5px 0 24px 0;
   animation-name: ${SmallFadeInUp};
+  font-family: 'Source Sans Pro', sans-serif;
 
   @media screen and (max-width: 767px) {
     font-size: 16px;
@@ -126,7 +128,7 @@ const DevInfo = () => {
           onClick={() =>
             captureEvent('Personal GitHub', 'click', 'Social Links')
           }>
-          many more
+          more
         </ExternalLink>{' '}
         <span role="img" aria-label="Yay!!!">
           🎉

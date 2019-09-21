@@ -8,41 +8,49 @@
  * Copyright (c) 2018 Daniel Eden
  */
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+}
+
 @keyframes fadeInDown {
   from {
     opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
     transform: translate3d(0, -100%, 0);
   }
 
   to {
     opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
   }
 }
 
 .fadeInDown {
-  -webkit-animation-name: fadeInDown;
   animation-name: fadeInDown;
 }
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
     transform: translate3d(0, 100%, 0);
   }
 
   to {
     opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
   }
 }
 
 .fadeInUp {
-  -webkit-animation-name: fadeInUp;
   animation-name: fadeInUp;
 }
 
@@ -50,253 +58,199 @@
   from,
   11.1%,
   to {
-    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
   }
 
   22.2% {
-    -webkit-transform: skewX(-12.5deg) skewY(-12.5deg);
     transform: skewX(-12.5deg) skewY(-12.5deg);
   }
 
   33.3% {
-    -webkit-transform: skewX(6.25deg) skewY(6.25deg);
     transform: skewX(6.25deg) skewY(6.25deg);
   }
 
   44.4% {
-    -webkit-transform: skewX(-3.125deg) skewY(-3.125deg);
     transform: skewX(-3.125deg) skewY(-3.125deg);
   }
 
   55.5% {
-    -webkit-transform: skewX(1.5625deg) skewY(1.5625deg);
     transform: skewX(1.5625deg) skewY(1.5625deg);
   }
 
   66.6% {
-    -webkit-transform: skewX(-0.78125deg) skewY(-0.78125deg);
     transform: skewX(-0.78125deg) skewY(-0.78125deg);
   }
 
   77.7% {
-    -webkit-transform: skewX(0.390625deg) skewY(0.390625deg);
     transform: skewX(0.390625deg) skewY(0.390625deg);
   }
 
   88.8% {
-    -webkit-transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
     transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
   }
 }
 
 .jello {
-  -webkit-animation-name: jello;
   animation-name: jello;
-  -webkit-transform-origin: center;
   transform-origin: center;
 }
 
 @keyframes rotateIn {
   from {
-    -webkit-transform-origin: center;
     transform-origin: center;
-    -webkit-transform: rotate3d(0, 0, 1, -200deg);
     transform: rotate3d(0, 0, 1, -200deg);
     opacity: 0;
   }
 
   to {
-    -webkit-transform-origin: center;
     transform-origin: center;
-    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     opacity: 1;
   }
 }
 
 .rotateIn {
-  -webkit-animation-name: rotateIn;
   animation-name: rotateIn;
 }
 
 @keyframes rotateInDownLeft {
   from {
-    -webkit-transform-origin: left bottom;
     transform-origin: left bottom;
-    -webkit-transform: rotate3d(0, 0, 1, -45deg);
     transform: rotate3d(0, 0, 1, -45deg);
     opacity: 0;
   }
 
   to {
-    -webkit-transform-origin: left bottom;
     transform-origin: left bottom;
-    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     opacity: 1;
   }
 }
 
 .rotateInDownLeft {
-  -webkit-animation-name: rotateInDownLeft;
   animation-name: rotateInDownLeft;
 }
 
 @keyframes rotateInDownRight {
   from {
-    -webkit-transform-origin: right bottom;
     transform-origin: right bottom;
-    -webkit-transform: rotate3d(0, 0, 1, 45deg);
     transform: rotate3d(0, 0, 1, 45deg);
     opacity: 0;
   }
 
   to {
-    -webkit-transform-origin: right bottom;
     transform-origin: right bottom;
-    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     opacity: 1;
   }
 }
 
 .rotateInDownRight {
-  -webkit-animation-name: rotateInDownRight;
   animation-name: rotateInDownRight;
 }
 
 @keyframes rotateInUpLeft {
   from {
-    -webkit-transform-origin: left bottom;
     transform-origin: left bottom;
-    -webkit-transform: rotate3d(0, 0, 1, 45deg);
     transform: rotate3d(0, 0, 1, 45deg);
     opacity: 0;
   }
 
   to {
-    -webkit-transform-origin: left bottom;
     transform-origin: left bottom;
-    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     opacity: 1;
   }
 }
 
 .rotateInUpLeft {
-  -webkit-animation-name: rotateInUpLeft;
   animation-name: rotateInUpLeft;
 }
 
 @keyframes rotateInUpRight {
   from {
-    -webkit-transform-origin: right bottom;
     transform-origin: right bottom;
-    -webkit-transform: rotate3d(0, 0, 1, -90deg);
     transform: rotate3d(0, 0, 1, -90deg);
     opacity: 0;
   }
 
   to {
-    -webkit-transform-origin: right bottom;
     transform-origin: right bottom;
-    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     opacity: 1;
   }
 }
 
 .rotateInUpRight {
-  -webkit-animation-name: rotateInUpRight;
   animation-name: rotateInUpRight;
 }
 
 @keyframes zoomInDown {
   from {
     opacity: 0;
-    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -500px, 0);
     transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -500px, 0);
-    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
     animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
   }
 
   60% {
     opacity: 1;
-    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 64px, 0);
     transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 40px, 0);
-    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
     animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
   }
 }
 
 .zoomInDown {
-  -webkit-animation-name: zoomInDown;
   animation-name: zoomInDown;
 }
 
 .animated {
-  -webkit-animation-duration: 1s;
   animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
 
 .animated.infinite {
-  -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
 }
 
 .animated.delay-1s {
-  -webkit-animation-delay: 1s;
   animation-delay: 1s;
 }
 
 .animated.delay-2s {
-  -webkit-animation-delay: 2s;
   animation-delay: 2s;
 }
 
 .animated.delay-3s {
-  -webkit-animation-delay: 3s;
   animation-delay: 3s;
 }
 
 .animated.delay-4s {
-  -webkit-animation-delay: 4s;
   animation-delay: 4s;
 }
 
 .animated.delay-5s {
-  -webkit-animation-delay: 5s;
   animation-delay: 5s;
 }
 
 .animated.fast {
-  -webkit-animation-duration: 800ms;
   animation-duration: 800ms;
 }
 
 .animated.faster {
-  -webkit-animation-duration: 500ms;
   animation-duration: 500ms;
 }
 
 .animated.slow {
-  -webkit-animation-duration: 2s;
   animation-duration: 2s;
 }
 
 .animated.slower {
-  -webkit-animation-duration: 3s;
   animation-duration: 3s;
 }
 
 @media (print), (prefers-reduced-motion) {
   .animated {
-    -webkit-animation: unset !important;
     animation: unset !important;
-    -webkit-transition: none !important;
     transition: none !important;
   }
 }

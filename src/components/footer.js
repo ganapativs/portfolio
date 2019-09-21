@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FadeIn } from '../utils/keyframes';
 import ExternalLink from './externalLink';
 
 const FooterWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 30px 0 15px 0;
-  animation-name: ${FadeIn};
   transition: 0.25s ease;
   color: var(--color-light-dark);
 
@@ -40,7 +38,7 @@ const Right = styled.div`
 `;
 
 const Footer = () => (
-  <FooterWrapper>
+  <FooterWrapper className="animated fadeIn faster">
     <Left>
       <span>
         © Ganapati V S (
