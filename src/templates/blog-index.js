@@ -4,9 +4,8 @@ import { formatPostDate, formatReadingTime } from '../utils/helpers';
 import SEO from '../components/seo';
 import { rhythm } from '../utils/typography';
 
-class BlogIndexTemplate extends React.Component {
+class BlogIndex extends React.Component {
   render() {
-    const { title: siteTitle } = this.props.data.site.siteMetadata;
     const { edges: posts } = this.props.data.allMarkdownRemark;
 
     return (
@@ -47,7 +46,7 @@ class BlogIndexTemplate extends React.Component {
   }
 }
 
-export default BlogIndexTemplate;
+export default BlogIndex;
 
 export const pageQuery = graphql`
   query {
