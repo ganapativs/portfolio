@@ -2,15 +2,14 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { captureEvent } from '../utils/ga';
 import ExternalLink from './externalLink';
+import { rhythm } from '../utils/typography';
 
 const DevName = styled.h1`
-  font-size: 48px;
-  margin: 15px 0;
-  font-weight: 400;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-size: ${rhythm(1.4)};
+  margin-bottom: ${rhythm(0.8)};
 
-  @media screen and (max-width: 767px) {
-    font-size: 40px;
+  @media screen and (min-width: 768px) {
+    margin-top: 0;
   }
 
   a {
@@ -41,23 +40,7 @@ const SmallFadeInUp = keyframes`
 `;
 
 const DevDescription = styled.p`
-  font-size: 18px;
-  font-weight: 400;
-  margin: 5px 0 24px 0;
   animation-name: ${SmallFadeInUp};
-  font-family: 'Source Sans Pro', sans-serif;
-
-  @media screen and (max-width: 767px) {
-    font-size: 16px;
-  }
-
-  span {
-    font-size: 16px;
-
-    @media screen and (max-width: 767px) {
-      font-size: 14px;
-    }
-  }
 `;
 
 const Separator = styled.div`

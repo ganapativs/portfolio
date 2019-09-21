@@ -162,12 +162,12 @@ module.exports = {
       options: {
         fonts: [
           {
-            family: `Oswald`,
-            subsets: [`latin`],
+            family: `Merriweather`,
+            variants: [`700`],
           },
           {
             family: `Source Sans Pro`,
-            variants: [`300`, `400`],
+            variants: [`300`, `400`, `400i`],
           },
         ],
       },

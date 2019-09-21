@@ -1,8 +1,16 @@
 import { Link, graphql } from 'gatsby';
 import React from 'react';
+import styled from 'styled-components';
 import { formatPostDate, formatReadingTime } from '../utils/helpers';
 import SEO from '../components/seo';
 import { rhythm } from '../utils/typography';
+
+const Article = styled.article``;
+
+const Small = styled.small`
+  color: var(--color-light-dark);
+  font-weight: bold;
+`;
 
 class BlogIndex extends React.Component {
   render() {
@@ -15,11 +23,14 @@ class BlogIndex extends React.Component {
           {posts.map(({ node }) => {
             const title = node.frontmatter.title || node.fields.slug;
             return (
-              <article key={node.fields.slug}>
+              <Article
+                key={node.fields.slug}
+                style={{
+                  marginBottom: rhythm(1.5),
+                }}>
                 <header>
                   <h3
                     style={{
-                      fontSize: rhythm(1),
                       marginBottom: rhythm(1 / 4),
                     }}>
                     <Link
@@ -29,15 +40,15 @@ class BlogIndex extends React.Component {
                       {title}
                     </Link>
                   </h3>
-                  <small>
+                  <Small>
                     {formatPostDate(node.frontmatter.date)}
                     {` • ${formatReadingTime(node.timeToRead)}`}
-                  </small>
+                  </Small>
                 </header>
                 <p
                   dangerouslySetInnerHTML={{ __html: node.frontmatter.spoiler }}
                 />
-              </article>
+              </Article>
             );
           })}
         </main>

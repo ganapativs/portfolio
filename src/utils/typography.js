@@ -4,18 +4,10 @@ import CodePlugin from 'typography-plugin-code';
 
 theme.plugins = [new CodePlugin()];
 
-theme.googleFonts = [
-  {
-    name: 'Merriweather',
-    styles: ['700'],
-  },
-  {
-    name: 'Source Sans Pro',
-    styles: ['400', '400i', '300'],
-  },
-];
+// Fonts are loaded globally in gatsby-config
+delete theme.googleFonts;
 
-theme.bodyFontFamily = ['Source Sans Pro', 'georgia', 'sans-serif'];
+theme.bodyFontFamily = ['Source Sans Pro', 'sans-serif'];
 theme.headerFontFamily = ['Merriweather', 'sans-serif'];
 
 theme.overrideThemeStyles = () => ({

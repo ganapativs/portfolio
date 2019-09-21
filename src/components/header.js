@@ -176,7 +176,7 @@ const links = [
   },
   {
     link: '/blog/',
-    name: 'blog',
+    name: 'Blog',
   },
 ];
 
@@ -211,9 +211,14 @@ const Header = ({ location: { pathname } }) => {
         <RouteLinks>
           {links.map(({ link, name }) => (
             <Link
-              key={`${link}_${pathname === link}`}
+              key={`${link}_${pathname}`}
               title={name}
-              className={pathname === link ? 'active' : ''}
+              className={
+                (pathname === '/' && pathname === link) ||
+                (link !== '/' && pathname.startsWith(link))
+                  ? 'active'
+                  : ''
+              }
               to={link}>
               {name}
             </Link>
