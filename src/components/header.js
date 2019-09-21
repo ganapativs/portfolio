@@ -171,12 +171,12 @@ const links = [
     name: 'About',
   },
   {
-    link: '/photography/',
-    name: 'Photography',
-  },
-  {
     link: '/blog/',
     name: 'Blog',
+  },
+  {
+    link: '/photography/',
+    name: 'Photography',
   },
 ];
 

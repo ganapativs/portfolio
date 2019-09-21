@@ -81,13 +81,9 @@ const socialLinks = [
 
 export default function ProfileLinks() {
   return (
-    <Div className="animated fadeInUp faster animation-delay-half-s">
-      {socialLinks.map(({ link, Component, title, seo }, index) => (
-        <Icons
-          className="app__link animated fadeInUp faster"
-          key={link}
-          title={title}
-          style={{ animationDelay: `${index * 0.1 + 0.4}s` }}>
+    <Div>
+      {socialLinks.map(({ link, Component, title, seo }) => (
+        <Icons className="app__link" key={link} title={title}>
           <ExternalLink
             href={link}
             onClick={() => captureEvent(seo, 'click', 'Social Links')}>

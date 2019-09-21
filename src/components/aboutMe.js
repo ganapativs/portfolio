@@ -23,7 +23,7 @@ const ProfileInfo = styled.div`
 
 const AboutMe = ({ profileLogo }) => {
   return (
-    <Div>
+    <Div className="animated fadeIn faster">
       <ProfileLogo profileLogo={profileLogo} />
       <ProfileInfo>
         <DevInfo />

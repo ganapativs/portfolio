@@ -1,6 +1,6 @@
 ---
 title: Algebraic Effects for the Rest of Us
-date: '2019-07-21'
+date: '2019-07-22'
 spoiler: They’re not burritos.
 ---
 

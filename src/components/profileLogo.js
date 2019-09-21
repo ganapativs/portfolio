@@ -66,6 +66,7 @@ const UserLogoBGCommon = styled.div`
 
 const UserLogoBG = styled(UserLogoBGCommon)`
   overflow: hidden;
+  border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
   animation: ${MorphRest} 8s ease-in-out infinite both alternate,
     ${MorphShadowMobile} 8s ease-in-out infinite both alternate;
 
@@ -156,9 +157,9 @@ export default function ProfileLogo({ profileLogo }) {
     : [];
 
   return (
-    <W1 className="animated jello">
-      <W2 className="animated fadeInUp">
-        <UserLogo className="animated zoomInDown">
+    <W1>
+      <W2>
+        <UserLogo>
           <UserLogoBGRotate>
             <UserLogoBG>
               <UserLogoImageWrapper>

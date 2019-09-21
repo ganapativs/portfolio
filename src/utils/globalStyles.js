@@ -55,6 +55,13 @@ body {
   font-size: 18px;
 }
 
+@media (print), (prefers-reduced-motion) {
+  * {
+    animation: unset !important;
+    transition: none !important;
+  }
+}
+
 /**
  * This will hide the focus indicator if the element receives focus via the mouse,
  * but it will still show up on keyboard focus.
@@ -103,7 +110,7 @@ code[class*='language-'],
 pre[class*='language-'] {
   color: white;
   background: none;
-  font-family: Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace;
+  font-family: 'Fira Code', monospace;
   font-feature-settings: normal;
   text-align: left;
   white-space: pre;

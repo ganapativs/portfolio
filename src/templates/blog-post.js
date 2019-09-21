@@ -26,7 +26,9 @@ class BlogPostTemplate extends React.Component {
     )}`;
 
     return (
-      <div style={{ width: '100%' }} className="animated fadeIn fast">
+      <div
+        style={{ width: '100%', maxWidth: 680, margin: '0 auto' }}
+        className="animated fadeIn fast">
         <SEO
           title={post.frontmatter.title}
           description={post.frontmatter.spoiler}

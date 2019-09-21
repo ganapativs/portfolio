@@ -34,6 +34,7 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          'gatsby-remark-autolink-headers',
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -46,7 +47,6 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
-          'gatsby-remark-autolink-headers',
           {
             resolve: 'gatsby-remark-prismjs',
             options: {
@@ -168,6 +168,10 @@ module.exports = {
           {
             family: `Source Sans Pro`,
             variants: [`300`, `400`, `400i`],
+          },
+          {
+            family: `Fira Code`,
+            variants: [`400`, `700`],
           },
         ],
       },

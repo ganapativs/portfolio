@@ -50,7 +50,7 @@ const Separator = styled.div`
 const DevInfo = () => {
   return (
     <>
-      <DevName className="animated fadeInUp faster animation-delay-half-s">
+      <DevName>
         Ganapati V S{' '}
         <ExternalLink
           href="https://twitter.com/ganapativs?ref=meetguns.com"
@@ -60,7 +60,7 @@ const DevInfo = () => {
           <span>(@ganapativs)</span>
         </ExternalLink>
       </DevName>
-      <DevDescription className="animated faster animation-delay-half-s">
+      <DevDescription>
         Hi{' '}
         <span role="img" aria-label="Hi!">
           👋
