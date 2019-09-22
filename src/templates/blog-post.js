@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
+import styled from 'styled-components';
 import SEO from '../components/seo';
 
 import { formatPostDate, formatReadingTime } from '../utils/helpers';
@@ -8,10 +9,19 @@ import { rhythm, scale } from '../utils/typography';
 const GITHUB_USERNAME = 'ganapativs';
 const GITHUB_REPO_NAME = 'Portfolio';
 
+const PostInfo = styled.p`
+  color: var(--color-light-dark);
+  font-weight: bold;
+`;
+
+const Ul = styled.ul`
+  list-style: none;
+  margin-left: 0;
+`;
+
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark;
-    const { title: siteTitle } = this.props.data.site.siteMetadata;
     const { previous, next, slug } = this.props.pageContext;
 
     // Replace original links with translated when available.
@@ -27,7 +37,8 @@ class BlogPostTemplate extends React.Component {
 
     return (
       <div
-        style={{ width: '100%', maxWidth: 680, margin: '0 auto' }}
+        // Remove 2em padding space of blog card
+        style={{ width: '100%', maxWidth: 644, margin: '0 auto' }}
         className="animated fadeIn fast">
         <SEO
           title={post.frontmatter.title}
@@ -37,19 +48,22 @@ class BlogPostTemplate extends React.Component {
         <main>
           <article>
             <header>
-              <h1 style={{ color: 'var(--textTitle)' }}>
+              <h1
+                style={{
+                  color: 'var(--textTitle)',
+                  marginTop: rhythm(1 / 2),
+                }}>
                 {post.frontmatter.title}
               </h1>
-              <p
+              <PostInfo
                 style={{
                   ...scale(-1 / 5),
-                  display: 'block',
                   marginBottom: rhythm(1),
-                  marginTop: rhythm(-4 / 5),
+                  marginTop: rhythm(-3 / 5),
                 }}>
                 {formatPostDate(post.frontmatter.date)}
                 {` • ${formatReadingTime(post.timeToRead)}`}
-              </p>
+              </PostInfo>
             </header>
             <div dangerouslySetInnerHTML={{ __html: html }} />
             <footer>
@@ -65,6 +79,24 @@ class BlogPostTemplate extends React.Component {
             </footer>
           </article>
         </main>
+        <nav>
+          <Ul>
+            <li>
+              {previous ? (
+                <Link to={`/blog${previous.fields.slug}`} rel="prev">
+                  ← {previous.frontmatter.title}
+                </Link>
+              ) : null}
+            </li>
+            <li>
+              {next ? (
+                <Link to={`/blog${next.fields.slug}`} rel="next">
+                  {next.frontmatter.title} →
+                </Link>
+              ) : null}
+            </li>
+          </Ul>
+        </nav>
       </div>
     );
   }

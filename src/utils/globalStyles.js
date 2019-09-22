@@ -28,7 +28,7 @@ body.dark {
   box-sizing: border-box;
 }
 
-html {
+html, body {
   font-size: 16px;
 }
 
@@ -43,16 +43,13 @@ body {
   background-color: var(--color-dark);
   color: var(--color-light);
   line-height: 1.42857143;
+  transition: background 0.1s ease-in;
+  font-family: 'Source Sans Pro', sans-serif;
+  overflow-x: hidden;
 }
 
 html, body, #root {
   height: 100%;
-}
-
-body {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-weight: 400;
-  font-size: 18px;
 }
 
 @media (print), (prefers-reduced-motion) {
@@ -70,16 +67,12 @@ body {
   outline: none;
 }
 
-a {
-  text-decoration: none;
-}
-
 a, a:focus, a:active, a:hover {
   color: var(--color-red);
 }
 
 a:focus, a:active, a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 @media screen and (max-width: 767px) {
@@ -119,6 +112,7 @@ pre[class*='language-'] {
   word-wrap: normal;
   line-height: 1.5;
   margin-bottom: 0;
+  font-size: 0.95em;
 
   -moz-tab-size: 4;
   -o-tab-size: 4;
@@ -164,7 +158,7 @@ pre[class*='language-'] ::selection {
   border-radius: 3px;
   background: var(--color-light-op-3);
   color: var(--color-light);
-  padding: 0.1em 0.2em;
+  padding: 0.1em;
   white-space: normal;
 }
 
@@ -249,7 +243,8 @@ pre[data-line] {
   margin-left: -1.3125rem;
   margin-right: -1.3125rem;
   border-radius: 10px;
-  background: #011627;
+  /* background: #011627; */
+  background: linear-gradient(0deg, #060217, #10024c);
   -webkit-overflow-scrolling: touch;
   overflow: auto;
 }

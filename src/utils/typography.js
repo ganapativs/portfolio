@@ -38,11 +38,19 @@ theme.overrideThemeStyles = () => ({
   },
   blockquote: {
     color: 'inherit',
-    borderLeftColor: 'inherit',
-    opacity: '0.8',
+    borderLeft: 0,
+    fontFamily: "'Merriweather',sans-serif",
+    margin: '2.5em auto',
+    fontStyle: 'italic',
+    padding: '0 1.5rem',
+    lineHeight: 'inherit',
   },
   'blockquote.translation': {
     fontSize: '1em',
+  },
+  iframe: {
+    border: 0,
+    borderRadius: '8px',
   },
 });
 

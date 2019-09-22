@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 import { ThemeToggler } from 'gatsby-plugin-dark-mode';
 import Logo from '../assets/logo/meetguns';
 import { captureEvent } from '../utils/ga';
@@ -14,11 +14,18 @@ const switchTheme = (theme, toggleTheme) => {
 const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 30px 0;
+  margin: 20px -20px;
+  padding: 10px 15px;
   font-size: 14px;
+  position: sticky;
+  top: 0;
+  transition: background 0.1s ease-in;
+  background: var(--color-dark);
+  z-index: 1;
 
   @media screen and (min-width: 768px) {
-    padding: 60px 0;
+    margin: 40px 0;
+    padding: 20px 0;
     font-size: inherit;
   }
 `;
@@ -158,13 +165,6 @@ const Switcher = styled.div`
   }
 `;
 
-const SepiaEffectGlobalStyle = createGlobalStyle`
-  body {
-    transition: filter .5s ease-in-out, background 0.1s ease-in;
-    filter: ${props => (props.sepia ? 'sepia(1)' : '')}
-  }
-`;
-
 const links = [
   {
     link: '/',
@@ -182,7 +182,6 @@ const links = [
 
 const Header = ({ location: { pathname } }) => {
   const [logoActiveAnimateState, setLogoAnimateState] = useState(true);
-  const [sepia, setSepia] = useState(false);
 
   // Animate hover state to normal state initially on logo
   useEffect(() => {
@@ -194,20 +193,16 @@ const Header = ({ location: { pathname } }) => {
   }, []);
 
   return (
-    <HeaderWrapper className="animated fadeIn faster">
-      <SepiaEffectGlobalStyle sepia={sepia} />
+    <HeaderWrapper className="animated fadeIn">
       <Left>
-        <button
-          onClick={() => {
-            setSepia(!sepia);
-          }}>
+        <Link title={'Meetguns.com | About'} to={'/'}>
           <LogoWrapper
             className={
               logoActiveAnimateState ? 'init-hover-animate-state' : ''
             }>
             <Logo color="var(--color-red)" />
           </LogoWrapper>
-        </button>
+        </Link>
         <RouteLinks>
           {links.map(({ link, name }) => (
             <Link

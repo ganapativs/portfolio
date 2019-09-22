@@ -38,17 +38,9 @@ const Right = styled.div`
 `;
 
 const Footer = () => (
-  <FooterWrapper className="animated fadeIn faster">
+  <FooterWrapper className="animated fadeIn">
     <Left>
-      <span>
-        © Ganapati V S (
-        <ExternalLink
-          title="Twitter"
-          href={'https://twitter.com/ganapativs?ref=meetguns.com'}>
-          @ganapativs
-        </ExternalLink>
-        )
-      </span>
+      <span>Hand-crafted in India with ❤</span>
     </Left>
     <Right>
       <ExternalLink

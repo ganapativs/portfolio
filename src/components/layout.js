@@ -20,7 +20,7 @@ const LayoutWidth = styled.div`
   margin: 0 auto;
   height: 100%;
   min-height: 100vh;
-  padding: 0 25px;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

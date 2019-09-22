@@ -10,17 +10,23 @@ const Article = styled.article`
 
   @media screen and (min-width: 768px) {
     padding: 1rem;
-    border-radius: 12px;
   }
 
   @media screen and (hover: hover) and (pointer: fine) {
     transition: all 0.3s ease-out;
+    border-radius: 4px;
 
     &:hover {
-      transition: all 0.15s ease-in;
-      box-shadow: 2px 5px 25px -5px var(--color-light-op-1);
-      /* transform: translateY(-2px); */
+      transition: all 0.2s ease-in;
+      box-shadow: 0 5px 10px -8px var(--color-light-op-2),
+        0 5px 15px -5px var(--color-light-op-1),
+        inset 0 -4px var(--color-light-op-3);
+      transform: translateY(-2px);
     }
+  }
+
+  a {
+    text-decoration: none;
   }
 `;
 
@@ -51,7 +57,7 @@ class BlogIndex extends React.Component {
                 // Skipping keyboard navigation as link inside will handle it
                 onClick={() => this.props.navigate(`/blog${node.fields.slug}`)}
                 style={{
-                  marginBottom: rhythm(1),
+                  marginBottom: rhythm(1.5),
                 }}>
                 <header>
                   <h3
