@@ -34,7 +34,7 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
-          'gatsby-remark-autolink-headers',
+          `gatsby-remark-autolink-headers`,
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -48,15 +48,15 @@ module.exports = {
             },
           },
           {
-            resolve: 'gatsby-remark-prismjs',
+            resolve: `gatsby-remark-prismjs`,
             options: {
               inlineCodeMarker: '÷',
             },
           },
-          'gatsby-remark-copy-linked-files',
-          'gatsby-remark-smartypants',
+          `gatsby-remark-copy-linked-files`,
+          `gatsby-remark-smartypants`,
           {
-            resolve: 'gatsby-remark-external-links',
+            resolve: `gatsby-remark-external-links`,
             options: {
               target: '_blank',
             },
@@ -177,7 +177,7 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-source-s3-image',
+      resolve: `gatsby-source-s3-image`,
       options: {
         accessKeyId: process.env.ACCESS_KEY_ID,
         secretAccessKey: process.env.SECRET_ACCESS_KEY,
@@ -186,7 +186,7 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-typography',
+      resolve: `gatsby-plugin-typography`,
       options: {
         pathToConfigModule: 'src/utils/typography',
       },

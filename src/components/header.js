@@ -123,46 +123,71 @@ const RouteLinks = styled.div`
   }
 `;
 
-const Switcher = styled.div`
+const ThemeSwitcher = styled.div`
   position: relative;
-  width: 44px;
-  height: 24px;
   cursor: pointer;
-
-  &:before,
-  &:after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    background: transparent;
-    transition: all 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
-  }
-
-  &:before {
-    left: 0;
-    top: ${props => (props.theme === 'light' ? '0px' : '6px')};
-    width: ${props => (props.theme === 'light' ? '24px' : '12px')};
-    height: ${props => (props.theme === 'light' ? '24px' : '12px')};
-    background: ${props =>
-      props.theme === 'light' ? 'var(--color-dark)' : 'var(--color-light)'};
-    box-shadow: ${props =>
-      props.theme === 'light' ? '0 1px 2px 1px var(--color-red)' : ''};
-  }
-
-  &:after {
-    left: ${props => (props.theme === 'dark' ? '20px' : '32px')};
-    top: ${props => (props.theme === 'dark' ? '0px' : '6px')};
-    width: ${props => (props.theme === 'dark' ? '24px' : '12px')};
-    height: ${props => (props.theme === 'dark' ? '24px' : '12px')};
-    background: ${props =>
-      props.theme === 'dark' ? 'var(--color-dark)' : 'var(--color-light)'};
-    box-shadow: ${props =>
-      props.theme === 'dark' ? '0 1px 2px 1px var(--color-red)' : ''};
-  }
+  transform: scale(0.8) translateX(2px);
 
   @media screen and (max-width: 767px) {
-    transform: scale(0.8) translateX(5px);
+    transform: scale(0.7) translateX(3px);
   }
+`;
+
+// Much appreciated to: https://codepen.io/aaroniker/pen/KGpXZo
+const MoonOrSun = styled.div`
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: ${p => (p.isDark ? '4px' : '2px')} solid var(--color-light);
+  background: var(--color-light);
+  transform: scale(${p => (p.isDark ? 0.55 : 1)});
+  transition: all 0.45s ease;
+  overflow: ${p => (p.isDark ? 'visible' : 'hidden')};
+
+  &::before {
+    content: '';
+    position: absolute;
+    right: -9px;
+    top: -9px;
+    height: 24px;
+    width: 24px;
+    border: 2px solid var(--color-light);
+    border-radius: 50%;
+    transform: translate(${p => (p.isDark ? '14px, -14px' : '0, 0')});
+    opacity: ${p => (p.isDark ? 0 : 1)};
+    transition: transform 0.45s ease;
+  }
+  &::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin: -4px 0 0 -4px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    box-shadow: 0 -23px 0 var(--color-light), 0 23px 0 var(--color-light),
+      23px 0 0 var(--color-light), -23px 0 0 var(--color-light),
+      15px 15px 0 var(--color-light), -15px 15px 0 var(--color-light),
+      15px -15px 0 var(--color-light), -15px -15px 0 var(--color-light);
+    transform: scale(${p => (p.isDark ? 1 : 0)});
+    transition: all 0.35s ease;
+  }
+`;
+
+const MoonMask = styled.div`
+  position: absolute;
+  right: -9px;
+  top: -9px;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--color-dark);
+  transform: translate(${p => (p.isDark ? '14px, -14px' : '0, 0')});
+  opacity: ${p => (p.isDark ? 0 : 1)};
+  transition: background 0.1s ease-in, transform 0.35s ease;
 `;
 
 const links = [
@@ -221,30 +246,30 @@ const Header = ({ location: { pathname } }) => {
         </RouteLinks>
       </Left>
       <Right>
-        <div>
-          <ThemeToggler>
-            {({ theme, toggleTheme }) => (
-              <div
-                role="button"
-                tabIndex={0}
-                onKeyPress={e => {
-                  if (e.which === 13 || e.which === 32) {
-                    switchTheme(theme, toggleTheme);
-                  }
-                }}
-                title={
-                  theme === 'dark'
-                    ? 'Switch to light theme'
-                    : 'Switch to dark theme'
-                }
-                onClick={() => {
+        <ThemeToggler>
+          {({ theme, toggleTheme }) => (
+            <ThemeSwitcher
+              role="button"
+              tabIndex={0}
+              onKeyPress={e => {
+                if (e.which === 13 || e.which === 32) {
                   switchTheme(theme, toggleTheme);
-                }}>
-                <Switcher theme={theme} />
-              </div>
-            )}
-          </ThemeToggler>
-        </div>
+                }
+              }}
+              title={
+                theme === 'dark'
+                  ? 'Switch to light theme'
+                  : 'Switch to dark theme'
+              }
+              onClick={() => {
+                switchTheme(theme, toggleTheme);
+              }}>
+              {/* <Switcher theme={theme} /> */}
+              <MoonOrSun isDark={theme === 'dark'} />
+              <MoonMask isDark={theme === 'dark'} />
+            </ThemeSwitcher>
+          )}
+        </ThemeToggler>
       </Right>
     </HeaderWrapper>
   );
