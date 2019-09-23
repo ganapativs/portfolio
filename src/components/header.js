@@ -41,9 +41,9 @@ const LogoWrapper = styled.div`
   border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
   margin-right: 24px;
   background: linear-gradient(0deg, var(--color-light-op-3), transparent);
-  box-shadow: 0 0 var(--color-orange), inset 0 0 var(--color-red),
-    inset 0 0 var(--color-red), inset 0 0 var(--color-red),
-    inset 0 0 var(--color-red);
+  box-shadow: 0 0 var(--color-orange), inset 0 0 var(--color-accent),
+    inset 0 0 var(--color-accent), inset 0 0 var(--color-accent),
+    inset 0 0 var(--color-accent);
 
   svg {
     height: 30px;
@@ -70,9 +70,11 @@ const LogoWrapper = styled.div`
       background: linear-gradient(0deg, transparent, transparent);
       border-radius: 35% 65% 55% 45% / 48% 48% 52% 52%;
       transform: translateY(-3px) scale(1.05);
-      box-shadow: 2px 5px 25px -5px var(--color-orange),
-        inset 0 -4px 2px var(--color-red), inset -4px 0 2px var(--color-red),
-        inset 0 2px 4px var(--color-red), inset 2px 0px 4px var(--color-red);
+      box-shadow: 2px 5px 25px -5px var(--color-accent),
+        inset 0 -4px 2px var(--color-accent),
+        inset -4px 0 2px var(--color-accent),
+        inset 0 2px 4px var(--color-accent),
+        inset 2px 0px 4px var(--color-accent);
     }
 
     svg {
@@ -107,13 +109,13 @@ const RouteLinks = styled.div`
 
     &.active {
       transition: all 0.25s ease-in;
-      color: var(--color-red);
+      color: var(--color-accent);
     }
 
     @media screen and (hover: hover) and (pointer: fine) {
       &:hover {
         transition: all 0.25s ease-in;
-        color: var(--color-red);
+        color: var(--color-accent);
       }
     }
 
@@ -225,7 +227,7 @@ const Header = ({ location: { pathname } }) => {
             className={
               logoActiveAnimateState ? 'init-hover-animate-state' : ''
             }>
-            <Logo color="var(--color-red)" />
+            <Logo color="var(--color-accent)" />
           </LogoWrapper>
         </Link>
         <RouteLinks>

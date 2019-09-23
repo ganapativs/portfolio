@@ -45,12 +45,10 @@ const MorphRest = keyframes`
     transform: scale(0.95);
     border-radius: 50%;
     border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
-    background: var(--color-orange);
   }
   100% {
     transform: scale(1.1);
     border-radius: 50%;
-    background: var(--color-red);
     border-radius: 35% 65% 55% 45% / 48% 48% 52% 52%;
   }
 `;

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, graphql } from 'gatsby';
 import styled from 'styled-components';
 import SEO from '../components/seo';
+import TwitterIcon from '../assets/icons/twitterIcon';
 
 import { formatPostDate, formatReadingTime } from '../utils/helpers';
 import { rhythm, scale } from '../utils/typography';
@@ -31,8 +32,9 @@ class BlogPostTemplate extends React.Component {
       1,
       slug - 1,
     )}index.md`;
+    const blogUrl = `https://meetguns.com/blog/${slug}`;
     const discussUrl = `https://mobile.twitter.com/search?q=${encodeURIComponent(
-      `https://meetguns.com/blog/${slug}`,
+      blogUrl,
     )}`;
 
     return (
@@ -62,7 +64,15 @@ class BlogPostTemplate extends React.Component {
                   marginTop: rhythm(-3 / 5),
                 }}>
                 {formatPostDate(post.frontmatter.date)}
-                {` • ${formatReadingTime(post.timeToRead)}`}
+                {` • ${formatReadingTime(post.timeToRead)}`} •{' '}
+                <a
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                    `Checkout this blog about "${post.frontmatter.title}" by @ganapativs\n\n${blogUrl}`,
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  Tweet
+                </a>
               </PostInfo>
             </header>
             <div dangerouslySetInnerHTML={{ __html: html }} />

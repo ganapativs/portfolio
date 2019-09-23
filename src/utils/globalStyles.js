@@ -3,15 +3,13 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
 body {
+  --color-accent: #f1404b;
   --color-dark: #f3f8f9;
   --color-light: #0f0f10;
   --color-light-dark: #909295;
   --color-light-op-1: rgba(0, 0, 0, 0.2);
   --color-light-op-2: rgba(0, 0, 0, 0.1);
   --color-light-op-3: rgba(0, 0, 0, 0.05);
-  --color-blue: #673AB7;
-  --color-orange: #ff7146;
-  --color-red: #f1404b;
   --color-transparent: transparent;
 }
 
@@ -68,7 +66,7 @@ html, body, #root {
 }
 
 a, a:focus, a:active, a:hover {
-  color: var(--color-red);
+  color: var(--color-accent);
 }
 
 a:focus, a:active, a:hover {

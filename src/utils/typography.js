@@ -12,7 +12,7 @@ theme.headerFontFamily = ['Merriweather', 'sans-serif'];
 
 theme.overrideThemeStyles = () => ({
   a: {
-    color: 'var(--color-red)',
+    color: 'var(--color-accent)',
   },
   hr: {
     background: 'var(--color-light-op-3)',
@@ -25,7 +25,7 @@ theme.overrideThemeStyles = () => ({
     boxShadow: 'none',
   },
   'a.anchor svg[aria-hidden="true"]': {
-    stroke: 'var(--color-red)',
+    stroke: 'var(--color-accent)',
   },
   'p code': {
     fontSize: '1rem',
@@ -51,6 +51,16 @@ theme.overrideThemeStyles = () => ({
   iframe: {
     border: 0,
     borderRadius: '8px',
+  },
+  figure: {
+    marginTop: '2.4rem',
+    marginBottom: '2.4rem',
+  },
+  figcaption: {
+    textAlign: 'center',
+    margin: '1em',
+    fontSize: '0.8rem',
+    color: 'var(--color-light-dark)',
   },
 });
 

@@ -17,7 +17,7 @@ const FooterWrapper = styled.div`
   @media screen and (hover: hover) and (pointer: fine) {
     &:hover {
       a {
-        color: var(--color-red);
+        color: var(--color-accent);
       }
     }
   }
