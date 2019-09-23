@@ -41,7 +41,7 @@ body {
   background-color: var(--color-dark);
   color: var(--color-light);
   line-height: 1.42857143;
-  transition: background 0.1s ease-in;
+  /* transition: background 0.1s ease-in; */
   font-family: 'Source Sans Pro', sans-serif;
   overflow-x: hidden;
 }

@@ -19,7 +19,7 @@ const HeaderWrapper = styled.div`
   font-size: 14px;
   position: sticky;
   top: 0;
-  transition: background 0.1s ease-in;
+  /* transition: background 0.1s ease-in; */
   background: var(--color-dark);
   z-index: 1;
 
@@ -189,7 +189,7 @@ const MoonMask = styled.div`
   background: var(--color-dark);
   transform: translate(${p => (p.isDark ? '14px, -14px' : '0, 0')});
   opacity: ${p => (p.isDark ? 0 : 1)};
-  transition: background 0.1s ease-in, transform 0.35s ease;
+  transition: transform 0.35s ease;
 `;
 
 const links = [
