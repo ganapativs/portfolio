@@ -46,6 +46,13 @@ module.exports = {
             },
           },
           {
+            resolve: `gatsby-remark-embed-video`,
+            options: {
+              related: false, // Optional: Will remove related videos from the end of an embedded YouTube video.
+              noIframeBorder: true, // Optional: Disable insertion of <style> border: 0,
+            },
+          },
+          {
             resolve: `gatsby-remark-responsive-iframe`,
             options: {
               wrapperStyle: `margin-bottom: 1.0725rem`,
