@@ -179,8 +179,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-s3-image',
       options: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        accessKeyId: process.env.ACCESS_KEY_ID,
+        secretAccessKey: process.env.SECRET_ACCESS_KEY,
         bucketName: 'meetguns-photography',
         region: 'ap-south-1',
       },
