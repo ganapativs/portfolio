@@ -6,6 +6,14 @@ import useOutsideClick from './hooks/useOutsideClick';
 const AccentToggleWrapper = styled.button`
   position: relative;
   margin-right: 1.25rem;
+
+  @media screen and (max-width: 767px) {
+    margin-right: 0.8rem;
+  }
+
+  @media screen and (max-width: 300px) {
+    display: none;
+  }
 `;
 
 const AccentToggle = styled.div`
@@ -20,7 +28,7 @@ const AccentToggle = styled.div`
     0px -15px 0 -6px var(--color-accent);
 
   @media screen and (max-width: 767px) {
-    transform: rotate(45deg) scale(0.75) translateY(4px);
+    transform: rotate(45deg) scale(0.75) translateY(2px);
   }
 
   @media screen and (hover: hover) and (pointer: fine) {
@@ -107,8 +115,8 @@ function AccentSwitcher() {
             width="36px"
             colors={[
               '#f1404b',
-              '#f07818',
               '#FF2E63',
+              '#f07818',
               '#6abe83',
               '#209396',
               '#00A0FF',
