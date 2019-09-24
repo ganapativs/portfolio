@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { ThemeToggler } from 'gatsby-plugin-dark-mode';
 import Logo from '../assets/logo/meetguns';
 import { captureEvent } from '../utils/ga';
+import AccentSwitcher from './accentSwitcher';
 
 const switchTheme = (theme, toggleTheme) => {
   const nextTheme = theme === 'dark' ? 'light' : 'dark';
@@ -251,6 +252,7 @@ const Header = ({ location: { pathname } }) => {
         </RouteLinks>
       </Left>
       <Right>
+        <AccentSwitcher />
         <ThemeToggler>
           {({ theme, toggleTheme }) => (
             <ThemeSwitcher

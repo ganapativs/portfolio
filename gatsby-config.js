@@ -210,6 +210,7 @@ module.exports = {
       },
     },
     `gatsby-plugin-dark-mode`,
+    `gatsby-plugin-accent-color`,
     `gatsby-plugin-webpack-size`,
     `gatsby-plugin-catch-links`,
     // https://gatsby.dev/offline
