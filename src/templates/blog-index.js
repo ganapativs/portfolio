@@ -9,7 +9,7 @@ const Article = styled.article`
   cursor: pointer;
 
   @media screen and (min-width: 768px) {
-    padding: 1rem;
+    padding: 0.8rem 1rem;
   }
 
   @media screen and (hover: hover) and (pointer: fine) {
@@ -57,7 +57,7 @@ class BlogIndex extends React.Component {
                 // Skipping keyboard navigation as link inside will handle it
                 onClick={() => this.props.navigate(`/blog${node.fields.slug}`)}
                 style={{
-                  marginBottom: rhythm(1.5),
+                  marginBottom: rhythm(1.2),
                 }}>
                 <header>
                   <h3

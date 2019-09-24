@@ -1,4 +1,3 @@
-import 'normalize.css';
 import '../assets/animate-custom.css';
 import React from 'react';
 import styled from 'styled-components';

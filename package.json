@@ -54,7 +54,6 @@
     "gatsby-transformer-remark": "^2.6.22",
     "gatsby-transformer-sharp": "^2.2.14",
     "intersection-observer": "^0.7.0",
-    "normalize.css": "^8.0.1",
     "prismjs": "^1.17.1",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
@@ -63,8 +62,8 @@
     "react-typography": "^0.16.19",
     "styled-components": "^4.3.2",
     "typography": "^0.16.19",
-    "typography-plugin-code": "^0.16.19",
-    "typography-theme-funston": "^0.16.19"
+    "typography-breakpoint-constants": "^0.16.19",
+    "typography-plugin-code": "^0.16.19"
   },
   "devDependencies": {
     "@ganapativs/eslint-config-react": "^0.0.7",

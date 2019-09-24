@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
+import Img from 'gatsby-image';
 import styled from 'styled-components';
 import SEO from '../components/seo';
-import TwitterIcon from '../assets/icons/twitterIcon';
 
 import { formatPostDate, formatReadingTime } from '../utils/helpers';
 import { rhythm, scale } from '../utils/typography';
@@ -18,6 +18,19 @@ const PostInfo = styled.p`
 const Ul = styled.ul`
   list-style: none;
   margin-left: 0;
+`;
+
+const CoverImage = styled.div`
+  margin-top: ${rhythm(1 / 2)};
+  margin-bottom: ${rhythm(1.5)};
+  box-shadow: 0px 30px 60px -10px var(--color-light-op-2),
+    0px 18px 36px -18px var(--color-light-op-2);
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: ${rhythm(2.5)};
+    margin-left: -5rem;
+    margin-right: -5rem;
+  }
 `;
 
 class BlogPostTemplate extends React.Component {
@@ -49,6 +62,11 @@ class BlogPostTemplate extends React.Component {
         />
         <main>
           <article>
+            {post.frontmatter.cover ? (
+              <CoverImage>
+                <Img fluid={post.frontmatter.cover.childImageSharp.fluid} />
+              </CoverImage>
+            ) : null}
             <header>
               <h1
                 style={{
@@ -130,6 +148,15 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         spoiler
+        cover {
+          publicURL
+          childImageSharp {
+            # Expected cover image to have 1/2 aspect ratio
+            fluid(maxWidth: 1200, maxHeight: 600, quality: 85) {
+              ...GatsbyImageSharpFluid_withWebp_tracedSVG
+            }
+          }
+        }
       }
       fields {
         slug

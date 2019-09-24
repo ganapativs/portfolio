@@ -2,13 +2,16 @@
 title: Algebraic Effects for the Rest of Us
 date: '2019-07-22'
 spoiler: They’re not burritos.
+cover: './cover.jpg'
 ---
 
 Have you heard about _algebraic effects_?
 
+---
+
 `youtube: https://www.youtube.com/watch?v=2Xc9gXyf2G4`
 
-<iframe src="http://www.example.com/" width="600" height="400"></iframe>
+<iframe src="https://www.example.com/" width="600" height="400"></iframe>
 
 My first attempts to figure out what they are or why I should care about them were unsuccessful. I found a [few](https://www.eff-lang.org/handlers-tutorial.pdf) [pdfs](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/08/algeff-tr-2016-v2.pdf) but they only confused me more. (There’s something about academic pdfs that makes me sleepy.)
 

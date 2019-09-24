@@ -16,7 +16,7 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
   margin: 20px -20px;
   padding: 10px 15px;
-  font-size: 14px;
+  font-size: 0.9rem;
   position: sticky;
   top: 0;
   /* transition: background 0.1s ease-in; */
@@ -26,7 +26,6 @@ const HeaderWrapper = styled.div`
   @media screen and (min-width: 768px) {
     margin: 40px 0;
     padding: 20px 0;
-    font-size: inherit;
   }
 `;
 
@@ -39,7 +38,6 @@ const LogoWrapper = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
-  margin-right: 24px;
   background: linear-gradient(0deg, var(--color-light-op-3), transparent);
   box-shadow: 0 0 var(--color-orange), inset 0 0 var(--color-accent),
     inset 0 0 var(--color-accent), inset 0 0 var(--color-accent),
@@ -52,7 +50,6 @@ const LogoWrapper = styled.div`
   @media screen and (max-width: 767px) {
     width: 40px;
     height: 40px;
-    margin-right: 10px;
 
     svg {
       height: 20px;
@@ -99,6 +96,12 @@ const Right = styled.div`
 `;
 
 const RouteLinks = styled.div`
+  margin-left: 1rem;
+
+  @media screen and (max-width: 767px) {
+    margin-left: 0.6rem;
+  }
+
   a {
     color: var(--color-light-dark);
     margin: 0 15px;

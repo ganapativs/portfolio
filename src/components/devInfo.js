@@ -22,7 +22,7 @@ const DevName = styled.h1`
 
   span {
     @media screen and (min-width: 768px) {
-      font-size: 20px;
+      font-size: ${rhythm(0.8)};
       vertical-align: middle;
     }
   }

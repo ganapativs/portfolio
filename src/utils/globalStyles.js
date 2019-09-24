@@ -27,7 +27,7 @@ body.dark {
 }
 
 html, body {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 body {
@@ -63,14 +63,6 @@ html, body, #root {
  */
 .js-focus-visible :focus:not(.focus-visible) {
   outline: none;
-}
-
-a, a:focus, a:active, a:hover {
-  color: var(--color-accent);
-}
-
-a:focus, a:active, a:hover {
-  text-decoration: none;
 }
 
 @media screen and (max-width: 767px) {
@@ -153,10 +145,10 @@ pre[class*='language-'] ::selection {
 
 /* Inline code */
 :not(pre) > code[class*='language-'] {
-  border-radius: 3px;
+  border-radius: 2px;
   background: var(--color-light-op-3);
   color: var(--color-light);
-  padding: 0.1em;
+  padding: 0.1em 0;
   white-space: normal;
 }
 
@@ -240,17 +232,10 @@ pre[data-line] {
   margin-bottom: 1.75rem;
   margin-left: -1.3125rem;
   margin-right: -1.3125rem;
-  border-radius: 10px;
   /* background: #011627; */
   background: linear-gradient(0deg, #060217, #10024c);
   -webkit-overflow-scrolling: touch;
   overflow: auto;
-}
-
-@media (max-width: 672px) {
-  .gatsby-highlight {
-    border-radius: 0;
-  }
 }
 
 .gatsby-highlight pre[class*='language-'] {
