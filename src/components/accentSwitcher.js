@@ -5,7 +5,7 @@ import useOutsideClick from './hooks/useOutsideClick';
 
 const AccentToggleWrapper = styled.button`
   position: relative;
-  margin-right: 1rem;
+  margin-right: 1.25rem;
 `;
 
 const AccentToggle = styled.div`
@@ -86,7 +86,7 @@ function AccentSwitcher() {
 
   useEffect(() => {
     // eslint-disable-next-line no-underscore-dangle
-    setAccentColor(window.__accentColor || '#f1404b');
+    setAccentColor(window.__accentColor || '#FF2E63');
     // eslint-disable-next-line no-underscore-dangle
     window.__onAccentColorChange = () => {
       // eslint-disable-next-line no-underscore-dangle
@@ -105,7 +105,14 @@ function AccentSwitcher() {
           <GithubPicker
             className="animated fadeIn faster"
             width="36px"
-            colors={['#f1404b', '#f07818', '#209396', '#00A0FF']}
+            colors={[
+              '#f1404b',
+              '#f07818',
+              '#FF2E63',
+              '#6abe83',
+              '#209396',
+              '#00A0FF',
+            ]}
             onChange={toggleAccent}
           />
         ) : null}

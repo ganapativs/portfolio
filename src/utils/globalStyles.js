@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
 body {
-  /* --color-accent: #f1404b; */
+  --color-accent: #FF2E63;
   --color-dark: #f3f8f9;
   --color-light: #0f0f10;
   --color-light-dark: #909295;
