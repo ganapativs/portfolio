@@ -23,6 +23,7 @@ const HeaderWrapper = styled.div`
   /* transition: background 0.1s ease-in; */
   background: var(--color-dark);
   z-index: 1;
+  box-shadow: -10rem 0 var(--color-dark), 10rem 0 var(--color-dark);
 
   @media screen and (min-width: 768px) {
     margin: 40px 0;
@@ -148,12 +149,12 @@ const MoonOrSun = styled.div`
   border: ${p => (p.isDark ? '4px' : '2px')} solid var(--color-accent);
   background: var(--color-accent);
   transform: scale(${p => (p.isDark ? 0.55 : 1)});
-  transition: all 0.45s ease, opacity 0.1s ease-out;
+  transition: all 0.45s ease-out, opacity 0.1s ease-out;
   overflow: ${p => (p.isDark ? 'visible' : 'hidden')};
 
   @media screen and (hover: hover) and (pointer: fine) {
     &:hover {
-      transition: all 0.15s ease-in;
+      transition: all 0.1s ease-in, opacity 0.15s ease-in;
       opacity: 0.8;
     }
   }
