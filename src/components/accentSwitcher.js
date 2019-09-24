@@ -15,7 +15,7 @@ const AccentToggle = styled.div`
   border-radius: 2px 50% 50% 50%;
   transform: rotate(45deg) scale(0.9) translateY(2px);
   transform-origin: 50% 50%;
-  box-shadow: inset 0 0 0px 4px var(--color-light),
+  box-shadow: inset 0 0 0px 0 var(--color-light),
     0px -15px 0 -6px var(--color-accent);
   transition: all 0.1s ease-out;
 
@@ -26,9 +26,7 @@ const AccentToggle = styled.div`
   @media screen and (hover: hover) and (pointer: fine) {
     &:hover {
       transition: all 0.15s ease-in;
-      transform: rotate(45deg) scale(1) translateY(2px);
-      box-shadow: inset 0 0 0px 0px var(--color-light),
-        0px -15px 0 -6px var(--color-light);
+      opacity: 0.8;
     }
   }
 

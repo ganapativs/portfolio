@@ -145,11 +145,18 @@ const MoonOrSun = styled.div`
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  border: ${p => (p.isDark ? '4px' : '2px')} solid var(--color-light);
-  background: var(--color-light);
+  border: ${p => (p.isDark ? '4px' : '2px')} solid var(--color-accent);
+  background: var(--color-accent);
   transform: scale(${p => (p.isDark ? 0.55 : 1)});
-  transition: all 0.45s ease;
+  transition: all 0.45s ease, opacity 0.1s ease-out;
   overflow: ${p => (p.isDark ? 'visible' : 'hidden')};
+
+  @media screen and (hover: hover) and (pointer: fine) {
+    &:hover {
+      transition: all 0.15s ease-in;
+      opacity: 0.8;
+    }
+  }
 
   &::before {
     content: '';
@@ -158,7 +165,7 @@ const MoonOrSun = styled.div`
     top: -9px;
     height: 24px;
     width: 24px;
-    border: 2px solid var(--color-light);
+    border: 2px solid var(--color-accent);
     border-radius: 50%;
     transform: translate(${p => (p.isDark ? '14px, -14px' : '0, 0')});
     opacity: ${p => (p.isDark ? 0 : 1)};
@@ -173,10 +180,10 @@ const MoonOrSun = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
-    box-shadow: 0 -23px 0 var(--color-light), 0 23px 0 var(--color-light),
-      23px 0 0 var(--color-light), -23px 0 0 var(--color-light),
-      15px 15px 0 var(--color-light), -15px 15px 0 var(--color-light),
-      15px -15px 0 var(--color-light), -15px -15px 0 var(--color-light);
+    box-shadow: 0 -23px 0 var(--color-accent), 0 23px 0 var(--color-accent),
+      23px 0 0 var(--color-accent), -23px 0 0 var(--color-accent),
+      15px 15px 0 var(--color-accent), -15px 15px 0 var(--color-accent),
+      15px -15px 0 var(--color-accent), -15px -15px 0 var(--color-accent);
     transform: scale(${p => (p.isDark ? 1 : 0)});
     transition: all 0.35s ease;
   }

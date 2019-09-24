@@ -21,8 +21,8 @@ const Ul = styled.ul`
 `;
 
 const CoverImage = styled.div`
-  margin-top: ${rhythm(1 / 2)};
-  margin-bottom: ${rhythm(1.5)};
+  margin-top: ${rhythm(1.8)};
+  margin-bottom: ${rhythm(1.8)};
   box-shadow: 0px 30px 60px -10px var(--color-light-op-2),
     0px 18px 36px -18px var(--color-light-op-2);
 
@@ -62,11 +62,6 @@ class BlogPostTemplate extends React.Component {
         />
         <main>
           <article>
-            {post.frontmatter.cover ? (
-              <CoverImage>
-                <Img fluid={post.frontmatter.cover.childImageSharp.fluid} />
-              </CoverImage>
-            ) : null}
             <header>
               <h1
                 style={{
@@ -93,6 +88,11 @@ class BlogPostTemplate extends React.Component {
                 </a>
               </PostInfo>
             </header>
+            {post.frontmatter.cover ? (
+              <CoverImage>
+                <Img fluid={post.frontmatter.cover.childImageSharp.fluid} />
+              </CoverImage>
+            ) : null}
             <div dangerouslySetInnerHTML={{ __html: html }} />
             <footer>
               <p>
