@@ -20,7 +20,7 @@ const AccentToggle = styled.div`
     0px -15px 0 -6px var(--color-accent);
 
   @media screen and (max-width: 767px) {
-    transform: rotate(45deg) scale(0.8) translateY(2px);
+    transform: rotate(45deg) scale(0.8) translateY(4px);
   }
 
   @media screen and (hover: hover) and (pointer: fine) {
