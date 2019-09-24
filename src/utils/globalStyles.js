@@ -102,7 +102,7 @@ pre[class*='language-'] {
   word-wrap: normal;
   line-height: 1.5;
   margin-bottom: 0;
-  font-size: 0.95em;
+  font-size: 0.95rem;
 
   -moz-tab-size: 4;
   -o-tab-size: 4;
@@ -236,6 +236,13 @@ pre[data-line] {
   background: linear-gradient(0deg, #060217, #10024c);
   -webkit-overflow-scrolling: touch;
   overflow: auto;
+}
+
+@media screen and (max-width: 767px) {
+  .gatsby-highlight {
+    margin-left: -1.1rem;
+    margin-right: -1.1rem;
+  }
 }
 
 .gatsby-highlight pre[class*='language-'] {

@@ -134,7 +134,7 @@ const W1 = styled.div`
 const W2 = styled.div`
   width: 160px;
   height: 120px;
-  margin: 30px 0 15px -15px;
+  margin: 30px 0 25px -15px;
 
   @media screen and (min-width: 768px) {
     margin: 50px 0 25px 0;
