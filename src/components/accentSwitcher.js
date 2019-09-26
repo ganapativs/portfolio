@@ -63,7 +63,7 @@ const AccentToggle = styled.div`
       outline: none !important;
       box-shadow: none !important;
       background: transparent !important;
-      transform: scale(0.8);
+      transform: scale(0.7);
       transition: transform 0.1s ease-in;
 
       &:hover {

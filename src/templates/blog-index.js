@@ -44,9 +44,7 @@ class BlogIndex extends React.Component {
     const { edges: posts } = this.props.data.allMarkdownRemark;
 
     return (
-      <div
-        style={{ width: '100%', maxWidth: 680, margin: '0 auto' }}
-        className="animated fadeIn fast">
+      <div style={{ width: '100%', maxWidth: 680, margin: '0 auto' }}>
         <SEO title="Blog" />
         <main>
           {posts.map(({ node }) => {

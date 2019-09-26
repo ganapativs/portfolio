@@ -43,7 +43,6 @@ body {
   line-height: 1.42857143;
   /* transition: background 0.1s ease-in; */
   font-family: 'Source Sans Pro', sans-serif;
-  overflow-x: hidden;
 }
 
 html, body, #root {

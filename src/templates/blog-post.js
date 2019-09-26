@@ -53,8 +53,7 @@ class BlogPostTemplate extends React.Component {
     return (
       <div
         // Remove 2em padding space of blog card
-        style={{ width: '100%', maxWidth: 644, margin: '0 auto' }}
-        className="animated fadeIn fast">
+        style={{ width: '100%', maxWidth: 644, margin: '0 auto' }}>
         <SEO
           title={post.frontmatter.title}
           description={post.frontmatter.spoiler}

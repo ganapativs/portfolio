@@ -38,7 +38,7 @@ const Right = styled.div`
 `;
 
 const Footer = () => (
-  <FooterWrapper className="animated fadeIn">
+  <FooterWrapper>
     <Left>
       <span>Hand-crafted in India with ❤</span>
     </Left>

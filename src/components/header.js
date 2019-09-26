@@ -232,7 +232,7 @@ const Header = ({ location: { pathname } }) => {
   }, []);
 
   return (
-    <HeaderWrapper className="animated fadeIn">
+    <HeaderWrapper>
       <Left>
         <Link title={'Meetguns.com | About'} to={'/'}>
           <LogoWrapper
