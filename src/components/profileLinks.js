@@ -10,33 +10,22 @@ import { captureEvent } from '../utils/ga';
 import ExternalLink from './externalLink';
 
 const Icons = styled.div`
-  padding: 10px;
+  text-align: left;
+  padding: 8px 10px;
+  display: inline-block;
+
+  @media screen and (min-width: 768px) {
+    padding: 5px 10px;
+  }
 `;
 
 const Div = styled.div`
-  width: 100%;
-  vertical-align: middle;
-
-  .app__link {
-    text-align: left;
-    padding: 8px 10px;
-    display: inline-block;
-
-    :first-child {
-      padding-left: 0;
-    }
-
-    :last-child {
-      padding-right: 0;
-    }
+  ${Icons}:first-child {
+    padding-left: 0;
   }
 
-  @media screen and (min-width: 768px) {
-    text-align: left;
-
-    .app__link {
-      padding: 5px 10px;
-    }
+  ${Icons}::last-child {
+    padding-right: 0;
   }
 `;
 
@@ -83,7 +72,7 @@ export default function ProfileLinks() {
   return (
     <Div>
       {socialLinks.map(({ link, Component, title, seo }) => (
-        <Icons className="app__link" key={link} title={title}>
+        <Icons key={link} title={title}>
           <ExternalLink
             href={link}
             onClick={() => captureEvent(seo, 'click', 'Social Links')}>
