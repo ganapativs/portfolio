@@ -1,14 +1,8 @@
 const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
-const { createExifFields } = require('./gatsby/createExifFields');
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
-
-  // Image files
-  if (node.internal.mediaType === 'image/jpeg') {
-    createExifFields(node, createNodeField);
-  }
 
   if (node.internal.type === `MarkdownRemark`) {
     const slug = createFilePath({ node, getNode, basePath: `blog` });

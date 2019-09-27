@@ -1,4 +1,20 @@
 // Thanks to https://github.com/kremalicious/blog/blob/master/gatsby/createExifFields.js
+/**
+ * USAGE
+ *
+// gatsby-node.js
+const { createExifFields } = require('./gatsby/createExifFields');
+
+exports.onCreateNode = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions;
+
+  // Image files
+  if (node.internal.mediaType === 'image/jpeg') {
+    createExifFields(node, createNodeField);
+  }
+};
+
+ */
 const fastExif = require('fast-exif');
 const Fraction = require('fraction.js');
 const dms2dec = require('dms2dec');
