@@ -1,15 +1,15 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { captureEvent } from '../utils/ga';
+import ExternalLink from './externalLink';
+import { rhythm } from '../utils/typography';
 
 const DevName = styled.h1`
-  font-size: 48px;
-  margin: 15px 0;
-  font-weight: 400;
+  font-size: ${rhythm(1.4)};
+  margin-bottom: ${rhythm(0.8)};
 
-  @media screen and (max-width: 767px) {
-    text-align: center;
-    font-size: 40px;
+  @media screen and (min-width: 768px) {
+    margin-top: 0;
   }
 
   a {
@@ -22,7 +22,7 @@ const DevName = styled.h1`
 
   span {
     @media screen and (min-width: 768px) {
-      font-size: 20px;
+      font-size: ${rhythm(0.8)};
       vertical-align: middle;
     }
   }
@@ -39,24 +39,8 @@ const SmallFadeInUp = keyframes`
   }
 `;
 
-const DevDescription = styled.h3`
-  font-size: 18px;
-  font-weight: 400;
-  margin: 5px 0 24px 0;
+const DevDescription = styled.p`
   animation-name: ${SmallFadeInUp};
-
-  @media screen and (max-width: 767px) {
-    text-align: center;
-    font-size: 16px;
-  }
-
-  span {
-    font-size: 16px;
-
-    @media screen and (max-width: 767px) {
-      font-size: 14px;
-    }
-  }
 `;
 
 const Separator = styled.div`
@@ -66,38 +50,34 @@ const Separator = styled.div`
 const DevInfo = () => {
   return (
     <>
-      <DevName className="animated fadeInUp faster animation-delay-half-s">
+      <DevName>
         Ganapati V S{' '}
-        <a
+        <ExternalLink
           href="https://twitter.com/ganapativs?ref=meetguns.com"
-          rel="noopener noreferrer"
           onClick={() =>
             captureEvent('Personal Twitter', 'click', 'Social Links')
-          }
-          target="_blank">
+          }>
           <span>(@ganapativs)</span>
-        </a>
+        </ExternalLink>
       </DevName>
-      <DevDescription className="animated faster animation-delay-half-s">
+      <DevDescription>
         Hi{' '}
         <span role="img" aria-label="Hi!">
           👋
         </span>{' '}
         I&#39;m a Full-Stack JavaScript developer with over 5 years of
         experience. Currently working{' '}
-        <a
+        <ExternalLink
           href="https://twitter.com/tracxn?ref=meetguns.com"
-          rel="noopener noreferrer"
           onClick={() =>
             captureEvent('Tracxn Twitter', 'click', 'Social Links')
-          }
-          target="_blank">
+          }>
           @Tracxn
-        </a>
-        . <Separator />I love open source and have created{' '}
-        <a
+        </ExternalLink>
+        . <Separator />I love coding, contributing to the open source and have
+        created{' '}
+        <ExternalLink
           href="https://www.npmjs.com/package/react-delightful-scroller?ref=meetguns.com"
-          rel="noopener noreferrer"
           onClick={() =>
             captureEvent(
               'react-delightful-scroller NPM',
@@ -105,48 +85,38 @@ const DevInfo = () => {
               'Social Links',
             )
           }
-          style={{ whiteSpace: 'nowrap' }}
-          target="_blank">
+          style={{ whiteSpace: 'nowrap' }}>
           react-delightful-scroller
-        </a>
+        </ExternalLink>
         ,{' '}
-        <a
+        <ExternalLink
           href="https://www.npmjs.com/package/react-dynamic-import?ref=meetguns.com"
-          rel="noopener noreferrer"
           onClick={() =>
             captureEvent('react-dynamic-import NPM', 'click', 'Social Links')
           }
-          style={{ whiteSpace: 'nowrap' }}
-          target="_blank">
+          style={{ whiteSpace: 'nowrap' }}>
           react-dynamic-import
-        </a>
+        </ExternalLink>
         ,{' '}
-        <a
+        <ExternalLink
           href="https://bttn.surge.sh/?ref=meetguns.com"
-          rel="noopener noreferrer"
-          onClick={() => captureEvent('bttn.surge.sh', 'click', 'Social Links')}
-          target="_blank">
+          onClick={() =>
+            captureEvent('bttn.surge.sh', 'click', 'Social Links')
+          }>
           bttn.css
-        </a>{' '}
+        </ExternalLink>{' '}
         and{' '}
-        <a
+        <ExternalLink
           href="https://github.com/ganapativs?ref=meetguns.com"
-          rel="noopener noreferrer"
           onClick={() =>
             captureEvent('Personal GitHub', 'click', 'Social Links')
-          }
-          target="_blank">
-          many more
-        </a>{' '}
+          }>
+          more
+        </ExternalLink>{' '}
         <span role="img" aria-label="Yay!!!">
           🎉
         </span>
-        <Separator />
-        Most of the time I&#39;ll be{' '}
-        <span role="img" aria-label="Coding">
-          👨🏻‍💻
-        </span>{' '}
-        and I play{' '}
+        <Separator />I like travelling, capturing photos and I play{' '}
         <span role="img" aria-label="Soccer">
           ⚽️
         </span>{' '}

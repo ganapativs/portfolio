@@ -1,6 +1,5 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import Layout from '../components/layout';
 import SEO from '../components/seo';
 import AboutMe from '../components/aboutMe';
 
@@ -25,10 +24,10 @@ export const query = graphql`
   }
 `;
 const About = ({ data: profileLogo }) => (
-  <Layout>
+  <>
     <SEO title="About" />
     <AboutMe profileLogo={profileLogo} />
-  </Layout>
+  </>
 );
 
 export default About;

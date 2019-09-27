@@ -1,5 +1,8 @@
 {
-    "extends": "@ganapativs/react",
+    "extends": [
+      "@ganapativs/react",
+      "plugin:jsx-a11y/recommended"
+    ],
     "env": {
         "browser": true,
         "amd": true,

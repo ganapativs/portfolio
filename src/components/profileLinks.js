@@ -7,6 +7,7 @@ import LinkedInIcon from '../assets/icons/linkedinIcon';
 import DribbbleIcon from '../assets/icons/dribbbleIcon';
 import EmailIcon from '../assets/icons/emailIcon';
 import { captureEvent } from '../utils/ga';
+import ExternalLink from './externalLink';
 
 const Icons = styled.div`
   padding: 10px;
@@ -15,7 +16,6 @@ const Icons = styled.div`
 const Div = styled.div`
   width: 100%;
   vertical-align: middle;
-  text-align: center;
 
   .app__link {
     text-align: left;
@@ -81,24 +81,18 @@ const socialLinks = [
 
 export default function ProfileLinks() {
   return (
-    <Div className="animated fadeInUp faster animation-delay-half-s">
-      {socialLinks.map(({ link, Component, title, seo }, index) => (
-        <Icons
-          className="app__link animated fadeInUp faster"
-          key={link}
-          title={title}
-          style={{ animationDelay: `${index * 0.1 + 0.4}s` }}>
-          <a
+    <Div>
+      {socialLinks.map(({ link, Component, title, seo }) => (
+        <Icons className="app__link" key={link} title={title}>
+          <ExternalLink
             href={link}
-            target="_blank"
-            rel="noopener noreferrer"
             onClick={() => captureEvent(seo, 'click', 'Social Links')}>
             <Component
               width={26}
               height={26}
               style={{ verticalAlign: 'sub' }}
             />
-          </a>
+          </ExternalLink>
         </Icons>
       ))}
     </Div>
