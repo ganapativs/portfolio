@@ -214,8 +214,8 @@ const links = [
   //   name: 'Blog',
   // },
   // {
-  //   link: '/photography/',
-  //   name: 'Photography',
+  //   link: '/gallery/',
+  //   name: 'Gallery',
   // },
 ];
 
