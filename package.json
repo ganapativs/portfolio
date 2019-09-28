@@ -20,6 +20,8 @@
     ]
   },
   "dependencies": {
+    "@mdx-js/mdx": "^1.5.0",
+    "@mdx-js/react": "^1.5.0",
     "babel-plugin-styled-components": "^1.10.6",
     "classnames": "^2.2.6",
     "dms2dec": "^1.1.0",
@@ -33,6 +35,7 @@
     "gatsby-plugin-feed": "^2.3.15",
     "gatsby-plugin-google-analytics": "^2.1.19",
     "gatsby-plugin-manifest": "^2.2.20",
+    "gatsby-plugin-mdx": "^1.0.46",
     "gatsby-plugin-nprogress": "^2.1.9",
     "gatsby-plugin-offline": "^3.0.11",
     "gatsby-plugin-prefetch-google-fonts": "^1.4.3",
@@ -43,7 +46,7 @@
     "gatsby-plugin-webpack-size": "^1.0.0",
     "gatsby-remark-autolink-headers": "^2.1.13",
     "gatsby-remark-copy-linked-files": "^2.1.23",
-    "gatsby-remark-embed-video": "^2.0.0",
+    "gatsby-remark-embedder": "^1.2.0",
     "gatsby-remark-external-links": "^0.0.4",
     "gatsby-remark-images": "^3.1.25",
     "gatsby-remark-prismjs": "^3.3.16",
@@ -51,7 +54,6 @@
     "gatsby-remark-smartypants": "^2.1.11",
     "gatsby-source-filesystem": "^2.1.28",
     "gatsby-source-s3-image": "^1.6.54",
-    "gatsby-transformer-remark": "^2.6.26",
     "gatsby-transformer-sharp": "^2.2.19",
     "intersection-observer": "^0.7.0",
     "prismjs": "^1.17.1",
@@ -79,7 +81,9 @@
     "portfolio",
     "react",
     "performance",
-    "gatsby"
+    "gatsby",
+    "blog",
+    "mdx"
   ],
   "scripts": {
     "build": "gatsby build",

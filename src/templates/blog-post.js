@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import styled from 'styled-components';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 import SEO from '../components/seo';
 
 import { formatPostDate, formatReadingTime } from '../utils/helpers';
@@ -35,17 +36,15 @@ const CoverImage = styled.div`
 
 class BlogPostTemplate extends React.Component {
   render() {
-    const post = this.props.data.markdownRemark;
+    const post = this.props.data.allMdx.edges[0].node;
+    const { body } = post;
     const { previous, next, slug } = this.props.pageContext;
-
-    // Replace original links with translated when available.
-    const { html } = post;
 
     const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/src/pages/${slug.slice(
       1,
       slug - 1,
     )}index.md`;
-    const blogUrl = `https://meetguns.com/blog/${slug}`;
+    const blogUrl = `https://meetguns.com/blog${slug}`;
     const discussUrl = `https://mobile.twitter.com/search?q=${encodeURIComponent(
       blogUrl,
     )}`;
@@ -92,7 +91,7 @@ class BlogPostTemplate extends React.Component {
                 <Img fluid={post.frontmatter.cover.childImageSharp.fluid} />
               </CoverImage>
             ) : null}
-            <div dangerouslySetInnerHTML={{ __html: html }} />
+            <MDXRenderer>{body}</MDXRenderer>
             <footer>
               <p>
                 <a href={discussUrl} target="_blank" rel="noopener noreferrer">
@@ -139,26 +138,30 @@ export const pageQuery = graphql`
         author
       }
     }
-    markdownRemark(fields: { slug: { eq: $slug } }) {
-      id
-      html
-      timeToRead
-      frontmatter {
-        title
-        date(formatString: "MMMM DD, YYYY")
-        spoiler
-        cover {
-          publicURL
-          childImageSharp {
-            # Expected cover image to have 1/2 aspect ratio
-            fluid(maxWidth: 1200, maxHeight: 600, quality: 85) {
-              ...GatsbyImageSharpFluid_withWebp_tracedSVG
+    allMdx(filter: { fields: { slug: { eq: $slug } } }) {
+      edges {
+        node {
+          id
+          body
+          timeToRead
+          frontmatter {
+            title
+            date(formatString: "MMMM DD, YYYY")
+            spoiler
+            cover {
+              publicURL
+              childImageSharp {
+                # Expected cover image to have 1/2 aspect ratio
+                fluid(maxWidth: 1200, maxHeight: 600, quality: 85) {
+                  ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                }
+              }
             }
           }
+          fields {
+            slug
+          }
         }
-      }
-      fields {
-        slug
       }
     }
   }

@@ -17,6 +17,61 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        // TODO: Remove this workaround
+        // https://github.com/gatsbyjs/gatsby/issues/15486
+        plugins: [`gatsby-remark-images`, `gatsby-remark-autolink-headers`],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1500,
+              showCaptions: true,
+              quality: 85,
+              withWebp: { quality: 85 },
+              tracedSVG: true,
+            },
+          },
+          {
+            resolve: `gatsby-remark-embedder`,
+          },
+          {
+            resolve: `gatsby-remark-responsive-iframe`,
+            options: {
+              wrapperStyle: `margin-bottom: 1.0725rem`,
+            },
+          },
+          {
+            // TODO: Replace with "mdx-component-autolink-headers" when offset is supported
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              offsetY: 100,
+            },
+          },
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              inlineCodeMarker: '÷',
+            },
+          },
+          {
+            resolve: `gatsby-remark-copy-linked-files`,
+          },
+          {
+            resolve: `gatsby-remark-smartypants`,
+          },
+          {
+            resolve: `gatsby-remark-external-links`,
+            options: {
+              target: '_blank',
+              rel: 'nofollow noopener noreferrer',
+            },
+          },
+        ],
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
@@ -31,64 +86,12 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: [
-          {
-            resolve: `gatsby-remark-images`,
-            options: {
-              maxWidth: 1500,
-              showCaptions: true,
-              quality: 85,
-              withWebp: { quality: 85 },
-              tracedSVG: true,
-            },
-          },
-          {
-            resolve: `gatsby-remark-embed-video`,
-            options: {
-              related: false, // Optional: Will remove related videos from the end of an embedded YouTube video.
-              noIframeBorder: true, // Optional: Disable insertion of <style> border: 0,
-            },
-          },
-          {
-            resolve: `gatsby-remark-responsive-iframe`,
-            options: {
-              wrapperStyle: `margin-bottom: 1.0725rem`,
-            },
-          },
-          {
-            resolve: `gatsby-remark-autolink-headers`,
-            options: {
-              offsetY: 100,
-            },
-          },
-          {
-            resolve: `gatsby-remark-prismjs`,
-            options: {
-              inlineCodeMarker: '÷',
-            },
-          },
-          `gatsby-remark-copy-linked-files`,
-          `gatsby-remark-smartypants`,
-          {
-            resolve: `gatsby-remark-external-links`,
-            options: {
-              target: '_blank',
-            },
-          },
-        ],
-      },
-    },
-    {
       resolve: `gatsby-plugin-feed`,
       options: {
         query: `
           {
             site {
               siteMetadata {
-                title
-                description
                 siteUrl
               }
             }
@@ -96,11 +99,12 @@ module.exports = {
         `,
         feeds: [
           {
-            serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.edges.map(edge => {
+            serialize: ({ query: { site, allMdx } }) => {
+              return allMdx.edges.map(edge => {
                 const { siteUrl } = site.siteMetadata;
+                const blogUrl = `${siteUrl}/blog`;
                 const postText = `
-                <div style="margin-top=55px; font-style: italic;">(This is an article posted to my blog at meetguns.com. You can read it online by <a href="${siteUrl +
+                <div style="margin-top=55px; font-style: italic;">(This is an article posted to my blog at meetguns.com. You can read it online by <a href="${blogUrl +
                   edge.node.fields.slug}">clicking here</a>.)</div>
               `;
 
@@ -116,17 +120,19 @@ module.exports = {
                   ...edge.node.frontmatter,
                   description: edge.node.frontmatter.spoiler,
                   date: edge.node.frontmatter.date,
-                  url: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  url: blogUrl + edge.node.fields.slug,
+                  guid: blogUrl + edge.node.fields.slug,
                   custom_elements: [{ 'content:encoded': html + postText }],
                 };
               });
             },
             query: `
               {
-                allMarkdownRemark(
-                  limit: 1000,
+                allMdx(
                   sort: { order: DESC, fields: [frontmatter___date] }
+                  filter: { frontmatter: { draft: { eq: ${process.env
+                    .NODE_ENV === 'development'} } } }
+                  limit: 1000,
                 ) {
                   edges {
                     node {
@@ -146,7 +152,7 @@ module.exports = {
               }
             `,
             output: '/rss.xml',
-            title: 'meetguns.com blog RSS Feed',
+            title: 'meetguns.com/blog - RSS Feed',
           },
         ],
       },
