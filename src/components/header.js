@@ -205,18 +205,18 @@ const MoonMask = styled.div`
 `;
 
 const links = [
-  {
-    link: '/',
-    name: 'About',
-  },
-  {
-    link: '/blog/',
-    name: 'Blog',
-  },
-  {
-    link: '/photography/',
-    name: 'Photography',
-  },
+  // {
+  //   link: '/',
+  //   name: 'About',
+  // },
+  // {
+  //   link: '/blog/',
+  //   name: 'Blog',
+  // },
+  // {
+  //   link: '/photography/',
+  //   name: 'Photography',
+  // },
 ];
 
 const Header = ({ location: { pathname } }) => {
