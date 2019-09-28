@@ -6,6 +6,7 @@ export const captureEvent = (
   eventLabel,
   eventValue,
 ) =>
+  window &&
   window.ga &&
   window.ga(
     'send',

@@ -2,7 +2,7 @@ const React = require('react');
 const Layout = require('./src/components/layout').default;
 
 // IntersectionObserver polyfill for gatsby-image (Safari, IE)
-if (typeof window.IntersectionObserver === 'undefined') {
+if (window && typeof window.IntersectionObserver === 'undefined') {
   import('intersection-observer');
 }
 

@@ -17,23 +17,12 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `blog`,
-        path: `${__dirname}/src/blog`,
-      },
-    },
-    {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: [
+        // TODO: Remove this workaround
+        // https://github.com/gatsbyjs/gatsby/issues/15486
+        plugins: [`gatsby-remark-images`, `gatsby-remark-autolink-headers`],
+        gatsbyRemarkPlugins: [
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -45,19 +34,13 @@ module.exports = {
             },
           },
           {
-            resolve: `gatsby-remark-embed-video`,
-            options: {
-              related: false, // Optional: Will remove related videos from the end of an embedded YouTube video.
-              noIframeBorder: true, // Optional: Disable insertion of <style> border: 0,
-            },
-          },
-          {
             resolve: `gatsby-remark-responsive-iframe`,
             options: {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
           {
+            // TODO: Replace with "mdx-component-autolink-headers" when offset is supported
             resolve: `gatsby-remark-autolink-headers`,
             options: {
               offsetY: 100,
@@ -69,15 +52,34 @@ module.exports = {
               inlineCodeMarker: '÷',
             },
           },
-          `gatsby-remark-copy-linked-files`,
-          `gatsby-remark-smartypants`,
+          {
+            resolve: `gatsby-remark-copy-linked-files`,
+          },
+          {
+            resolve: `gatsby-remark-smartypants`,
+          },
           {
             resolve: `gatsby-remark-external-links`,
             options: {
               target: '_blank',
+              rel: 'nofollow noopener noreferrer',
             },
           },
         ],
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `blog`,
+        path: `${__dirname}/src/blog`,
       },
     },
     {
