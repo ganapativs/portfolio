@@ -44,7 +44,7 @@ class BlogPostTemplate extends React.Component {
       1,
       slug - 1,
     )}index.md`;
-    const blogUrl = `https://meetguns.com/blog/${slug}`;
+    const blogUrl = `https://meetguns.com/blog${slug}`;
     const discussUrl = `https://mobile.twitter.com/search?q=${encodeURIComponent(
       blogUrl,
     )}`;
