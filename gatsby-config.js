@@ -92,8 +92,6 @@ module.exports = {
           {
             site {
               siteMetadata {
-                title
-                description
                 siteUrl
               }
             }
@@ -101,11 +99,12 @@ module.exports = {
         `,
         feeds: [
           {
-            serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.edges.map(edge => {
+            serialize: ({ query: { site, allMdx } }) => {
+              return allMdx.edges.map(edge => {
                 const { siteUrl } = site.siteMetadata;
+                const blogUrl = `${siteUrl}/blog`;
                 const postText = `
-                <div style="margin-top=55px; font-style: italic;">(This is an article posted to my blog at meetguns.com. You can read it online by <a href="${siteUrl +
+                <div style="margin-top=55px; font-style: italic;">(This is an article posted to my blog at meetguns.com. You can read it online by <a href="${blogUrl +
                   edge.node.fields.slug}">clicking here</a>.)</div>
               `;
 
@@ -121,17 +120,19 @@ module.exports = {
                   ...edge.node.frontmatter,
                   description: edge.node.frontmatter.spoiler,
                   date: edge.node.frontmatter.date,
-                  url: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  url: blogUrl + edge.node.fields.slug,
+                  guid: blogUrl + edge.node.fields.slug,
                   custom_elements: [{ 'content:encoded': html + postText }],
                 };
               });
             },
             query: `
               {
-                allMarkdownRemark(
-                  limit: 1000,
+                allMdx(
                   sort: { order: DESC, fields: [frontmatter___date] }
+                  filter: { frontmatter: { draft: { eq: ${process.env
+                    .NODE_ENV === 'development'} } } }
+                  limit: 1000,
                 ) {
                   edges {
                     node {
@@ -151,7 +152,7 @@ module.exports = {
               }
             `,
             output: '/rss.xml',
-            title: 'meetguns.com blog RSS Feed',
+            title: 'meetguns.com/blog - RSS Feed',
           },
         ],
       },
