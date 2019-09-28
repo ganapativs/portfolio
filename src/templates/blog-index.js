@@ -86,14 +86,17 @@ class BlogIndex extends React.Component {
 export default BlogIndex;
 
 export const pageQuery = graphql`
-  query {
+  query BlogIndex($showDraftPosts: Boolean!) {
     site {
       siteMetadata {
         title
         description
       }
     }
-    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMdx(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { draft: { eq: $showDraftPosts } } }
+    ) {
       edges {
         node {
           fields {
