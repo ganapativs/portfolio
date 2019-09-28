@@ -41,7 +41,7 @@ const Spoiler = styled.p`
 
 class BlogIndex extends React.Component {
   render() {
-    const { edges: posts } = this.props.data.allMarkdownRemark;
+    const { edges: posts } = this.props.data.allMdx;
 
     return (
       <div style={{ width: '100%', maxWidth: 680, margin: '0 auto' }}>
@@ -86,14 +86,17 @@ class BlogIndex extends React.Component {
 export default BlogIndex;
 
 export const pageQuery = graphql`
-  query {
+  query BlogIndex($showDraftPosts: Boolean!) {
     site {
       siteMetadata {
         title
         description
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMdx(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { draft: { eq: $showDraftPosts } } }
+    ) {
       edges {
         node {
           fields {
