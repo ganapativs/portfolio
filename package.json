@@ -24,6 +24,7 @@
     "@mdx-js/react": "^1.5.0",
     "babel-plugin-styled-components": "^1.10.6",
     "classnames": "^2.2.6",
+    "cross-fetch": "^3.0.4",
     "dms2dec": "^1.1.0",
     "fast-exif": "^1.0.1",
     "focus-visible": "^5.0.2",

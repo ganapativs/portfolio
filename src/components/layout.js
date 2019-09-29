@@ -14,9 +14,8 @@ import 'focus-visible';
 import Header from './header';
 import Footer from './footer';
 
-const LayoutWidth = styled.div`
-  max-width: ${props => (props.full ? '100%' : '900px')};
-  margin: 0 auto;
+const LayoutWrapper = styled.div`
+  width: 100%;
   height: 100%;
   min-height: 100vh;
   padding: 0 20px;
@@ -33,7 +32,12 @@ const Div = styled.div`
   display: flex;
   align-items: flex-start;
   flex: 1;
+  max-width: ${props => (props.full ? '100%' : '900px')};
+  width: 100%;
+  margin: 0 auto;
 `;
+
+const fullPathPatterns = ['/captures/'];
 
 const Layout = props => {
   const { location } = props;
@@ -45,14 +49,17 @@ const Layout = props => {
     return null;
   }
 
+  const isFullWidth =
+    props.full || fullPathPatterns.some(p => location.pathname.startsWith(p));
+
   return (
     <>
       <GlobalStyles />
-      <LayoutWidth full={props.full}>
-        <Header location={location} />
-        <Div>{props.children}</Div>
-        <Footer></Footer>
-      </LayoutWidth>
+      <LayoutWrapper>
+        <Header full={isFullWidth} location={location} />
+        <Div full={isFullWidth}>{props.children}</Div>
+        <Footer full={isFullWidth}></Footer>
+      </LayoutWrapper>
     </>
   );
 };

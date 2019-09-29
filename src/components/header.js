@@ -12,21 +12,26 @@ const switchTheme = (theme, toggleTheme) => {
   captureEvent(nextTheme, 'change', 'Theme');
 };
 
+const HeaderRow = styled.div`
+  position: sticky;
+  top: 0;
+  background: var(--color-dark);
+  z-index: 1;
+`;
+
 const HeaderWrapper = styled.div`
+  max-width: 900px;
+  margin: 0 auto;
+  align-self: center;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   margin: 20px -20px;
   padding: 10px 15px;
   font-size: 0.9rem;
-  position: sticky;
-  top: 0;
-  /* transition: background 0.1s ease-in; */
-  background: var(--color-dark);
-  z-index: 1;
-  box-shadow: -10rem 0 var(--color-dark), 10rem 0 var(--color-dark);
 
   @media screen and (min-width: 768px) {
-    margin: 40px 0;
+    margin: 40px auto;
     padding: 20px 0;
   }
 `;
@@ -205,18 +210,18 @@ const MoonMask = styled.div`
 `;
 
 const links = [
-  // {
-  //   link: '/',
-  //   name: 'About',
-  // },
-  // {
-  //   link: '/blog/',
-  //   name: 'Blog',
-  // },
-  // {
-  //   link: '/gallery/',
-  //   name: 'Gallery',
-  // },
+  {
+    link: '/',
+    name: 'About',
+  },
+  {
+    link: '/blog/',
+    name: 'Blog',
+  },
+  {
+    link: '/captures/',
+    name: 'Captures',
+  },
 ];
 
 const Header = ({ location: { pathname } }) => {
@@ -232,61 +237,63 @@ const Header = ({ location: { pathname } }) => {
   }, []);
 
   return (
-    <HeaderWrapper>
-      <Left>
-        <Link title={'Meetguns.com | About'} to={'/'}>
-          <LogoWrapper
-            className={
-              logoActiveAnimateState ? 'init-hover-animate-state' : ''
-            }>
-            <Logo color="var(--color-accent)" />
-          </LogoWrapper>
-        </Link>
-        <RouteLinks>
-          {links.map(({ link, name }) => (
-            <Link
-              key={`${link}_${pathname}`}
-              title={name}
+    <HeaderRow>
+      <HeaderWrapper>
+        <Left>
+          <Link title={'Meetguns.com | About'} to={'/'}>
+            <LogoWrapper
               className={
-                (pathname === '/' && pathname === link) ||
-                (link !== '/' && pathname.startsWith(link))
-                  ? 'active'
-                  : ''
-              }
-              to={link}>
-              {name}
-            </Link>
-          ))}
-        </RouteLinks>
-      </Left>
-      <Right>
-        <AccentSwitcher />
-        <ThemeToggler>
-          {({ theme, toggleTheme }) => (
-            <ThemeSwitcher
-              role="button"
-              tabIndex={0}
-              onKeyPress={e => {
-                if (e.which === 13 || e.which === 32) {
-                  switchTheme(theme, toggleTheme);
+                logoActiveAnimateState ? 'init-hover-animate-state' : ''
+              }>
+              <Logo color="var(--color-accent)" />
+            </LogoWrapper>
+          </Link>
+          <RouteLinks>
+            {links.map(({ link, name }) => (
+              <Link
+                key={`${link}_${pathname}`}
+                title={name}
+                className={
+                  (pathname === '/' && pathname === link) ||
+                  (link !== '/' && pathname.startsWith(link))
+                    ? 'active'
+                    : ''
                 }
-              }}
-              title={
-                theme === 'dark'
-                  ? 'Switch to light theme'
-                  : 'Switch to dark theme'
-              }
-              onClick={() => {
-                switchTheme(theme, toggleTheme);
-              }}>
-              {/* <Switcher theme={theme} /> */}
-              <MoonOrSun isDark={theme === 'dark'} />
-              <MoonMask isDark={theme === 'dark'} />
-            </ThemeSwitcher>
-          )}
-        </ThemeToggler>
-      </Right>
-    </HeaderWrapper>
+                to={link}>
+                {name}
+              </Link>
+            ))}
+          </RouteLinks>
+        </Left>
+        <Right>
+          <AccentSwitcher />
+          <ThemeToggler>
+            {({ theme, toggleTheme }) => (
+              <ThemeSwitcher
+                role="button"
+                tabIndex={0}
+                onKeyPress={e => {
+                  if (e.which === 13 || e.which === 32) {
+                    switchTheme(theme, toggleTheme);
+                  }
+                }}
+                title={
+                  theme === 'dark'
+                    ? 'Switch to light theme'
+                    : 'Switch to dark theme'
+                }
+                onClick={() => {
+                  switchTheme(theme, toggleTheme);
+                }}>
+                {/* <Switcher theme={theme} /> */}
+                <MoonOrSun isDark={theme === 'dark'} />
+                <MoonMask isDark={theme === 'dark'} />
+              </ThemeSwitcher>
+            )}
+          </ThemeToggler>
+        </Right>
+      </HeaderWrapper>
+    </HeaderRow>
   );
 };
 

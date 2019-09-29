@@ -18,8 +18,17 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 const fastExif = require('fast-exif');
 const Fraction = require('fraction.js');
 const dms2dec = require('dms2dec');
+const fetch = require('cross-fetch');
 
-const constructExifFields = (exifData, createNodeField, node) => {
+const getGeoLocation = async (latitude, longitude) => {
+  const response = await fetch(
+    `http://open.mapquestapi.com/geocoding/v1/reverse?key=${process.env.MAPQUEST_API_KEY}&location=${latitude},${longitude}&includeNearestIntersection=true`,
+  ).then(r => r.json());
+
+  return response.results[0].locations[0];
+};
+
+const constructExifFields = async (exifData, createNodeField, node) => {
   const { Model } = exifData.image;
   const {
     ISO,
@@ -53,6 +62,7 @@ const constructExifFields = (exifData, createNodeField, node) => {
 
   const latitude = GPSdec[0];
   const longitude = GPSdec[1];
+  const location = await getGeoLocation(latitude, longitude);
 
   let exposure;
 
@@ -78,6 +88,7 @@ const constructExifFields = (exifData, createNodeField, node) => {
       gps: {
         latitude,
         longitude,
+        location,
       },
     },
   });
@@ -87,9 +98,9 @@ exports.createExifFields = (node, createNodeField) => {
   return new Promise(resolve => {
     fastExif
       .read(node.absolutePath, true)
-      .then(exifData => {
+      .then(async exifData => {
         if (!exifData) return;
-        constructExifFields(exifData, createNodeField, node);
+        await constructExifFields(exifData, createNodeField, node);
         resolve();
       })
       // just silently fail when exif can't be extracted
