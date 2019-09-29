@@ -50,7 +50,7 @@ const Layout = props => {
   }
 
   const isFullWidth =
-    props.full || fullPathPatterns.some(p => location.pathname.startsWith(p));
+    props.full || fullPathPatterns.some(p => location.pathname === p);
 
   return (
     <>

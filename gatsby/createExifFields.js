@@ -98,10 +98,10 @@ exports.createExifFields = (node, createNodeField) => {
   return new Promise(resolve => {
     fastExif
       .read(node.absolutePath, true)
-      .then(async exifData => {
+      .then(exifData => {
         if (!exifData) return;
-        await constructExifFields(exifData, createNodeField, node);
-        resolve();
+        console.log('TCL: exports.createExifFields -> exifData', exifData);
+        constructExifFields(exifData, createNodeField, node).then(resolve);
       })
       // just silently fail when exif can't be extracted
       .catch(err => {
