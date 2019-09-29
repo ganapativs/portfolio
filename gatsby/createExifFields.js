@@ -100,7 +100,6 @@ exports.createExifFields = (node, createNodeField) => {
       .read(node.absolutePath, true)
       .then(exifData => {
         if (!exifData) return;
-        console.log('TCL: exports.createExifFields -> exifData', exifData);
         constructExifFields(exifData, createNodeField, node).then(resolve);
       })
       // just silently fail when exif can't be extracted

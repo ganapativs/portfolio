@@ -6,7 +6,10 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
 
   // Image files
-  if (node.internal.mediaType === 'image/jpeg') {
+  if (
+    node.internal.mediaType === 'image/jpeg' &&
+    node.internal.type === 'S3ImageAsset'
+  ) {
     createExifFields(node, createNodeField);
   }
 
