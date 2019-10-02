@@ -203,8 +203,11 @@ module.exports = {
       options: {
         accessKeyId: process.env.ACCESS_KEY_ID,
         secretAccessKey: process.env.SECRET_ACCESS_KEY,
-        bucketName: 'meetguns-photography',
-        region: 'ap-south-1',
+        bucketName:
+          process.env.NODE_ENV === 'development'
+            ? process.env.PHOTOGRAPHY_BUCKET_DEV
+            : process.env.PHOTOGRAPHY_BUCKET,
+        region: process.env.REGION,
       },
     },
     {

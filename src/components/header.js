@@ -17,6 +17,13 @@ const HeaderRow = styled.div`
   top: 0;
   background: var(--color-dark);
   z-index: 1;
+  margin: 20px -20px;
+  padding: 10px 15px;
+
+  @media screen and (min-width: 768px) {
+    margin: 40px 0;
+    padding: 20px 0;
+  }
 `;
 
 const HeaderWrapper = styled.div`
@@ -26,14 +33,7 @@ const HeaderWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin: 20px -20px;
-  padding: 10px 15px;
   font-size: 0.9rem;
-
-  @media screen and (min-width: 768px) {
-    margin: 40px auto;
-    padding: 20px 0;
-  }
 `;
 
 const LogoWrapper = styled.div`
