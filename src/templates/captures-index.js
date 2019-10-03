@@ -1,4 +1,4 @@
-import { graphql, Link } from 'gatsby';
+import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 import React from 'react';
 import Gallery from 'react-photo-gallery';
