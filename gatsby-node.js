@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const sharp = require('sharp');
@@ -7,6 +8,21 @@ const { getImageGeoLocation } = require('./gatsby/getImageGeoLocation');
 // https://github.com/gatsbyjs/gatsby/issues/6291
 sharp.simd(false);
 sharp.cache(false);
+
+function createJSON(currentPage, pageImages) {
+  const dir = 'public/captures-pagination/';
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
+  const filePath = `${dir}index-${currentPage}.json`;
+  const dataToSave = JSON.stringify(pageImages);
+  fs.writeFile(filePath, dataToSave, err => {
+    if (err) {
+      return console.log(err);
+    }
+    return true;
+  });
+}
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
@@ -93,13 +109,104 @@ exports.createPages = ({ graphql, actions }) => {
     });
   });
 
-  const captureQueries = new Promise(resolve => {
-    createPage({
-      path: `/captures/`,
-      component: path.resolve('./src/templates/captures-index.js'),
-    });
+  const captureQueries = new Promise((resolve, reject) => {
+    graphql(
+      `
+        {
+          allS3ImageAsset(
+            sort: { fields: EXIF___DateTimeOriginal, order: DESC }
+          ) {
+            edges {
+              node {
+                id
+                fields {
+                  geolocation {
+                    adminArea5
+                    adminArea3
+                    adminArea1
+                    latitude
+                    longitude
+                  }
+                }
+                EXIF {
+                  DateTimeOriginal
+                }
+                childImageSharp {
+                  original {
+                    height
+                    width
+                    src
+                  }
+                  mobileSizes: fluid(maxHeight: 800, quality: 100) {
+                    # GatsbyImageSharpFluid_withWebp
+                    base64
+                    aspectRatio
+                    src
+                    srcSet
+                    srcWebp
+                    srcSetWebp
+                    sizes
+                  }
+                  desktopSizes: fluid(maxHeight: 500, quality: 100) {
+                    # GatsbyImageSharpFluid_withWebp
+                    base64
+                    aspectRatio
+                    src
+                    srcSet
+                    srcWebp
+                    srcSetWebp
+                    sizes
+                  }
+                }
+              }
+            }
+          }
+        }
+      `,
+    ).then(result => {
+      if (result.errors) {
+        console.log(result.errors);
+        reject(result.errors);
+        return;
+      }
+      const capturesIndex = path.resolve('./src/templates/captures-index.js');
+      const images = result.data.allS3ImageAsset.edges;
+      /* Iterate needed pages and create them. */
+      const countImagesPerPage = 20;
+      const totalPages = Math.ceil(images.length / countImagesPerPage);
+      for (let currentPage = 1; currentPage <= totalPages; currentPage += 1) {
+        const pathSuffix =
+          currentPage > 1
+            ? currentPage
+            : ''; /* To create paths "/", "/2", "/3", ... */
 
-    resolve();
+        /* Collect images needed for this page. */
+        const startIndexInclusive = countImagesPerPage * (currentPage - 1);
+        const endIndexExclusive = startIndexInclusive + countImagesPerPage;
+        const pageImages = images.slice(startIndexInclusive, endIndexExclusive);
+
+        /* Combine all data needed to construct this page. */
+        const pageData = {
+          path: `/captures/${pathSuffix}`,
+          component: capturesIndex,
+          context: {
+            /* If you need to pass additional data, you can pass it inside this context object. */
+            pageImages,
+            currentPage,
+            totalPages,
+          },
+        };
+
+        /* Create normal pages (for pagination) and corresponding JSON (for infinite scroll). */
+        createJSON(pageData.context.currentPage, pageData.context.pageImages);
+        createPage(pageData);
+      }
+      console.log(
+        `\nCreated ${totalPages} pages of capture index paginated content.`,
+      );
+
+      resolve();
+    });
   });
 
   return Promise.all([postQueries, captureQueries]);
