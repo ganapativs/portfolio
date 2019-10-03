@@ -1,6 +1,12 @@
 const path = require('path');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const sharp = require('sharp');
 const { createFilePath } = require('gatsby-source-filesystem');
 const { getImageGeoLocation } = require('./gatsby/getImageGeoLocation');
+
+// https://github.com/gatsbyjs/gatsby/issues/6291
+sharp.simd(false);
+sharp.cache(false);
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
