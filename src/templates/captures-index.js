@@ -55,7 +55,8 @@ class CapturesIndex extends React.Component {
     const {
       pageContext: { currentPage },
     } = this.props;
-    // Only enable infinite scrolling if user is on first page
+    // Only enable infinite scrolling if user is on first page and JS is enabled
+    // Else fall back to pagination
     this.setState({
       infiniteScrollEnabled: currentPage === 1,
     });
@@ -192,40 +193,3 @@ class CapturesIndex extends React.Component {
 }
 
 export default CapturesIndex;
-
-export const pageQuery = graphql`
-  query CapturesIndex {
-    allS3ImageAsset(sort: { fields: EXIF___DateTimeOriginal, order: DESC }) {
-      edges {
-        node {
-          id
-          fields {
-            geolocation {
-              adminArea5
-              adminArea3
-              adminArea1
-              latitude
-              longitude
-            }
-          }
-          EXIF {
-            DateTimeOriginal
-          }
-          childImageSharp {
-            original {
-              height
-              width
-              src
-            }
-            mobileSizes: fluid(maxHeight: 800, quality: 100) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
-            desktopSizes: fluid(maxHeight: 500, quality: 100) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
-          }
-        }
-      }
-    }
-  }
-`;
