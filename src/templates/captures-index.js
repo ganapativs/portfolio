@@ -111,10 +111,10 @@ export const pageQuery = graphql`
               src
             }
             mobileSizes: fluid(maxHeight: 800, quality: 100) {
-              ...GatsbyImageSharpFluid_withWebp_tracedSVG
+              ...GatsbyImageSharpFluid_withWebp
             }
             desktopSizes: fluid(maxHeight: 500, quality: 100) {
-              ...GatsbyImageSharpFluid_withWebp_tracedSVG
+              ...GatsbyImageSharpFluid_withWebp
             }
           }
         }
