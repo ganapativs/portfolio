@@ -10,6 +10,7 @@ import Loader from '../components/loader';
 const Main = styled.main`
   width: 100%;
   position: relative;
+  min-height: 100vh;
 
   @media screen and (max-width: 767px) {
     margin: 0 -20px;
