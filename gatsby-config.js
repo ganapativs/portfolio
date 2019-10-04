@@ -227,6 +227,13 @@ module.exports = {
     `gatsby-plugin-accent-color`,
     `gatsby-plugin-webpack-size`,
     `gatsby-plugin-catch-links`,
+    {
+      resolve: `gatsby-plugin-hotjar`,
+      options: {
+        id: process.env.HOTJAR_ID,
+        sv: process.env.HOTJAR_SNIPPET_VERSION,
+      },
+    },
     // https://gatsby.dev/offline
     `gatsby-plugin-offline`,
   ],
