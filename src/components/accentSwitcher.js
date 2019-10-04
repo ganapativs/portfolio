@@ -23,6 +23,7 @@ const AccentToggle = styled.div`
   border-radius: 2px 50% 50% 50%;
   transform: rotate(45deg) scale(0.9) translateY(2px);
   transform-origin: 50% 50%;
+  background: var(--color-accent);
   border: 1px solid var(--color-dark);
   box-shadow: inset 0 0 0px 0 var(--color-light),
     0px -15px 0 -6px var(--color-accent);
