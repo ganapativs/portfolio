@@ -7,6 +7,21 @@ import SEO from '../components/seo';
 import Sentinel from '../components/sentinel';
 import Loader from '../components/loader';
 
+const monthNames = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
 const Main = styled.main`
   width: 100%;
   position: relative;
@@ -21,6 +36,68 @@ const Main = styled.main`
 const Ul = styled.ul`
   list-style: none;
   margin-left: 0;
+`;
+
+const ImageMetaInfo = styled.div`
+  position: absolute;
+  bottom: calc(1rem + ${props => props.margin}px);
+  right: calc(1rem + ${props => props.margin}px);
+  background: var(--color-dark);
+  color: var(--color-accent);
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  box-shadow: 0 0.5rem 1rem var(--color-light-op-1);
+  border-radius: 50px 50px 0 50px;
+  font-weight: bold;
+  transform: translateY(1rem) translateX(1rem) scale(0.7);
+  transform-origin: 100% 100%;
+  opacity: 0;
+  border: 2px solid var(--color-accent);
+  clip-path: circle(0% at 100% 100%);
+  transition: all 0.15s ease-out;
+
+  @media screen and (max-width: 767px) {
+    transform: translateY(0) translateX(0) scale(1);
+    clip-path: circle(100% at 50% 50%);
+    opacity: 1;
+    border: none;
+    border-radius: 20px;
+    padding: 0.2rem 0.5rem;
+    background: transparent;
+    color: var(--color-light);
+    font-size: 0.6rem;
+    box-shadow: none;
+    overflow: hidden;
+
+    small {
+      display: none;
+    }
+
+    &:before {
+      content: '';
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: -1;
+      opacity: 0.8;
+      background: var(--color-dark);
+    }
+  }
+`;
+
+const ImageWrapper = styled.div`
+  position: relative;
+
+  @media screen and (hover: hover) and (pointer: fine) {
+    &:hover ${ImageMetaInfo} {
+      transition: all 0.15s 0.15s ease-in;
+      transform: translateY(0) translateX(0) scale(1);
+      clip-path: circle(100% at 50% 50%);
+      opacity: 1;
+    }
+  }
 `;
 
 class CapturesIndex extends React.Component {
@@ -114,6 +191,10 @@ class CapturesIndex extends React.Component {
       img:
         t.node.childImageSharp[isMobileLayout ? 'mobileSizes' : 'desktopSizes'],
       id: t.node.id,
+      meta: {
+        ...t.node.EXIF,
+        ...(t.node.fields && t.node.fields.geolocation),
+      },
     }));
     let additionalGalleryProps = {
       targetRowHeight: 500,
@@ -133,31 +214,54 @@ class CapturesIndex extends React.Component {
             {...additionalGalleryProps}
             margin={4}
             photos={photos}
-            renderImage={({ photo, margin, key, left, top }) => (
-              <div
-                key={key}
-                className="animated fadeIn faster"
-                style={{
-                  left,
-                  top,
-                  position: isMobileLayout ? 'absolute' : 'relative',
-                }}>
-                <Img
+            renderImage={({ photo, margin, key, left, top }) => {
+              const {
+                adminArea5,
+                adminArea3,
+                adminArea1,
+                DateTimeOriginal,
+              } = photo.meta;
+              const location =
+                [adminArea5, adminArea3, adminArea1]
+                  .filter(Boolean)
+                  .join(', ') || 'Location unavailable';
+              const date = DateTimeOriginal
+                ? new Date(DateTimeOriginal * 1000)
+                : null;
+              return (
+                <ImageWrapper
+                  key={key}
+                  className="animated fadeIn faster"
                   style={{
-                    width: photo.width,
-                    height: photo.height,
-                    margin,
-                  }}
-                  fluid={photo.img}
-                />
-              </div>
-            )}
+                    left,
+                    top,
+                    position: isMobileLayout ? 'absolute' : 'relative',
+                  }}>
+                  <Img
+                    style={{
+                      width: photo.width,
+                      height: photo.height,
+                      margin,
+                    }}
+                    fluid={photo.img}
+                  />
+                  <ImageMetaInfo margin={margin}>
+                    <div>{location}</div>
+                    {date ? (
+                      <small style={{ opacity: 0.9 }}>
+                        {monthNames[date.getMonth()]} {date.getFullYear()}
+                      </small>
+                    ) : null}
+                  </ImageMetaInfo>
+                </ImageWrapper>
+              );
+            }}
           />
           {infiniteScrollEnabled ? (
             <>
               {currentPage < totalPages ? (
                 <Sentinel
-                  fetchMoreBufferDistance={1000}
+                  fetchMoreBufferDistance={2500}
                   onFetchMore={this.onFetchMore}>
                   <Loader />
                 </Sentinel>
