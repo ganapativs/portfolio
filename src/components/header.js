@@ -27,7 +27,7 @@ const HeaderRow = styled.div`
 `;
 
 const HeaderWrapper = styled.div`
-  max-width: 900px;
+  max-width: 840px;
   margin: 0 auto;
   align-self: center;
   width: 100%;

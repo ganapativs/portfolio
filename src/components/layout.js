@@ -32,7 +32,7 @@ const Div = styled.div`
   display: flex;
   align-items: flex-start;
   flex: 1;
-  max-width: ${props => (props.full ? '100%' : '900px')};
+  max-width: ${props => (props.full ? '100%' : '840px')};
   width: 100%;
   margin: 0 auto;
 `;
