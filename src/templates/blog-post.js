@@ -153,7 +153,7 @@ export const pageQuery = graphql`
               childImageSharp {
                 # Expected cover image to have 1/2 aspect ratio
                 fluid(maxWidth: 1200, maxHeight: 600, quality: 85) {
-                  ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                  ...GatsbyImageSharpFluid_withWebp
                 }
               }
             }

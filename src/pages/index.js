@@ -9,7 +9,7 @@ export const query = graphql`
       childImageSharp {
         # 120 * 1.1 (-5% margin)
         fluid(maxWidth: 132, maxHeight: 132, quality: 100) {
-          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
@@ -17,7 +17,7 @@ export const query = graphql`
       childImageSharp {
         # 160 * 1.1 (-5% margin)
         fluid(maxWidth: 176, maxHeight: 176, quality: 100) {
-          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
