@@ -38,7 +38,7 @@ const Ul = styled.ul`
   margin-left: 0;
 `;
 
-const ImageMetaInfo = styled.div`
+const MetaInfo = styled.div`
   position: absolute;
   bottom: calc(1rem + ${props => props.margin}px);
   right: calc(1rem + ${props => props.margin}px);
@@ -89,7 +89,7 @@ const ImageWrapper = styled.div`
   position: relative;
 
   @media screen and (hover: hover) and (pointer: fine) {
-    &:hover ${ImageMetaInfo} {
+    &:hover ${MetaInfo} {
       transition: all 0.15s 0.15s linear;
       transform: translateY(0) translateX(0) scale(1);
       clip-path: circle(100% at 50% 50%);
@@ -97,6 +97,40 @@ const ImageWrapper = styled.div`
     }
   }
 `;
+
+const CSSViewWrapper = styled.div`
+  max-width: 840px;
+  margin: 0 auto;
+`;
+
+const CSSView = styled.div`
+  column-count: 2;
+  column-gap: 10px;
+
+  @media screen and (max-width: 767px) {
+    column-count: 1;
+    column-gap: 0;
+  }
+`;
+
+const ImageMeta = ({ margin, photo }) => {
+  const { adminArea5, adminArea3, adminArea1, DateTimeOriginal } = photo.meta;
+  const location =
+    [adminArea5, adminArea3, adminArea1].filter(Boolean).join(', ') ||
+    'Location unavailable';
+  const date = DateTimeOriginal ? new Date(DateTimeOriginal * 1000) : null;
+
+  return (
+    <MetaInfo margin={margin}>
+      <div>{location}</div>
+      {date ? (
+        <small style={{ opacity: 0.9 }}>
+          {monthNames[date.getMonth()]} {date.getFullYear()}
+        </small>
+      ) : null}
+    </MetaInfo>
+  );
+};
 
 class CapturesIndex extends React.Component {
   constructor(props) {
@@ -208,55 +242,35 @@ class CapturesIndex extends React.Component {
       <>
         <SEO title="Captures" />
         <Main>
-          <Gallery
-            {...additionalGalleryProps}
-            margin={4}
-            photos={photos}
-            renderImage={({ photo, margin, key, left, top }) => {
-              const {
-                adminArea5,
-                adminArea3,
-                adminArea1,
-                DateTimeOriginal,
-              } = photo.meta;
-              const location =
-                [adminArea5, adminArea3, adminArea1]
-                  .filter(Boolean)
-                  .join(', ') || 'Location unavailable';
-              const date = DateTimeOriginal
-                ? new Date(DateTimeOriginal * 1000)
-                : null;
-              return (
-                <ImageWrapper
-                  key={key}
-                  className="animated fadeIn faster"
-                  style={{
-                    left,
-                    top,
-                    position: isMobileLayout ? 'absolute' : 'relative',
-                  }}>
-                  <Img
-                    style={{
-                      width: photo.width,
-                      height: photo.height,
-                      margin,
-                    }}
-                    fluid={photo.img}
-                  />
-                  <ImageMetaInfo margin={margin}>
-                    <div>{location}</div>
-                    {date ? (
-                      <small style={{ opacity: 0.9 }}>
-                        {monthNames[date.getMonth()]} {date.getFullYear()}
-                      </small>
-                    ) : null}
-                  </ImageMetaInfo>
-                </ImageWrapper>
-              );
-            }}
-          />
           {infiniteScrollEnabled ? (
             <>
+              <Gallery
+                {...additionalGalleryProps}
+                margin={4}
+                photos={photos}
+                renderImage={({ photo, margin, key, left, top }) => {
+                  return (
+                    <ImageWrapper
+                      key={key}
+                      className="animated fadeIn faster"
+                      style={{
+                        left,
+                        top,
+                        position: isMobileLayout ? 'absolute' : 'relative',
+                      }}>
+                      <Img
+                        style={{
+                          width: photo.width,
+                          height: photo.height,
+                          margin,
+                        }}
+                        fluid={photo.img}
+                      />
+                      <ImageMeta margin={margin} photo={photo} />
+                    </ImageWrapper>
+                  );
+                }}
+              />
               {currentPage < totalPages ? (
                 <Sentinel
                   fetchMoreBufferDistance={2500}
@@ -266,28 +280,49 @@ class CapturesIndex extends React.Component {
               ) : null}
             </>
           ) : (
-            <nav>
-              <Ul>
-                <li>
-                  {previous ? (
-                    <Link
-                      to={`/captures/${
-                        currentPage !== 2 ? currentPage - 1 : ''
-                      }`}
-                      rel="prev">
-                      ← Previous
-                    </Link>
-                  ) : null}
-                </li>
-                <li>
-                  {next ? (
-                    <Link to={`/captures/${currentPage + 1}`} rel="next">
-                      Next →
-                    </Link>
-                  ) : null}
-                </li>
-              </Ul>
-            </nav>
+            <CSSViewWrapper>
+              <CSSView>
+                {photos.map(photo => (
+                  <ImageWrapper
+                    key={photo.id}
+                    className="animated fadeIn faster"
+                    style={{
+                      breakInside: 'avoid',
+                      // eslint-disable-next-line no-dupe-keys
+                      breakInside: 'avoid-column',
+                    }}>
+                    <img
+                      style={{ width: '100%', marginBottom: 0 }}
+                      src={photo.src}
+                      alt={photo.src}
+                    />
+                    <ImageMeta margin={4} photo={photo} />
+                  </ImageWrapper>
+                ))}
+              </CSSView>
+              <nav>
+                <Ul>
+                  <li>
+                    {previous ? (
+                      <Link
+                        to={`/captures/${
+                          currentPage !== 2 ? currentPage - 1 : ''
+                        }`}
+                        rel="prev">
+                        ← Previous ({currentPage - 1} / {totalPages})
+                      </Link>
+                    ) : null}
+                  </li>
+                  <li>
+                    {next ? (
+                      <Link to={`/captures/${currentPage + 1}`} rel="next">
+                        Next ({currentPage + 1} / {totalPages}) →
+                      </Link>
+                    ) : null}
+                  </li>
+                </Ul>
+              </nav>
+            </CSSViewWrapper>
           )}
         </Main>
       </>
