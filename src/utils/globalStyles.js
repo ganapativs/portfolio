@@ -56,7 +56,7 @@ html, body, #root {
   }
 }
 
-noscript {
+noscript#gatsby-noscript {
   position: fixed;
   bottom: 1rem;
   left: 50%;
@@ -66,6 +66,9 @@ noscript {
   border-radius: 2rem;
   z-index: 1;
   transform: translateX(-50%);
+  min-width: 320px;
+  font-size: .8rem;
+  text-align: center;
 }
 
 /**

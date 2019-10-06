@@ -116,7 +116,7 @@ const DevInfo = () => {
         <span role="img" aria-label="Yay!!!">
           🎉
         </span>
-        <Separator />I like travelling, capturing photos and I play{' '}
+        <Separator mb={8} />I like travelling, capturing photos and I play{' '}
         <span role="img" aria-label="Soccer">
           ⚽️
         </span>{' '}

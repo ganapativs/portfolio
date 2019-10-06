@@ -225,13 +225,16 @@ const links = [
 ];
 
 const Header = ({ location: { pathname } }) => {
-  const [logoActiveAnimateState, setLogoAnimateState] = useState(true);
+  const [logoActiveAnimateState, setLogoAnimateState] = useState(false);
+  const [jsEnabled, setJSEnabled] = useState(false);
 
   // Animate hover state to normal state initially on logo
   useEffect(() => {
+    setJSEnabled(true);
+    setLogoAnimateState(true);
     const timer = setTimeout(() => {
       setLogoAnimateState(false);
-    }, 250);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -266,31 +269,35 @@ const Header = ({ location: { pathname } }) => {
           </RouteLinks>
         </Left>
         <Right>
-          <AccentSwitcher />
-          <ThemeToggler>
-            {({ theme, toggleTheme }) => (
-              <ThemeSwitcher
-                role="button"
-                tabIndex={0}
-                onKeyPress={e => {
-                  if (e.which === 13 || e.which === 32) {
-                    switchTheme(theme, toggleTheme);
-                  }
-                }}
-                title={
-                  theme === 'dark'
-                    ? 'Switch to light theme'
-                    : 'Switch to dark theme'
-                }
-                onClick={() => {
-                  switchTheme(theme, toggleTheme);
-                }}>
-                {/* <Switcher theme={theme} /> */}
-                <MoonOrSun isDark={theme === 'dark'} />
-                <MoonMask isDark={theme === 'dark'} />
-              </ThemeSwitcher>
-            )}
-          </ThemeToggler>
+          {jsEnabled ? (
+            <>
+              <AccentSwitcher />
+              <ThemeToggler>
+                {({ theme, toggleTheme }) => (
+                  <ThemeSwitcher
+                    role="button"
+                    tabIndex={0}
+                    onKeyPress={e => {
+                      if (e.which === 13 || e.which === 32) {
+                        switchTheme(theme, toggleTheme);
+                      }
+                    }}
+                    title={
+                      theme === 'dark'
+                        ? 'Switch to light theme'
+                        : 'Switch to dark theme'
+                    }
+                    onClick={() => {
+                      switchTheme(theme, toggleTheme);
+                    }}>
+                    {/* <Switcher theme={theme} /> */}
+                    <MoonOrSun isDark={theme === 'dark'} />
+                    <MoonMask isDark={theme === 'dark'} />
+                  </ThemeSwitcher>
+                )}
+              </ThemeToggler>
+            </>
+          ) : null}
         </Right>
       </HeaderWrapper>
     </HeaderRow>
