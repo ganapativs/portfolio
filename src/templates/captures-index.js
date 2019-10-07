@@ -101,6 +101,7 @@ const ImageWrapper = styled.div`
 const CSSViewWrapper = styled.div`
   max-width: 840px;
   margin: 0 auto;
+  padding: 0 10px;
 `;
 
 const CSSView = styled.div`
@@ -132,6 +133,56 @@ const ImageMeta = ({ margin, photo }) => {
   );
 };
 
+const FixedCapturesIndexLayout = ({
+  photos,
+  previous,
+  next,
+  currentPage,
+  totalPages,
+}) => (
+  <CSSViewWrapper>
+    <CSSView>
+      {photos.map(photo => (
+        <ImageWrapper
+          key={photo.id}
+          className="animated fadeIn faster"
+          style={{
+            breakInside: 'avoid',
+            // eslint-disable-next-line no-dupe-keys
+            breakInside: 'avoid-column',
+          }}>
+          <img
+            style={{ width: '100%', marginBottom: 5 }}
+            src={photo.src}
+            alt={photo.src}
+          />
+          <ImageMeta margin={4} photo={photo} />
+        </ImageWrapper>
+      ))}
+    </CSSView>
+    <nav>
+      <Ul>
+        <li>
+          {previous ? (
+            <Link
+              to={`/captures/${currentPage !== 2 ? currentPage - 1 : ''}`}
+              rel="prev">
+              ← Previous ({currentPage - 1} / {totalPages})
+            </Link>
+          ) : null}
+        </li>
+        <li>
+          {next ? (
+            <Link to={`/captures/${currentPage + 1}`} rel="next">
+              Next ({currentPage + 1} / {totalPages}) →
+            </Link>
+          ) : null}
+        </li>
+      </Ul>
+    </nav>
+  </CSSViewWrapper>
+);
+
 class CapturesIndex extends React.Component {
   constructor(props) {
     super(props);
@@ -142,6 +193,7 @@ class CapturesIndex extends React.Component {
     this.state = {
       columns: 4,
       direction: 'row',
+      jsEnabled: false,
       infiniteScrollEnabled: false,
       loading: false,
       pageImages,
@@ -168,6 +220,7 @@ class CapturesIndex extends React.Component {
     // Only enable infinite scrolling if user is on first page and JS is enabled
     // Else fall back to pagination
     this.setState({
+      jsEnabled: true,
       infiniteScrollEnabled: currentPage === 1,
     });
   }
@@ -207,6 +260,7 @@ class CapturesIndex extends React.Component {
     const {
       direction,
       columns,
+      jsEnabled,
       infiniteScrollEnabled,
       pageImages,
       currentPage,
@@ -238,93 +292,65 @@ class CapturesIndex extends React.Component {
       };
     }
 
+    let View = (
+      <FixedCapturesIndexLayout
+        photos={photos}
+        previous={previous}
+        next={next}
+        currentPage={currentPage}
+        totalPages={totalPages}
+      />
+    );
+
+    if (!jsEnabled) {
+      View = <noscript>{View}</noscript>;
+    }
+
+    if (jsEnabled && infiniteScrollEnabled) {
+      View = (
+        <>
+          <Gallery
+            {...additionalGalleryProps}
+            margin={4}
+            photos={photos}
+            renderImage={({ photo, margin, key, left, top }) => {
+              return (
+                <ImageWrapper
+                  key={key}
+                  className="animated fadeIn faster"
+                  style={{
+                    left,
+                    top,
+                    position: isMobileLayout ? 'absolute' : 'relative',
+                  }}>
+                  <Img
+                    style={{
+                      width: photo.width,
+                      height: photo.height,
+                      margin,
+                    }}
+                    fluid={photo.img}
+                  />
+                  <ImageMeta margin={margin} photo={photo} />
+                </ImageWrapper>
+              );
+            }}
+          />
+          {currentPage < totalPages ? (
+            <Sentinel
+              fetchMoreBufferDistance={2500}
+              onFetchMore={this.onFetchMore}>
+              <Loader />
+            </Sentinel>
+          ) : null}
+        </>
+      );
+    }
+
     return (
       <>
         <SEO title="Captures" />
-        <Main>
-          {infiniteScrollEnabled ? (
-            <>
-              <Gallery
-                {...additionalGalleryProps}
-                margin={4}
-                photos={photos}
-                renderImage={({ photo, margin, key, left, top }) => {
-                  return (
-                    <ImageWrapper
-                      key={key}
-                      className="animated fadeIn faster"
-                      style={{
-                        left,
-                        top,
-                        position: isMobileLayout ? 'absolute' : 'relative',
-                      }}>
-                      <Img
-                        style={{
-                          width: photo.width,
-                          height: photo.height,
-                          margin,
-                        }}
-                        fluid={photo.img}
-                      />
-                      <ImageMeta margin={margin} photo={photo} />
-                    </ImageWrapper>
-                  );
-                }}
-              />
-              {currentPage < totalPages ? (
-                <Sentinel
-                  fetchMoreBufferDistance={2500}
-                  onFetchMore={this.onFetchMore}>
-                  <Loader />
-                </Sentinel>
-              ) : null}
-            </>
-          ) : (
-            <CSSViewWrapper>
-              <CSSView>
-                {photos.map(photo => (
-                  <ImageWrapper
-                    key={photo.id}
-                    className="animated fadeIn faster"
-                    style={{
-                      breakInside: 'avoid',
-                      // eslint-disable-next-line no-dupe-keys
-                      breakInside: 'avoid-column',
-                    }}>
-                    <img
-                      style={{ width: '100%', marginBottom: 0 }}
-                      src={photo.src}
-                      alt={photo.src}
-                    />
-                    <ImageMeta margin={4} photo={photo} />
-                  </ImageWrapper>
-                ))}
-              </CSSView>
-              <nav>
-                <Ul>
-                  <li>
-                    {previous ? (
-                      <Link
-                        to={`/captures/${
-                          currentPage !== 2 ? currentPage - 1 : ''
-                        }`}
-                        rel="prev">
-                        ← Previous ({currentPage - 1} / {totalPages})
-                      </Link>
-                    ) : null}
-                  </li>
-                  <li>
-                    {next ? (
-                      <Link to={`/captures/${currentPage + 1}`} rel="next">
-                        Next ({currentPage + 1} / {totalPages}) →
-                      </Link>
-                    ) : null}
-                  </li>
-                </Ul>
-              </nav>
-            </CSSViewWrapper>
-          )}
-        </Main>
+        <Main>{View}</Main>
       </>
     );
   }
