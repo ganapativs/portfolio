@@ -5,7 +5,7 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    title: `Ganapati V S - Portfolio`,
+    title: `Ganapati V S`,
     description: `Full-Stack JavaScript developer building stuffs using bleeding edge technologies 🎉`,
     author: `@ganapativs`,
     siteUrl: 'https://meetguns.com',
@@ -203,8 +203,11 @@ module.exports = {
       options: {
         accessKeyId: process.env.ACCESS_KEY_ID,
         secretAccessKey: process.env.SECRET_ACCESS_KEY,
-        bucketName: 'meetguns-photography',
-        region: 'ap-south-1',
+        bucketName:
+          process.env.NODE_ENV === 'development'
+            ? process.env.PHOTOGRAPHY_BUCKET_DEV
+            : process.env.PHOTOGRAPHY_BUCKET,
+        region: process.env.REGION,
       },
     },
     {
@@ -224,6 +227,13 @@ module.exports = {
     `gatsby-plugin-accent-color`,
     `gatsby-plugin-webpack-size`,
     `gatsby-plugin-catch-links`,
+    {
+      resolve: `gatsby-plugin-hotjar`,
+      options: {
+        id: process.env.HOTJAR_ID,
+        sv: process.env.HOTJAR_SNIPPET_VERSION,
+      },
+    },
     // https://gatsby.dev/offline
     `gatsby-plugin-offline`,
   ],

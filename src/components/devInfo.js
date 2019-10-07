@@ -39,12 +39,12 @@ const SmallFadeInUp = keyframes`
   }
 `;
 
-const DevDescription = styled.p`
+const DevDescription = styled.div`
   animation-name: ${SmallFadeInUp};
 `;
 
 const Separator = styled.div`
-  margin-bottom: 8px;
+  margin-bottom: ${props => props.mb}px;
 `;
 
 const DevInfo = () => {
@@ -74,8 +74,8 @@ const DevInfo = () => {
           }>
           @Tracxn
         </ExternalLink>
-        . <Separator />I love coding, contributing to the open source and have
-        created{' '}
+        . <Separator mb={8} />I love coding, contributing to the open source and
+        have created{' '}
         <ExternalLink
           href="https://www.npmjs.com/package/react-delightful-scroller?ref=meetguns.com"
           onClick={() =>
@@ -116,7 +116,7 @@ const DevInfo = () => {
         <span role="img" aria-label="Yay!!!">
           🎉
         </span>
-        <Separator />I like travelling, capturing photos and I play{' '}
+        <Separator mb={8} />I like travelling, capturing photos and I play{' '}
         <span role="img" aria-label="Soccer">
           ⚽️
         </span>{' '}
@@ -131,6 +131,7 @@ const DevInfo = () => {
           🙌
         </span>
       </DevDescription>
+      <Separator mb={24} />
     </>
   );
 };

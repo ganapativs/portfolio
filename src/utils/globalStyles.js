@@ -56,6 +56,21 @@ html, body, #root {
   }
 }
 
+noscript#gatsby-noscript {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  background: var(--color-light);
+  color: var(--color-dark);
+  padding: .5rem 1rem;
+  border-radius: 2rem;
+  z-index: 1;
+  transform: translateX(-50%);
+  min-width: 320px;
+  font-size: .8rem;
+  text-align: center;
+}
+
 /**
  * This will hide the focus indicator if the element receives focus via the mouse,
  * but it will still show up on keyboard focus.

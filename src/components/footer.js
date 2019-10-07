@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import ExternalLink from './externalLink';
 
 const FooterWrapper = styled.div`
+  max-width: 840px;
+  margin: 0 auto;
+  align-self: center;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   padding: 30px 0 15px 0;
