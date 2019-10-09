@@ -1,10 +1,10 @@
-// Detects clicks outside of the passed ref
+// Detects clicks outside of the passed element ref
 import { useEffect } from 'react';
 
-function useOutsideClick(ref, onOutsideClick) {
+function useOutsideClick(elementRef, onOutsideClick) {
   useEffect(() => {
     function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
+      if (elementRef.current && !elementRef.current.contains(event.target)) {
         onOutsideClick(event);
       }
     }
