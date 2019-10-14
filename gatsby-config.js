@@ -223,6 +223,7 @@ module.exports = {
         showSpinner: false,
       },
     },
+    `gatsby-plugin-twitter`,
     `gatsby-plugin-dark-mode`,
     `gatsby-plugin-accent-color`,
     `gatsby-plugin-webpack-size`,
