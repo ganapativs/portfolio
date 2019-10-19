@@ -137,7 +137,7 @@ exports.createPages = ({ graphql, actions }) => {
                     width
                     src
                   }
-                  mobileSizes: fluid(maxHeight: 800, quality: 100) {
+                  mobileThumb: fluid(maxHeight: 500, quality: 100) {
                     # GatsbyImageSharpFluid_withWebp
                     base64
                     aspectRatio
@@ -147,7 +147,16 @@ exports.createPages = ({ graphql, actions }) => {
                     srcSetWebp
                     sizes
                   }
-                  desktopSizes: fluid(maxHeight: 500, quality: 100) {
+                  mobileOriginal: fluid(
+                    maxWidth: 767
+                    maxHeight: 1000
+                    quality: 100
+                  ) {
+                    # GatsbyImageSharpFluid_withWebp
+                    src
+                    srcWebp
+                  }
+                  desktopThumb: fluid(maxHeight: 300, quality: 100) {
                     # GatsbyImageSharpFluid_withWebp
                     base64
                     aspectRatio
@@ -156,6 +165,15 @@ exports.createPages = ({ graphql, actions }) => {
                     srcWebp
                     srcSetWebp
                     sizes
+                  }
+                  desktopOriginal: fluid(
+                    maxWidth: 3000
+                    maxHeight: 3000
+                    quality: 100
+                  ) {
+                    # GatsbyImageSharpFluid_withWebp
+                    src
+                    srcWebp
                   }
                 }
               }

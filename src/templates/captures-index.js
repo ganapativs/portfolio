@@ -3,6 +3,7 @@ import Img from 'gatsby-image';
 import React from 'react';
 import Gallery from 'react-photo-gallery';
 import styled from 'styled-components';
+import Carousel, { Modal, ModalGateway } from 'react-images';
 import SEO from '../components/seo';
 import Sentinel from '../components/sentinel';
 import Loader from '../components/loader';
@@ -87,6 +88,7 @@ const MetaInfo = styled.div`
 
 const ImageWrapper = styled.div`
   position: relative;
+  cursor: pointer;
 
   @media screen and (hover: hover) and (pointer: fine) {
     &:hover ${MetaInfo} {
@@ -114,21 +116,35 @@ const CSSView = styled.div`
   }
 `;
 
-const ImageMeta = ({ margin, photo }) => {
+const getPhotoMetaInfo = photo => {
   const { adminArea5, adminArea3, adminArea1, DateTimeOriginal } = photo.meta;
   const location =
     [adminArea5, adminArea3, adminArea1].filter(Boolean).join(', ') ||
     'Location unavailable';
   const date = DateTimeOriginal ? new Date(DateTimeOriginal * 1000) : null;
 
+  return { location, date };
+};
+
+const RenderMetaInfo = ({ photo }) => {
+  const { location, date } = getPhotoMetaInfo(photo);
+
   return (
-    <MetaInfo margin={margin}>
+    <div>
       <div>{location}</div>
       {date ? (
         <small style={{ opacity: 0.9 }}>
           {monthNames[date.getMonth()]} {date.getFullYear()}
         </small>
       ) : null}
+    </div>
+  );
+};
+
+const ImageMeta = ({ margin, photo }) => {
+  return (
+    <MetaInfo margin={margin}>
+      <RenderMetaInfo photo={photo} />
     </MetaInfo>
   );
 };
@@ -183,6 +199,10 @@ const FixedCapturesIndexLayout = ({
   </CSSViewWrapper>
 );
 
+const FooterCaption = ({ currentView: photo }) => (
+  <RenderMetaInfo photo={photo} />
+);
+
 class CapturesIndex extends React.Component {
   constructor(props) {
     super(props);
@@ -199,6 +219,7 @@ class CapturesIndex extends React.Component {
       pageImages,
       currentPage,
       totalPages,
+      lightboxOpen: false,
     };
   }
 
@@ -256,6 +277,13 @@ class CapturesIndex extends React.Component {
     );
   };
 
+  toggleLightbox = (e, idx) => {
+    this.setState(({ lightboxOpen }) => ({
+      lightboxOpen: !lightboxOpen,
+      selectedIndex: idx,
+    }));
+  };
+
   render() {
     const {
       direction,
@@ -265,6 +293,8 @@ class CapturesIndex extends React.Component {
       pageImages,
       currentPage,
       totalPages,
+      lightboxOpen,
+      selectedIndex,
     } = this.state;
     const previous = currentPage > 1;
     const next = currentPage < totalPages;
@@ -272,10 +302,10 @@ class CapturesIndex extends React.Component {
     const photos = pageImages.map(t => ({
       ...t.node.childImageSharp.original,
       src:
-        t.node.childImageSharp[isMobileLayout ? 'mobileSizes' : 'desktopSizes']
+        t.node.childImageSharp[isMobileLayout ? 'mobileThumb' : 'desktopThumb']
           .src,
       img:
-        t.node.childImageSharp[isMobileLayout ? 'mobileSizes' : 'desktopSizes'],
+        t.node.childImageSharp[isMobileLayout ? 'mobileThumb' : 'desktopThumb'],
       id: t.node.id,
       meta: {
         ...t.node.EXIF,
@@ -283,7 +313,7 @@ class CapturesIndex extends React.Component {
       },
     }));
     let additionalGalleryProps = {
-      targetRowHeight: 500,
+      targetRowHeight: 300,
     };
     if (isMobileLayout) {
       additionalGalleryProps = {
@@ -313,11 +343,12 @@ class CapturesIndex extends React.Component {
             {...additionalGalleryProps}
             margin={4}
             photos={photos}
-            renderImage={({ photo, margin, key, left, top }) => {
+            renderImage={({ photo, margin, key, left, top, index }) => {
               return (
                 <ImageWrapper
                   key={key}
                   className="animated fadeIn faster"
+                  onClick={() => this.toggleLightbox(null, index)}
                   style={{
                     left,
                     top,
@@ -336,6 +367,18 @@ class CapturesIndex extends React.Component {
               );
             }}
           />
+          <ModalGateway>
+            {lightboxOpen ? (
+              <Modal onClose={this.toggleLightbox}>
+                <Carousel
+                  components={{ FooterCaption }}
+                  currentIndex={selectedIndex}
+                  frameProps={{ autoSize: 'height' }}
+                  views={photos}
+                />
+              </Modal>
+            ) : null}
+          </ModalGateway>
           {currentPage < totalPages ? (
             <Sentinel
               fetchMoreBufferDistance={2500}
