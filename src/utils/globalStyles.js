@@ -263,6 +263,12 @@ pre[data-line] {
   float: left;
   min-width: 100%;
 }
+
+/* Plugin style overrides */
+.twitter-tweet {
+  margin-left: auto;
+  margin-right: auto;
+}
 `;
 
 export default React.memo(GlobalStyles);
