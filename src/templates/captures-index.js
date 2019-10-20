@@ -406,7 +406,6 @@ class CapturesIndex extends React.Component {
                 <Carousel
                   components={{ FooterCaption }}
                   currentIndex={selectedIndex}
-                  frameProps={{ autoSize: 'height' }}
                   views={this.getCarouselImages()}
                 />
               </Modal>
