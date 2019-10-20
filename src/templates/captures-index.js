@@ -41,27 +41,29 @@ const Ul = styled.ul`
 
 const MetaInfo = styled.div`
   position: absolute;
-  bottom: calc(1rem + ${props => props.margin}px);
-  right: calc(1rem + ${props => props.margin}px);
+  bottom: calc(0.4rem + ${props => props.margin}px);
+  right: calc(0.4rem + ${props => props.margin}px);
   background: var(--color-dark);
   color: var(--color-accent);
   padding: 0.5rem 1rem;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   border-radius: 50px 50px 0 50px;
   font-weight: bold;
-  transform: translateY(1rem) translateX(1rem) scale(0.7);
+  transform: scale(0.7);
   transform-origin: 100% 100%;
   opacity: 0;
-  box-shadow: 0.2rem 0.2rem var(--color-accent);
+  box-shadow: 0.15rem 0.15rem var(--color-accent);
   clip-path: circle(0% at 100% 100%);
   transition: all 0.15s ease-out;
 
   @media screen and (max-width: 767px) {
-    transform: translateY(0) translateX(0) scale(1);
+    transform: scale(1);
     clip-path: circle(100% at 50% 50%);
     opacity: 1;
     border-radius: 20px;
-    padding: 0.2rem 0.5rem;
+    bottom: 6px;
+    right: 6px;
+    padding: 0 0.4rem;
     background: transparent;
     color: var(--color-light);
     font-size: 0.6rem;
@@ -223,14 +225,14 @@ class CapturesIndex extends React.Component {
     this.isWebPSupported = hasWebPSupport();
 
     this.state = {
-      columns: 4,
-      direction: 'row',
+      isMobileLayout: false,
       jsEnabled: false,
       infiniteScrollEnabled: false,
       loading: false,
       pageImages,
       currentPage,
       totalPages,
+      showSentinel: false,
       lightboxOpen: false,
     };
   }
@@ -238,8 +240,7 @@ class CapturesIndex extends React.Component {
   resizeHandler = () => {
     const containerWidth = window.innerWidth;
     this.setState({
-      columns: Math.floor(containerWidth / 350),
-      direction: containerWidth < 768 ? 'column' : 'row',
+      isMobileLayout: containerWidth < 768,
     });
   };
 
@@ -289,6 +290,16 @@ class CapturesIndex extends React.Component {
     );
   };
 
+  showSentinel = () => {
+    const { showSentinel } = this.state;
+
+    if (!showSentinel) {
+      this.setState({
+        showSentinel: true,
+      });
+    }
+  };
+
   toggleLightbox = (e, idx) => {
     this.setState(({ lightboxOpen }) => ({
       lightboxOpen: !lightboxOpen,
@@ -301,12 +312,13 @@ class CapturesIndex extends React.Component {
     const isMobileLayout = direction === 'column';
 
     const carouselImages = pageImages.map(t => {
-      const { srcWebp, src } = t.node.childImageSharp[
+      const { srcWebp, src, srcSet, srcSetWebp } = t.node.childImageSharp[
         isMobileLayout ? 'mobileOriginal' : 'desktopOriginal'
       ];
 
       return {
         src: this.isWebPSupported ? srcWebp : src,
+        srcset: this.isWebPSupported ? srcSetWebp : srcSet,
         meta: {
           ...t.node.EXIF,
           ...(t.node.fields && t.node.fields.geolocation),
@@ -317,21 +329,40 @@ class CapturesIndex extends React.Component {
     return carouselImages;
   };
 
+  renderImage = ({ photo, margin, key, index }) => {
+    return (
+      <ImageWrapper
+        key={key}
+        className="animated fadeIn faster"
+        onClick={() => this.toggleLightbox(null, index)}>
+        <Img
+          onLoad={this.showSentinel}
+          style={{
+            width: photo.width,
+            height: photo.height,
+            margin,
+          }}
+          fluid={photo.img}
+        />
+        <ImageMeta margin={margin} photo={photo} />
+      </ImageWrapper>
+    );
+  };
+
   render() {
     const {
-      direction,
-      columns,
+      isMobileLayout,
       jsEnabled,
       infiniteScrollEnabled,
       pageImages,
       currentPage,
       totalPages,
+      showSentinel,
       lightboxOpen,
       selectedIndex,
     } = this.state;
     const previous = currentPage > 1;
     const next = currentPage < totalPages;
-    const isMobileLayout = direction === 'column';
     const photos = pageImages.map(t => ({
       ...t.node.childImageSharp.original,
       src:
@@ -345,15 +376,9 @@ class CapturesIndex extends React.Component {
         ...(t.node.fields && t.node.fields.geolocation),
       },
     }));
-    let additionalGalleryProps = {
-      targetRowHeight: 300,
+    const additionalGalleryProps = {
+      targetRowHeight: isMobileLayout ? 220 : 250,
     };
-    if (isMobileLayout) {
-      additionalGalleryProps = {
-        direction: 'column',
-        columns,
-      };
-    }
 
     let View = (
       <FixedCapturesIndexLayout
@@ -376,29 +401,7 @@ class CapturesIndex extends React.Component {
             {...additionalGalleryProps}
             margin={4}
             photos={photos}
-            renderImage={({ photo, margin, key, left, top, index }) => {
-              return (
-                <ImageWrapper
-                  key={key}
-                  className="animated fadeIn faster"
-                  onClick={() => this.toggleLightbox(null, index)}
-                  style={{
-                    left,
-                    top,
-                    position: isMobileLayout ? 'absolute' : 'relative',
-                  }}>
-                  <Img
-                    style={{
-                      width: photo.width,
-                      height: photo.height,
-                      margin,
-                    }}
-                    fluid={photo.img}
-                  />
-                  <ImageMeta margin={margin} photo={photo} />
-                </ImageWrapper>
-              );
-            }}
+            renderImage={this.renderImage}
           />
           <ModalGateway>
             {lightboxOpen ? (
@@ -407,13 +410,20 @@ class CapturesIndex extends React.Component {
                   components={{ FooterCaption }}
                   currentIndex={selectedIndex}
                   views={this.getCarouselImages()}
+                  trackProps={{
+                    onViewChange: currentIndex => {
+                      if (currentIndex > photos.length - 5) {
+                        this.onFetchMore();
+                      }
+                    },
+                  }}
                 />
               </Modal>
             ) : null}
           </ModalGateway>
-          {currentPage < totalPages ? (
+          {showSentinel && currentPage < totalPages ? (
             <Sentinel
-              fetchMoreBufferDistance={2500}
+              fetchMoreBufferDistance={200}
               onFetchMore={this.onFetchMore}>
               <Loader />
             </Sentinel>
