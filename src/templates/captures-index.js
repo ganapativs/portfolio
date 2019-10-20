@@ -116,6 +116,16 @@ const CSSView = styled.div`
   }
 `;
 
+const hasWebPSupport = () => {
+  const canvas =
+    typeof document === 'object' ? document.createElement('canvas') : {};
+  canvas.width = 1;
+  canvas.height = 1;
+  return canvas.toDataURL
+    ? canvas.toDataURL('image/webp').indexOf('image/webp') === 5
+    : false;
+};
+
 const getPhotoMetaInfo = photo => {
   const { adminArea5, adminArea3, adminArea1, DateTimeOriginal } = photo.meta;
   const location =
@@ -210,6 +220,8 @@ class CapturesIndex extends React.Component {
       pageContext: { pageImages, currentPage, totalPages },
     } = props;
 
+    this.isWebPSupported = hasWebPSupport();
+
     this.state = {
       columns: 4,
       direction: 'row',
@@ -282,6 +294,27 @@ class CapturesIndex extends React.Component {
       lightboxOpen: !lightboxOpen,
       selectedIndex: idx,
     }));
+  };
+
+  getCarouselImages = () => {
+    const { pageImages, direction } = this.state;
+    const isMobileLayout = direction === 'column';
+
+    const carouselImages = pageImages.map(t => {
+      const { srcWebp, src } = t.node.childImageSharp[
+        isMobileLayout ? 'mobileOriginal' : 'desktopOriginal'
+      ];
+
+      return {
+        src: this.isWebPSupported ? srcWebp : src,
+        meta: {
+          ...t.node.EXIF,
+          ...(t.node.fields && t.node.fields.geolocation),
+        },
+      };
+    });
+
+    return carouselImages;
   };
 
   render() {
@@ -374,7 +407,7 @@ class CapturesIndex extends React.Component {
                   components={{ FooterCaption }}
                   currentIndex={selectedIndex}
                   frameProps={{ autoSize: 'height' }}
-                  views={photos}
+                  views={this.getCarouselImages()}
                 />
               </Modal>
             ) : null}
