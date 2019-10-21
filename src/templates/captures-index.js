@@ -307,13 +307,10 @@ class CapturesIndex extends React.Component {
   };
 
   getCarouselImages = () => {
-    const { pageImages, direction } = this.state;
-    const isMobileLayout = direction === 'column';
+    const { pageImages } = this.state;
 
     const carouselImages = pageImages.map(t => {
-      const { srcWebp, src } = t.node.childImageSharp[
-        isMobileLayout ? 'mobileOriginal' : 'desktopOriginal'
-      ];
+      const { srcWebp, src } = t.node.childImageSharp.preview;
 
       return {
         src: this.isWebPSupported ? srcWebp : src,
