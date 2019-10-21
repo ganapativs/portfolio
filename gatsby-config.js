@@ -224,6 +224,7 @@ module.exports = {
       },
     },
     `gatsby-plugin-twitter`,
+    `gatsby-plugin-netlify-cache`,
     `gatsby-plugin-dark-mode`,
     `gatsby-plugin-accent-color`,
     `gatsby-plugin-webpack-size`,

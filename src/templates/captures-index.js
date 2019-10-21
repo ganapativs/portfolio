@@ -95,7 +95,7 @@ const ImageWrapper = styled.div`
   @media screen and (hover: hover) and (pointer: fine) {
     &:hover ${MetaInfo} {
       transition: all 0.15s 0.15s linear;
-      transform: translateY(0) translateX(0) scale(1);
+      transform: translateY(0) translateX(0) scale(0.85);
       clip-path: circle(100% at 50% 50%);
       opacity: 1;
     }
@@ -131,8 +131,7 @@ const hasWebPSupport = () => {
 const getPhotoMetaInfo = photo => {
   const { adminArea5, adminArea3, adminArea1, DateTimeOriginal } = photo.meta;
   const location =
-    [adminArea5, adminArea3, adminArea1].filter(Boolean).join(', ') ||
-    'Location unavailable';
+    [adminArea5, adminArea3, adminArea1].filter(Boolean).join(', ') || '—';
   const date = DateTimeOriginal ? new Date(DateTimeOriginal * 1000) : null;
 
   return { location, date };
@@ -312,13 +311,12 @@ class CapturesIndex extends React.Component {
     const isMobileLayout = direction === 'column';
 
     const carouselImages = pageImages.map(t => {
-      const { srcWebp, src, srcSet, srcSetWebp } = t.node.childImageSharp[
+      const { srcWebp, src } = t.node.childImageSharp[
         isMobileLayout ? 'mobileOriginal' : 'desktopOriginal'
       ];
 
       return {
         src: this.isWebPSupported ? srcWebp : src,
-        srcset: this.isWebPSupported ? srcSetWebp : srcSet,
         meta: {
           ...t.node.EXIF,
           ...(t.node.fields && t.node.fields.geolocation),

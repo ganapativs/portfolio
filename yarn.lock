@@ -5877,6 +5877,14 @@ gatsby-plugin-mdx@^1.0.52:
     unist-util-remove "^1.0.3"
     unist-util-visit "^1.4.1"
 
+gatsby-plugin-netlify-cache@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-netlify-cache/-/gatsby-plugin-netlify-cache-1.2.0.tgz#e68db9c5bd4ae103b4589f9be2a3cb9958750788"
+  integrity sha512-unt4mAVpC0JzwZSo8KQV4P/trDHkr3PeTWDF5Hijw9jGfNQIWXbcj9nYljAVg7HCich6E6b27Q+zuf53InwpDQ==
+  dependencies:
+    babel-runtime "^6.26.0"
+    fs-extra "^7.0.0"
+
 gatsby-plugin-nprogress@^2.1.12:
   version "2.1.12"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-nprogress/-/gatsby-plugin-nprogress-2.1.12.tgz#70e3f8be65fc55ee29772927763dc067b712e8b9"
@@ -6019,10 +6027,10 @@ gatsby-remark-copy-linked-files@^2.1.28:
     probe-image-size "^4.1.1"
     unist-util-visit "^1.4.1"
 
-gatsby-remark-embedder@^1.3.3:
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-embedder/-/gatsby-remark-embedder-1.3.3.tgz#e670be637e54d6f79864fc4014d265ecf0e17a76"
-  integrity sha512-/QV4bhAeY1+f0vlgU48as/+smbex9IzksvFsq5kWNLp9PnAKoCj9jAS1HreHySvmHTUSocCYCuzUteeu++0CFw==
+gatsby-remark-embedder@^1.3.4:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-embedder/-/gatsby-remark-embedder-1.3.4.tgz#a2df78a779756e21c4aa6341f1e5bc888e2c04f1"
+  integrity sha512-SkuzE9bSk6JKHnir/ajSquFTak5x0FQRt3Pwzcs5zkeh764OGlkIDdlPSGZqesitHbk3SY4n2QvkstRzDrwBxQ==
   dependencies:
     "@babel/runtime" "^7.6.2"
     node-fetch "^2.6.0"
@@ -6143,10 +6151,10 @@ gatsby-telemetry@^1.1.33:
     stack-utils "1.0.2"
     uuid "3.3.3"
 
-gatsby-transformer-sharp@^2.2.23:
-  version "2.2.23"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-sharp/-/gatsby-transformer-sharp-2.2.23.tgz#225050f3bf23ea13a9da46667cc7980ce4090e65"
-  integrity sha512-Xd2Ydn6vrfpyElfRtiFqidHWhbXI28NS/sm9olOS1AJzSvonJ/UdQKQFhoGkgZ+JyWlo+yZfFmXMCSDr7pyVpQ==
+gatsby-transformer-sharp@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-sharp/-/gatsby-transformer-sharp-2.3.0.tgz#15fed043a73a43d8b7e7512a6de72614ed28b11b"
+  integrity sha512-AW8Ds4CiJEcqKjCjbKfnrqRcwRAX2scybe5Lvv+9klSZcSTlDtsB4sSpKQbBOrLeMOmrRan4zoC0vPc1Ccut9g==
   dependencies:
     "@babel/runtime" "^7.6.3"
     bluebird "^3.7.0"
@@ -6156,10 +6164,10 @@ gatsby-transformer-sharp@^2.2.23:
     semver "^5.7.1"
     sharp "^0.23.1"
 
-gatsby@^2.16.5:
-  version "2.16.5"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.16.5.tgz#155376fd8d797ba111772d168daecd4a5ba036ef"
-  integrity sha512-ga7WX773yCouxVPTUgswkjnHkFMWsIuHyOfGzprqdI8EJ74oEkBfcDUZTntbXDuP20IUGomve6sUOJLwZMdReA==
+gatsby@^2.17.0:
+  version "2.17.0"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.17.0.tgz#f4a0dbe4d6897f32df3019d33ef4dee5d30b5aab"
+  integrity sha512-bi+Hv6nLj6u1eH/qNR8Df7yjSSNWje4GuP3IKS0l/dBH+a4WDZTuh8OR4oby9M06lwXfi8kfUlRStDzzjthfQA==
   dependencies:
     "@babel/code-frame" "^7.5.5"
     "@babel/core" "^7.6.4"
