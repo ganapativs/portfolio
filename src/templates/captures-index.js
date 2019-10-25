@@ -110,7 +110,7 @@ const CSSViewWrapper = styled.div`
 
 const CSSView = styled.div`
   column-count: 2;
-  column-gap: 10px;
+  column-gap: 5px;
 
   @media screen and (max-width: 767px) {
     column-count: 1;
@@ -179,7 +179,7 @@ const FixedCapturesIndexLayout = ({
             breakInside: 'avoid-column',
           }}>
           <img
-            style={{ width: '100%', marginBottom: 5 }}
+            style={{ width: '100%', marginBottom: 0 }}
             src={photo.src}
             alt={photo.src}
           />
@@ -222,12 +222,12 @@ class CapturesIndex extends React.Component {
     } = props;
 
     this.isWebPSupported = hasWebPSupport();
+    this.loading = false;
 
     this.state = {
       isMobileLayout: false,
       jsEnabled: false,
       infiniteScrollEnabled: false,
-      loading: false,
       pageImages,
       currentPage,
       totalPages,
@@ -262,31 +262,30 @@ class CapturesIndex extends React.Component {
     window.removeEventListener('resize', this.resizeHandler, true);
   }
 
-  onFetchMore = () => {
-    const { loading, pageImages, currentPage } = this.state;
-    if (loading) {
+  onFetchMore = async () => {
+    const { pageImages, currentPage } = this.state;
+    if (this.loading) {
       return;
     }
 
-    this.setState(
-      {
-        loading: true,
-      },
-      async () => {
-        try {
-          const nextImages = await fetch(
-            `/captures-pagination/index-${currentPage + 1}.json`,
-          ).then(t => t.json());
-          this.setState({
-            pageImages: [...pageImages, ...nextImages],
-            currentPage: currentPage + 1,
-            loading: false,
-          });
-        } catch (e) {
-          console.log('Error in fetching more images.', e);
-        }
-      },
-    );
+    try {
+      this.loading = true;
+      const nextImages = await fetch(
+        `/captures-pagination/index-${currentPage + 1}.json`,
+      ).then(t => t.json());
+      this.setState(
+        {
+          pageImages: [...pageImages, ...nextImages],
+          currentPage: currentPage + 1,
+        },
+        () => {
+          this.loading = false;
+        },
+      );
+    } catch (e) {
+      console.log('Error in fetching more images.', e);
+      this.loading = false;
+    }
   };
 
   showSentinel = () => {
