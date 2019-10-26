@@ -176,7 +176,7 @@ exports.createPages = ({ graphql, actions }) => {
       const capturesIndex = path.resolve('./src/templates/captures-index.js');
       const images = result.data.allS3ImageAsset.edges;
       /* Iterate needed pages and create them. */
-      const countImagesPerPage = 20;
+      const countImagesPerPage = 50;
       const totalPages = Math.ceil(images.length / countImagesPerPage);
       for (let currentPage = 1; currentPage <= totalPages; currentPage += 1) {
         const pathSuffix =

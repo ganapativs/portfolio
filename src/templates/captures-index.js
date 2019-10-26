@@ -417,7 +417,7 @@ class CapturesIndex extends React.Component {
           </ModalGateway>
           {showSentinel && currentPage < totalPages ? (
             <Sentinel
-              fetchMoreBufferDistance={2500}
+              fetchMoreBufferDistance={1000}
               onFetchMore={this.onFetchMore}>
               <Loader />
             </Sentinel>
