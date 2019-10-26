@@ -3,6 +3,7 @@ import Img from 'gatsby-image';
 import React from 'react';
 import Gallery from 'react-photo-gallery';
 import styled from 'styled-components';
+import Carousel, { Modal, ModalGateway } from 'react-images';
 import SEO from '../components/seo';
 import Sentinel from '../components/sentinel';
 import Loader from '../components/loader';
@@ -40,27 +41,29 @@ const Ul = styled.ul`
 
 const MetaInfo = styled.div`
   position: absolute;
-  bottom: calc(1rem + ${props => props.margin}px);
-  right: calc(1rem + ${props => props.margin}px);
+  bottom: calc(0.4rem + ${props => props.margin}px);
+  right: calc(0.4rem + ${props => props.margin}px);
   background: var(--color-dark);
   color: var(--color-accent);
   padding: 0.5rem 1rem;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   border-radius: 50px 50px 0 50px;
   font-weight: bold;
-  transform: translateY(1rem) translateX(1rem) scale(0.7);
+  transform: scale(0.7);
   transform-origin: 100% 100%;
   opacity: 0;
-  box-shadow: 0.2rem 0.2rem var(--color-accent);
+  box-shadow: 0.15rem 0.15rem var(--color-accent);
   clip-path: circle(0% at 100% 100%);
   transition: all 0.15s ease-out;
 
   @media screen and (max-width: 767px) {
-    transform: translateY(0) translateX(0) scale(1);
+    transform: scale(1);
     clip-path: circle(100% at 50% 50%);
     opacity: 1;
     border-radius: 20px;
-    padding: 0.2rem 0.5rem;
+    bottom: 6px;
+    right: 6px;
+    padding: 0 0.4rem;
     background: transparent;
     color: var(--color-light);
     font-size: 0.6rem;
@@ -87,11 +90,12 @@ const MetaInfo = styled.div`
 
 const ImageWrapper = styled.div`
   position: relative;
+  cursor: pointer;
 
   @media screen and (hover: hover) and (pointer: fine) {
     &:hover ${MetaInfo} {
       transition: all 0.15s 0.15s linear;
-      transform: translateY(0) translateX(0) scale(1);
+      transform: translateY(0) translateX(0) scale(0.85);
       clip-path: circle(100% at 50% 50%);
       opacity: 1;
     }
@@ -106,7 +110,7 @@ const CSSViewWrapper = styled.div`
 
 const CSSView = styled.div`
   column-count: 2;
-  column-gap: 10px;
+  column-gap: 5px;
 
   @media screen and (max-width: 767px) {
     column-count: 1;
@@ -114,21 +118,44 @@ const CSSView = styled.div`
   }
 `;
 
-const ImageMeta = ({ margin, photo }) => {
+const hasWebPSupport = () => {
+  const canvas =
+    typeof document === 'object' ? document.createElement('canvas') : {};
+  canvas.width = 1;
+  canvas.height = 1;
+  return canvas.toDataURL
+    ? canvas.toDataURL('image/webp').indexOf('image/webp') === 5
+    : false;
+};
+
+const getPhotoMetaInfo = photo => {
   const { adminArea5, adminArea3, adminArea1, DateTimeOriginal } = photo.meta;
   const location =
-    [adminArea5, adminArea3, adminArea1].filter(Boolean).join(', ') ||
-    'Location unavailable';
+    [adminArea5, adminArea3, adminArea1].filter(Boolean).join(', ') || '—';
   const date = DateTimeOriginal ? new Date(DateTimeOriginal * 1000) : null;
 
+  return { location, date };
+};
+
+const RenderMetaInfo = ({ photo }) => {
+  const { location, date } = getPhotoMetaInfo(photo);
+
   return (
-    <MetaInfo margin={margin}>
+    <div>
       <div>{location}</div>
       {date ? (
         <small style={{ opacity: 0.9 }}>
           {monthNames[date.getMonth()]} {date.getFullYear()}
         </small>
       ) : null}
+    </div>
+  );
+};
+
+const ImageMeta = ({ margin, photo }) => {
+  return (
+    <MetaInfo margin={margin}>
+      <RenderMetaInfo photo={photo} />
     </MetaInfo>
   );
 };
@@ -152,7 +179,7 @@ const FixedCapturesIndexLayout = ({
             breakInside: 'avoid-column',
           }}>
           <img
-            style={{ width: '100%', marginBottom: 5 }}
+            style={{ width: '100%', marginBottom: 0 }}
             src={photo.src}
             alt={photo.src}
           />
@@ -183,6 +210,10 @@ const FixedCapturesIndexLayout = ({
   </CSSViewWrapper>
 );
 
+const FooterCaption = ({ currentView: photo }) => (
+  <RenderMetaInfo photo={photo} />
+);
+
 class CapturesIndex extends React.Component {
   constructor(props) {
     super(props);
@@ -190,23 +221,25 @@ class CapturesIndex extends React.Component {
       pageContext: { pageImages, currentPage, totalPages },
     } = props;
 
+    this.isWebPSupported = hasWebPSupport();
+    this.loading = false;
+
     this.state = {
-      columns: 4,
-      direction: 'row',
+      isMobileLayout: false,
       jsEnabled: false,
       infiniteScrollEnabled: false,
-      loading: false,
       pageImages,
       currentPage,
       totalPages,
+      showSentinel: false,
+      lightboxOpen: false,
     };
   }
 
   resizeHandler = () => {
     const containerWidth = window.innerWidth;
     this.setState({
-      columns: Math.floor(containerWidth / 350),
-      direction: containerWidth < 768 ? 'column' : 'row',
+      isMobileLayout: containerWidth < 768,
     });
   };
 
@@ -229,68 +262,117 @@ class CapturesIndex extends React.Component {
     window.removeEventListener('resize', this.resizeHandler, true);
   }
 
-  onFetchMore = () => {
-    const { loading, pageImages, currentPage } = this.state;
-    if (loading) {
+  onFetchMore = async () => {
+    const { pageImages, currentPage } = this.state;
+    if (this.loading) {
       return;
     }
 
-    this.setState(
-      {
-        loading: true,
-      },
-      async () => {
-        try {
-          const nextImages = await fetch(
-            `/captures-pagination/index-${currentPage + 1}.json`,
-          ).then(t => t.json());
-          this.setState({
-            pageImages: [...pageImages, ...nextImages],
-            currentPage: currentPage + 1,
-            loading: false,
-          });
-        } catch (e) {
-          console.log('Error in fetching more images.', e);
-        }
-      },
+    try {
+      this.loading = true;
+      const nextImages = await fetch(
+        `/captures-pagination/index-${currentPage + 1}.json`,
+      ).then(t => t.json());
+      this.setState(
+        {
+          pageImages: [...pageImages, ...nextImages],
+          currentPage: currentPage + 1,
+        },
+        () => {
+          this.loading = false;
+        },
+      );
+    } catch (e) {
+      console.log('Error in fetching more images.', e);
+      this.loading = false;
+    }
+  };
+
+  showSentinel = () => {
+    const { showSentinel } = this.state;
+
+    if (!showSentinel) {
+      this.setState({
+        showSentinel: true,
+      });
+    }
+  };
+
+  toggleLightbox = (e, idx) => {
+    this.setState(({ lightboxOpen }) => ({
+      lightboxOpen: !lightboxOpen,
+      selectedIndex: idx,
+    }));
+  };
+
+  getCarouselImages = () => {
+    const { pageImages } = this.state;
+
+    const carouselImages = pageImages.map(t => {
+      const { srcWebp, src } = t.node.childImageSharp.preview;
+
+      return {
+        src: this.isWebPSupported ? srcWebp : src,
+        meta: {
+          ...t.node.EXIF,
+          ...(t.node.fields && t.node.fields.geolocation),
+        },
+      };
+    });
+
+    return carouselImages;
+  };
+
+  renderImage = ({ photo, margin, key, index }) => {
+    return (
+      <ImageWrapper
+        key={key}
+        className="animated fadeIn faster"
+        onClick={() => this.toggleLightbox(null, index)}>
+        <Img
+          onLoad={this.showSentinel}
+          style={{
+            width: photo.width,
+            height: photo.height,
+            margin,
+          }}
+          fluid={photo.img}
+        />
+        <ImageMeta margin={margin} photo={photo} />
+      </ImageWrapper>
     );
   };
 
   render() {
     const {
-      direction,
-      columns,
+      isMobileLayout,
       jsEnabled,
       infiniteScrollEnabled,
       pageImages,
       currentPage,
       totalPages,
+      showSentinel,
+      lightboxOpen,
+      selectedIndex,
     } = this.state;
     const previous = currentPage > 1;
     const next = currentPage < totalPages;
-    const isMobileLayout = direction === 'column';
     const photos = pageImages.map(t => ({
       ...t.node.childImageSharp.original,
       src:
-        t.node.childImageSharp[isMobileLayout ? 'mobileSizes' : 'desktopSizes']
+        t.node.childImageSharp[isMobileLayout ? 'mobileThumb' : 'desktopThumb']
           .src,
       img:
-        t.node.childImageSharp[isMobileLayout ? 'mobileSizes' : 'desktopSizes'],
+        t.node.childImageSharp[isMobileLayout ? 'mobileThumb' : 'desktopThumb'],
       id: t.node.id,
       meta: {
         ...t.node.EXIF,
         ...(t.node.fields && t.node.fields.geolocation),
       },
     }));
-    let additionalGalleryProps = {
-      targetRowHeight: 500,
+    const additionalGalleryProps = {
+      targetRowHeight: isMobileLayout ? 220 : 250,
     };
-    if (isMobileLayout) {
-      additionalGalleryProps = {
-        direction: 'column',
-        columns,
-      };
-    }
 
     let View = (
       <FixedCapturesIndexLayout
@@ -313,32 +395,29 @@ class CapturesIndex extends React.Component {
             {...additionalGalleryProps}
             margin={4}
             photos={photos}
-            renderImage={({ photo, margin, key, left, top }) => {
-              return (
-                <ImageWrapper
-                  key={key}
-                  className="animated fadeIn faster"
-                  style={{
-                    left,
-                    top,
-                    position: isMobileLayout ? 'absolute' : 'relative',
-                  }}>
-                  <Img
-                    style={{
-                      width: photo.width,
-                      height: photo.height,
-                      margin,
-                    }}
-                    fluid={photo.img}
-                  />
-                  <ImageMeta margin={margin} photo={photo} />
-                </ImageWrapper>
-              );
-            }}
+            renderImage={this.renderImage}
           />
-          {currentPage < totalPages ? (
+          <ModalGateway>
+            {lightboxOpen ? (
+              <Modal onClose={this.toggleLightbox}>
+                <Carousel
+                  components={{ FooterCaption }}
+                  currentIndex={selectedIndex}
+                  views={this.getCarouselImages()}
+                  trackProps={{
+                    onViewChange: currentIndex => {
+                      if (currentIndex > photos.length - 5) {
+                        this.onFetchMore();
+                      }
+                    },
+                  }}
+                />
+              </Modal>
+            ) : null}
+          </ModalGateway>
+          {showSentinel && currentPage < totalPages ? (
             <Sentinel
-              fetchMoreBufferDistance={2500}
+              fetchMoreBufferDistance={1000}
               onFetchMore={this.onFetchMore}>
               <Loader />
             </Sentinel>

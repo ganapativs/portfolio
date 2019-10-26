@@ -137,7 +137,7 @@ exports.createPages = ({ graphql, actions }) => {
                     width
                     src
                   }
-                  mobileSizes: fluid(maxHeight: 800, quality: 100) {
+                  mobileThumb: fluid(maxHeight: 220, quality: 100) {
                     # GatsbyImageSharpFluid_withWebp
                     base64
                     aspectRatio
@@ -147,7 +147,7 @@ exports.createPages = ({ graphql, actions }) => {
                     srcSetWebp
                     sizes
                   }
-                  desktopSizes: fluid(maxHeight: 500, quality: 100) {
+                  desktopThumb: fluid(maxHeight: 250, quality: 100) {
                     # GatsbyImageSharpFluid_withWebp
                     base64
                     aspectRatio
@@ -156,6 +156,10 @@ exports.createPages = ({ graphql, actions }) => {
                     srcWebp
                     srcSetWebp
                     sizes
+                  }
+                  preview: fluid(maxHeight: 800, quality: 100) {
+                    src
+                    srcWebp
                   }
                 }
               }
@@ -172,7 +176,7 @@ exports.createPages = ({ graphql, actions }) => {
       const capturesIndex = path.resolve('./src/templates/captures-index.js');
       const images = result.data.allS3ImageAsset.edges;
       /* Iterate needed pages and create them. */
-      const countImagesPerPage = 20;
+      const countImagesPerPage = 50;
       const totalPages = Math.ceil(images.length / countImagesPerPage);
       for (let currentPage = 1; currentPage <= totalPages; currentPage += 1) {
         const pathSuffix =

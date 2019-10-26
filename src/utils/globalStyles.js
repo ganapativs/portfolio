@@ -45,10 +45,6 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-html, body, #root {
-  height: 100%;
-}
-
 @media (print), (prefers-reduced-motion) {
   * {
     animation: unset !important;
