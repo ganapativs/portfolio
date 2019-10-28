@@ -98,12 +98,10 @@ const hasWebPSupport = () => {
 };
 
 const getPhotoMetaInfo = photo => {
-  const { adminArea5, adminArea3, adminArea1, DateTimeOriginal } = photo.meta;
-  const location =
-    [adminArea5, adminArea3, adminArea1].filter(Boolean).join(', ') || '—';
+  const { location, DateTimeOriginal } = photo.meta;
   const date = DateTimeOriginal ? new Date(DateTimeOriginal * 1000) : null;
 
-  return { location, date };
+  return { location: location || '—', date };
 };
 
 const RenderMetaInfo = ({ photo }) => {
@@ -196,7 +194,7 @@ class CapturesIndex extends React.Component {
     this.state = {
       isMobileLayout: false,
       jsEnabled: false,
-      pageImages,
+      images: [pageImages],
       currentPage,
       totalPages,
       showSentinel: false,
@@ -224,7 +222,7 @@ class CapturesIndex extends React.Component {
   }
 
   onFetchMore = async () => {
-    const { pageImages, currentPage } = this.state;
+    const { images, currentPage } = this.state;
     if (this.loading) {
       return;
     }
@@ -236,7 +234,7 @@ class CapturesIndex extends React.Component {
       ).then(t => t.json());
       this.setState(
         {
-          pageImages: [...pageImages, ...nextImages],
+          images: [...images, nextImages],
           currentPage: currentPage + 1,
         },
         () => {
@@ -267,19 +265,21 @@ class CapturesIndex extends React.Component {
   };
 
   getCarouselImages = () => {
-    const { pageImages } = this.state;
+    const { images } = this.state;
 
-    const carouselImages = pageImages.map(t => {
-      const { srcWebp, src } = t.node.childImageSharp.preview;
+    const carouselImages = images
+      .reduce((p, c) => [...p, ...c], [])
+      .map(t => {
+        const { srcWebp, src } = t.node.childImageSharp.preview;
 
-      return {
-        src: this.isWebPSupported ? srcWebp : src,
-        meta: {
-          ...t.node.EXIF,
-          ...(t.node.fields && t.node.fields.geolocation),
-        },
-      };
-    });
+        return {
+          src: this.isWebPSupported ? srcWebp : src,
+          meta: {
+            ...t.node.EXIF,
+            location: t.node.fields && t.node.fields.geolocation.Label,
+          },
+        };
+      });
 
     return carouselImages;
   };
@@ -304,11 +304,43 @@ class CapturesIndex extends React.Component {
     );
   };
 
+  renderGallery = () => {
+    const { isMobileLayout, images } = this.state;
+
+    return images.map(batch => {
+      const photos = batch.map(t => ({
+        ...t.node.childImageSharp.original,
+        src:
+          t.node.childImageSharp[
+            isMobileLayout ? 'mobileThumb' : 'desktopThumb'
+          ].src,
+        img:
+          t.node.childImageSharp[
+            isMobileLayout ? 'mobileThumb' : 'desktopThumb'
+          ],
+        id: t.node.id,
+        meta: {
+          ...t.node.EXIF,
+          location: t.node.fields && t.node.fields.geolocation.Label,
+        },
+      }));
+
+      return (
+        <Gallery
+          key={photos[0].id}
+          targetRowHeight={isMobileLayout ? 220 : 250}
+          margin={4}
+          photos={photos}
+          renderImage={this.renderImage}
+        />
+      );
+    });
+  };
+
   render() {
     const {
-      isMobileLayout,
+      images,
       jsEnabled,
-      pageImages,
       currentPage,
       totalPages,
       showSentinel,
@@ -317,44 +349,25 @@ class CapturesIndex extends React.Component {
     } = this.state;
     const previous = currentPage > 1;
     const next = currentPage < totalPages;
-    const photos = pageImages.map(t => ({
-      ...t.node.childImageSharp.original,
-      src:
-        t.node.childImageSharp[isMobileLayout ? 'mobileThumb' : 'desktopThumb']
-          .src,
-      img:
-        t.node.childImageSharp[isMobileLayout ? 'mobileThumb' : 'desktopThumb'],
-      id: t.node.id,
-      meta: {
-        ...t.node.EXIF,
-        ...(t.node.fields && t.node.fields.geolocation),
-      },
-    }));
-    const additionalGalleryProps = {
-      targetRowHeight: isMobileLayout ? 220 : 250,
-    };
 
     let View = null;
 
     if (jsEnabled) {
+      const carouselImages = this.getCarouselImages();
+
       View = (
         <>
-          <Gallery
-            {...additionalGalleryProps}
-            margin={4}
-            photos={photos}
-            renderImage={this.renderImage}
-          />
+          {this.renderGallery()}
           <ModalGateway>
             {lightboxOpen ? (
               <Modal onClose={this.toggleLightbox}>
                 <Carousel
                   components={{ FooterCaption }}
                   currentIndex={selectedIndex}
-                  views={this.getCarouselImages()}
+                  views={carouselImages}
                   trackProps={{
                     onViewChange: currentIndex => {
-                      if (currentIndex > photos.length - 5) {
+                      if (currentIndex > carouselImages.length - 5) {
                         this.onFetchMore();
                       }
                     },
@@ -376,7 +389,7 @@ class CapturesIndex extends React.Component {
       View = (
         <noscript>
           <FixedCapturesIndexLayout
-            photos={photos}
+            photos={images[0]}
             previous={previous}
             next={next}
             currentPage={currentPage}
