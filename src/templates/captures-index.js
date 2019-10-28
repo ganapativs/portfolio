@@ -98,7 +98,6 @@ const hasWebPSupport = () => {
 };
 
 const getPhotoMetaInfo = photo => {
-  console.log('TCL: photo', photo);
   const { location, DateTimeOriginal } = photo.meta;
   const date = DateTimeOriginal ? new Date(DateTimeOriginal * 1000) : null;
 
@@ -305,26 +304,29 @@ class CapturesIndex extends React.Component {
     );
   };
 
+  getPhotosFromBatch = batch => {
+    const { isMobileLayout } = this.state;
+
+    return batch.map(t => ({
+      ...t.node.childImageSharp.original,
+      src:
+        t.node.childImageSharp[isMobileLayout ? 'mobileThumb' : 'desktopThumb']
+          .src,
+      img:
+        t.node.childImageSharp[isMobileLayout ? 'mobileThumb' : 'desktopThumb'],
+      id: t.node.id,
+      meta: {
+        ...t.node.EXIF,
+        location: t.node.fields && t.node.fields.geolocation.Label,
+      },
+    }));
+  };
+
   renderGallery = () => {
     const { isMobileLayout, images } = this.state;
 
     return images.map(batch => {
-      const photos = batch.map(t => ({
-        ...t.node.childImageSharp.original,
-        src:
-          t.node.childImageSharp[
-            isMobileLayout ? 'mobileThumb' : 'desktopThumb'
-          ].src,
-        img:
-          t.node.childImageSharp[
-            isMobileLayout ? 'mobileThumb' : 'desktopThumb'
-          ],
-        id: t.node.id,
-        meta: {
-          ...t.node.EXIF,
-          location: t.node.fields && t.node.fields.geolocation.Label,
-        },
-      }));
+      const photos = this.getPhotosFromBatch(batch);
 
       return (
         <Gallery
@@ -390,7 +392,7 @@ class CapturesIndex extends React.Component {
       View = (
         <noscript>
           <FixedCapturesIndexLayout
-            photos={images[0]}
+            photos={this.getPhotosFromBatch(images[0])}
             previous={previous}
             next={next}
             currentPage={currentPage}
