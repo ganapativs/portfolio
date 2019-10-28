@@ -42,12 +42,13 @@ const fullPathPatterns = ['/captures/'];
 const Layout = props => {
   const { location } = props;
 
+  /* Removing `gatsby-plugin-offline` because it's buggy! */
   // Gatsby plugin offline messes up hydration and removes some styled component classes
   // Temp workaround is to render empty layout in offline page by default
   // https://github.com/gatsbyjs/gatsby/issues/11738#issuecomment-488660043
-  if (location.pathname === '/offline-plugin-app-shell-fallback/') {
-    return null;
-  }
+  // if (location.pathname === '/offline-plugin-app-shell-fallback/') {
+  //   return null;
+  // }
 
   const isFullWidth =
     props.full || fullPathPatterns.some(p => location.pathname.startsWith(p));
