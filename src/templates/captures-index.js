@@ -98,6 +98,7 @@ const hasWebPSupport = () => {
 };
 
 const getPhotoMetaInfo = photo => {
+  console.log('TCL: photo', photo);
   const { location, DateTimeOriginal } = photo.meta;
   const date = DateTimeOriginal ? new Date(DateTimeOriginal * 1000) : null;
 
