@@ -39,6 +39,7 @@ const getGeoLocation = async (latitude, longitude) => {
     )}`,
   ).then(r => r.json());
 
+  console.log({ latitude, longitude });
   const {
     AdditionalData,
     ...Address
