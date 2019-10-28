@@ -41,7 +41,7 @@ const getGeoLocation = async (latitude, longitude) => {
 
   console.log({ latitude, longitude });
   const { AdditionalData, ...Address } =
-    (response.Response.View &&
+    (response.Response.View[0] &&
       response.Response.View[0].Result[0].Location.Address) ||
     {};
 
