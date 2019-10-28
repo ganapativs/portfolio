@@ -55,37 +55,6 @@ const MetaInfo = styled.div`
   box-shadow: 0.15rem 0.15rem var(--color-accent);
   clip-path: circle(0% at 100% 100%);
   transition: all 0.15s ease-out;
-
-  @media screen and (max-width: 767px) {
-    transform: scale(1);
-    clip-path: circle(100% at 50% 50%);
-    opacity: 1;
-    border-radius: 20px;
-    bottom: 6px;
-    right: 6px;
-    padding: 0 0.4rem;
-    background: transparent;
-    color: var(--color-light);
-    font-size: 0.6rem;
-    box-shadow: none;
-    overflow: hidden;
-
-    small {
-      display: none;
-    }
-
-    &:before {
-      content: '';
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      z-index: -1;
-      opacity: 0.8;
-      background: var(--color-dark);
-    }
-  }
 `;
 
 const ImageWrapper = styled.div`
@@ -374,19 +343,7 @@ class CapturesIndex extends React.Component {
       targetRowHeight: isMobileLayout ? 220 : 250,
     };
 
-    let View = (
-      <FixedCapturesIndexLayout
-        photos={photos}
-        previous={previous}
-        next={next}
-        currentPage={currentPage}
-        totalPages={totalPages}
-      />
-    );
-
-    if (!jsEnabled) {
-      View = <noscript>{View}</noscript>;
-    }
+    let View = null;
 
     if (jsEnabled && infiniteScrollEnabled) {
       View = (
@@ -423,6 +380,16 @@ class CapturesIndex extends React.Component {
             </Sentinel>
           ) : null}
         </>
+      );
+    } else {
+      View = (
+        <FixedCapturesIndexLayout
+          photos={photos}
+          previous={previous}
+          next={next}
+          currentPage={currentPage}
+          totalPages={totalPages}
+        />
       );
     }
 
