@@ -12,7 +12,7 @@ const switchTheme = (theme, toggleTheme) => {
   captureEvent(nextTheme, 'change', 'Theme');
 };
 
-const HeaderRow = styled.div`
+const HeaderRow = styled.header`
   position: sticky;
   top: 0;
   background: var(--color-dark);

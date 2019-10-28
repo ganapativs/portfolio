@@ -29,6 +29,14 @@ void function() {
   }
 
   setAccentColor(preferredAccentColor)
+
+  // Add accent color variable to body initially to avoid color flicker
+  var css = 'body { --color-accent: ' + preferredAccentColor + ' }',
+  head = document.head || document.getElementsByTagName('head')[0],
+  style = document.createElement('style');
+  head.appendChild(style);
+  style.type = 'text/css';
+  style.appendChild(document.createTextNode(css));
 }()
     `,
       },

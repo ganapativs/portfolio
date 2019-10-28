@@ -3,7 +3,10 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
 body {
-  --color-accent: #FF2E63;
+  /*
+    Accent color is set initially at gatsby-plugin-accent-color plugin
+    level and handled subsequently in accentSwitcher component
+  */
   --color-dark: #f3f8f9;
   --color-light: #0f0f10;
   --color-light-dark: #909295;
