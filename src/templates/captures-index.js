@@ -308,7 +308,6 @@ class CapturesIndex extends React.Component {
     const {
       isMobileLayout,
       jsEnabled,
-      infiniteScrollEnabled,
       pageImages,
       currentPage,
       totalPages,
@@ -337,7 +336,7 @@ class CapturesIndex extends React.Component {
 
     let View = null;
 
-    if (jsEnabled && infiniteScrollEnabled) {
+    if (jsEnabled) {
       View = (
         <>
           <Gallery
