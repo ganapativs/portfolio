@@ -185,11 +185,12 @@ class CapturesIndex extends React.Component {
   constructor(props) {
     super(props);
     const {
-      pageContext: { pageImages, currentPage, totalPages },
+      pageContext: { pageImages, currentPage, totalPages, imagesCountPerPage },
     } = props;
 
     this.isWebPSupported = hasWebPSupport();
     this.loading = false;
+    this.imagesCountPerPage = imagesCountPerPage;
 
     this.state = {
       isMobileLayout: false,
@@ -222,8 +223,12 @@ class CapturesIndex extends React.Component {
   }
 
   onFetchMore = async () => {
-    const { images, currentPage } = this.state;
+    const { images, currentPage, totalPages } = this.state;
     if (this.loading) {
+      return;
+    }
+
+    if (currentPage === totalPages) {
       return;
     }
 
@@ -284,12 +289,17 @@ class CapturesIndex extends React.Component {
     return carouselImages;
   };
 
-  renderImage = ({ photo, margin, key, index }) => {
+  renderImage = (batchIndex, { photo, margin, key, index }) => {
     return (
       <ImageWrapper
         key={key}
         className="animated fadeIn faster"
-        onClick={() => this.toggleLightbox(null, index)}>
+        onClick={() =>
+          this.toggleLightbox(
+            null,
+            this.imagesCountPerPage * batchIndex + index,
+          )
+        }>
         <Img
           onLoad={this.showSentinel}
           style={{
@@ -325,7 +335,7 @@ class CapturesIndex extends React.Component {
   renderGallery = () => {
     const { isMobileLayout, images } = this.state;
 
-    return images.map(batch => {
+    return images.map((batch, batchIndex) => {
       const photos = this.getPhotosFromBatch(batch);
 
       return (
@@ -334,7 +344,7 @@ class CapturesIndex extends React.Component {
           targetRowHeight={isMobileLayout ? 220 : 250}
           margin={4}
           photos={photos}
-          renderImage={this.renderImage}
+          renderImage={this.renderImage.bind(this, batchIndex)}
         />
       );
     });
