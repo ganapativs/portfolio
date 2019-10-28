@@ -196,7 +196,6 @@ class CapturesIndex extends React.Component {
     this.state = {
       isMobileLayout: false,
       jsEnabled: false,
-      infiniteScrollEnabled: false,
       pageImages,
       currentPage,
       totalPages,
@@ -215,15 +214,8 @@ class CapturesIndex extends React.Component {
   componentDidMount() {
     this.resizeHandler();
     window.addEventListener('resize', this.resizeHandler, true);
-
-    const {
-      pageContext: { currentPage },
-    } = this.props;
-    // Only enable infinite scrolling if user is on first page and JS is enabled
-    // Else fall back to pagination
     this.setState({
       jsEnabled: true,
-      infiniteScrollEnabled: currentPage === 1,
     });
   }
 
@@ -383,13 +375,15 @@ class CapturesIndex extends React.Component {
       );
     } else {
       View = (
-        <FixedCapturesIndexLayout
-          photos={photos}
-          previous={previous}
-          next={next}
-          currentPage={currentPage}
-          totalPages={totalPages}
-        />
+        <noscript>
+          <FixedCapturesIndexLayout
+            photos={photos}
+            previous={previous}
+            next={next}
+            currentPage={currentPage}
+            totalPages={totalPages}
+          />
+        </noscript>
       );
     }
 
