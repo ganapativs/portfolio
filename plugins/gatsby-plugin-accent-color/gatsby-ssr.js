@@ -1,7 +1,10 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const React = require('react');
 
-exports.onRenderBody = function accentColor({ setPreBodyComponents }) {
+exports.onRenderBody = function accentColor(
+  { setPreBodyComponents },
+  { defaultAccentColor } = {},
+) {
   setPreBodyComponents([
     React.createElement('script', {
       key: 'gatsby-plugin-accent-color',
@@ -28,7 +31,7 @@ void function() {
     } catch (err) {}
   }
 
-  setAccentColor(preferredAccentColor)
+  setAccentColor(preferredAccentColor || '${defaultAccentColor}')
 
   // Add accent color variable to body initially to avoid color flicker
   var css = 'body { --color-accent: ' + preferredAccentColor + ' }',

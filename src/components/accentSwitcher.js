@@ -95,7 +95,7 @@ function AccentSwitcher() {
 
   useEffect(() => {
     // eslint-disable-next-line no-underscore-dangle
-    setAccentColor(window.__accentColor || '#FF2E63');
+    setAccentColor(window.__accentColor);
     // eslint-disable-next-line no-underscore-dangle
     window.__onAccentColorChange = () => {
       // eslint-disable-next-line no-underscore-dangle

@@ -223,10 +223,15 @@ module.exports = {
         showSpinner: false,
       },
     },
+    {
+      resolve: `gatsby-plugin-accent-color`,
+      options: {
+        defaultAccentColor: `#FF2E63`,
+      },
+    },
     `gatsby-plugin-twitter`,
     `gatsby-plugin-netlify-cache`,
     `gatsby-plugin-dark-mode`,
-    `gatsby-plugin-accent-color`,
     `gatsby-plugin-webpack-size`,
     `gatsby-plugin-catch-links`,
     // Disabling temporarily
