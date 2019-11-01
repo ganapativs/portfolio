@@ -127,11 +127,7 @@ const UserLogo = styled.div`
   }
 `;
 
-const W1 = styled.div`
-  animation-delay: 0.5s;
-`;
-
-const W2 = styled.div`
+const Wrapper = styled.div`
   width: 160px;
   height: 120px;
   margin: 30px 0 25px -15px;
@@ -155,20 +151,18 @@ export default function ProfileLogo({ profileLogo }) {
     : [];
 
   return (
-    <W1>
-      <W2>
-        <UserLogo>
-          <UserLogoBGRotate>
-            <UserLogoBG>
-              <UserLogoImageWrapper>
-                <UserLogoImage>
-                  {profileLogo ? <Img fluid={sources} /> : null}
-                </UserLogoImage>
-              </UserLogoImageWrapper>
-            </UserLogoBG>
-          </UserLogoBGRotate>
-        </UserLogo>
-      </W2>
-    </W1>
+    <Wrapper className="animated fadeIn">
+      <UserLogo>
+        <UserLogoBGRotate>
+          <UserLogoBG>
+            <UserLogoImageWrapper>
+              <UserLogoImage>
+                {profileLogo ? <Img fluid={sources} /> : null}
+              </UserLogoImage>
+            </UserLogoImageWrapper>
+          </UserLogoBG>
+        </UserLogoBGRotate>
+      </UserLogo>
+    </Wrapper>
   );
 }
