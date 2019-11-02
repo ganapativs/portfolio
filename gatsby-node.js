@@ -121,11 +121,7 @@ exports.createPages = ({ graphql, actions }) => {
                 id
                 fields {
                   geolocation {
-                    adminArea5
-                    adminArea3
-                    adminArea1
-                    latitude
-                    longitude
+                    Label
                   }
                 }
                 EXIF {
@@ -176,8 +172,8 @@ exports.createPages = ({ graphql, actions }) => {
       const capturesIndex = path.resolve('./src/templates/captures-index.js');
       const images = result.data.allS3ImageAsset.edges;
       /* Iterate needed pages and create them. */
-      const countImagesPerPage = 50;
-      const totalPages = Math.ceil(images.length / countImagesPerPage);
+      const imagesCountPerPage = 50;
+      const totalPages = Math.ceil(images.length / imagesCountPerPage);
       for (let currentPage = 1; currentPage <= totalPages; currentPage += 1) {
         const pathSuffix =
           currentPage > 1
@@ -185,8 +181,8 @@ exports.createPages = ({ graphql, actions }) => {
             : ''; /* To create paths "/", "/2", "/3", ... */
 
         /* Collect images needed for this page. */
-        const startIndexInclusive = countImagesPerPage * (currentPage - 1);
-        const endIndexExclusive = startIndexInclusive + countImagesPerPage;
+        const startIndexInclusive = imagesCountPerPage * (currentPage - 1);
+        const endIndexExclusive = startIndexInclusive + imagesCountPerPage;
         const pageImages = images.slice(startIndexInclusive, endIndexExclusive);
 
         /* Combine all data needed to construct this page. */
@@ -198,6 +194,7 @@ exports.createPages = ({ graphql, actions }) => {
             pageImages,
             currentPage,
             totalPages,
+            imagesCountPerPage,
           },
         };
 

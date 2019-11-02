@@ -55,37 +55,6 @@ const MetaInfo = styled.div`
   box-shadow: 0.15rem 0.15rem var(--color-accent);
   clip-path: circle(0% at 100% 100%);
   transition: all 0.15s ease-out;
-
-  @media screen and (max-width: 767px) {
-    transform: scale(1);
-    clip-path: circle(100% at 50% 50%);
-    opacity: 1;
-    border-radius: 20px;
-    bottom: 6px;
-    right: 6px;
-    padding: 0 0.4rem;
-    background: transparent;
-    color: var(--color-light);
-    font-size: 0.6rem;
-    box-shadow: none;
-    overflow: hidden;
-
-    small {
-      display: none;
-    }
-
-    &:before {
-      content: '';
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      z-index: -1;
-      opacity: 0.8;
-      background: var(--color-dark);
-    }
-  }
 `;
 
 const ImageWrapper = styled.div`
@@ -129,12 +98,10 @@ const hasWebPSupport = () => {
 };
 
 const getPhotoMetaInfo = photo => {
-  const { adminArea5, adminArea3, adminArea1, DateTimeOriginal } = photo.meta;
-  const location =
-    [adminArea5, adminArea3, adminArea1].filter(Boolean).join(', ') || '—';
+  const { location, DateTimeOriginal } = photo.meta;
   const date = DateTimeOriginal ? new Date(DateTimeOriginal * 1000) : null;
 
-  return { location, date };
+  return { location: location || '—', date };
 };
 
 const RenderMetaInfo = ({ photo }) => {
@@ -218,17 +185,17 @@ class CapturesIndex extends React.Component {
   constructor(props) {
     super(props);
     const {
-      pageContext: { pageImages, currentPage, totalPages },
+      pageContext: { pageImages, currentPage, totalPages, imagesCountPerPage },
     } = props;
 
     this.isWebPSupported = hasWebPSupport();
     this.loading = false;
+    this.imagesCountPerPage = imagesCountPerPage;
 
     this.state = {
       isMobileLayout: false,
       jsEnabled: false,
-      infiniteScrollEnabled: false,
-      pageImages,
+      images: [pageImages],
       currentPage,
       totalPages,
       showSentinel: false,
@@ -246,15 +213,8 @@ class CapturesIndex extends React.Component {
   componentDidMount() {
     this.resizeHandler();
     window.addEventListener('resize', this.resizeHandler, true);
-
-    const {
-      pageContext: { currentPage },
-    } = this.props;
-    // Only enable infinite scrolling if user is on first page and JS is enabled
-    // Else fall back to pagination
     this.setState({
       jsEnabled: true,
-      infiniteScrollEnabled: currentPage === 1,
     });
   }
 
@@ -263,8 +223,12 @@ class CapturesIndex extends React.Component {
   }
 
   onFetchMore = async () => {
-    const { pageImages, currentPage } = this.state;
+    const { images, currentPage, totalPages } = this.state;
     if (this.loading) {
+      return;
+    }
+
+    if (currentPage === totalPages) {
       return;
     }
 
@@ -275,7 +239,7 @@ class CapturesIndex extends React.Component {
       ).then(t => t.json());
       this.setState(
         {
-          pageImages: [...pageImages, ...nextImages],
+          images: [...images, nextImages],
           currentPage: currentPage + 1,
         },
         () => {
@@ -306,29 +270,36 @@ class CapturesIndex extends React.Component {
   };
 
   getCarouselImages = () => {
-    const { pageImages } = this.state;
+    const { images } = this.state;
 
-    const carouselImages = pageImages.map(t => {
-      const { srcWebp, src } = t.node.childImageSharp.preview;
+    const carouselImages = images
+      .reduce((p, c) => [...p, ...c], [])
+      .map(t => {
+        const { srcWebp, src } = t.node.childImageSharp.preview;
 
-      return {
-        src: this.isWebPSupported ? srcWebp : src,
-        meta: {
-          ...t.node.EXIF,
-          ...(t.node.fields && t.node.fields.geolocation),
-        },
-      };
-    });
+        return {
+          src: this.isWebPSupported ? srcWebp : src,
+          meta: {
+            ...t.node.EXIF,
+            location: t.node.fields && t.node.fields.geolocation.Label,
+          },
+        };
+      });
 
     return carouselImages;
   };
 
-  renderImage = ({ photo, margin, key, index }) => {
+  renderImage = (batchIndex, { photo, margin, key, index }) => {
     return (
       <ImageWrapper
         key={key}
         className="animated fadeIn faster"
-        onClick={() => this.toggleLightbox(null, index)}>
+        onClick={() =>
+          this.toggleLightbox(
+            null,
+            this.imagesCountPerPage * batchIndex + index,
+          )
+        }>
         <Img
           onLoad={this.showSentinel}
           style={{
@@ -343,21 +314,10 @@ class CapturesIndex extends React.Component {
     );
   };
 
-  render() {
-    const {
-      isMobileLayout,
-      jsEnabled,
-      infiniteScrollEnabled,
-      pageImages,
-      currentPage,
-      totalPages,
-      showSentinel,
-      lightboxOpen,
-      selectedIndex,
-    } = this.state;
-    const previous = currentPage > 1;
-    const next = currentPage < totalPages;
-    const photos = pageImages.map(t => ({
+  getPhotosFromBatch = batch => {
+    const { isMobileLayout } = this.state;
+
+    return batch.map(t => ({
       ...t.node.childImageSharp.original,
       src:
         t.node.childImageSharp[isMobileLayout ? 'mobileThumb' : 'desktopThumb']
@@ -367,46 +327,60 @@ class CapturesIndex extends React.Component {
       id: t.node.id,
       meta: {
         ...t.node.EXIF,
-        ...(t.node.fields && t.node.fields.geolocation),
+        location: t.node.fields && t.node.fields.geolocation.Label,
       },
     }));
-    const additionalGalleryProps = {
-      targetRowHeight: isMobileLayout ? 220 : 250,
-    };
+  };
 
-    let View = (
-      <FixedCapturesIndexLayout
-        photos={photos}
-        previous={previous}
-        next={next}
-        currentPage={currentPage}
-        totalPages={totalPages}
-      />
-    );
+  renderGallery = () => {
+    const { isMobileLayout, images } = this.state;
 
-    if (!jsEnabled) {
-      View = <noscript>{View}</noscript>;
-    }
+    return images.map((batch, batchIndex) => {
+      const photos = this.getPhotosFromBatch(batch);
 
-    if (jsEnabled && infiniteScrollEnabled) {
+      return (
+        <Gallery
+          key={photos[0].id}
+          targetRowHeight={isMobileLayout ? 220 : 250}
+          margin={4}
+          photos={photos}
+          renderImage={this.renderImage.bind(this, batchIndex)}
+        />
+      );
+    });
+  };
+
+  render() {
+    const {
+      images,
+      jsEnabled,
+      currentPage,
+      totalPages,
+      showSentinel,
+      lightboxOpen,
+      selectedIndex,
+    } = this.state;
+    const previous = currentPage > 1;
+    const next = currentPage < totalPages;
+
+    let View = null;
+
+    if (jsEnabled) {
+      const carouselImages = this.getCarouselImages();
+
       View = (
         <>
-          <Gallery
-            {...additionalGalleryProps}
-            margin={4}
-            photos={photos}
-            renderImage={this.renderImage}
-          />
+          {this.renderGallery()}
           <ModalGateway>
             {lightboxOpen ? (
               <Modal onClose={this.toggleLightbox}>
                 <Carousel
                   components={{ FooterCaption }}
                   currentIndex={selectedIndex}
-                  views={this.getCarouselImages()}
+                  views={carouselImages}
                   trackProps={{
                     onViewChange: currentIndex => {
-                      if (currentIndex > photos.length - 5) {
+                      if (currentIndex > carouselImages.length - 5) {
                         this.onFetchMore();
                       }
                     },
@@ -423,6 +397,18 @@ class CapturesIndex extends React.Component {
             </Sentinel>
           ) : null}
         </>
+      );
+    } else {
+      View = (
+        <noscript>
+          <FixedCapturesIndexLayout
+            photos={this.getPhotosFromBatch(images[0])}
+            previous={previous}
+            next={next}
+            currentPage={currentPage}
+            totalPages={totalPages}
+          />
+        </noscript>
       );
     }
 

@@ -19,12 +19,32 @@ const fastExif = require('fast-exif');
 const dms2dec = require('dms2dec');
 const fetch = require('cross-fetch');
 
+const serialise = obj =>
+  Object.entries(obj)
+    .map(([key, val]) => `${key}=${val}`)
+    .join('&');
+
 const getGeoLocation = async (latitude, longitude) => {
+  const params = {
+    prox: `${latitude},${longitude}`,
+    mode: 'retrieveAddresses',
+    maxresults: '1',
+    gen: '9',
+    app_id: process.env.HERE_APP_ID,
+    app_code: process.env.HERE_APP_CODE,
+  };
   const response = await fetch(
-    `http://open.mapquestapi.com/geocoding/v1/reverse?key=${process.env.MAPQUEST_API_KEY}&location=${latitude},${longitude}&includeNearestIntersection=true`,
+    `https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?${serialise(
+      params,
+    )}`,
   ).then(r => r.json());
 
-  return response.results[0].locations[0];
+  const { AdditionalData, ...Address } =
+    (response.Response.View[0] &&
+      response.Response.View[0].Result[0].Location.Address) ||
+    {};
+
+  return Address;
 };
 
 const populateImageGeoLocation = async (exifData, createNodeField, node) => {

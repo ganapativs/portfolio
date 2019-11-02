@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ExternalLink from './externalLink';
 
-const FooterWrapper = styled.div`
+const FooterWrapper = styled.footer`
   max-width: 840px;
   margin: 0 auto;
   align-self: center;
