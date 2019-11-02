@@ -185,7 +185,7 @@ module.exports = {
         fonts: [
           {
             family: `Merriweather`,
-            variants: [`700`],
+            variants: [`400`],
           },
           {
             family: `Source Sans Pro`,
