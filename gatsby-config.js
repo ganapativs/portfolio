@@ -242,7 +242,7 @@ module.exports = {
     //     sv: process.env.HOTJAR_SNIPPET_VERSION,
     //   },
     // },
-    // Removing `gatsby-plugin-offline` because it's buggy!
-    `gatsby-plugin-remove-serviceworker`,
+    // https://www.gatsbyjs.org/packages/gatsby-plugin-offline/
+    `gatsby-plugin-offline`,
   ],
 };
