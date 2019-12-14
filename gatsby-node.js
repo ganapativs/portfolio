@@ -47,15 +47,12 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
-  const showDraftPosts = process.env.NODE_ENV === 'development';
+  const showAllPosts = process.env.NODE_ENV === 'development';
 
   const postQueries = new Promise((resolve, reject) => {
     createPage({
       path: `/blog/`,
       component: path.resolve('./src/templates/blog-index.js'),
-      context: {
-        showDraftPosts,
-      },
     });
 
     graphql(
@@ -63,7 +60,7 @@ exports.createPages = ({ graphql, actions }) => {
           {
             allMdx(
               sort: { fields: [frontmatter___date], order: DESC }
-              filter: { frontmatter: { draft: { eq: ${showDraftPosts} } } }
+              ${showAllPosts ? '' : 'filter: { frontmatter: { draft: { eq: false } } }'}
               limit: 1000
             ) {
               edges {

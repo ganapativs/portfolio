@@ -130,8 +130,7 @@ module.exports = {
               {
                 allMdx(
                   sort: { order: DESC, fields: [frontmatter___date] }
-                  filter: { frontmatter: { draft: { eq: ${process.env
-                    .NODE_ENV === 'development'} } } }
+                  ${process.env.NODE_ENV === 'development' ? '' : 'filter: { frontmatter: { draft: { ne: true } } }' }
                   limit: 1000,
                 ) {
                   edges {

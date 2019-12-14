@@ -36,7 +36,12 @@ const CoverImage = styled.div`
 
 class BlogPostTemplate extends React.Component {
   render() {
-    const post = this.props.data.allMdx.edges[0].node;
+    const post = (this.props.data.blogPost.edges[0] || {}).node;
+
+    if (!post) {
+      return null;
+    }
+
     const { body } = post;
     const { previous, next, slug } = this.props.pageContext;
 
@@ -138,7 +143,7 @@ export const pageQuery = graphql`
         author
       }
     }
-    allMdx(filter: { fields: { slug: { eq: $slug } } }) {
+    blogPost: allMdx(filter: { fields: { slug: { eq: $slug } } }) {
       edges {
         node {
           id

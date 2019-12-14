@@ -41,7 +41,8 @@ const Spoiler = styled.p`
 
 class BlogIndex extends React.Component {
   render() {
-    const { edges: posts } = this.props.data.allMdx;
+    const isDev = process.env.NODE_ENV === 'development';
+    const { edges: posts } = this.props.data[`${isDev ? 'dev' : 'prod'}Mdx`];
 
     return (
       <div style={{ width: '100%', maxWidth: 680, margin: '0 auto' }}>
@@ -86,16 +87,31 @@ class BlogIndex extends React.Component {
 export default BlogIndex;
 
 export const pageQuery = graphql`
-  query BlogIndex($showDraftPosts: Boolean!) {
+  query BlogIndex {
     site {
       siteMetadata {
         title
         description
       }
     }
-    allMdx(
+    devMdx: allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+      edges {
+        node {
+          fields {
+            slug
+          }
+          timeToRead
+          frontmatter {
+            date(formatString: "MMMM DD, YYYY")
+            title
+            spoiler
+          }
+        }
+      }
+    }
+    prodMdx: allMdx(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { draft: { eq: $showDraftPosts } } }
+      filter: { frontmatter: { draft: { eq: false } } }
     ) {
       edges {
         node {
