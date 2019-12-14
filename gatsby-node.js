@@ -79,8 +79,7 @@ exports.createPages = ({ graphql, actions }) => {
     ).then(result => {
       if (result.errors) {
         console.log(result.errors);
-        reject(result.errors);
-        return;
+        return reject(result.errors);
       }
 
       // Create blog posts pages.
@@ -163,9 +162,9 @@ exports.createPages = ({ graphql, actions }) => {
     ).then(result => {
       if (result.errors) {
         console.log(result.errors);
-        reject(result.errors);
-        return;
+        return reject(result.errors);
       }
+
       const capturesIndex = path.resolve('./src/templates/captures-index.js');
       const images = result.data.allS3ImageAsset.edges;
       /* Iterate needed pages and create them. */
