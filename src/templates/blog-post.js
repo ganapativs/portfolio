@@ -11,6 +11,10 @@ import { rhythm, scale } from '../utils/typography';
 const GITHUB_USERNAME = 'ganapativs';
 const GITHUB_REPO_NAME = 'Portfolio';
 
+const Article = styled.article`
+  line-height: 1.75rem;
+`;
+
 const PostInfo = styled.p`
   color: var(--color-light-dark);
   font-weight: bold;
@@ -36,12 +40,7 @@ const CoverImage = styled.div`
 
 class BlogPostTemplate extends React.Component {
   render() {
-    const post = (this.props.data.blogPost.edges[0] || {}).node;
-
-    if (!post) {
-      return null;
-    }
-
+    const post = this.props.data.blogPost.edges[0].node;
     const { body } = post;
     const { previous, next, slug } = this.props.pageContext;
 
@@ -64,7 +63,7 @@ class BlogPostTemplate extends React.Component {
           slug={post.fields.slug}
         />
         <main>
-          <article>
+          <Article>
             <header>
               <h1
                 style={{
@@ -108,7 +107,7 @@ class BlogPostTemplate extends React.Component {
                 </a>
               </p>
             </footer>
-          </article>
+          </Article>
         </main>
         <nav>
           <Ul>
