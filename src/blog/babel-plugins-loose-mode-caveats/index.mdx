@@ -15,7 +15,7 @@ to get unique items in an array. The source code looks like this.
 const getUnique = arr => [...new Set(arr)];
 ```
 
-Then I execute the function expecting it to work fine. but, it **didn't** 😅
+Then I execute the function expecting it to work fine. but, **it didn't** 😅
 
 ```js
 /**
@@ -56,7 +56,7 @@ There it was! wrongly transpiled code. now I knew it was my babel config.
 
 For some reason, `loose` mode option was set to `true` and was the **real culprit** 🙆‍♂️
 
-## What is the `loose` mode in babel plugins?
+## What does `loose` mode mean?
 
 Many babel plugins have two modes:
 
