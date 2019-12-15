@@ -240,7 +240,7 @@ pre[data-line] {
   margin-left: -1.3125rem;
   padding-right: 1em;
   padding-left: 1.25em;
-  border-left: 0.25em solid #F06292;
+  border-left: 0.25em solid var(--color-accent);
 }
 
 .gatsby-highlight {
