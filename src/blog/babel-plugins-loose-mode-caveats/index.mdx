@@ -8,20 +8,31 @@ cover: './cover.jpg'
 
 Recently I was working on a JavaScript library that had `babel` setup to
 transpile `ES6+` code into `ES5`. For some functionality, I had to write a function
-to get unique items in an array like this.
+to get unique items in an array. The source code looks like this.
 
 ```js
+// Source code
 const getUnique = arr => [...new Set(arr)];
 ```
 
-When run `getUnique([1,2,1])`, it should return `[1,2]`. instead, it returned `[Set({1, 2})]` 😮
+Then I execute the function expecting it to work fine. but, it **didn't** 😅
 
-I wasn't sure what was happening. I double-checked all package versions,
-build tool config, restarted my build. But, the issue still persisted.
+```js
+/**
+ * Expected output: [1,2]
+ * Actual output: [Set({1, 2})] 😮
+*/
+const uniqueArr = getUnique([1,2,1]);
+```
+
+I wasn't sure what was happening. Why did it produce the wrong result?
+I double-checked the package versions, build tool config, restarted my build.
+But, the issue still persisted.
 
 Finally, I decided to check the [transpiled code][set transpile].
 
 ```js
+// Transpiled code
 var getUnique = function getUnique(arr) {
   return [].concat(new Set(arr));
 };
@@ -45,7 +56,7 @@ There it was! wrongly transpiled code. now I knew it was my babel config.
 
 For some reason, `loose` mode option was set to `true` and was the **real culprit** 🙆‍♂️
 
-## What is `loose` mode in babel plugins?
+## What is the `loose` mode in babel plugins?
 
 Many babel plugins have two modes:
 
@@ -72,8 +83,8 @@ const charArr = [..."hello"];
 
 /**
  * Transpiled code in loose mode(Produces wrong result)
- *   expected: ["h", "e", "l", "l", "o"]
- *   generated: ["hello"]
+ *   Expected output: ["h", "e", "l", "l", "o"]
+ *   Actual output: ["hello"]
 */
 var charArr = [].concat("hello");
 ```
