@@ -46,7 +46,10 @@ class BlogIndex extends React.Component {
 
     return (
       <div style={{ width: '100%', maxWidth: 680, margin: '0 auto' }}>
-        <SEO title="Blog by Ganapati V S" description="Blog by Ganapati V S" />
+        <SEO
+          title="Blog by Ganapati V S"
+          description="Tech blog by Ganapati V S"
+        />
         <main>
           {posts.map(({ node }) => {
             const title = node.frontmatter.title || node.fields.slug;
