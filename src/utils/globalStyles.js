@@ -256,8 +256,8 @@ pre[data-line] {
 
 @media screen and (max-width: 767px) {
   .gatsby-highlight {
-    margin-left: -1.15rem;
-    margin-right: -1.15rem;
+    margin-left: -1.13rem;
+    margin-right: -1.13rem;
   }
 }
 
