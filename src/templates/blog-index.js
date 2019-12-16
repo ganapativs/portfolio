@@ -46,7 +46,7 @@ class BlogIndex extends React.Component {
 
     return (
       <div style={{ width: '100%', maxWidth: 680, margin: '0 auto' }}>
-        <SEO title="Blog" />
+        <SEO title="Blog by Ganapati V S" description="Blog by Ganapati V S" />
         <main>
           {posts.map(({ node }) => {
             const title = node.frontmatter.title || node.fields.slug;
@@ -54,7 +54,7 @@ class BlogIndex extends React.Component {
               <Article
                 key={node.fields.slug}
                 // Skipping keyboard navigation as link inside will handle it
-                onClick={() => this.props.navigate(`/blog${node.fields.slug}`)}
+                onClick={() => this.props.navigate(node.fields.slug)}
                 style={{
                   marginBottom: rhythm(1.2),
                 }}>
@@ -63,7 +63,7 @@ class BlogIndex extends React.Component {
                     style={{
                       marginBottom: rhythm(1 / 4),
                     }}>
-                    <Link to={`/blog${node.fields.slug}`} rel="bookmark">
+                    <Link to={node.fields.slug} rel="bookmark">
                       {title}
                     </Link>
                   </h3>

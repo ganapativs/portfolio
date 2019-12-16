@@ -4,6 +4,7 @@ date: '2019-12-15'
 spoiler: Using the 'loose' mode option with babel plugins might be risky?
 draft: false
 cover: './cover.jpg'
+keywords: Babel,ES6,ES5,Loose mode,Transpile JavaScript,Build tools
 ---
 
 Recently I was working on a JavaScript library that had `babel` setup to
@@ -91,6 +92,9 @@ var charArr = [].concat("hello");
 
 It's recommended to keep `loose` mode option set to `false` unless you are okay with the limitations
 of `loose` mode.
+
+This was a fun issue I had to deal with recently. Hope you enjoyed reading this blog 😇
+If you did, give me a follow [@ganapativs](https://twitter.com/ganapativs) 🙌
 
 [github issue]: https://github.com/babel/babel/issues/7958#issuecomment-389916364
 [set transpile]: https://babeljs.io/en/repl#?browsers=&build=&builtIns=false&spec=false&loose=true&code_lz=MYewdgzgLgBA5gUygVTASwI4FcEwLwwCGATsfgHwwDaAdHWAgO4wDKSAFCcQJQC6A3EA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=env&prettier=false&targets=&version=7.7.4&externalPlugins=

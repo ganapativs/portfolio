@@ -36,11 +36,13 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   }
 
   if (node.internal.type === `Mdx`) {
-    const slug = createFilePath({ node, getNode, basePath: `blog` });
+    const basePath = `blog`;
+    const slug = createFilePath({ node, getNode, basePath });
+
     createNodeField({
       node,
       name: `slug`,
-      value: slug,
+      value: `/${basePath}${slug}`,
     });
   }
 };
@@ -60,7 +62,11 @@ exports.createPages = ({ graphql, actions }) => {
           {
             allMdx(
               sort: { fields: [frontmatter___date], order: DESC }
-              ${showAllPosts ? '' : 'filter: { frontmatter: { draft: { eq: false } } }'}
+              ${
+                showAllPosts
+                  ? ''
+                  : 'filter: { frontmatter: { draft: { eq: false } } }'
+              }
               limit: 1000
             ) {
               edges {
@@ -91,7 +97,7 @@ exports.createPages = ({ graphql, actions }) => {
         const next = index === 0 ? null : posts[index - 1].node;
 
         createPage({
-          path: `/blog${post.node.fields.slug}`,
+          path: post.node.fields.slug,
           component: blogPost,
           context: {
             slug: post.node.fields.slug,

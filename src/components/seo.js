@@ -2,7 +2,13 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
-function SEO({ title = '' }) {
+function SEO({
+  title = '',
+  description = '',
+  keywords = '',
+  fbBanner = '',
+  twitterBanner = '',
+}) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -20,7 +26,7 @@ function SEO({ title = '' }) {
   return (
     <Helmet
       title={title}
-      titleTemplate={`${site.siteMetadata.title} | %s`}
+      titleTemplate={`%s`}
       htmlAttributes={{
         lang: 'en',
       }}>
@@ -34,17 +40,23 @@ function SEO({ title = '' }) {
         httpEquiv="Content-Security-Policy"
         content="default-src 'self' blob https://www.google.com/analytics https://marketingplatform.google.com/about/analytics https://twitter.com https://github.com https://stackoverflow.com https://www.linkedin.com https://dribbble.com https://www.instagram.com https://www.facebook.com https://www.google-analytics.com ; base-uri 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com; block-all-mixed-content; connect-src 'self' ws: ; img-src 'self' data: https://www.google-analytics.com; manifest-src 'self'; font-src blob 'self'; style-src 'self' blob 'unsafe-inline' fonts.googleapis.com;"
       /> */}
-      <meta name="description" content={site.siteMetadata.description} />
+      <meta
+        name="description"
+        content={description || site.siteMetadata.description}
+      />
       <meta name="robots" content="index,follow" />
       <meta name="googlebot" content="index,follow" />
       <meta
         name="google-site-verification"
         content="SjjIT31sWEJ5ZN2ADsgkGuVZCCJSS0KyvBODf6g0Ijw"
       />
-      <meta name="subject" content={site.siteMetadata.title} />
+      <meta name="subject" content={title || site.siteMetadata.title} />
       <meta
         name="keywords"
-        content="HTML5,CSS3,JavaScript,React,UI,UX,CSS-in-JS,Animation,Frontend Developer,Webpack,Node.js,GraphQL,Performance,60fps,Full-Stack Developer in Bangalore,Full-Stack Developer in Bengaluru"
+        content={
+          keywords ||
+          'HTML5,CSS3,JavaScript,React,UI,UX,CSS-in-JS,Animation,Frontend Developer,Webpack,Node.js,GraphQL,Performance,60fps,Full-Stack Developer in Bangalore,Full-Stack Developer in Bengaluru'
+        }
       />
       <link rel="author" href="/humans.txt" />
       <link rel="me" href="https://twitter.com/ganapativs" type="text/html" />
@@ -72,24 +84,29 @@ function SEO({ title = '' }) {
       />
       <meta property="og:url" content="https://meetguns.com" />
       <meta property="og:type" content="website" />
-      <meta property="og:title" content={site.siteMetadata.title} />
+      <meta property="og:title" content={title || site.siteMetadata.title} />
       <meta
         property="og:image"
-        content="https://meetguns.com/images/fb-banner.png"
+        content={fbBanner || 'https://meetguns.com/images/fb-banner.png'}
       />
-      <meta property="og:description" content={site.siteMetadata.description} />
+      <meta
+        property="og:description"
+        content={description || site.siteMetadata.description}
+      />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content={site.siteMetadata.author} />
       <meta name="twitter:creator" content={site.siteMetadata.author} />
       <meta name="twitter:url" content="https://meetguns.com" />
-      <meta name="twitter:title" content={site.siteMetadata.title} />
+      <meta name="twitter:title" content={title || site.siteMetadata.title} />
       <meta
         name="twitter:description"
-        content={site.siteMetadata.description}
+        content={description || site.siteMetadata.description}
       />
       <meta
         name="twitter:image"
-        content="https://meetguns.com/images/twitter-banner.png"
+        content={
+          twitterBanner || 'https://meetguns.com/images/twitter-banner.png'
+        }
       />
     </Helmet>
   );

@@ -25,7 +25,7 @@ export const query = graphql`
 `;
 const About = ({ data: profileLogo }) => (
   <>
-    <SEO title="About" />
+    <SEO title="Ganapati V S" />
     <AboutMe profileLogo={profileLogo} />
   </>
 );
