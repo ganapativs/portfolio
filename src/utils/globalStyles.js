@@ -115,16 +115,18 @@ pre[class*='language-'] {
   word-wrap: normal;
   line-height: 1.5;
   margin-bottom: 0;
-  font-size: 0.85rem;
-
   -moz-tab-size: 4;
   -o-tab-size: 4;
   tab-size: 4;
-
   -webkit-hyphens: none;
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
+}
+
+p code[class*='language-'],
+p pre[class*='language-'] {
+  font-size: 0.85rem;
 }
 
 /* Code blocks */
@@ -238,7 +240,7 @@ pre[data-line] {
   margin-left: -1.3125rem;
   padding-right: 1em;
   padding-left: 1.25em;
-  border-left: 0.25em solid #F06292;
+  border-left: 0.25em solid var(--color-accent);
 }
 
 .gatsby-highlight {
@@ -246,7 +248,8 @@ pre[data-line] {
   margin-left: -1.3125rem;
   margin-right: -1.3125rem;
   /* background: #011627; */
-  background: linear-gradient(0deg, #060217, #10024c);
+  /* background: linear-gradient(0deg, #060217, #10024c); */
+  background: linear-gradient(45deg, black, #191919);
   -webkit-overflow-scrolling: touch;
   overflow: auto;
 }

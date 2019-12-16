@@ -414,7 +414,7 @@ class CapturesIndex extends React.Component {
 
     return (
       <>
-        <SEO title="Captures" />
+        <SEO title="Captures by Ganapati V S" />
         <Main>{View}</Main>
       </>
     );

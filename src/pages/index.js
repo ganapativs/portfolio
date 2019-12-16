@@ -5,7 +5,7 @@ import AboutMe from '../components/aboutMe';
 
 export const query = graphql`
   query {
-    mobileImage: file(relativePath: { eq: "ganapativs.png" }) {
+    mobileImage: file(relativePath: { eq: "ganapativs.jpg" }) {
       childImageSharp {
         # 120 * 1.1 (-5% margin)
         fluid(maxWidth: 132, maxHeight: 132, quality: 100) {
@@ -13,7 +13,7 @@ export const query = graphql`
         }
       }
     }
-    desktopImage: file(relativePath: { eq: "ganapativs.png" }) {
+    desktopImage: file(relativePath: { eq: "ganapativs.jpg" }) {
       childImageSharp {
         # 160 * 1.1 (-5% margin)
         fluid(maxWidth: 176, maxHeight: 176, quality: 100) {
@@ -25,7 +25,7 @@ export const query = graphql`
 `;
 const About = ({ data: profileLogo }) => (
   <>
-    <SEO title="About" />
+    <SEO title="Ganapati V S" />
     <AboutMe profileLogo={profileLogo} />
   </>
 );

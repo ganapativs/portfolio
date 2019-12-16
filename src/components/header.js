@@ -214,10 +214,10 @@ const links = [
     link: '/',
     name: 'About',
   },
-  // {
-  //   link: '/blog/',
-  //   name: 'Blog',
-  // },
+  {
+    link: '/blog/',
+    name: 'Blog',
+  },
   {
     link: '/captures/',
     name: 'Captures',

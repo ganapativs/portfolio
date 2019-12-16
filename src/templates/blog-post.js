@@ -11,6 +11,10 @@ import { rhythm, scale } from '../utils/typography';
 const GITHUB_USERNAME = 'ganapativs';
 const GITHUB_REPO_NAME = 'Portfolio';
 
+const Article = styled.article`
+  line-height: 1.75rem;
+`;
+
 const PostInfo = styled.p`
   color: var(--color-light-dark);
   font-weight: bold;
@@ -36,15 +40,12 @@ const CoverImage = styled.div`
 
 class BlogPostTemplate extends React.Component {
   render() {
-    const post = this.props.data.allMdx.edges[0].node;
+    const post = this.props.data.blogPost.edges[0].node;
     const { body } = post;
     const { previous, next, slug } = this.props.pageContext;
 
-    const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/src/pages/${slug.slice(
-      1,
-      slug - 1,
-    )}index.md`;
-    const blogUrl = `https://meetguns.com/blog${slug}`;
+    const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/src${slug}index.mdx`;
+    const blogUrl = `https://meetguns.com${slug}`;
     const discussUrl = `https://mobile.twitter.com/search?q=${encodeURIComponent(
       blogUrl,
     )}`;
@@ -56,10 +57,12 @@ class BlogPostTemplate extends React.Component {
         <SEO
           title={post.frontmatter.title}
           description={post.frontmatter.spoiler}
-          slug={post.fields.slug}
+          keywords={post.frontmatter.keywords}
+          fbBanner={`${blogUrl}twitter-card.jpg`}
+          twitterBanner={`${blogUrl}twitter-card.jpg`}
         />
         <main>
-          <article>
+          <Article>
             <header>
               <h1
                 style={{
@@ -103,20 +106,20 @@ class BlogPostTemplate extends React.Component {
                 </a>
               </p>
             </footer>
-          </article>
+          </Article>
         </main>
         <nav>
           <Ul>
             <li>
               {previous ? (
-                <Link to={`/blog${previous.fields.slug}`} rel="prev">
+                <Link to={previous.fields.slug} rel="prev">
                   ← {previous.frontmatter.title}
                 </Link>
               ) : null}
             </li>
             <li>
               {next ? (
-                <Link to={`/blog${next.fields.slug}`} rel="next">
+                <Link to={next.fields.slug} rel="next">
                   {next.frontmatter.title} →
                 </Link>
               ) : null}
@@ -138,7 +141,7 @@ export const pageQuery = graphql`
         author
       }
     }
-    allMdx(filter: { fields: { slug: { eq: $slug } } }) {
+    blogPost: allMdx(filter: { fields: { slug: { eq: $slug } } }) {
       edges {
         node {
           id
@@ -148,6 +151,7 @@ export const pageQuery = graphql`
             title
             date(formatString: "MMMM DD, YYYY")
             spoiler
+            keywords
             cover {
               publicURL
               childImageSharp {

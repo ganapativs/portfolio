@@ -41,11 +41,12 @@ const Spoiler = styled.p`
 
 class BlogIndex extends React.Component {
   render() {
-    const { edges: posts } = this.props.data.allMdx;
+    const isDev = process.env.NODE_ENV === 'development';
+    const { edges: posts } = this.props.data[`${isDev ? 'dev' : 'prod'}Mdx`];
 
     return (
       <div style={{ width: '100%', maxWidth: 680, margin: '0 auto' }}>
-        <SEO title="Blog" />
+        <SEO title="Blog by Ganapati V S" description="Blog by Ganapati V S" />
         <main>
           {posts.map(({ node }) => {
             const title = node.frontmatter.title || node.fields.slug;
@@ -53,7 +54,7 @@ class BlogIndex extends React.Component {
               <Article
                 key={node.fields.slug}
                 // Skipping keyboard navigation as link inside will handle it
-                onClick={() => this.props.navigate(`/blog${node.fields.slug}`)}
+                onClick={() => this.props.navigate(node.fields.slug)}
                 style={{
                   marginBottom: rhythm(1.2),
                 }}>
@@ -62,7 +63,7 @@ class BlogIndex extends React.Component {
                     style={{
                       marginBottom: rhythm(1 / 4),
                     }}>
-                    <Link to={`/blog${node.fields.slug}`} rel="bookmark">
+                    <Link to={node.fields.slug} rel="bookmark">
                       {title}
                     </Link>
                   </h3>
@@ -86,16 +87,31 @@ class BlogIndex extends React.Component {
 export default BlogIndex;
 
 export const pageQuery = graphql`
-  query BlogIndex($showDraftPosts: Boolean!) {
+  query BlogIndex {
     site {
       siteMetadata {
         title
         description
       }
     }
-    allMdx(
+    devMdx: allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+      edges {
+        node {
+          fields {
+            slug
+          }
+          timeToRead
+          frontmatter {
+            date(formatString: "MMMM DD, YYYY")
+            title
+            spoiler
+          }
+        }
+      }
+    }
+    prodMdx: allMdx(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { draft: { eq: $showDraftPosts } } }
+      filter: { frontmatter: { draft: { eq: false } } }
     ) {
       edges {
         node {

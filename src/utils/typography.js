@@ -53,6 +53,7 @@ const theme = {
       fontStyle: 'italic',
       padding: '0 1.5rem',
       lineHeight: 'inherit',
+      borderLeft: '4px solid var(--color-accent)',
     },
     'blockquote.translation': {
       fontSize: '1em',

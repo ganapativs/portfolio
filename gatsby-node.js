@@ -36,26 +36,25 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   }
 
   if (node.internal.type === `Mdx`) {
-    const slug = createFilePath({ node, getNode, basePath: `blog` });
+    const basePath = `blog`;
+    const slug = createFilePath({ node, getNode, basePath });
+
     createNodeField({
       node,
       name: `slug`,
-      value: slug,
+      value: `/${basePath}${slug}`,
     });
   }
 };
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
-  const showDraftPosts = process.env.NODE_ENV === 'development';
+  const showAllPosts = process.env.NODE_ENV === 'development';
 
   const postQueries = new Promise((resolve, reject) => {
     createPage({
       path: `/blog/`,
       component: path.resolve('./src/templates/blog-index.js'),
-      context: {
-        showDraftPosts,
-      },
     });
 
     graphql(
@@ -63,7 +62,11 @@ exports.createPages = ({ graphql, actions }) => {
           {
             allMdx(
               sort: { fields: [frontmatter___date], order: DESC }
-              filter: { frontmatter: { draft: { eq: ${showDraftPosts} } } }
+              ${
+                showAllPosts
+                  ? ''
+                  : 'filter: { frontmatter: { draft: { eq: false } } }'
+              }
               limit: 1000
             ) {
               edges {
@@ -82,8 +85,7 @@ exports.createPages = ({ graphql, actions }) => {
     ).then(result => {
       if (result.errors) {
         console.log(result.errors);
-        reject(result.errors);
-        return;
+        return reject(result.errors);
       }
 
       // Create blog posts pages.
@@ -95,7 +97,7 @@ exports.createPages = ({ graphql, actions }) => {
         const next = index === 0 ? null : posts[index - 1].node;
 
         createPage({
-          path: `/blog${post.node.fields.slug}`,
+          path: post.node.fields.slug,
           component: blogPost,
           context: {
             slug: post.node.fields.slug,
@@ -166,9 +168,9 @@ exports.createPages = ({ graphql, actions }) => {
     ).then(result => {
       if (result.errors) {
         console.log(result.errors);
-        reject(result.errors);
-        return;
+        return reject(result.errors);
       }
+
       const capturesIndex = path.resolve('./src/templates/captures-index.js');
       const images = result.data.allS3ImageAsset.edges;
       /* Iterate needed pages and create them. */

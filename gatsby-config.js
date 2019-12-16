@@ -17,12 +17,41 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `blog`,
+        path: `${__dirname}/src/blog`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-mdx`,
       options: {
         // TODO: Remove this workaround
         // https://github.com/gatsbyjs/gatsby/issues/15486
         plugins: [`gatsby-remark-images`, `gatsby-remark-autolink-headers`],
+        extensions: [`.mdx`, `.md`],
         gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-twitter-cards`,
+            options: {
+              title: 'meetguns.com',
+              separator: '|',
+              author: 'Ganapati V S',
+              // background: require.resolve('./content/assets/base.png'), // defaults to black
+              background: '#0f0f10',
+              fontColor: '#f3f8f9',
+              titleFontSize: 96,
+              subtitleFontSize: 60,
+              fontStyle: 'monospace',
+            },
+          },
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -72,20 +101,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `blog`,
-        path: `${__dirname}/src/blog`,
-      },
-    },
-    {
       resolve: `gatsby-plugin-feed`,
       options: {
         query: `
@@ -102,9 +117,8 @@ module.exports = {
             serialize: ({ query: { site, allMdx } }) => {
               return allMdx.edges.map(edge => {
                 const { siteUrl } = site.siteMetadata;
-                const blogUrl = `${siteUrl}/blog`;
                 const postText = `
-                <div style="margin-top=55px; font-style: italic;">(This is an article posted to my blog at meetguns.com. You can read it online by <a href="${blogUrl +
+                <div style="margin-top=55px; font-style: italic;">(This is an article posted to my blog at meetguns.com. You can read it online by <a href="${siteUrl +
                   edge.node.fields.slug}">clicking here</a>.)</div>
               `;
 
@@ -120,8 +134,8 @@ module.exports = {
                   ...edge.node.frontmatter,
                   description: edge.node.frontmatter.spoiler,
                   date: edge.node.frontmatter.date,
-                  url: blogUrl + edge.node.fields.slug,
-                  guid: blogUrl + edge.node.fields.slug,
+                  url: siteUrl + edge.node.fields.slug,
+                  guid: siteUrl + edge.node.fields.slug,
                   custom_elements: [{ 'content:encoded': html + postText }],
                 };
               });
@@ -130,8 +144,11 @@ module.exports = {
               {
                 allMdx(
                   sort: { order: DESC, fields: [frontmatter___date] }
-                  filter: { frontmatter: { draft: { eq: ${process.env
-                    .NODE_ENV === 'development'} } } }
+                  ${
+                    process.env.NODE_ENV === 'development'
+                      ? ''
+                      : 'filter: { frontmatter: { draft: { ne: true } } }'
+                  }
                   limit: 1000,
                 ) {
                   edges {

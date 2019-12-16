@@ -1,0 +1,115 @@
+---
+title: Babel plugins 'loose' mode caveats
+date: '2019-12-15'
+spoiler: Using the 'loose' mode option with babel plugins might be risky?
+draft: false
+cover: './cover.jpg'
+keywords: Babel,ES6,ES5,Loose mode,Transpile JavaScript,Build tools
+---
+
+Recently I was working on a JavaScript library that had `babel` setup to
+transpile `ES6+` code into `ES5`. For some functionality, I had to write a function
+to get unique items in an array. The source code looks like this.
+
+```js
+// Source code
+const getUnique = arr => [...new Set(arr)];
+```
+
+Then I execute the function expecting it to work fine. but, **it didn't** 😅
+
+```js
+/**
+ * Expected output: [1,2]
+ * Actual output: [Set({1, 2})] 😮
+*/
+const uniqueArr = getUnique([1,2,1]);
+```
+
+I wasn't sure what was happening. Why did it produce the wrong result?
+I double-checked the package versions, build tool config, restarted my build.
+But, the issue still persisted.
+
+Finally, I decided to check the [transpiled code][set transpile].
+
+```js
+// Transpiled code
+var getUnique = function getUnique(arr) {
+  return [].concat(new Set(arr));
+};
+```
+
+There it was! wrongly transpiled code. now I knew it was my babel config.
+
+```json{6}
+{
+  "presets": {
+    [
+      "@babel/preset-env",
+      {
+          "loose": true,
+          "modules": false,
+      }
+    ]
+  }
+}
+```
+
+For some reason, `loose` mode option was set to `true` and was the **real culprit** 🙆‍♂️
+
+## What does `loose` mode mean?
+
+Many babel plugins have two modes:
+
+- **Normal mode**: closely follows the ECMAScript 6 standard
+- **Loose mode**: produces smaller & simple ES5 code, more like the handwritten one
+
+Here is a example of generated code of [`loose` mode disabled(default)][loose mode disabled] vs
+[`loose` mode enabled][loose mode enabled].
+
+`loose` mode might generate potentially faster, smaller and old browser engine compatible `ES5` code. but,
+it might also introduce unintended results when switching from transpiled `ES6+` to native `ES6+` at
+later stage as it produces code that is less faithful to `ES6+` semantics.
+
+As discussed in [this GitHub issue][github issue]
+
+> In loose mode, all [iterables](https://javascript.info/iterable) are assumed to be arrays.
+
+So, when using `loose` mode, some of the basic operations like converting a `string`
+to an array using `spread` operators might not work as expected.
+
+```js
+// Input code
+const charArr = [..."hello"];
+
+/**
+ * Transpiled code in loose mode(Produces wrong result)
+ *   Expected output: ["h", "e", "l", "l", "o"]
+ *   Actual output: ["hello"]
+*/
+var charArr = [].concat("hello");
+```
+
+It's recommended to keep `loose` mode option set to `false` unless you are okay with the limitations
+of `loose` mode.
+
+This was a fun issue I had to deal with recently. Hope you enjoyed reading this blog 😇
+If you did, give me a follow [@ganapativs](https://twitter.com/ganapativs) 🙌
+
+[github issue]: https://github.com/babel/babel/issues/7958#issuecomment-389916364
+[set transpile]: https://babeljs.io/en/repl#?browsers=&build=&builtIns=false&spec=false&loose=true&code_lz=MYewdgzgLgBA5gUygVTASwI4FcEwLwwCGATsfgHwwDaAdHWAgO4wDKSAFCcQJQC6A3EA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=env&prettier=false&targets=&version=7.7.4&externalPlugins=
+[loose mode disabled]: https://babeljs.io/en/repl#?browsers=&build=&builtIns=false&spec=false&loose=false&code_lz=MYewdgzgLgBAtgUwE4HMEEElIIYE8IwC8MAFNlgIwA0M5SATAJREB8MA2gHTd3Uzec69ALoBuIA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=env&prettier=false&targets=&version=7.7.4&externalPlugins=
+[loose mode enabled]: https://babeljs.io/en/repl#?browsers=&build=&builtIns=false&spec=false&loose=true&code_lz=MYewdgzgLgBAtgUwE4HMEEElIIYE8IwC8MAFNlgIwA0M5SATAJREB8MA2gHTd3Uzec69ALoBuIA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=env&prettier=false&targets=&version=7.7.4&externalPlugins=
+
+---
+
+**References:**
+
+- [https://github.com/babel/babel/issues/7958](https://github.com/babel/babel/issues/7958)
+- [https://2ality.com/2015/12/babel6-loose-mode.html](https://2ality.com/2015/12/babel6-loose-mode.html)
+
+**Thanks:**
+
+- [Photo by Kyle Glenn on Unsplash](https://unsplash.com/photos/IFLgWYlT2fI)
+
+---
