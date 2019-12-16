@@ -7,7 +7,7 @@ cover: './cover.jpg'
 keywords: Babel,ES6,ES5,Loose mode,Transpile JavaScript,Build tools
 ---
 
-Recently I was working on a JavaScript library that had `babel` setup to
+Recently I was working on a JavaScript project that had `babel` setup to
 transpile `ES6+` code into `ES5`. For some functionality, I had to write a function
 to get unique items in an array. The source code looks like this.
 
@@ -90,8 +90,12 @@ const charArr = [..."hello"];
 var charArr = [].concat("hello");
 ```
 
-It's recommended to keep `loose` mode option set to `false` unless you are okay with the limitations
-of `loose` mode.
+## Should I use the `loose` mode?
+
+- Avoid it in large or shared projects unless you and everybody working on the project are okay with its limitations.
+- If you are a library author, it should probably be okay to use it as you have full control over the source code.
+
+https://twitter.com/_developit/status/1192456661681811458
 
 This was a fun issue I had to deal with recently. Hope you enjoyed reading this blog 😇
 If you did, give me a follow [@ganapativs](https://twitter.com/ganapativs) 🙌
