@@ -1,3 +1,8 @@
+[build.environment]
+  NODE_VERSION = "13.4.0"
+  YARN_VERSION = "1.21.1"
+  YARN_FLAGS = "--no-ignore-optional"
+
 # The following redirect is intended for use with most SPAs that handle
 # routing internally.
 [[redirects]]
