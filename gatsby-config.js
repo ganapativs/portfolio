@@ -221,7 +221,7 @@ module.exports = {
         accessKeyId: process.env.ACCESS_KEY_ID,
         secretAccessKey: process.env.SECRET_ACCESS_KEY,
         bucketName:
-          process.env.NODE_ENV === 'development'
+          process.env.NODE_ENV !== 'development'
             ? process.env.PHOTOGRAPHY_BUCKET_DEV
             : process.env.PHOTOGRAPHY_BUCKET,
         region: process.env.REGION,
@@ -251,6 +251,7 @@ module.exports = {
     `gatsby-plugin-dark-mode`,
     `gatsby-plugin-webpack-size`,
     `gatsby-plugin-catch-links`,
+    `gatsby-plugin-sitemap`,
     // Disabling temporarily
     // {
     //   resolve: `gatsby-plugin-hotjar`,
