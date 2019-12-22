@@ -77,10 +77,19 @@ const DevInfo = () => {
         . <Separator mb={8} />I love coding, contributing to the open source and
         have created{' '}
         <ExternalLink
-          href="https://www.npmjs.com/package/react-delightful-scroller?ref=meetguns.com"
+          href="https://github.com/ganapativs/react-spectrum?ref=meetguns.com"
+          onClick={() =>
+            captureEvent('react-spectrum GitHub', 'click', 'Social Links')
+          }
+          style={{ whiteSpace: 'nowrap' }}>
+          react-spectrum
+        </ExternalLink>
+        ,{' '}
+        <ExternalLink
+          href="https://github.com/ganapativs/react-delightful-scroller?ref=meetguns.com"
           onClick={() =>
             captureEvent(
-              'react-delightful-scroller NPM',
+              'react-delightful-scroller GitHub',
               'click',
               'Social Links',
             )
@@ -90,9 +99,9 @@ const DevInfo = () => {
         </ExternalLink>
         ,{' '}
         <ExternalLink
-          href="https://www.npmjs.com/package/react-dynamic-import?ref=meetguns.com"
+          href="https://github.com/ganapativs/react-dynamic-import?ref=meetguns.com"
           onClick={() =>
-            captureEvent('react-dynamic-import NPM', 'click', 'Social Links')
+            captureEvent('react-dynamic-import GitHub', 'click', 'Social Links')
           }
           style={{ whiteSpace: 'nowrap' }}>
           react-dynamic-import
@@ -111,7 +120,7 @@ const DevInfo = () => {
           onClick={() =>
             captureEvent('Personal GitHub', 'click', 'Social Links')
           }>
-          more
+          many more
         </ExternalLink>{' '}
         <span role="img" aria-label="Yay!!!">
           🎉
