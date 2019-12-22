@@ -254,10 +254,17 @@ pre[data-line] {
   overflow: auto;
 }
 
+
+@media screen and (hover: hover) and (pointer: fine) {
+  .gatsby-highlight {
+    border-radius: 1rem;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .gatsby-highlight {
-    margin-left: -1.13rem;
-    margin-right: -1.13rem;
+    margin-left: -1.1rem;
+    margin-right: -1.1rem;
   }
 }
 

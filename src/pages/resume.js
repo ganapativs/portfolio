@@ -46,7 +46,12 @@ const Resume = ({ size: { width } }) => {
       <SEO title="Resume" />
       <div key={theme}>
         <p>
-          <b>Updated:</b> Dec 22, 2019
+          {!visible ? (
+            <b>Loading resume...</b>
+          ) : (
+            // Invisible space char to fix vertical space shift
+            '‎'
+          )}
           <a
             style={{ float: 'right' }}
             href={`/resume/${theme}.pdf`}
