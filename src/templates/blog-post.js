@@ -28,13 +28,17 @@ const Ul = styled.ul`
 const CoverImage = styled.div`
   margin-top: ${rhythm(1.8)};
   margin-bottom: ${rhythm(1.8)};
-  box-shadow: 0px 30px 60px -10px var(--color-light-op-2),
-    0px 18px 36px -18px var(--color-light-op-2);
+  box-shadow: 0 0 2px var(--color-light-op-1);
 
   @media screen and (min-width: 768px) {
     margin-bottom: ${rhythm(2.5)};
     margin-left: -5rem;
     margin-right: -5rem;
+  }
+
+  @media screen and (hover: hover) and (pointer: fine) {
+    border-radius: 1rem;
+    overflow: hidden;
   }
 `;
 
@@ -153,7 +157,6 @@ export const pageQuery = graphql`
             spoiler
             keywords
             cover {
-              publicURL
               childImageSharp {
                 # Expected cover image to have 1/2 aspect ratio
                 fluid(maxWidth: 1200, maxHeight: 600, quality: 85) {
