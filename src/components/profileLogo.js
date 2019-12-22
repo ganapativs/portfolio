@@ -87,10 +87,10 @@ const UserLogoImageWrapper = styled(UserLogoBGCommon)`
 `;
 
 const UserLogoImage = styled(UserLogoBGCommon)`
-  width: 110%;
-  height: 110%;
-  left: -5%;
-  top: -5%;
+  width: 116%;
+  height: 116%;
+  left: -8%;
+  top: -8%;
   border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
   opacity: 0;
   transform: scale(1) rotate(-10deg) translateY(10%);

@@ -108,6 +108,7 @@ function AccentSwitcher() {
       <AccentGlobalStyle accentColor={accentColor} />
       <AccentToggleWrapper ref={wrapperRef}>
         <AccentToggle
+          title="Change accent color"
           background={accentColor}
           onClick={toggleVisibility}></AccentToggle>
         {visible ? (
