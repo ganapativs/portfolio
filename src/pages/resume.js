@@ -47,7 +47,7 @@ const Resume = ({ size: { width } }) => {
       <div key={theme}>
         <p>
           {!visible ? (
-            <b>Loading resume...</b>
+            <b>Fetching resume...</b>
           ) : (
             // Invisible space char to fix vertical space shift
             '‎'
