@@ -319,11 +319,8 @@ class CapturesIndex extends React.Component {
 
     return batch.map(t => ({
       ...t.node.childImageSharp.original,
-      src:
-        t.node.childImageSharp[isMobileLayout ? 'mobileThumb' : 'desktopThumb']
-          .src,
-      img:
-        t.node.childImageSharp[isMobileLayout ? 'mobileThumb' : 'desktopThumb'],
+      src: t.node.childImageSharp[isMobileLayout ? 'thumb' : 'thumb'].src,
+      img: t.node.childImageSharp[isMobileLayout ? 'thumb' : 'thumb'],
       id: t.node.id,
       meta: {
         ...t.node.EXIF,
