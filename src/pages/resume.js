@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { pdfjs, Document, Page } from 'react-pdf';
+import Spectrum from 'react-spectrum';
 import SizeMe from 'react-sizeme';
 import SEO from '../components/seo';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
@@ -45,20 +46,25 @@ const Resume = ({ size: { width } }) => {
     <ResumeWrapper>
       <SEO title="Resume" />
       <div key={theme}>
-        <p>
-          {!visible ? (
-            <b>Fetching resume...</b>
-          ) : (
-            // Invisible space char to fix vertical space shift
-            '‎'
-          )}
+        <p style={{ textAlign: 'right' }}>
           <a
-            style={{ float: 'right' }}
             href={`/resume/${theme}.pdf`}
             download={`Ganapati V S - Resume - ${theme}.pdf`}>
             <button>Download resume</button>
           </a>
         </p>
+        {!visible ? (
+          <div style={{ position: 'absolute' }}>
+            <Spectrum
+              width={width}
+              colors={
+                theme === 'light'
+                  ? ['#bbb', '#ccc', '#ddd']
+                  : ['#222', '#333', '#444']
+              }
+            />
+          </div>
+        ) : null}
         <ResumeDoc
           className="animated fadeIn"
           style={{ visibility: visible ? 'visible' : 'hidden' }}>
@@ -74,6 +80,39 @@ const Resume = ({ size: { width } }) => {
             />
           </Document>
         </ResumeDoc>
+        {visible ? (
+          <div style={{ margin: '5rem 0 1rem 0' }}>
+            <Spectrum
+              width={width}
+              linesPerParagraph={4}
+              lineDistance={8}
+              wordHeight={4}
+              wordWidths={[20, 30, 40, 50, 60]}
+              colors={
+                theme === 'light'
+                  ? [
+                      '#d9ce71',
+                      '#4a7770',
+                      '#41466c',
+                      '#dae198',
+                      '#51b496',
+                      '#418b90',
+                      '#dae18f',
+                      '#51b48c',
+                      '#418b84',
+                    ]
+                  : [
+                      '#e7ecf7',
+                      '#aacdf7',
+                      '#47b5f6',
+                      '#fde1d7',
+                      '#fab3d6',
+                      '#f689d3',
+                    ]
+              }
+            />
+          </div>
+        ) : null}
       </div>
     </ResumeWrapper>
   );

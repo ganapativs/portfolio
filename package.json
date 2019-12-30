@@ -71,6 +71,7 @@
     "react-pdf": "^4.1.0",
     "react-photo-gallery": "^8.0.0",
     "react-sizeme": "^2.6.10",
+    "react-spectrum": "^1.1.0",
     "react-typography": "^0.16.19",
     "styled-components": "^4.4.1",
     "typography": "^0.16.19",
