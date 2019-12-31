@@ -122,6 +122,7 @@ function AccentSwitcher() {
               '#6abe83',
               '#209396',
               '#00A0FF',
+              '#4d80e4',
             ]}
             onChange={toggleAccent}
           />
