@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { GithubPicker } from 'react-color';
 import useOutsideClick from './hooks/useOutsideClick';
+import { accentColors } from '../utils/helpers';
 
 const AccentToggleWrapper = styled.button`
   position: relative;
@@ -115,15 +116,7 @@ function AccentSwitcher() {
           <GithubPicker
             className="animated fadeIn faster"
             width="36px"
-            colors={[
-              '#f1404b',
-              '#FF2E63',
-              '#f07818',
-              '#6abe83',
-              '#209396',
-              '#00A0FF',
-              '#4d80e4',
-            ]}
+            colors={accentColors}
             onChange={toggleAccent}
           />
         ) : null}

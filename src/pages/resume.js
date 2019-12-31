@@ -57,6 +57,7 @@ const Resume = ({ size: { width } }) => {
           <div style={{ position: 'absolute' }}>
             <Spectrum
               width={width}
+              wordRadius={0}
               colors={
                 theme === 'light'
                   ? ['#bbb', '#ccc', '#ddd']

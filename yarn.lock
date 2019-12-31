@@ -11524,10 +11524,10 @@ react-sizeme@^2.6.10:
     shallowequal "^1.1.0"
     throttle-debounce "^2.1.0"
 
-react-spectrum@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-spectrum/-/react-spectrum-1.1.0.tgz#ed2b2edcdce7639aad58a88d89f40fdb94b6fba1"
-  integrity sha512-PLeieO2st5kWqhhMiMkpIz7mLP/CU0m7zWcf1dqdJlF6kgoUrLu2KNGiHm6NDcdryZOPNZ6U/jiMoIh1sttJSw==
+react-spectrum@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/react-spectrum/-/react-spectrum-1.1.2.tgz#c2309747954d7cdcd305e1cd7d7d13fd1004b17b"
+  integrity sha512-kR3KaGHXaEU5HvzrvoVApWpbdsF0PHoCDFDA0zZSy97ldLhP6uLp9E8M/3+MDWaQvtZAR2bgGlDunG2A/x4PkQ==
   dependencies:
     "@types/react" "^16.9.17"
     react "^16.12.0"
