@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 import { GithubPicker } from 'react-color';
 import useOutsideClick from './hooks/useOutsideClick';
 import { accentColors } from '../utils/helpers';
@@ -75,38 +75,36 @@ const AccentToggle = styled.div`
   }
 `;
 
-const AccentGlobalStyle = createGlobalStyle`
-    body {
-        --color-accent: ${p => p.accentColor}
-    }
-`;
-
 function AccentSwitcher() {
   const wrapperRef = useRef(null);
   const [accentColor, setAccentColor] = useState(null);
   const [visible, setVisibility] = useState(false);
   const hideVisibility = () => setVisibility(false);
   const toggleVisibility = () => setVisibility(!visible);
+  /* eslint-disable no-underscore-dangle */
   const toggleAccent = ({ hex: accent }) => {
-    // eslint-disable-next-line no-underscore-dangle
     window.__setPreferredAccentColor(accent);
     toggleVisibility();
   };
   useOutsideClick(wrapperRef, hideVisibility);
 
   useEffect(() => {
-    // eslint-disable-next-line no-underscore-dangle
-    setAccentColor(window.__accentColor);
-    // eslint-disable-next-line no-underscore-dangle
-    window.__onAccentColorChange = () => {
-      // eslint-disable-next-line no-underscore-dangle
+    const setAccentColorOnBody = () => {
       setAccentColor(window.__accentColor);
+      document.body.style.setProperty('--color-accent', window.__accentColor);
+    };
+
+    setAccentColorOnBody();
+    window.__onAccentColorChange = setAccentColorOnBody;
+
+    return () => {
+      window.__onAccentColorChange = () => {};
     };
   }, []);
+  /* eslint-enable no-underscore-dangle */
 
   return (
     <>
-      <AccentGlobalStyle accentColor={accentColor} />
       <AccentToggleWrapper ref={wrapperRef}>
         <AccentToggle
           title="Change accent color"
