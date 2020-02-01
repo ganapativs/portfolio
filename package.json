@@ -28,7 +28,7 @@
     "dms2dec": "^1.1.0",
     "fast-exif": "^1.0.1",
     "focus-visible": "^5.0.2",
-    "gatsby": "2.19.6",
+    "gatsby": "2.19.10",
     "gatsby-image": "^2.2.39",
     "gatsby-plugin-catch-links": "^2.1.24",
     "gatsby-plugin-dark-mode": "^1.1.0",
