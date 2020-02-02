@@ -247,6 +247,7 @@ class CapturesIndex extends React.Component {
         },
       );
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log('Error in fetching more images.', e);
       this.loading = false;
     }
