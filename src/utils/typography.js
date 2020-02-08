@@ -8,18 +8,24 @@ const theme = {
   baseFontSize: '18px',
   bodyColor: 'var(--color-light)',
   bodyFontFamily: ['Source Sans Pro', 'sans-serif'],
-  headerFontFamily: ['Merriweather', 'sans-serif'],
+  headerFontFamily: ['Merriweather', 'serif'],
   headerWeight: '400',
   bodyWeight: 400,
-  boldWeight: 700,
+  boldWeight: 600,
   includeNormalize: true,
   plugins: [new CodePlugin()],
   overrideStyles: () => ({
+    a: {
+      textDecoration: 'none',
+    },
     'a, a:focus, a:active, a:hover': {
       color: 'var(--color-accent)',
     },
     'a:focus, a:active, a:hover': {
-      textDecoration: 'none',
+      textDecoration: 'underline',
+    },
+    'a code': {
+      color: 'var(--color-accent) !important',
     },
     hr: {
       background: 'var(--color-light-op-2)',

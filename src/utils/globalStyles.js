@@ -98,7 +98,6 @@ button, input[type="submit"], input[type="reset"] {
     outline: inherit;
 }
 
-
 /**
  * Based on copypasta from Remy Bach and Sarah Drasner
  */
@@ -126,7 +125,9 @@ pre[class*='language-'] {
 
 p code[class*='language-'],
 p pre[class*='language-'] {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 0 1px var(--color-accent);
 }
 
 /* Code blocks */
@@ -165,6 +166,8 @@ pre[class*='language-'] ::selection {
   color: var(--color-light);
   padding: 0.1em 0;
   white-space: normal;
+  margin: 0 0.15em 0 0;
+  box-shadow: 0 0 1px var(--color-accent);
 }
 
 .token.attr-name {
