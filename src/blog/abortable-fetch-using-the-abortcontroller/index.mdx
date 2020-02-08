@@ -69,6 +69,7 @@ const controller = new AbortController();
 const signal = controller.signal;
 
 // API responds after 5s
+// Note the 'signal' in the second argument
 fetch('https://slowmo.glitch.me/5000', { signal })
   .then(r => r.json())
   .then(response => console.log(response))
@@ -95,14 +96,14 @@ The request fails with the error `new DOMException('Aborted', 'AbortError')`.
 
 ![Aborted fetch request in devtool](./fetch-devtool-cancelled.png)
 
-#### Demo
+## Demo
 
 https://codesandbox.io/s/abortable-fetch-using-abortcontroller-yd07c
 
 > `AbortController` is not only for fetch. it’s a generic API to abort asynchronous tasks.
 > Eg: You can use it to [implement a cancelable promise][cancel promise].
 
-#### AbortController polyfill
+## Polyfill
 
 Many older browsers don't support the `AbortController` and the `AbortSignal` APIs.
 You can use either of these polyfills to make it work.
