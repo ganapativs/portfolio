@@ -7,6 +7,8 @@ body {
     Accent color is set initially at gatsby-plugin-accent-color plugin
     level and handled subsequently in accentSwitcher component
   */
+  --color-ultra-dark: #030303;
+  --color-ultra-light: #FCFCFC;
   --color-dark: #f3f8f9;
   --color-light: #0f0f10;
   --color-light-dark: #909295;
@@ -17,6 +19,8 @@ body {
 }
 
 body.dark {
+  --color-ultra-dark: #FCFCFC;
+  --color-ultra-light: #030303;
   --color-dark: #0f0f10;
   --color-light: #f3f8f9;
   --color-light-dark: #747475;
@@ -255,13 +259,6 @@ pre[data-line] {
   background: linear-gradient(45deg, black, #191919);
   -webkit-overflow-scrolling: touch;
   overflow: auto;
-}
-
-
-@media screen and (hover: hover) and (pointer: fine) {
-  .gatsby-highlight {
-    border-radius: 1rem;
-  }
 }
 
 @media screen and (max-width: 767px) {

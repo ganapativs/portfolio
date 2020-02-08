@@ -10,18 +10,19 @@ const CoverImage = styled.div`
   width: 100%;
   margin-bottom: ${rhythm(0.5)};
   overflow: hidden;
-  box-shadow: 0 0 2px var(--color-light-op-1);
+  box-shadow: 0 1px 2px var(--color-light-op-1);
   transition: all 0.2s ease-in-out;
-
-  @media screen and (hover: hover) and (pointer: fine) {
-    border-radius: 1rem;
-  }
 `;
 
 const Article = styled.article`
   cursor: pointer;
   padding: 1rem;
-  margin-bottom: ${rhythm(2)};
+  margin-bottom: ${rhythm(1.5)};
+
+  @media screen and (min-width: 768px) {
+    background: var(--color-ultra-light);
+    box-shadow: 0 0 2px var(--color-light-op-1);
+  }
 
   @media screen and (max-width: 767px) {
     padding: 0.5rem 1rem;
@@ -30,12 +31,10 @@ const Article = styled.article`
   }
 
   @media screen and (hover: hover) and (pointer: fine) {
-    transition: all 0.3s ease-in-out;
-    border-radius: 1rem;
-    box-shadow: 0 0 2px var(--color-light-op-1);
+    transition: transform 0.3s ease-in-out;
 
     &:hover {
-      transition: all 0.2s ease-in-out;
+      transition: transform 0.2s ease-in-out;
       transform: translateY(-2px);
 
       ${CoverImage} {

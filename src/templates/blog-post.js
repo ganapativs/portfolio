@@ -43,7 +43,6 @@ const CoverImage = styled.div`
   }
 
   @media screen and (hover: hover) and (pointer: fine) {
-    border-radius: 1rem;
     overflow: hidden;
   }
 `;

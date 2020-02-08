@@ -20,7 +20,12 @@ const HeaderRow = styled.header`
   margin: 20px -20px;
   padding: 10px 15px;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 768px) and (max-width: 991px) {
+    margin: 40px -30px;
+    padding: 20px 25px;
+  }
+
+  @media screen and (min-width: 992px) {
     margin: 40px 0;
     padding: 20px 0;
   }
