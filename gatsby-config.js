@@ -202,15 +202,15 @@ module.exports = {
         fonts: [
           {
             family: `Merriweather`,
-            variants: [`400`],
+            variants: [`400`, `400i`],
           },
           {
             family: `Source Sans Pro`,
-            variants: [`300`, `400`, `400i`],
+            variants: [`400`],
           },
           {
             family: `Fira Code`,
-            variants: [`400`, `700`],
+            variants: [`400`, `400i`],
           },
         ],
       },

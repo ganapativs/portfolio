@@ -13,6 +13,12 @@ const GITHUB_REPO_NAME = 'Portfolio';
 
 const Article = styled.article`
   line-height: 1.75rem;
+  font-family: 'Merriweather', serif;
+
+  // Put shadow around image(distinguish dark/light image from content)
+  .gatsby-resp-image-wrapper {
+    box-shadow: 0 0 1px var(--color-accent);
+  }
 `;
 
 const PostInfo = styled.p`
@@ -37,7 +43,6 @@ const CoverImage = styled.div`
   }
 
   @media screen and (hover: hover) and (pointer: fine) {
-    border-radius: 1rem;
     overflow: hidden;
   }
 `;

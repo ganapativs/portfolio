@@ -7,6 +7,8 @@ body {
     Accent color is set initially at gatsby-plugin-accent-color plugin
     level and handled subsequently in accentSwitcher component
   */
+  --color-ultra-dark: #030303;
+  --color-ultra-light: #FCFCFC;
   --color-dark: #f3f8f9;
   --color-light: #0f0f10;
   --color-light-dark: #909295;
@@ -17,6 +19,8 @@ body {
 }
 
 body.dark {
+  --color-ultra-dark: #FCFCFC;
+  --color-ultra-light: #030303;
   --color-dark: #0f0f10;
   --color-light: #f3f8f9;
   --color-light-dark: #747475;
@@ -98,7 +102,6 @@ button, input[type="submit"], input[type="reset"] {
     outline: inherit;
 }
 
-
 /**
  * Based on copypasta from Remy Bach and Sarah Drasner
  */
@@ -126,7 +129,9 @@ pre[class*='language-'] {
 
 p code[class*='language-'],
 p pre[class*='language-'] {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 0 1px var(--color-accent);
 }
 
 /* Code blocks */
@@ -165,6 +170,8 @@ pre[class*='language-'] ::selection {
   color: var(--color-light);
   padding: 0.1em 0;
   white-space: normal;
+  margin: 0 0.15em 0 0;
+  box-shadow: 0 0 1px var(--color-accent);
 }
 
 .token.attr-name {
@@ -252,13 +259,6 @@ pre[data-line] {
   background: linear-gradient(45deg, black, #191919);
   -webkit-overflow-scrolling: touch;
   overflow: auto;
-}
-
-
-@media screen and (hover: hover) and (pointer: fine) {
-  .gatsby-highlight {
-    border-radius: 1rem;
-  }
 }
 
 @media screen and (max-width: 767px) {
