@@ -50,10 +50,13 @@ const LogoWrapper = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
-  background: linear-gradient(0deg, var(--color-light-op-3), transparent);
-  box-shadow: 0 0 var(--color-orange), inset 0 0 var(--color-accent),
+  background: linear-gradient(0deg, var(--color-light-op-2), transparent);
+  /* OLD */
+  /* box-shadow: 12px 12px 24px 6px var(--color-ultra-light),
+    -6px -6px 48px var(--color-accent), inset 0 0 var(--color-accent),
     inset 0 0 var(--color-accent), inset 0 0 var(--color-accent),
-    inset 0 0 var(--color-accent);
+    inset 0 0 var(--color-accent); */
+  box-shadow: none;
 
   svg {
     height: 30px;
@@ -76,14 +79,21 @@ const LogoWrapper = styled.div`
     &.init-hover-animate-state {
       transition: all 0.5s ease-in, border-color 0.25s ease-in-out,
         transform 0.25s ease, border-radius 0.25s ease, box-shadow 0.25s ease-in;
-      background: linear-gradient(0deg, transparent, transparent);
+      /* OLD */
+      /* background: linear-gradient(0deg, transparent, transparent); */
       border-radius: 35% 65% 55% 45% / 48% 48% 52% 52%;
       transform: translateY(-3px) scale(1.05);
-      box-shadow: 2px 5px 25px -5px var(--color-accent),
+      /* OLD */
+      /* box-shadow: 0px 0px 0px 0px var(--color-ultra-light),
+        2px 5px 25px -5px var(--color-accent),
         inset 0 -4px 2px var(--color-accent),
         inset -4px 0 2px var(--color-accent),
         inset 0 2px 4px var(--color-accent),
-        inset 2px 0px 4px var(--color-accent);
+        inset 2px 0px 4px var(--color-accent); */
+      box-shadow: 12px 12px 24px 6px var(--color-ultra-light),
+        -6px -6px 48px var(--color-accent), inset 0 0 var(--color-accent),
+        inset 0 0 var(--color-accent), inset 0 0 var(--color-accent),
+        inset 0 0 var(--color-accent);
     }
 
     svg {
