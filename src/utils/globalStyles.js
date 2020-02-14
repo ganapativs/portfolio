@@ -9,7 +9,7 @@ body {
   */
   --color-ultra-dark: #030303;
   --color-ultra-light: #FCFCFC;
-  --color-dark: #f3f8f9;
+  --color-dark: #f3fbff;
   --color-light: #0f0f10;
   --color-light-dark: #909295;
   --color-light-op-1: rgba(0, 0, 0, 0.2);
