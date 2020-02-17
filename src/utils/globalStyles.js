@@ -8,24 +8,26 @@ body {
     level and handled subsequently in accentSwitcher component
   */
   --color-dark: #ecf0f3;
-  --color-dark-2: #d1d9e6;
+  --color-dark-2: #d4d8db;
   --color-ultra-dark: #fff;
-  --color-light: #141415;
-  --color-light-2: #050505;
-  --color-ultra-light: #000;
+  --color-light: #22252B;
+  --color-light-2: #1b1e22;
+  --color-ultra-light: #292c34;
   --color-light-dark: #909295;
   --color-light-op-1: rgba(0, 0, 0, 0.2);
   --color-light-op-2: rgba(0, 0, 0, 0.1);
   --color-light-op-3: rgba(0, 0, 0, 0.05);
   --color-transparent: transparent;
+  --neumorphism-shadow: 15px 15px 24px var(--color-dark-2),
+      -15px -15px 24px var(--color-ultra-dark);
 }
 
 body.dark {
-  --color-dark: #141415;
-  --color-dark-2: #050505;
-  --color-ultra-dark: #000;
+  --color-dark: #1c1e24;
+  --color-dark-2: #16181d;
+  --color-ultra-dark: #22242b;
   --color-light: #ecf0f3;
-  --color-light-2: #d1d9e6;
+  --color-light-2: #d4d8db;
   --color-ultra-light: #fff;
   --color-light-dark: #747475;
   --color-light-op-1: rgba(255, 255, 255, 0.2);
@@ -80,8 +82,7 @@ noscript#gatsby-noscript {
 
 .neumorphism {
   background: var(--color-dark);
-  box-shadow: 12px 12px 20px var(--color-dark-2),
-      -12px -12px 20px var(--color-ultra-dark);
+  box-shadow: var(--neumorphism-shadow);
 }
 
 /**

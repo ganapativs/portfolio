@@ -44,12 +44,12 @@ const HeaderWrapper = styled.div`
 
 const LogoWrapper = styled.div`
   background: var(--color-dark);
-  border-radius: 50%;
   width: 60px;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50%;
   border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
 
   svg {

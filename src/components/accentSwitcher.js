@@ -45,8 +45,7 @@ const AccentToggle = styled.div`
     top: 38px;
     border: none !important;
     background: var(--color-dark) !important;
-    box-shadow: 12px 12px 20px var(--color-dark-2),
-      -12px -12px 20px var(--color-ultra-dark) !important;
+    box-shadow: var(--neumorphism-shadow) !important;
 
     > div:first-child {
       border: none !important;

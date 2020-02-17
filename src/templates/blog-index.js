@@ -10,7 +10,6 @@ const CoverImage = styled.div`
   width: 100%;
   margin-bottom: ${rhythm(0.5)};
   overflow: hidden;
-  box-shadow: 0 1px 2px var(--color-light-op-1);
   transition: all 0.2s ease-in-out;
 `;
 
@@ -18,16 +17,16 @@ const Article = styled.article`
   cursor: pointer;
   padding: 1rem;
   margin-bottom: ${rhythm(1.5)};
-
-  @media screen and (min-width: 768px) {
-    background: var(--color-ultra-dark);
-    box-shadow: 0 0 2px var(--color-light-op-1);
-  }
+  border-radius: 20px;
 
   @media screen and (max-width: 767px) {
     padding: 0.5rem 1rem;
     margin: 0 -1rem;
     margin-bottom: ${rhythm(1)};
+  }
+
+  ${CoverImage} {
+    border-radius: 14px;
   }
 
   @media screen and (hover: hover) and (pointer: fine) {
@@ -36,11 +35,6 @@ const Article = styled.article`
     &:hover {
       transition: transform 0.2s ease-in-out;
       transform: translateY(-2px);
-
-      ${CoverImage} {
-        width: calc(100% + 4rem);
-        margin: -2rem -2rem ${rhythm(0.5)} -2rem;
-      }
     }
   }
 
@@ -74,6 +68,7 @@ class BlogIndex extends React.Component {
             const title = post.frontmatter.title || post.fields.slug;
             return (
               <Article
+                className="neumorphism"
                 key={post.fields.slug}
                 // Skipping keyboard navigation as link inside will handle it
                 onClick={() => this.props.navigate(post.fields.slug)}>

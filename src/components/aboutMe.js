@@ -11,21 +11,23 @@ const Div = styled.div`
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
-    align-items: center;
   }
 `;
 
 const ProfileInfo = styled.div`
-  @media screen and (min-width: 768px) {
+  padding: 2rem;
+  border-radius: 20px;
+
+  /* @media screen and (min-width: 768px) {
     padding-left: 50px;
-  }
+  } */
 `;
 
 const AboutMe = ({ profileLogo }) => {
   return (
     <Div>
       <ProfileLogo profileLogo={profileLogo} />
-      <ProfileInfo>
+      <ProfileInfo className="neumorphism">
         <DevInfo />
         <ProfileLinks />
       </ProfileInfo>
