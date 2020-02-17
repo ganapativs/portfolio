@@ -5,6 +5,7 @@ import { ThemeToggler } from 'gatsby-plugin-dark-mode';
 import Logo from '../assets/logo/meetguns';
 import { captureEvent } from '../utils/ga';
 import AccentSwitcher from './accentSwitcher';
+import SwitcherButton from './SwitcherButton';
 
 const switchTheme = (theme, toggleTheme) => {
   const nextTheme = theme === 'dark' ? 'light' : 'dark';
@@ -50,13 +51,6 @@ const LogoWrapper = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
-  background: linear-gradient(0deg, var(--color-light-op-2), transparent);
-  /* OLD */
-  /* box-shadow: 12px 12px 24px 6px var(--color-ultra-light),
-    -6px -6px 48px var(--color-accent), inset 0 0 var(--color-accent),
-    inset 0 0 var(--color-accent), inset 0 0 var(--color-accent),
-    inset 0 0 var(--color-accent); */
-  box-shadow: none;
 
   svg {
     height: 30px;
@@ -72,38 +66,13 @@ const LogoWrapper = styled.div`
   }
 
   @media screen and (hover: hover) and (pointer: fine) {
-    transition: all 0.3s ease-out, border-color 0.4s ease-out,
-      border-radius 0.15s ease-out, box-shadow 0.25s linear;
+    transition: transform 0.3s ease-out, border-radius 0.15s ease-out;
 
     &:hover,
     &.init-hover-animate-state {
-      transition: all 0.5s ease-in, border-color 0.25s ease-in-out,
-        transform 0.25s ease, border-radius 0.25s ease, box-shadow 0.25s ease-in;
-      /* OLD */
-      /* background: linear-gradient(0deg, transparent, transparent); */
+      transition: transform 0.5s ease-in-out, border-radius 0.2s ease-in-out;
       border-radius: 35% 65% 55% 45% / 48% 48% 52% 52%;
-      transform: translateY(-3px) scale(1.05);
-      /* OLD */
-      /* box-shadow: 0px 0px 0px 0px var(--color-ultra-light),
-        2px 5px 25px -5px var(--color-accent),
-        inset 0 -4px 2px var(--color-accent),
-        inset -4px 0 2px var(--color-accent),
-        inset 0 2px 4px var(--color-accent),
-        inset 2px 0px 4px var(--color-accent); */
-      box-shadow: 12px 12px 24px 6px var(--color-ultra-light),
-        -6px -6px 48px var(--color-accent), inset 0 0 var(--color-accent),
-        inset 0 0 var(--color-accent), inset 0 0 var(--color-accent),
-        inset 0 0 var(--color-accent);
-    }
-
-    svg {
-      transition: transform 0.15s ease-out;
-    }
-
-    &:hover svg,
-    &.init-hover-animate-state svg {
-      transition: transform 0.15s ease-in-out;
-      transform: scale(1.05) translateX(-2px);
+      transform: translateY(-2px);
     }
   }
 `;
@@ -118,7 +87,7 @@ const Right = styled.div`
 `;
 
 const RouteLinks = styled.div`
-  margin-left: 1rem;
+  margin-left: 2rem;
 
   @media screen and (max-width: 767px) {
     margin-left: 0.6rem;
@@ -126,20 +95,22 @@ const RouteLinks = styled.div`
 
   a {
     color: var(--color-light-dark);
-    margin: 0 15px;
-    text-transform: uppercase;
+    margin: 0 1rem;
+    text-transform: capitalize;
     font-weight: bold;
     text-decoration: none;
-    transition: all 0.2s ease-out;
+    transition: color 0.2s ease-out;
+    padding: 8px 15px;
+    border-radius: 20px;
 
     &.active {
-      transition: all 0.25s ease-in;
+      transition: color 0.25s ease-in;
       color: var(--color-accent);
     }
 
     @media screen and (hover: hover) and (pointer: fine) {
       &:hover {
-        transition: all 0.25s ease-in;
+        transition: color 0.25s ease-in;
         color: var(--color-accent);
       }
     }
@@ -151,8 +122,6 @@ const RouteLinks = styled.div`
 `;
 
 const ThemeSwitcher = styled.div`
-  position: relative;
-  cursor: pointer;
   transform: scale(0.8) translateX(2px);
 
   @media screen and (max-width: 767px) {
@@ -260,9 +229,9 @@ const Header = ({ location: { pathname } }) => {
         <Left>
           <Link title={'Meetguns.com | About'} to={'/'}>
             <LogoWrapper
-              className={
+              className={`neumorphism ${
                 logoActiveAnimateState ? 'init-hover-animate-state' : ''
-              }>
+              }`}>
               <Logo color="var(--color-accent)" />
             </LogoWrapper>
           </Link>
@@ -271,12 +240,12 @@ const Header = ({ location: { pathname } }) => {
               <Link
                 key={`${link}_${pathname}`}
                 title={name}
-                className={
+                className={`neumorphism ${
                   (pathname === '/' && pathname === link) ||
                   (link !== '/' && pathname.startsWith(link))
                     ? 'active'
                     : ''
-                }
+                }`}
                 to={link}>
                 {name}
               </Link>
@@ -289,7 +258,8 @@ const Header = ({ location: { pathname } }) => {
               <AccentSwitcher />
               <ThemeToggler>
                 {({ theme, toggleTheme }) => (
-                  <ThemeSwitcher
+                  <SwitcherButton
+                    className="neumorphism"
                     role="button"
                     tabIndex={0}
                     onKeyPress={e => {
@@ -305,10 +275,12 @@ const Header = ({ location: { pathname } }) => {
                     onClick={() => {
                       switchTheme(theme, toggleTheme);
                     }}>
-                    {/* <Switcher theme={theme} /> */}
-                    <MoonOrSun isDark={theme === 'dark'} />
-                    <MoonMask isDark={theme === 'dark'} />
-                  </ThemeSwitcher>
+                    <ThemeSwitcher>
+                      {/* <Switcher theme={theme} /> */}
+                      <MoonOrSun isDark={theme === 'dark'} />
+                      <MoonMask isDark={theme === 'dark'} />
+                    </ThemeSwitcher>
+                  </SwitcherButton>
                 )}
               </ThemeToggler>
             </>

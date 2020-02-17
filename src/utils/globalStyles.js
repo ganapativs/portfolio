@@ -7,10 +7,12 @@ body {
     Accent color is set initially at gatsby-plugin-accent-color plugin
     level and handled subsequently in accentSwitcher component
   */
-  --color-ultra-dark: #030303;
-  --color-ultra-light: #FCFCFC;
-  --color-dark: #f3fbff;
-  --color-light: #0f0f10;
+  --color-dark: #ecf0f3;
+  --color-dark-2: #d1d9e6;
+  --color-ultra-dark: #fff;
+  --color-light: #141415;
+  --color-light-2: #050505;
+  --color-ultra-light: #000;
   --color-light-dark: #909295;
   --color-light-op-1: rgba(0, 0, 0, 0.2);
   --color-light-op-2: rgba(0, 0, 0, 0.1);
@@ -19,10 +21,12 @@ body {
 }
 
 body.dark {
-  --color-ultra-dark: #FCFCFC;
-  --color-ultra-light: #030303;
-  --color-dark: #0f0f10;
-  --color-light: #f3f8f9;
+  --color-dark: #141415;
+  --color-dark-2: #050505;
+  --color-ultra-dark: #000;
+  --color-light: #ecf0f3;
+  --color-light-2: #d1d9e6;
+  --color-ultra-light: #fff;
   --color-light-dark: #747475;
   --color-light-op-1: rgba(255, 255, 255, 0.2);
   --color-light-op-2: rgba(255, 255, 255, 0.1);
@@ -72,6 +76,12 @@ noscript#gatsby-noscript {
   min-width: 320px;
   font-size: .8rem;
   text-align: center;
+}
+
+.neumorphism {
+  background: var(--color-dark);
+  box-shadow: 12px 12px 20px var(--color-dark-2),
+      -12px -12px 20px var(--color-ultra-dark);
 }
 
 /**

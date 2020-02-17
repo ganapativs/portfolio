@@ -20,7 +20,7 @@ const Article = styled.article`
   margin-bottom: ${rhythm(1.5)};
 
   @media screen and (min-width: 768px) {
-    background: var(--color-ultra-light);
+    background: var(--color-ultra-dark);
     box-shadow: 0 0 2px var(--color-light-op-1);
   }
 

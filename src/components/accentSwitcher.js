@@ -3,14 +3,11 @@ import styled from 'styled-components';
 import { GithubPicker } from 'react-color';
 import useOutsideClick from './hooks/useOutsideClick';
 import { accentColors } from '../utils/helpers';
+import SwitcherButton from './SwitcherButton';
 
-const AccentToggleWrapper = styled.button`
+const AccentToggleWrapper = styled.div`
   position: relative;
-  margin-right: 1.25rem;
-
-  @media screen and (max-width: 767px) {
-    margin-right: 0.8rem;
-  }
+  transform: translateY(4px);
 
   @media screen and (max-width: 300px) {
     display: none;
@@ -44,11 +41,12 @@ const AccentToggle = styled.div`
 
   + .github-picker {
     position: absolute !important;
-    right: -7px;
-    top: 30px;
+    right: -10px;
+    top: 38px;
     border: none !important;
     background: var(--color-dark) !important;
-    box-shadow: var(--color-light-op-1) 0px 3px 12px !important;
+    box-shadow: 12px 12px 20px var(--color-dark-2),
+      -12px -12px 20px var(--color-ultra-dark) !important;
 
     > div:first-child {
       border: none !important;
@@ -105,20 +103,22 @@ function AccentSwitcher() {
 
   return (
     <>
-      <AccentToggleWrapper ref={wrapperRef}>
-        <AccentToggle
-          title="Change accent color"
-          background={accentColor}
-          onClick={toggleVisibility}></AccentToggle>
-        {visible ? (
-          <GithubPicker
-            className="animated fadeIn faster"
-            width="36px"
-            colors={accentColors}
-            onChange={toggleAccent}
-          />
-        ) : null}
-      </AccentToggleWrapper>
+      <SwitcherButton
+        className="neumorphism"
+        onClick={toggleVisibility}
+        style={{ margin: 0 }}>
+        <AccentToggleWrapper ref={wrapperRef}>
+          <AccentToggle title="Change accent color" background={accentColor} />
+          {visible ? (
+            <GithubPicker
+              className="animated fadeIn faster"
+              width="36px"
+              colors={accentColors}
+              onChange={toggleAccent}
+            />
+          ) : null}
+        </AccentToggleWrapper>
+      </SwitcherButton>
     </>
   );
 }
