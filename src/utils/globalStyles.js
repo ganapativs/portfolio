@@ -18,8 +18,8 @@ body {
   --color-light-op-2: rgba(0, 0, 0, 0.1);
   --color-light-op-3: rgba(0, 0, 0, 0.05);
   --color-transparent: transparent;
-  --neumorphism-shadow: 15px 15px 24px var(--color-dark-2),
-      -15px -15px 24px var(--color-ultra-dark);
+  --neumorphism-shadow: 15px 15px 24px var(--color-ultra-dark),
+      -15px -15px 24px var(--color-dark-2);
 }
 
 body.dark {

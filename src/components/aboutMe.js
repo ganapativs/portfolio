@@ -15,12 +15,13 @@ const Div = styled.div`
 `;
 
 const ProfileInfo = styled.div`
-  padding: 2rem;
+  padding: 3rem;
   border-radius: 20px;
 
-  /* @media screen and (min-width: 768px) {
-    padding-left: 50px;
-  } */
+  @media screen and (min-width: 768px) {
+    margin: 85px 0 0 85px;
+    padding-left: 100px;
+  }
 `;
 
 const AboutMe = ({ profileLogo }) => {

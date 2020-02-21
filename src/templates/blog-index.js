@@ -16,13 +16,13 @@ const CoverImage = styled.div`
 const Article = styled.article`
   cursor: pointer;
   padding: 1rem;
-  margin-bottom: ${rhythm(1.5)};
+  margin-bottom: ${rhythm(2)};
   border-radius: 20px;
 
   @media screen and (max-width: 767px) {
     padding: 0.5rem 1rem;
     margin: 0 -1rem;
-    margin-bottom: ${rhythm(1)};
+    margin-bottom: ${rhythm(1.5)};
   }
 
   ${CoverImage} {
