@@ -41,11 +41,12 @@ const AccentToggle = styled.div`
 
   + .github-picker {
     position: absolute !important;
-    right: -10px;
+    right: -6px;
     top: 38px;
     border: none !important;
     background: var(--color-dark) !important;
-    box-shadow: var(--neumorphism-shadow) !important;
+    box-shadow: 2px 2px 4px var(--color-ultra-dark),
+      -2px -2px 4px var(--color-ultra-dark) !important;
 
     > div:first-child {
       border: none !important;

@@ -8,6 +8,7 @@ const Div = styled.div`
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  position: relative;
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
@@ -19,8 +20,8 @@ const ProfileInfo = styled.div`
   border-radius: 20px;
 
   @media screen and (min-width: 768px) {
-    margin: 85px 0 0 85px;
-    padding-left: 100px;
+    padding: 3rem 2rem;
+    padding-left: 250px;
   }
 `;
 

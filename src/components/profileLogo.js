@@ -3,25 +3,23 @@ import styled from 'styled-components';
 import Img from 'gatsby-image';
 
 const Wrapper = styled.div`
-  min-width: 170px;
+  min-width: 250px;
 
   @media screen and (min-width: 768px) {
     position: absolute;
+    top: 0;
   }
 
   .profile-logo {
-    border-radius: 50%;
     border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
+    border-radius: 50%;
     overflow: hidden;
-    padding: 18px;
-    box-shadow: inset -4px -4px 10px -4px var(--color-dark-2),
-      1px 1px 1px -1px var(--color-ultra-dark),
-      -15px -15px 24px var(--color-dark-2);
+    margin: 3rem 2rem;
 
     .gatsby-image-wrapper {
       box-shadow: 2px 2px 4px var(--color-ultra-dark);
-      border-radius: 50%;
       border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
+      border-radius: 50%;
     }
   }
 `;
