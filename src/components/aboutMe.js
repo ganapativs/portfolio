@@ -9,6 +9,7 @@ const Div = styled.div`
   align-items: flex-start;
   flex-direction: column;
   position: relative;
+  padding-top: 2rem;
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
@@ -16,12 +17,11 @@ const Div = styled.div`
 `;
 
 const ProfileInfo = styled.div`
-  padding: 3rem;
+  padding: 0;
   border-radius: 20px;
 
   @media screen and (min-width: 768px) {
-    padding: 3rem 2rem;
-    padding-left: 250px;
+    padding: 0 0 0 2rem;
   }
 `;
 
@@ -29,7 +29,7 @@ const AboutMe = ({ profileLogo }) => {
   return (
     <Div>
       <ProfileLogo profileLogo={profileLogo} />
-      <ProfileInfo className="neumorphism">
+      <ProfileInfo>
         <DevInfo />
         <ProfileLinks />
       </ProfileInfo>

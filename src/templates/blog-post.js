@@ -99,7 +99,7 @@ class BlogPostTemplate extends React.Component {
               </PostInfo>
             </header>
             {post.frontmatter.cover ? (
-              <CoverImage className="neumorphism">
+              <CoverImage>
                 <Img fluid={post.frontmatter.cover.childImageSharp.fluid} />
               </CoverImage>
             ) : null}

@@ -8,6 +8,10 @@ const SwitcherButton = styled.div`
   width: 44px;
   height: 44px;
   cursor: pointer;
+
+  @media screen and (max-width: 767px) {
+    margin-left: 1rem;
+  }
 `;
 
 export default SwitcherButton;
