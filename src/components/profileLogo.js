@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import Img from 'gatsby-image';
 
 const Wrapper = styled.div`
-  min-width: 160px;
+  min-width: 140px;
   margin-bottom: 1rem;
 
   @media screen and (min-width: 768px) {
+    min-width: 160px;
     margin-bottom: 0;
   }
 

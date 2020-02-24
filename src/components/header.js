@@ -6,6 +6,9 @@ import Logo from '../assets/logo/meetguns';
 import { captureEvent } from '../utils/ga';
 import AccentSwitcher from './accentSwitcher';
 import SwitcherButton from './SwitcherButton';
+import UserIcon from '../assets/icons/userIcon';
+import CameraIcon from '../assets/icons/cameraIcon';
+import BlogIcon from '../assets/icons/blogIcon';
 
 const switchTheme = (theme, toggleTheme) => {
   const nextTheme = theme === 'dark' ? 'light' : 'dark';
@@ -86,6 +89,21 @@ const Right = styled.div`
   align-items: center;
 `;
 
+const IconWrapper = styled.span`
+  @media screen and (min-width: 768px) {
+    svg {
+      transform: translateY(4px) scale(0.8) !important;
+      margin-right: 0.25rem;
+
+      @media screen and (hover: hover) and (pointer: fine) {
+        &:hover {
+          transform: translateY(4px) scale(0.8) !important;
+        }
+      }
+    }
+  }
+`;
+
 const RouteLinks = styled.div`
   margin-left: 2rem;
 
@@ -109,14 +127,24 @@ const RouteLinks = styled.div`
     }
 
     @media screen and (hover: hover) and (pointer: fine) {
+      ${IconWrapper} path {
+        transition: fill 0.2s ease-out;
+      }
+
       &:hover {
         transition: color 0.25s ease-in;
         color: var(--color-accent);
+
+        ${IconWrapper} path {
+          transition: fill 0.25s ease-in;
+          fill: var(--color-accent) !important;
+        }
       }
     }
 
     @media screen and (max-width: 767px) {
-      margin: 0 8px;
+      margin: 0 5px;
+      padding: 8px 10px;
     }
   }
 `;
@@ -197,14 +225,17 @@ const links = [
   {
     link: '/',
     name: 'About',
+    icon: UserIcon,
   },
   {
     link: '/blog/',
     name: 'Blog',
+    icon: BlogIcon,
   },
   {
     link: '/captures/',
     name: 'Captures',
+    icon: CameraIcon,
   },
 ];
 
@@ -236,20 +267,24 @@ const Header = ({ location: { pathname } }) => {
             </LogoWrapper>
           </Link>
           <RouteLinks>
-            {links.map(({ link, name }) => (
-              <Link
-                key={`${link}_${pathname}`}
-                title={name}
-                className={`neumorphism ${
-                  (pathname === '/' && pathname === link) ||
-                  (link !== '/' && pathname.startsWith(link))
-                    ? 'active'
-                    : ''
-                }`}
-                to={link}>
-                {name}
-              </Link>
-            ))}
+            {links.map(({ link, name, icon: Icon }) => {
+              const active =
+                (pathname === '/' && pathname === link) ||
+                (link !== '/' && pathname.startsWith(link));
+
+              return (
+                <Link
+                  key={`${link}_${pathname}`}
+                  title={name}
+                  className={`neumorphism ${active ? 'active' : ''}`}
+                  to={link}>
+                  <IconWrapper>
+                    <Icon active={active} />
+                  </IconWrapper>
+                  <span className="hide-xs">{name}</span>
+                </Link>
+              );
+            })}
           </RouteLinks>
         </Left>
         <Right>
