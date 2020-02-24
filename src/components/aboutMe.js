@@ -8,16 +8,20 @@ const Div = styled.div`
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  position: relative;
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
-    align-items: center;
+    padding-top: 2rem;
   }
 `;
 
 const ProfileInfo = styled.div`
+  padding: 0;
+  border-radius: 20px;
+
   @media screen and (min-width: 768px) {
-    padding-left: 50px;
+    padding: 0 0 0 2rem;
   }
 `;
 

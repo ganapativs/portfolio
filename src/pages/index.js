@@ -8,7 +8,7 @@ export const query = graphql`
     mobileImage: file(relativePath: { eq: "ganapativs.jpg" }) {
       childImageSharp {
         # 120 * 1.1 (-5% margin)
-        fluid(maxWidth: 132, maxHeight: 132, quality: 100) {
+        fluid(maxWidth: 140, maxHeight: 140, quality: 100) {
           ...GatsbyImageSharpFluid_withWebp
         }
       }
@@ -16,7 +16,7 @@ export const query = graphql`
     desktopImage: file(relativePath: { eq: "ganapativs.jpg" }) {
       childImageSharp {
         # 160 * 1.1 (-5% margin)
-        fluid(maxWidth: 176, maxHeight: 176, quality: 100) {
+        fluid(maxWidth: 160, maxHeight: 160, quality: 100) {
           ...GatsbyImageSharpFluid_withWebp
         }
       }

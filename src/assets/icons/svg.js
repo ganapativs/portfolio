@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Path = styled.path`
   transition: fill 0.1s ease-out;
-  fill: var(--color-light-dark);
+  fill: ${p => (p.active ? 'var(--color-accent)' : 'var(--color-light-dark)')};
 `;
 
 export const Svg = styled.svg`
