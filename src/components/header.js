@@ -113,7 +113,7 @@ const RouteLinks = styled.div`
 
   a {
     color: var(--color-light-dark);
-    margin: 0 1rem;
+    margin: 0 0.8rem;
     text-transform: lowercase;
     font-weight: bold;
     text-decoration: none;
