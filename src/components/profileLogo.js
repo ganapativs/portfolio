@@ -4,11 +4,11 @@ import Img from 'gatsby-image';
 
 const Wrapper = styled.div`
   min-width: 140px;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 
   @media screen and (min-width: 768px) {
     min-width: 160px;
-    margin-bottom: 0;
+    margin: 0;
   }
 
   .profile-logo {
