@@ -42,11 +42,16 @@ const AccentToggle = styled.div`
   + .github-picker {
     position: absolute !important;
     right: -6px;
-    top: 38px;
+    top: 34px;
     border: none !important;
     background: var(--color-dark) !important;
     box-shadow: 2px 2px 4px var(--color-ultra-dark),
       -2px -2px 4px var(--color-ultra-dark) !important;
+
+    @media screen and (max-width: 767px) {
+      top: unset;
+      bottom: 40px;
+    }
 
     > div:first-child {
       border: none !important;
@@ -111,6 +116,7 @@ function AccentSwitcher() {
           <AccentToggle title="Change accent color" background={accentColor} />
           {visible ? (
             <GithubPicker
+              triangle="hide"
               className="animated fadeIn faster"
               width="36px"
               colors={accentColors}
