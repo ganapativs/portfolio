@@ -17,16 +17,11 @@ const Article = styled.article`
   cursor: pointer;
   padding: 1rem;
   margin-bottom: ${rhythm(1)};
-  border-radius: 20px;
 
   @media screen and (max-width: 767px) {
     padding: 0.5rem 1rem;
     margin: 0 -1rem;
     margin-bottom: ${rhythm(1)};
-  }
-
-  ${CoverImage} {
-    border-radius: 14px;
   }
 
   @media screen and (hover: hover) and (pointer: fine) {

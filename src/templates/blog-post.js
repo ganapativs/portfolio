@@ -34,7 +34,6 @@ const Ul = styled.ul`
 const CoverImage = styled.div`
   margin-top: ${rhythm(1.8)};
   margin-bottom: ${rhythm(1.8)};
-  border-radius: 14px;
 
   @media screen and (min-width: 768px) {
     margin-bottom: ${rhythm(2.5)};
