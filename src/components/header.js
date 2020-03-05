@@ -163,7 +163,7 @@ const RouteLinks = styled.div`
 `;
 
 const ThemeSwitcher = styled.div`
-  transform: scale(0.8) translateX(2px);
+  transform: scale(0.7);
 
   @media screen and (max-width: 767px) {
     transform: scale(0.8) translateY(-2px) translateX(-2px);

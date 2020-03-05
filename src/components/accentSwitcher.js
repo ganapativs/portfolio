@@ -7,7 +7,7 @@ import SwitcherButton from './SwitcherButton';
 
 const AccentToggleWrapper = styled.div`
   position: relative;
-  transform: translateY(4px);
+  transform: translateY(4px) translateX(1px);
 
   @media screen and (max-width: 767px) {
     transform: translateY(2px);
@@ -23,7 +23,7 @@ const AccentToggle = styled.div`
   height: 20px;
   background: ${p => p.background};
   border-radius: 2px 50% 50% 50%;
-  transform: rotate(45deg) scale(0.9) translateY(2px);
+  transform: rotate(45deg) scale(0.7) translateY(2px);
   transform-origin: 50% 50%;
   background: var(--color-accent);
   border: 1px solid var(--color-dark);
