@@ -20,6 +20,8 @@ body {
   --color-transparent: transparent;
   --neumorphism-shadow: 15px 15px 24px var(--color-ultra-dark),
       -15px -15px 24px var(--color-dark-2);
+  --neumorphism-shadow-mobile: 8px 8px 16px var(--color-ultra-dark),
+      -8px -8px 16px var(--color-dark-2);
 }
 
 body.dark {
@@ -83,6 +85,12 @@ noscript#gatsby-noscript {
 .neumorphism {
   background: var(--color-dark);
   box-shadow: var(--neumorphism-shadow);
+}
+
+@media screen and (max-width: 767px) {
+  .neumorphism {
+    box-shadow: var(--neumorphism-shadow-mobile);
+  }
 }
 
 /**

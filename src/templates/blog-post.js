@@ -46,6 +46,16 @@ const CoverImage = styled.div`
   }
 `;
 
+const Div = styled.div`
+  width: 100%;
+  max-width: 644px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 767px) {
+    padding-top: 1rem;
+  }
+`;
+
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.blogPost.edges[0].node;
@@ -59,9 +69,7 @@ class BlogPostTemplate extends React.Component {
     )}`;
 
     return (
-      <div
-        // Remove 2em padding space of blog card
-        style={{ width: '100%', maxWidth: 644, margin: '0 auto' }}>
+      <Div>
         <SEO
           title={post.frontmatter.title}
           description={post.frontmatter.spoiler}
@@ -134,7 +142,7 @@ class BlogPostTemplate extends React.Component {
             </li>
           </Ul>
         </nav>
-      </div>
+      </Div>
     );
   }
 }

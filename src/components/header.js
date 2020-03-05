@@ -70,6 +70,7 @@ const LogoWrapper = styled.div`
   @media screen and (max-width: 767px) {
     width: 40px;
     height: 40px;
+    box-shadow: none !important;
 
     svg {
       height: 20px;
