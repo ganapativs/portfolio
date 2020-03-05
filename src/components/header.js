@@ -166,7 +166,7 @@ const ThemeSwitcher = styled.div`
   transform: scale(0.8) translateX(2px);
 
   @media screen and (max-width: 767px) {
-    transform: scale(0.7) translateX(3px);
+    transform: scale(0.8) translateY(-2px) translateX(-2px);
   }
 `;
 

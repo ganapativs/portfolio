@@ -9,6 +9,10 @@ const AccentToggleWrapper = styled.div`
   position: relative;
   transform: translateY(4px);
 
+  @media screen and (max-width: 767px) {
+    transform: translateY(2px);
+  }
+
   @media screen and (max-width: 300px) {
     display: none;
   }
@@ -85,7 +89,7 @@ const Div = styled.div`
       left: 0;
       width: 100% !important;
       border: none !important;
-      bottom: 64px;
+      bottom: 60px;
       border-radius: 0 !important;
       background: var(--color-dark) !important;
       box-shadow: 0 -4px 4px -4px var(--color-light-op-2) !important;
