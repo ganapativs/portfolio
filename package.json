@@ -22,12 +22,17 @@
   "dependencies": {
     "@mdx-js/mdx": "^1.5.5",
     "@mdx-js/react": "^1.5.5",
+    "aws-sdk": "^2.633.0",
     "babel-plugin-styled-components": "^1.10.7",
     "classnames": "^2.2.6",
+    "colorthief": "^2.3.0",
     "cross-fetch": "^3.0.4",
     "dms2dec": "^1.1.0",
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
     "fast-exif": "^1.0.1",
     "focus-visible": "^5.0.2",
+    "fs-extra": "^8.1.0",
     "gatsby": "2.19.10",
     "gatsby-image": "^2.2.39",
     "gatsby-plugin-catch-links": "^2.1.24",
@@ -95,11 +100,12 @@
     "mdx"
   ],
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
+    "build": "NODE_ENV=production yarn prebuild-captures && gatsby build",
+    "develop": "NODE_ENV=development yarn prebuild-captures && gatsby develop",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "format": "eslint src --ext .js --ext .json --fix && prettier --write \"**/*.{css,md}\""
+    "format": "eslint src --ext .js --ext .json --fix && prettier --write \"**/*.{css,md}\"",
+    "prebuild-captures": "node ./scripts/prebuild-captures/index.js"
   },
   "repository": {
     "type": "git",
