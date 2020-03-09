@@ -19,6 +19,7 @@ import hashAndRenameImages from './hashAndRenameImages';
 */
 (async () => {
   try {
+    console.time('prebuild-images');
     // Cleanup folder and create if needed
     console.log('Preparing...');
     prepare();
@@ -70,5 +71,7 @@ import hashAndRenameImages from './hashAndRenameImages';
   } catch (err) {
     console.error(err.message);
     throw err;
+  } finally {
+    console.timeEnd('prebuild-images');
   }
 })();
