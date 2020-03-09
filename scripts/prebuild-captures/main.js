@@ -8,6 +8,7 @@ import getImagesMeta from './getImagesMeta';
 import getImagesProminentColors from './getImagesProminentColors';
 import getArrayChunks from './getArrayChunks';
 import sortAndWritePagination from './sortAndWritePagination';
+import hashAndRenameImages from './hashAndRenameImages';
 
 /**
 - Use these json in gatsby build
@@ -47,6 +48,8 @@ import sortAndWritePagination from './sortAndWritePagination';
     imagesProminentColors.push(...prominentColors);
   }
 
+  const hashedImagesList = await hashAndRenameImages(imagesList);
+
   // Sort images based on capture date and write pagination json files
-  sortAndWritePagination(imagesList, imagesMeta, imagesProminentColors);
+  sortAndWritePagination(hashedImagesList, imagesMeta, imagesProminentColors);
 })();

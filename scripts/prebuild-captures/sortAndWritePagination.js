@@ -19,9 +19,13 @@ const sortAndWritePagination = (
       exif: { DateTimeOriginal, Label },
     };
   });
+
+  // Sort images based on created date
   const sortedImages = images.sort(
     (a, b) => b.exif.DateTimeOriginal - a.exif.DateTimeOriginal,
   );
+
+  // Write pagination json
   const batch = getArrayChunks(sortedImages, batchSize);
   for (let i = 0; i < batch.length; i += 1) {
     const isLast = i === batch.length - 1;

@@ -65,6 +65,7 @@
     "gatsby-source-filesystem": "^2.1.46",
     "gatsby-source-s3-image": "^1.6.141",
     "gatsby-transformer-sharp": "^2.3.13",
+    "imghash": "^0.0.6",
     "intersection-observer": "^0.7.0",
     "prismjs": "^1.19.0",
     "prop-types": "^15.7.2",
