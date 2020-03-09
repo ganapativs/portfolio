@@ -31,6 +31,7 @@ const Main = styled.main`
   @media screen and (max-width: 767px) {
     margin: 0 -20px;
     width: calc(100% + 40px);
+    padding-top: 0.2rem;
   }
 `;
 

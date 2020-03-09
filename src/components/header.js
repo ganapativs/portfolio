@@ -24,6 +24,14 @@ const HeaderRow = styled.header`
   margin: 20px -20px;
   padding: 10px 15px;
 
+  @media screen and (max-width: 767px) {
+    order: 1;
+    bottom: 0;
+    top: unset;
+    box-shadow: 0 -4px 4px -4px var(--color-light-op-2);
+    margin-bottom: 0;
+  }
+
   @media screen and (min-width: 768px) and (max-width: 991px) {
     margin: 40px -30px;
     padding: 20px 25px;
@@ -62,6 +70,7 @@ const LogoWrapper = styled.div`
   @media screen and (max-width: 767px) {
     width: 40px;
     height: 40px;
+    box-shadow: none !important;
 
     svg {
       height: 20px;
@@ -90,6 +99,10 @@ const Right = styled.div`
 `;
 
 const IconWrapper = styled.span`
+  @media screen and (max-width: 767px) {
+    margin-right: ${prop => (prop.active ? '0.25rem' : 0)};
+  }
+
   @media screen and (min-width: 768px) {
     svg {
       transform: translateY(4px) scale(0.8) !important;
@@ -150,10 +163,10 @@ const RouteLinks = styled.div`
 `;
 
 const ThemeSwitcher = styled.div`
-  transform: scale(0.8) translateX(2px);
+  transform: scale(0.7);
 
   @media screen and (max-width: 767px) {
-    transform: scale(0.7) translateX(3px);
+    transform: scale(0.8) translateY(-2px) translateX(-2px);
   }
 `;
 
@@ -278,10 +291,10 @@ const Header = ({ location: { pathname } }) => {
                   title={name}
                   className={`neumorphism ${active ? 'active' : ''}`}
                   to={link}>
-                  <IconWrapper>
+                  <IconWrapper active={active}>
                     <Icon active={active} />
                   </IconWrapper>
-                  <span className="hide-xs">{name}</span>
+                  <span className={active ? '' : 'hide-xs'}>{name}</span>
                 </Link>
               );
             })}

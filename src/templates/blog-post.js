@@ -34,7 +34,6 @@ const Ul = styled.ul`
 const CoverImage = styled.div`
   margin-top: ${rhythm(1.8)};
   margin-bottom: ${rhythm(1.8)};
-  border-radius: 14px;
 
   @media screen and (min-width: 768px) {
     margin-bottom: ${rhythm(2.5)};
@@ -44,6 +43,16 @@ const CoverImage = styled.div`
 
   @media screen and (hover: hover) and (pointer: fine) {
     overflow: hidden;
+  }
+`;
+
+const Div = styled.div`
+  width: 100%;
+  max-width: 644px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 767px) {
+    padding-top: 1rem;
   }
 `;
 
@@ -60,9 +69,7 @@ class BlogPostTemplate extends React.Component {
     )}`;
 
     return (
-      <div
-        // Remove 2em padding space of blog card
-        style={{ width: '100%', maxWidth: 644, margin: '0 auto' }}>
+      <Div>
         <SEO
           title={post.frontmatter.title}
           description={post.frontmatter.spoiler}
@@ -135,7 +142,7 @@ class BlogPostTemplate extends React.Component {
             </li>
           </Ul>
         </nav>
-      </div>
+      </Div>
     );
   }
 }

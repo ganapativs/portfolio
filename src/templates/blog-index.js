@@ -17,16 +17,11 @@ const Article = styled.article`
   cursor: pointer;
   padding: 1rem;
   margin-bottom: ${rhythm(1)};
-  border-radius: 20px;
 
   @media screen and (max-width: 767px) {
     padding: 0.5rem 1rem;
     margin: 0 -1rem;
     margin-bottom: ${rhythm(1)};
-  }
-
-  ${CoverImage} {
-    border-radius: 14px;
   }
 
   @media screen and (hover: hover) and (pointer: fine) {
@@ -52,13 +47,23 @@ const Spoiler = styled.p`
   margin-bottom: 0;
 `;
 
+const Div = styled.div`
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 767px) {
+    padding-top: 1.5rem;
+  }
+`;
+
 class BlogIndex extends React.Component {
   render() {
     const isDev = process.env.NODE_ENV === 'development';
     const { edges: posts } = this.props.data[`${isDev ? 'dev' : 'prod'}Mdx`];
 
     return (
-      <div style={{ width: '100%', maxWidth: 680, margin: '0 auto' }}>
+      <Div>
         <SEO
           title="Blog by Ganapati V S"
           description="Tech blog by Ganapati V S"
@@ -95,7 +100,7 @@ class BlogIndex extends React.Component {
             );
           })}
         </main>
-      </div>
+      </Div>
     );
   }
 }

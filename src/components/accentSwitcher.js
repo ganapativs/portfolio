@@ -7,7 +7,11 @@ import SwitcherButton from './SwitcherButton';
 
 const AccentToggleWrapper = styled.div`
   position: relative;
-  transform: translateY(4px);
+  transform: translateY(4px) translateX(1px);
+
+  @media screen and (max-width: 767px) {
+    transform: translateY(2px);
+  }
 
   @media screen and (max-width: 300px) {
     display: none;
@@ -19,7 +23,7 @@ const AccentToggle = styled.div`
   height: 20px;
   background: ${p => p.background};
   border-radius: 2px 50% 50% 50%;
-  transform: rotate(45deg) scale(0.9) translateY(2px);
+  transform: rotate(45deg) scale(0.7) translateY(2px);
   transform-origin: 50% 50%;
   background: var(--color-accent);
   border: 1px solid var(--color-dark);
@@ -38,36 +42,65 @@ const AccentToggle = styled.div`
       opacity: 0.8;
     }
   }
+`;
 
-  + .github-picker {
-    position: absolute !important;
-    right: -6px;
-    top: 38px;
-    border: none !important;
-    background: var(--color-dark) !important;
-    box-shadow: 2px 2px 4px var(--color-ultra-dark),
-      -2px -2px 4px var(--color-ultra-dark) !important;
+const Div = styled.div`
+  position: relative;
 
-    > div:first-child {
+  @media screen and (min-width: 768px) {
+    .github-picker {
+      position: absolute !important;
+      right: 3px;
+      top: 54px;
       border: none !important;
+      background: var(--color-dark) !important;
+      box-shadow: 0 0px 12px 1px var(--color-light-op-2) !important;
+      width: 36px !important;
+      z-index: 1;
+
+      > div:first-child {
+        border: none !important;
+      }
+
+      > div:nth-child(2) {
+        border-color: transparent transparent var(--color-dark) !important;
+      }
+
+      > span > div {
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 0;
+        outline: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        transform: scale(0.7);
+        transition: transform 0.1s ease-in;
+
+        &:hover {
+          transform: scale(1);
+        }
+      }
     }
+  }
 
-    > div:nth-child(2) {
-      border-color: transparent transparent var(--color-dark) !important;
-    }
+  @media screen and (max-width: 767px) {
+    .github-picker {
+      position: fixed !important;
+      left: 0;
+      width: 100% !important;
+      border: none !important;
+      bottom: 60px;
+      border-radius: 0 !important;
+      background: var(--color-dark) !important;
+      box-shadow: 0 -4px 4px -4px var(--color-light-op-2) !important;
+      justify-content: space-around;
+      padding: 1rem 0 0.5rem !important;
 
-    > span > div {
-      border-radius: 50%;
-      overflow: hidden;
-      margin: 0;
-      outline: none !important;
-      box-shadow: none !important;
-      background: transparent !important;
-      transform: scale(0.7);
-      transition: transform 0.1s ease-in;
-
-      &:hover {
-        transform: scale(1);
+      > span > div {
+        border-radius: 50%;
+        overflow: hidden;
+        outline: none !important;
+        box-shadow: none !important;
       }
     }
   }
@@ -102,24 +135,23 @@ function AccentSwitcher() {
   /* eslint-enable no-underscore-dangle */
 
   return (
-    <>
+    <Div ref={wrapperRef}>
+      {visible ? (
+        <GithubPicker
+          triangle="hide"
+          colors={accentColors}
+          onChange={toggleAccent}
+        />
+      ) : null}
       <SwitcherButton
         className="neumorphism"
         onClick={toggleVisibility}
         style={{ margin: 0 }}>
-        <AccentToggleWrapper ref={wrapperRef}>
+        <AccentToggleWrapper>
           <AccentToggle title="Change accent color" background={accentColor} />
-          {visible ? (
-            <GithubPicker
-              className="animated fadeIn faster"
-              width="36px"
-              colors={accentColors}
-              onChange={toggleAccent}
-            />
-          ) : null}
         </AccentToggleWrapper>
       </SwitcherButton>
-    </>
+    </Div>
   );
 }
 
