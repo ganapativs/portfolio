@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Gallery from 'react-photo-gallery';
 import styled from 'styled-components';
 import Carousel, { Modal, ModalGateway } from 'react-images';
+import { Helmet } from 'react-helmet';
 import SEO from '../components/seo';
 import Sentinel from '../components/sentinel';
 import Loader from '../components/loader';
@@ -62,7 +63,7 @@ const ImageWrapper = styled.div`
   cursor: pointer;
 
   img {
-    transition: opacity 1s linear, filter 1s 0.5s ease-in-out;
+    transition: opacity 0.3s ease-in;
   }
 
   @media screen and (hover: hover) and (pointer: fine) {
@@ -190,7 +191,6 @@ const LoadImage = ({ src, alt, style, prominentColors, onLoad }) => {
           height: style.height,
           margin: 0,
           opacity: loaded ? 1 : 0,
-          filter: `sepia(${loaded ? 0 : 1})`,
         }}
         src={src}
         alt={alt}
@@ -391,6 +391,12 @@ class CapturesIndex extends React.Component {
       View = (
         <>
           {this.renderGallery()}
+          {/* Prefetch full images */}
+          <Helmet>
+            {carouselImages.map(t => (
+              <link rel="prefetch" href={t.src} key={t.src} />
+            ))}
+          </Helmet>
           <ModalGateway>
             {lightboxOpen ? (
               <Modal onClose={this.toggleLightbox}>

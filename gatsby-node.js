@@ -82,7 +82,7 @@ exports.createPages = async ({ graphql, actions }) => {
   });
 
   const capturesIndex = path.resolve('./src/templates/captures-index.js');
-  const imagesCountPerPage = 20;
+  const imagesCountPerPage = 40;
   let currentPage = 1;
   do {
     const currentJSONFile = path.resolve(
