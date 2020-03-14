@@ -9,13 +9,15 @@ const sortAndWritePagination = (
 ) => {
   const images = imagesList.map((Key, index) => {
     const {
-      exif: { DateTimeOriginal },
+      exif: { DateTimeOriginal, PixelXDimension, PixelYDimension },
       geolocation: { Label },
     } = imagesMeta[index];
     return {
       src: `/captures/${Key}`,
       preview: `/captures/preview/${Key}`,
       prominentColors: imagesProminentColors[index],
+      width: PixelXDimension,
+      height: PixelYDimension,
       exif: { DateTimeOriginal, Label },
     };
   });
@@ -28,8 +30,7 @@ const sortAndWritePagination = (
   // Write pagination json
   const batch = getArrayChunks(sortedImages, batchSize);
   for (let i = 0; i < batch.length; i += 1) {
-    const isLast = i === batch.length - 1;
-    writePagination(batch[i], i, isLast);
+    writePagination(batch[i], i + 1, batch.length);
   }
 };
 

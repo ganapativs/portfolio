@@ -1,5 +1,4 @@
 import { Link } from 'gatsby';
-import Img from 'gatsby-image';
 import React from 'react';
 import Gallery from 'react-photo-gallery';
 import styled from 'styled-components';
@@ -88,21 +87,11 @@ const CSSView = styled.div`
   }
 `;
 
-const hasWebPSupport = () => {
-  const canvas =
-    typeof document === 'object' ? document.createElement('canvas') : {};
-  canvas.width = 1;
-  canvas.height = 1;
-  return canvas.toDataURL
-    ? canvas.toDataURL('image/webp').indexOf('image/webp') === 5
-    : false;
-};
-
 const getPhotoMetaInfo = photo => {
-  const { location, DateTimeOriginal } = photo.meta;
-  const date = DateTimeOriginal ? new Date(DateTimeOriginal * 1000) : null;
+  const { Label, DateTimeOriginal } = photo.meta;
+  const date = DateTimeOriginal ? new Date(DateTimeOriginal) : null;
 
-  return { location: location || '—', date };
+  return { location: Label || '—', date };
 };
 
 const RenderMetaInfo = ({ photo }) => {
@@ -189,7 +178,6 @@ class CapturesIndex extends React.Component {
       pageContext: { pageImages, currentPage, totalPages, imagesCountPerPage },
     } = props;
 
-    this.isWebPSupported = hasWebPSupport();
     this.loading = false;
     this.imagesCountPerPage = imagesCountPerPage;
 
@@ -235,8 +223,8 @@ class CapturesIndex extends React.Component {
 
     try {
       this.loading = true;
-      const nextImages = await fetch(
-        `/captures-pagination/index-${currentPage + 1}.json`,
+      const { images: nextImages } = await fetch(
+        `/captures/page-${currentPage + 1}.json`,
       ).then(t => t.json());
       this.setState(
         {
@@ -277,13 +265,14 @@ class CapturesIndex extends React.Component {
     const carouselImages = images
       .reduce((p, c) => [...p, ...c], [])
       .map(t => {
-        const { srcWebp, src } = t.node.childImageSharp.preview;
+        const { src, width, height, exif } = t;
 
         return {
-          src: this.isWebPSupported ? srcWebp : src,
+          src,
+          width,
+          height,
           meta: {
-            ...t.node.EXIF,
-            location: t.node.fields && t.node.fields.geolocation.Label,
+            ...exif,
           },
         };
       });
@@ -302,31 +291,28 @@ class CapturesIndex extends React.Component {
             this.imagesCountPerPage * batchIndex + index,
           )
         }>
-        <Img
-          onLoad={this.showSentinel}
+        <img
+          alt={photo.meta.Label}
+          src={photo.src}
           style={{
             width: photo.width,
             height: photo.height,
             margin,
           }}
-          fluid={photo.img}
+          onLoad={this.showSentinel}
         />
-        <ImageMeta margin={margin} photo={photo} />
       </ImageWrapper>
     );
   };
 
   getPhotosFromBatch = batch => {
-    const { isMobileLayout } = this.state;
-
     return batch.map(t => ({
-      ...t.node.childImageSharp.original,
-      src: t.node.childImageSharp[isMobileLayout ? 'thumb' : 'thumb'].src,
-      img: t.node.childImageSharp[isMobileLayout ? 'thumb' : 'thumb'],
-      id: t.node.id,
+      src: t.src,
+      id: t.src,
+      width: t.width,
+      height: t.height,
       meta: {
-        ...t.node.EXIF,
-        location: t.node.fields && t.node.fields.geolocation.Label,
+        ...t.exif,
       },
     }));
   };
@@ -421,3 +407,9 @@ class CapturesIndex extends React.Component {
 }
 
 export default CapturesIndex;
+
+// export default props => {
+//   console.log(props);
+
+//   return JSON.stringify(props);
+// };

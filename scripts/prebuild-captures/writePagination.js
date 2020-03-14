@@ -1,9 +1,11 @@
 import fs from 'fs-extra';
 import { outputFolder } from './constants';
 
-const writePagination = (images, index, isLast = false) => {
-  fs.writeJSONSync(`${outputFolder}/page-${index + 1}.json`, {
-    isLast,
+const writePagination = (images, currentPage, totalPages) => {
+  fs.writeJSONSync(`${outputFolder}/page-${currentPage}.json`, {
+    currentPage,
+    totalPages,
+    hasMore: currentPage < totalPages,
     images,
   });
 };

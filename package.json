@@ -102,7 +102,7 @@
   ],
   "scripts": {
     "build": "NODE_ENV=production yarn prebuild-captures && gatsby build",
-    "develop": "gatsby develop",
+    "develop": "echo 'Run `yarn prebuild-captures` to build captures images.' && gatsby develop",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "format": "eslint src --ext .js --ext .json --fix && prettier --write \"**/*.{css,md}\"",
