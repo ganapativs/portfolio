@@ -5,7 +5,7 @@ import AboutMe from '../components/aboutMe';
 
 export const query = graphql`
   query {
-    mobileImage: file(relativePath: { eq: "ganapativs.jpg" }) {
+    mobileImage: file(relativePath: { eq: "ganapativs-no-bg.png" }) {
       childImageSharp {
         # 120 * 1.1 (-5% margin)
         fluid(maxWidth: 140, maxHeight: 140, quality: 100) {
@@ -13,7 +13,7 @@ export const query = graphql`
         }
       }
     }
-    desktopImage: file(relativePath: { eq: "ganapativs.jpg" }) {
+    desktopImage: file(relativePath: { eq: "ganapativs-no-bg.png" }) {
       childImageSharp {
         # 160 * 1.1 (-5% margin)
         fluid(maxWidth: 160, maxHeight: 160, quality: 100) {

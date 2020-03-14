@@ -1,9 +1,9 @@
 import { Link } from 'gatsby';
-import Img from 'gatsby-image';
-import React from 'react';
+import React, { useState } from 'react';
 import Gallery from 'react-photo-gallery';
 import styled from 'styled-components';
 import Carousel, { Modal, ModalGateway } from 'react-images';
+import { Helmet } from 'react-helmet';
 import SEO from '../components/seo';
 import Sentinel from '../components/sentinel';
 import Loader from '../components/loader';
@@ -62,6 +62,10 @@ const ImageWrapper = styled.div`
   position: relative;
   cursor: pointer;
 
+  img {
+    transition: opacity 0.3s ease-in;
+  }
+
   @media screen and (hover: hover) and (pointer: fine) {
     &:hover ${MetaInfo} {
       transition: all 0.15s 0.15s linear;
@@ -88,21 +92,11 @@ const CSSView = styled.div`
   }
 `;
 
-const hasWebPSupport = () => {
-  const canvas =
-    typeof document === 'object' ? document.createElement('canvas') : {};
-  canvas.width = 1;
-  canvas.height = 1;
-  return canvas.toDataURL
-    ? canvas.toDataURL('image/webp').indexOf('image/webp') === 5
-    : false;
-};
-
 const getPhotoMetaInfo = photo => {
-  const { location, DateTimeOriginal } = photo.meta;
-  const date = DateTimeOriginal ? new Date(DateTimeOriginal * 1000) : null;
+  const { Label, DateTimeOriginal } = photo.meta;
+  const date = DateTimeOriginal ? new Date(DateTimeOriginal) : null;
 
-  return { location: location || '—', date };
+  return { location: Label || '—', date };
 };
 
 const RenderMetaInfo = ({ photo }) => {
@@ -140,7 +134,6 @@ const FixedCapturesIndexLayout = ({
       {photos.map(photo => (
         <ImageWrapper
           key={photo.id}
-          className="animated fadeIn faster"
           style={{
             breakInside: 'avoid',
             // eslint-disable-next-line no-dupe-keys
@@ -182,6 +175,34 @@ const FooterCaption = ({ currentView: photo }) => (
   <RenderMetaInfo photo={photo} />
 );
 
+const LoadImage = ({ src, alt, style, prominentColors, onLoad }) => {
+  const [loaded, setLoaded] = useState(false);
+  const [[r1, g1, b1], [r2, g2, b2]] = prominentColors;
+
+  return (
+    <div
+      style={{
+        ...style,
+        background: `linear-gradient(135deg, rgb(${r1},${g1},${b1}), rgb(${r2},${g2},${b2}))`,
+      }}>
+      <img
+        style={{
+          width: style.width,
+          height: style.height,
+          margin: 0,
+          opacity: loaded ? 1 : 0,
+        }}
+        src={src}
+        alt={alt}
+        onLoad={() => {
+          setLoaded(true);
+          onLoad();
+        }}
+      />
+    </div>
+  );
+};
+
 class CapturesIndex extends React.Component {
   constructor(props) {
     super(props);
@@ -189,7 +210,6 @@ class CapturesIndex extends React.Component {
       pageContext: { pageImages, currentPage, totalPages, imagesCountPerPage },
     } = props;
 
-    this.isWebPSupported = hasWebPSupport();
     this.loading = false;
     this.imagesCountPerPage = imagesCountPerPage;
 
@@ -235,8 +255,8 @@ class CapturesIndex extends React.Component {
 
     try {
       this.loading = true;
-      const nextImages = await fetch(
-        `/captures-pagination/index-${currentPage + 1}.json`,
+      const { images: nextImages } = await fetch(
+        `/captures/page-${currentPage + 1}.json`,
       ).then(t => t.json());
       this.setState(
         {
@@ -277,13 +297,14 @@ class CapturesIndex extends React.Component {
     const carouselImages = images
       .reduce((p, c) => [...p, ...c], [])
       .map(t => {
-        const { srcWebp, src } = t.node.childImageSharp.preview;
+        const { src, width, height, exif } = t;
 
         return {
-          src: this.isWebPSupported ? srcWebp : src,
+          src,
+          width,
+          height,
           meta: {
-            ...t.node.EXIF,
-            location: t.node.fields && t.node.fields.geolocation.Label,
+            ...exif,
           },
         };
       });
@@ -302,31 +323,31 @@ class CapturesIndex extends React.Component {
             this.imagesCountPerPage * batchIndex + index,
           )
         }>
-        <Img
-          onLoad={this.showSentinel}
+        <LoadImage
+          alt={photo.preview}
+          src={photo.preview}
+          prominentColors={photo.prominentColors}
           style={{
             width: photo.width,
             height: photo.height,
             margin,
           }}
-          fluid={photo.img}
+          onLoad={this.showSentinel}
         />
-        <ImageMeta margin={margin} photo={photo} />
       </ImageWrapper>
     );
   };
 
   getPhotosFromBatch = batch => {
-    const { isMobileLayout } = this.state;
-
     return batch.map(t => ({
-      ...t.node.childImageSharp.original,
-      src: t.node.childImageSharp[isMobileLayout ? 'thumb' : 'thumb'].src,
-      img: t.node.childImageSharp[isMobileLayout ? 'thumb' : 'thumb'],
-      id: t.node.id,
+      src: t.src,
+      preview: t.preview,
+      prominentColors: t.prominentColors,
+      id: t.src,
+      width: t.width,
+      height: t.height,
       meta: {
-        ...t.node.EXIF,
-        location: t.node.fields && t.node.fields.geolocation.Label,
+        ...t.exif,
       },
     }));
   };
@@ -370,6 +391,12 @@ class CapturesIndex extends React.Component {
       View = (
         <>
           {this.renderGallery()}
+          {/* Prefetch full images */}
+          <Helmet>
+            {carouselImages.map(t => (
+              <link rel="prefetch" href={t.src} key={t.src} />
+            ))}
+          </Helmet>
           <ModalGateway>
             {lightboxOpen ? (
               <Modal onClose={this.toggleLightbox}>

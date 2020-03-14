@@ -12,14 +12,29 @@ const Wrapper = styled.div`
   }
 
   .profile-logo {
-    border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
     border-radius: 50%;
+    border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
     overflow: hidden;
+    border: 0.6rem solid var(--color-dark);
+    background: var(--color-accent);
+    background: radial-gradient(
+          circle at 0% 50%,
+          transparent 9px,
+          var(--color-dark) 10px,
+          transparent 11px
+        )
+        0px 10px,
+      radial-gradient(
+        at 100% 100%,
+        transparent 9px,
+        var(--color-dark) 10px,
+        transparent 11px
+      ),
+      var(--color-accent);
+    background-size: 20px 20px;
 
     .gatsby-image-wrapper {
-      box-shadow: 2px 2px 4px var(--color-ultra-dark);
-      border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
-      border-radius: 50%;
+      transform: translateY(0.5rem);
     }
   }
 `;
@@ -38,7 +53,7 @@ export default function ProfileLogo({ profileLogo }) {
   return (
     <Wrapper>
       <div className="neumorphism profile-logo">
-        {profileLogo ? <Img fluid={sources} /> : null}
+        {profileLogo ? <Img draggable={false} fluid={sources} /> : null}
       </div>
     </Wrapper>
   );
