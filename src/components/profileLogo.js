@@ -12,14 +12,14 @@ const Wrapper = styled.div`
   }
 
   .profile-logo {
-    border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
     border-radius: 50%;
+    border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
     overflow: hidden;
+    background: var(--color-accent);
+    border: 0.6rem solid var(--color-dark);
 
     .gatsby-image-wrapper {
-      box-shadow: 2px 2px 4px var(--color-ultra-dark);
-      border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
-      border-radius: 50%;
+      transform: translateY(0.5rem);
     }
   }
 `;
