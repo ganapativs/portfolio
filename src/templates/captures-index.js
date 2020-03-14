@@ -1,5 +1,5 @@
 import { Link } from 'gatsby';
-import React from 'react';
+import React, { useState } from 'react';
 import Gallery from 'react-photo-gallery';
 import styled from 'styled-components';
 import Carousel, { Modal, ModalGateway } from 'react-images';
@@ -60,6 +60,10 @@ const MetaInfo = styled.div`
 const ImageWrapper = styled.div`
   position: relative;
   cursor: pointer;
+
+  img {
+    transition: opacity 1s linear, filter 1s 0.5s ease-in-out;
+  }
 
   @media screen and (hover: hover) and (pointer: fine) {
     &:hover ${MetaInfo} {
@@ -129,7 +133,6 @@ const FixedCapturesIndexLayout = ({
       {photos.map(photo => (
         <ImageWrapper
           key={photo.id}
-          className="animated fadeIn faster"
           style={{
             breakInside: 'avoid',
             // eslint-disable-next-line no-dupe-keys
@@ -170,6 +173,35 @@ const FixedCapturesIndexLayout = ({
 const FooterCaption = ({ currentView: photo }) => (
   <RenderMetaInfo photo={photo} />
 );
+
+const LoadImage = ({ src, alt, style, prominentColors, onLoad }) => {
+  const [loaded, setLoaded] = useState(false);
+  const [[r1, g1, b1], [r2, g2, b2]] = prominentColors;
+
+  return (
+    <div
+      style={{
+        ...style,
+        background: `linear-gradient(135deg, rgb(${r1},${g1},${b1}), rgb(${r2},${g2},${b2}))`,
+      }}>
+      <img
+        style={{
+          width: style.width,
+          height: style.height,
+          margin: 0,
+          opacity: loaded ? 1 : 0,
+          filter: `sepia(${loaded ? 0 : 1})`,
+        }}
+        src={src}
+        alt={alt}
+        onLoad={() => {
+          setLoaded(true);
+          onLoad();
+        }}
+      />
+    </div>
+  );
+};
 
 class CapturesIndex extends React.Component {
   constructor(props) {
@@ -291,9 +323,10 @@ class CapturesIndex extends React.Component {
             this.imagesCountPerPage * batchIndex + index,
           )
         }>
-        <img
-          alt={photo.meta.Label}
-          src={photo.src}
+        <LoadImage
+          alt={photo.preview}
+          src={photo.preview}
+          prominentColors={photo.prominentColors}
           style={{
             width: photo.width,
             height: photo.height,
@@ -308,6 +341,8 @@ class CapturesIndex extends React.Component {
   getPhotosFromBatch = batch => {
     return batch.map(t => ({
       src: t.src,
+      preview: t.preview,
+      prominentColors: t.prominentColors,
       id: t.src,
       width: t.width,
       height: t.height,
@@ -407,9 +442,3 @@ class CapturesIndex extends React.Component {
 }
 
 export default CapturesIndex;
-
-// export default props => {
-//   console.log(props);
-
-//   return JSON.stringify(props);
-// };
