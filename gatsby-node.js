@@ -3,37 +3,13 @@ const path = require('path');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const sharp = require('sharp');
 const { createFilePath } = require('gatsby-source-filesystem');
-const { getImageGeoLocation } = require('./gatsby/getImageGeoLocation');
 
 // https://github.com/gatsbyjs/gatsby/issues/6291
 sharp.simd(false);
 sharp.cache(false);
 
-function createJSON(currentPage, pageImages) {
-  const dir = 'public/captures-pagination/';
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
-  }
-  const filePath = `${dir}index-${currentPage}.json`;
-  const dataToSave = JSON.stringify(pageImages);
-  fs.writeFile(filePath, dataToSave, err => {
-    if (err) {
-      return console.log(err);
-    }
-    return true;
-  });
-}
-
 exports.onCreateNode = async ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
-
-  // Image files
-  if (
-    node.internal.mediaType === 'image/jpeg' &&
-    node.internal.type === 'S3ImageAsset'
-  ) {
-    await getImageGeoLocation(node, createNodeField);
-  }
 
   if (node.internal.type === `Mdx`) {
     const basePath = `blog`;
@@ -109,9 +85,19 @@ exports.createPages = async ({ graphql, actions }) => {
   const imagesCountPerPage = 20;
   let currentPage = 1;
   do {
-    const { hasMore, totalPages, images } = fs.readJSONSync(
-      path.resolve(__dirname, `static/captures/page-${currentPage}.json`),
+    const currentJSONFile = path.resolve(
+      __dirname,
+      `static/captures/page-${currentPage}.json`,
     );
+
+    if (!fs.existsSync(currentJSONFile)) {
+      console.error(
+        'Captures images are not built. Run `yarn prebuild-captures` to prebuild images.',
+      );
+      process.exit(-1);
+    }
+
+    const { hasMore, totalPages, images } = fs.readJSONSync(currentJSONFile);
 
     const pathSuffix =
       currentPage > 1
@@ -135,98 +121,10 @@ exports.createPages = async ({ graphql, actions }) => {
     if (hasMore) {
       currentPage += 1;
     } else {
+      console.log(
+        `\nCreated ${currentPage} pages of capture index paginated content.`,
+      );
       currentPage = null;
     }
-    console.log('exports.createPages -> capturesPage', images);
   } while (currentPage !== null);
-
-  // const captures = await graphql(
-  //   `
-  //     {
-  //       allS3ImageAsset(
-  //         sort: { fields: EXIF___DateTimeOriginal, order: DESC }
-  //       ) {
-  //         edges {
-  //           node {
-  //             id
-  //             fields {
-  //               geolocation {
-  //                 Label
-  //               }
-  //             }
-  //             EXIF {
-  //               DateTimeOriginal
-  //             }
-  //             # Long sharp conversion time(around 3s per save) is breaking
-  //             # the watch/hot reloading of mdx blog
-  //             # Need to move this to page query to fix the issue
-  //             # Remove infinite scroll in captures?
-  //             childImageSharp {
-  //               original {
-  //                 height
-  //                 width
-  //                 src
-  //               }
-  //               thumb: fluid(maxHeight: 250, quality: 100) {
-  //                 # GatsbyImageSharpFluid_withWebp
-  //                 base64
-  //                 aspectRatio
-  //                 src
-  //                 srcSet
-  //                 srcWebp
-  //                 srcSetWebp
-  //                 sizes
-  //               }
-  //               preview: fluid(maxHeight: 800, quality: 100) {
-  //                 src
-  //                 srcWebp
-  //               }
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   `,
-  // );
-
-  // if (captures.errors) {
-  //   console.log(captures.errors);
-  // }
-
-  // const capturesIndex = path.resolve('./src/templates/captures-index.js');
-  // const images = captures.data.allS3ImageAsset.edges;
-  // /* Iterate needed pages and create them. */
-  // const imagesCountPerPage = 50;
-  // const totalPages = Math.ceil(images.length / imagesCountPerPage);
-  // for (let currentPage = 1; currentPage <= totalPages; currentPage += 1) {
-  //   const pathSuffix =
-  //     currentPage > 1
-  //       ? currentPage
-  //       : ''; /* To create paths "/", "/2", "/3", ... */
-
-  //   /* Collect images needed for this page. */
-  //   const startIndexInclusive = imagesCountPerPage * (currentPage - 1);
-  //   const endIndexExclusive = startIndexInclusive + imagesCountPerPage;
-  //   const pageImages = images.slice(startIndexInclusive, endIndexExclusive);
-
-  //   /* Combine all data needed to construct this page. */
-  //   const pageData = {
-  //     path: `/captures/${pathSuffix}`,
-  //     component: capturesIndex,
-  //     context: {
-  //       /* If you need to pass additional data, you can pass it inside this context object. */
-  //       pageImages,
-  //       currentPage,
-  //       totalPages,
-  //       imagesCountPerPage,
-  //     },
-  //   };
-
-  //   /* Create normal pages (for pagination) and corresponding JSON (for infinite scroll). */
-  //   createJSON(pageData.context.currentPage, pageData.context.pageImages);
-  //   createPage(pageData);
-  // }
-  // console.log(
-  //   `\nCreated ${totalPages} pages of capture index paginated content.`,
-  // );
 };

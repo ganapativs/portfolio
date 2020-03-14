@@ -215,18 +215,6 @@ module.exports = {
         ],
       },
     },
-    // {
-    //   resolve: `gatsby-source-s3-image`,
-    //   options: {
-    //     accessKeyId: process.env.ACCESS_KEY_ID,
-    //     secretAccessKey: process.env.SECRET_ACCESS_KEY,
-    //     bucketName:
-    //       process.env.NODE_ENV === 'development'
-    //         ? process.env.PHOTOGRAPHY_BUCKET_DEV
-    //         : process.env.PHOTOGRAPHY_BUCKET,
-    //     region: process.env.REGION,
-    //   },
-    // },
     {
       resolve: `gatsby-plugin-typography`,
       options: {
