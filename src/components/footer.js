@@ -50,7 +50,7 @@ const Footer = () => (
       <ExternalLink
         title="View source code on GitHub"
         href={'https://github.com/ganapativs/portfolio?ref=meetguns.com'}>
-        Source
+        &lt;Code /&gt;
       </ExternalLink>
     </Right>
   </FooterWrapper>
