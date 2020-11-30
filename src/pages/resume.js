@@ -4,7 +4,7 @@ import { pdfjs, Document, Page } from 'react-pdf';
 import Spectrum from 'react-spectrum';
 import SizeMe from 'react-sizeme';
 import SEO from '../components/seo';
-import 'react-pdf/dist/Page/AnnotationLayer.css';
+import 'react-pdf/dist/umd/Page/AnnotationLayer.css';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 

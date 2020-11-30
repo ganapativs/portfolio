@@ -197,21 +197,12 @@ module.exports = {
     },
     `gatsby-plugin-styled-components`,
     {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [
-          {
-            family: `Merriweather`,
-            variants: [`400`, `400i`],
-          },
-          {
-            family: `Source Sans Pro`,
-            variants: [`400`],
-          },
-          {
-            family: `Fira Code`,
-            variants: [`400`, `400i`],
-          },
+          `Merriweather\:400,400i`,
+          `Source Sans Pro\:400`,
+          `Fira Code\:400,400i`
         ],
       },
     },
