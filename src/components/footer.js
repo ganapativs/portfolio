@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ExternalLink from './externalLink';
+import { FeedbackFish } from '@feedback-fish/react'
 
 const FooterWrapper = styled.footer`
   max-width: 840px;
@@ -41,12 +42,26 @@ const Right = styled.div`
   align-items: center;
 `;
 
+const Feedback = styled(ExternalLink)`
+  cursor: pointer;
+`
+
+const Separator = styled.span`
+  padding: 0 0.5rem;
+`
+
 const Footer = () => (
   <FooterWrapper>
     <Left>
       <span>Hand-crafted in India with ❤</span>
     </Left>
     <Right>
+      <FeedbackFish projectId="0fdef6fa4b69d7">
+        <Feedback className="hide-xs">
+          Feedback
+        </Feedback>
+      </FeedbackFish>
+      <Separator className="hide-xs">・</Separator>
       <ExternalLink
         title="View source code on GitHub"
         href={'https://github.com/ganapativs/portfolio?ref=meetguns.com'}>
