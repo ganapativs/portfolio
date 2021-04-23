@@ -15,9 +15,10 @@ const Wrapper = styled.div`
     border-radius: 50%;
     border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
     overflow: hidden;
-    border: 0.6rem solid var(--color-dark);
+    border: 8px solid var(--color-dark);
     background: var(--color-accent);
-    background: radial-gradient(
+    background: linear-gradient(-135deg, var(--color-accent), transparent);
+    /* background: radial-gradient(
           circle at 0% 50%,
           transparent 9px,
           var(--color-dark) 10px,
@@ -31,10 +32,10 @@ const Wrapper = styled.div`
         transparent 11px
       ),
       var(--color-accent);
-    background-size: 20px 20px;
+    background-size: 20px 20px; */
 
     .gatsby-image-wrapper {
-      transform: translateY(0.5rem);
+      transform: translateY(0);
     }
   }
 `;
