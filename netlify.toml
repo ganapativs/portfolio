@@ -1,6 +1,6 @@
 [build.environment]
-  NODE_VERSION = "13.11.0"
-  YARN_VERSION = "1.22.4"
+  NODE_VERSION = "16.0.0"
+  YARN_VERSION = "1.22.5"
   YARN_FLAGS = "--no-ignore-optional"
 
 # The following redirect is intended for use with most SPAs that handle
