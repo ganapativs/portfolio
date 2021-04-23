@@ -73,7 +73,7 @@
     "react-color": "^2.19.3",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
-    "react-images": "^1.2.0-beta.6",
+    "react-images": "^1.1.7",
     "react-pdf": "^5.2.0",
     "react-photo-gallery": "^8.0.0",
     "react-sizeme": "^3.0.1",
