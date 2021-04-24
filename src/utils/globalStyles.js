@@ -25,7 +25,7 @@ body {
 }
 
 body.dark {
-  --color-dark: #1c1e24;
+  --color-dark: #0e0e0e;
   --color-dark-2: #16181d;
   --color-ultra-dark: #22242b;
   --color-light: #ecf0f3;
