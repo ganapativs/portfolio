@@ -1,5 +1,5 @@
 [build.environment]
-  NODE_VERSION = "16.0.0"
+  NODE_VERSION = "14.16.1"
   YARN_VERSION = "1.22.5"
   YARN_FLAGS = "--no-ignore-optional"
 
