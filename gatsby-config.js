@@ -115,11 +115,12 @@ module.exports = {
         feeds: [
           {
             serialize: ({ query: { site, allMdx } }) => {
-              return allMdx.edges.map(edge => {
+              return allMdx.edges.map((edge) => {
                 const { siteUrl } = site.siteMetadata;
                 const postText = `
-                <div style="margin-top=55px; font-style: italic;">(This is an article posted to my blog at meetguns.com. You can read it online by <a href="${siteUrl +
-                  edge.node.fields.slug}">clicking here</a>.)</div>
+                <div style="margin-top=55px; font-style: italic;">(This is an article posted to my blog at meetguns.com. You can read it online by <a href="${
+                  siteUrl + edge.node.fields.slug
+                }">clicking here</a>.)</div>
               `;
 
                 let { html } = edge.node;
@@ -202,7 +203,7 @@ module.exports = {
         fonts: [
           `Merriweather\:400,400i`,
           `Source Sans Pro\:400`,
-          `Fira Code\:400,400i`
+          `Fira Code\:400,400i`,
         ],
       },
     },
@@ -226,7 +227,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-twitter`,
-    `gatsby-plugin-netlify-cache`,
     `gatsby-plugin-dark-mode`,
     `gatsby-plugin-webpack-size`,
     `gatsby-plugin-catch-links`,
