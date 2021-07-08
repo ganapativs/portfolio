@@ -3,6 +3,13 @@
   YARN_VERSION = "1.22.5"
   YARN_FLAGS = "--no-ignore-optional"
 
+[build]
+  command = "yarn build"
+  publish = "public/"
+
+[[plugins]]
+  package = "@netlify/plugin-gatsby"
+
 # The following redirect is intended for use with most SPAs that handle
 # routing internally.
 [[redirects]]
