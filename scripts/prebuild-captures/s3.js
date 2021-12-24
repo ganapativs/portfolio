@@ -11,6 +11,6 @@ export const s3 = new AWS.S3();
 
 export const params = {
   Bucket: isProd
-    ? process.env.PHOTOGRAPHY_BUCKET
+    ? process.env.PHOTOGRAPHY_BUCKET_DEV
     : process.env.PHOTOGRAPHY_BUCKET_DEV,
 };

@@ -27,7 +27,7 @@ import hashAndRenameImages from './hashAndRenameImages';
     // Fetch images list from S3
     console.log('Fetching images list from S3');
     const images = await getS3ImagesList();
-    const imagesList = images.map(t => t.Key);
+    const imagesList = images.map((t) => t.Key);
     const imagesMeta = [];
     const imagesProminentColors = [];
     console.log('Total images found in S3: ', imagesList.length);
