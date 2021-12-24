@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { Suspense, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { pdfjs, Document, Page } from 'react-pdf';
 import Spectrum from 'react-spectrum';
 import SizeMe from 'react-sizeme';
 import SEO from '../components/seo';
 import 'react-pdf/dist/umd/Page/AnnotationLayer.css';
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+const ResumePdf = React.lazy(() => import('../components/resumePdf'));
 
 const ResumeWrapper = styled.div`
   flex: 1;
@@ -49,7 +48,8 @@ const Resume = ({ size: { width } }) => {
         <p style={{ textAlign: 'right' }}>
           <a
             href={`/resume/${theme}.pdf`}
-            download={`Ganapati V S - Resume - ${theme}.pdf`}>
+            download={`Ganapati V S - Resume - ${theme}.pdf`}
+          >
             <button>Download resume</button>
           </a>
         </p>
@@ -68,18 +68,11 @@ const Resume = ({ size: { width } }) => {
         ) : null}
         <ResumeDoc
           className="animated fadeIn"
-          style={{ visibility: visible ? 'visible' : 'hidden' }}>
-          <Document
-            file={`/resume/${theme}.pdf`}
-            externalLinkTarget="_blank"
-            loading={<div />}>
-            <Page
-              onRenderSuccess={() => setVisible(true)}
-              width={width}
-              pageNumber={1}
-              loading={<div />}
-            />
-          </Document>
+          style={{ visibility: visible ? 'visible' : 'hidden' }}
+        >
+          <Suspense fallback={<div>Loading...</div>}>
+            <ResumePdf theme={theme} width={width} onRender={() => setVisible(true)} />
+          </Suspense>
         </ResumeDoc>
         {visible ? (
           <div style={{ margin: '5rem 0 1rem 0' }}>
