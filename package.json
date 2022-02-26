@@ -66,7 +66,7 @@
     "gatsby-transformer-sharp": "^4.4.0",
     "imghash": "^0.0.9",
     "intersection-observer": "^0.12.0",
-    "prismjs": "^1.25.0",
+    "prismjs": "^1.27.0",
     "prop-types": "^15.8.0",
     "react": "^17.0.2",
     "react-color": "^2.19.3",
