@@ -65,7 +65,7 @@ const DevInfo = () => {
         <span role="img" aria-label="Hi!">
           👋
         </span>{' '}
-        I&#39;m a Full-Stack JavaScript developer with over 5 years of
+        I&#39;m a Full-Stack JavaScript developer with over 8 years of
         experience. Currently working as Associate Vice President - Technology{' '}
         <ExternalLink
           href="https://twitter.com/tracxn?ref=meetguns.com"
