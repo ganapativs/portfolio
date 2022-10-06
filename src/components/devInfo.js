@@ -66,7 +66,7 @@ const DevInfo = () => {
           👋
         </span>{' '}
         I&#39;m a Full-Stack JavaScript developer with over 8 years of
-        experience. Currently working as Associate Vice President - Technology{' '}
+        experience. Currently working as Senior Associate Vice President - Technology{' '}
         <ExternalLink
           href="https://twitter.com/tracxn?ref=meetguns.com"
           onClick={() =>
