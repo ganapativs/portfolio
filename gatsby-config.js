@@ -118,19 +118,6 @@ module.exports = {
             serialize: ({ query: { site, allMdx } }) => {
               return allMdx.edges.map((edge) => {
                 const { siteUrl } = site.siteMetadata;
-                const postText = `
-                <div style="margin-top=55px; font-style: italic;">(This is an article posted to my blog at meetguns.com. You can read it online by <a href="${
-                  siteUrl + edge.node.fields.slug
-                }">clicking here</a>.)</div>
-              `;
-
-                let { html } = edge.node;
-                // Hacky workaround for https://github.com/gaearon/overreacted.io/issues/65
-                html = html
-                  .replace(/href="\//g, `href="${siteUrl}/`)
-                  .replace(/src="\//g, `src="${siteUrl}/`)
-                  .replace(/"\/static\//g, `"${siteUrl}/static/`)
-                  .replace(/,\s*\/static\//g, `,${siteUrl}/static/`);
 
                 return {
                   ...edge.node.frontmatter,
@@ -138,7 +125,6 @@ module.exports = {
                   date: edge.node.frontmatter.date,
                   url: siteUrl + edge.node.fields.slug,
                   guid: siteUrl + edge.node.fields.slug,
-                  custom_elements: [{ 'content:encoded': html + postText }],
                 };
               });
             },
@@ -156,7 +142,6 @@ module.exports = {
                   edges {
                     node {
                       excerpt(pruneLength: 250)
-                      html
                       fields {
                         slug
                       }
