@@ -1,10 +1,9 @@
 [build.environment]
-  NODE_VERSION = "17.3.0"
-  YARN_VERSION = "1.22.17"
-  YARN_FLAGS = "--no-ignore-optional"
+  NODE_VERSION = "20.13.0"
+  PNPM_VERSION = "8.9.2"
 
 [build]
-  command = "yarn build"
+  command = "pnpm run build"
   publish = "public/"
 
 [[plugins]]

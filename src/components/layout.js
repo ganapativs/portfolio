@@ -32,14 +32,14 @@ const Div = styled.div`
   display: flex;
   align-items: flex-start;
   flex: 1;
-  max-width: ${props => (props.full ? '100%' : '840px')};
+  max-width: ${(props) => (props.full ? '100%' : '840px')};
   width: 100%;
   margin: 0 auto;
 `;
 
-const fullPathPatterns = ['/captures/'];
+const fullPathPatterns = []; // ['/full-path-url/']
 
-const Layout = props => {
+const Layout = (props) => {
   const { location } = props;
 
   // Gatsby plugin offline messes up hydration and removes some styled component classes
@@ -50,7 +50,7 @@ const Layout = props => {
   }
 
   const isFullWidth =
-    props.full || fullPathPatterns.some(p => location.pathname.startsWith(p));
+    props.full || fullPathPatterns.some((p) => location.pathname.startsWith(p));
 
   return (
     <>

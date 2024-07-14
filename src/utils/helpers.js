@@ -1,7 +1,3 @@
-export function formatReadingTime(minutes) {
-  return `${minutes} min read`;
-}
-
 export function formatPostDate(d) {
   let date = d;
   if (typeof Date.prototype.toLocaleDateString !== 'function') {

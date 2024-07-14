@@ -13,7 +13,7 @@ to get unique items in an array. The source code looks like this.
 
 ```js
 // Source code
-const getUnique = arr => [...new Set(arr)];
+const getUnique = (arr) => [...new Set(arr)];
 ```
 
 Then I execute the function expecting it to work fine. but, **it didn't** 😅
@@ -22,8 +22,8 @@ Then I execute the function expecting it to work fine. but, **it didn't** 😅
 /**
  * Expected output: [1,2]
  * Actual output: [Set({1, 2})] 😮
-*/
-const uniqueArr = getUnique([1,2,1]);
+ */
+const uniqueArr = getUnique([1, 2, 1]);
 ```
 
 I wasn't sure what was happening. Why did it produce the wrong result?
@@ -80,14 +80,14 @@ to an array using `spread` operators might not work as expected.
 
 ```js
 // Input code
-const charArr = [..."hello"];
+const charArr = [...'hello'];
 
 /**
  * Transpiled code in loose mode(Produces wrong result)
  *   Expected output: ["h", "e", "l", "l", "o"]
  *   Actual output: ["hello"]
-*/
-var charArr = [].concat("hello");
+ */
+var charArr = [].concat('hello');
 ```
 
 ## Should I use the `loose` mode?

@@ -1,3 +1,7 @@
+// TODO:
+// - Cleanup S3 bucket
+// - [gatsby-transformer-sharp] The "fixed" and "fluid" resolvers are now deprecated. Switch to "gatsby-plugin-image" for better performance and a simpler API. See https://gatsby.dev/migrate-images to learn how.
+// - gatsby-image@3.11.0: gatsby-image is now gatsby-plugin-image: https://npm.im/gatsby-plugin-image. This package will no longer receive updates.
 // eslint-disable-next-line import/no-extraneous-dependencies
 require('dotenv').config({
   path: '.env',
@@ -33,9 +37,6 @@ module.exports = {
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
-        // TODO: Remove this workaround
-        // https://github.com/gatsbyjs/gatsby/issues/15486
-        plugins: [`gatsby-remark-images`, `gatsby-remark-autolink-headers`],
         extensions: [`.mdx`, `.md`],
         gatsbyRemarkPlugins: [
           {
@@ -60,6 +61,13 @@ module.exports = {
               quality: 85,
               withWebp: { quality: 85 },
               tracedSVG: true,
+            },
+          },
+          {
+            resolve: `gatsby-remark-external-links`,
+            options: {
+              target: '_blank',
+              rel: 'nofollow noopener noreferrer',
             },
           },
           {
@@ -90,13 +98,6 @@ module.exports = {
           {
             resolve: `gatsby-remark-smartypants`,
           },
-          {
-            resolve: `gatsby-remark-external-links`,
-            options: {
-              target: '_blank',
-              rel: 'nofollow noopener noreferrer',
-            },
-          },
         ],
       },
     },
@@ -117,19 +118,6 @@ module.exports = {
             serialize: ({ query: { site, allMdx } }) => {
               return allMdx.edges.map((edge) => {
                 const { siteUrl } = site.siteMetadata;
-                const postText = `
-                <div style="margin-top=55px; font-style: italic;">(This is an article posted to my blog at meetguns.com. You can read it online by <a href="${
-                  siteUrl + edge.node.fields.slug
-                }">clicking here</a>.)</div>
-              `;
-
-                let { html } = edge.node;
-                // Hacky workaround for https://github.com/gaearon/overreacted.io/issues/65
-                html = html
-                  .replace(/href="\//g, `href="${siteUrl}/`)
-                  .replace(/src="\//g, `src="${siteUrl}/`)
-                  .replace(/"\/static\//g, `"${siteUrl}/static/`)
-                  .replace(/,\s*\/static\//g, `,${siteUrl}/static/`);
 
                 return {
                   ...edge.node.frontmatter,
@@ -137,7 +125,6 @@ module.exports = {
                   date: edge.node.frontmatter.date,
                   url: siteUrl + edge.node.fields.slug,
                   guid: siteUrl + edge.node.fields.slug,
-                  custom_elements: [{ 'content:encoded': html + postText }],
                 };
               });
             },
@@ -155,7 +142,6 @@ module.exports = {
                   edges {
                     node {
                       excerpt(pruneLength: 250)
-                      html
                       fields {
                         slug
                       }
@@ -228,7 +214,6 @@ module.exports = {
     },
     `gatsby-plugin-twitter`,
     `gatsby-plugin-dark-mode`,
-    `gatsby-plugin-webpack-size`,
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-sitemap`,
     // Disabling temporarily
