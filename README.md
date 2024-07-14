@@ -23,7 +23,7 @@ Pull requests are the greatest contributions, so be sure they are focused in sco
 - Clone your fork: `git clone https://github.com/<your-username>/portfolio`
 - Navigate to the newly cloned directory: `cd portfolio`
 - Create a new branch for the new feature: `git checkout -b my-new-feature`
-- Install the tools necessary for development: `yarn`
+- Install the tools necessary for development: `pnpm`
 - Make your changes.
 - Commit your changes: `git commit -am 'Add some feature'`
 - Push to the branch: `git push origin my-new-feature`

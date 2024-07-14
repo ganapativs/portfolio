@@ -1,5 +1,13 @@
 import React, { useRef, useEffect } from 'react';
 
+/**
+ * Usage:
+      <Sentinel
+        fetchMoreBufferDistance={1000}
+        onFetchMore={onFetchMore}>
+        <Loader />
+      </Sentinel>
+ */
 const Sentinel = ({
   fetchMoreBufferDistance,
   onFetchMore,

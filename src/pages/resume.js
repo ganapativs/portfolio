@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import Spectrum from 'react-spectrum';
 import SizeMe from 'react-sizeme';
 import SEO from '../components/seo';
-import 'react-pdf/dist/umd/Page/AnnotationLayer.css';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import 'react-pdf/dist/Page/TextLayer.css';
 
 const ResumePdf = React.lazy(() => import('../components/resumePdf'));
 

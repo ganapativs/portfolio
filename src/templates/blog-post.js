@@ -2,9 +2,7 @@ import React from 'react';
 import { Link, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import styled from 'styled-components';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
 import SEO from '../components/seo';
-
 import { formatPostDate, formatReadingTime } from '../utils/helpers';
 import { rhythm, scale } from '../utils/typography';
 
@@ -58,8 +56,9 @@ const Div = styled.div`
 
 class BlogPostTemplate extends React.Component {
   render() {
-    const post = this.props.data.blogPost.edges[0].node;
-    const { body } = post;
+    const { node: post } = this.props.data.blogPost.edges[0];
+    const { body, fields: { timeToRead: { text: timeToReadText } = {} } = {} } =
+      post;
     const { previous, next, slug } = this.props.pageContext;
 
     const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/src${slug}index.mdx`;
@@ -84,7 +83,8 @@ class BlogPostTemplate extends React.Component {
                 style={{
                   color: 'var(--textTitle)',
                   marginTop: rhythm(1 / 2),
-                }}>
+                }}
+              >
                 {post.frontmatter.title}
               </h1>
               <PostInfo
@@ -92,15 +92,17 @@ class BlogPostTemplate extends React.Component {
                   ...scale(-1 / 5),
                   marginBottom: rhythm(1),
                   marginTop: rhythm(-3 / 5),
-                }}>
+                }}
+              >
                 {formatPostDate(post.frontmatter.date)}
-                {` • ${formatReadingTime(post.timeToRead)}`} •{' '}
+                {` • ${timeToReadText}`} •{' '}
                 <a
                   href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
                     `Checkout this blog about "${post.frontmatter.title}" by @ganapativs\n\n${blogUrl}`,
                   )}`}
                   target="_blank"
-                  rel="noopener noreferrer">
+                  rel="noopener noreferrer"
+                >
                   Tweet
                 </a>
               </PostInfo>
@@ -110,7 +112,7 @@ class BlogPostTemplate extends React.Component {
                 <Img fluid={post.frontmatter.cover.childImageSharp.fluid} />
               </CoverImage>
             ) : null}
-            <MDXRenderer>{body}</MDXRenderer>
+            {this.props.children}
             <footer>
               <p>
                 <a href={discussUrl} target="_blank" rel="noopener noreferrer">
@@ -162,7 +164,6 @@ export const pageQuery = graphql`
         node {
           id
           body
-          timeToRead
           frontmatter {
             title
             date(formatString: "MMMM DD, YYYY")
@@ -179,6 +180,9 @@ export const pageQuery = graphql`
           }
           fields {
             slug
+            timeToRead {
+              text
+            }
           }
         }
       }

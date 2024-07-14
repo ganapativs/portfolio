@@ -7,7 +7,6 @@ import { captureEvent } from '../utils/ga';
 import AccentSwitcher from './accentSwitcher';
 import SwitcherButton from './SwitcherButton';
 import UserIcon from '../assets/icons/userIcon';
-import CameraIcon from '../assets/icons/cameraIcon';
 import BlogIcon from '../assets/icons/blogIcon';
 
 const switchTheme = (theme, toggleTheme) => {
@@ -78,11 +77,15 @@ const LogoWrapper = styled.div`
   }
 
   @media screen and (hover: hover) and (pointer: fine) {
-    transition: transform 0.3s ease-out, border-radius 0.15s ease-out;
+    transition:
+      transform 0.3s ease-out,
+      border-radius 0.15s ease-out;
 
     &:hover,
     &.init-hover-animate-state {
-      transition: transform 0.5s ease-in-out, border-radius 0.2s ease-in-out;
+      transition:
+        transform 0.5s ease-in-out,
+        border-radius 0.2s ease-in-out;
       border-radius: 35% 65% 55% 45% / 48% 48% 52% 52%;
       transform: translateY(-2px);
     }
@@ -100,7 +103,7 @@ const Right = styled.div`
 
 const IconWrapper = styled.span`
   @media screen and (max-width: 767px) {
-    margin-right: ${prop => (prop.active ? '0.25rem' : 0)};
+    margin-right: ${(prop) => (prop.active ? '0.25rem' : 0)};
   }
 
   @media screen and (min-width: 768px) {
@@ -176,15 +179,19 @@ const MoonOrSun = styled.div`
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  border: ${p => (p.isDark ? '4px' : '2px')} solid var(--color-accent);
+  border: ${(p) => (p.isDark ? '4px' : '2px')} solid var(--color-accent);
   background: var(--color-accent);
-  transform: scale(${p => (p.isDark ? 0.55 : 1)});
-  transition: all 0.45s ease-out, opacity 0.1s ease-out;
-  overflow: ${p => (p.isDark ? 'visible' : 'hidden')};
+  transform: scale(${(p) => (p.isDark ? 0.55 : 1)});
+  transition:
+    all 0.45s ease-out,
+    opacity 0.1s ease-out;
+  overflow: ${(p) => (p.isDark ? 'visible' : 'hidden')};
 
   @media screen and (hover: hover) and (pointer: fine) {
     &:hover {
-      transition: all 0.1s ease-in, opacity 0.15s ease-in;
+      transition:
+        all 0.1s ease-in,
+        opacity 0.15s ease-in;
       opacity: 0.8;
     }
   }
@@ -198,8 +205,8 @@ const MoonOrSun = styled.div`
     width: 24px;
     border: 2px solid var(--color-accent);
     border-radius: 50%;
-    transform: translate(${p => (p.isDark ? '14px, -14px' : '0, 0')});
-    opacity: ${p => (p.isDark ? 0 : 1)};
+    transform: translate(${(p) => (p.isDark ? '14px, -14px' : '0, 0')});
+    opacity: ${(p) => (p.isDark ? 0 : 1)};
     transition: transform 0.45s ease;
   }
   &::after {
@@ -211,11 +218,16 @@ const MoonOrSun = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
-    box-shadow: 0 -23px 0 var(--color-accent), 0 23px 0 var(--color-accent),
-      23px 0 0 var(--color-accent), -23px 0 0 var(--color-accent),
-      15px 15px 0 var(--color-accent), -15px 15px 0 var(--color-accent),
-      15px -15px 0 var(--color-accent), -15px -15px 0 var(--color-accent);
-    transform: scale(${p => (p.isDark ? 1 : 0)});
+    box-shadow:
+      0 -23px 0 var(--color-accent),
+      0 23px 0 var(--color-accent),
+      23px 0 0 var(--color-accent),
+      -23px 0 0 var(--color-accent),
+      15px 15px 0 var(--color-accent),
+      -15px 15px 0 var(--color-accent),
+      15px -15px 0 var(--color-accent),
+      -15px -15px 0 var(--color-accent);
+    transform: scale(${(p) => (p.isDark ? 1 : 0)});
     transition: all 0.35s ease;
   }
 `;
@@ -229,8 +241,8 @@ const MoonMask = styled.div`
   border-radius: 50%;
   border: 0;
   background: var(--color-dark);
-  transform: translate(${p => (p.isDark ? '14px, -14px' : '0, 0')});
-  opacity: ${p => (p.isDark ? 0 : 1)};
+  transform: translate(${(p) => (p.isDark ? '14px, -14px' : '0, 0')});
+  opacity: ${(p) => (p.isDark ? 0 : 1)};
   transition: transform 0.35s ease;
 `;
 
@@ -244,11 +256,6 @@ const links = [
     link: '/blog/',
     name: 'Blog',
     icon: BlogIcon,
-  },
-  {
-    link: '/captures/',
-    name: 'Captures',
-    icon: CameraIcon,
   },
 ];
 
@@ -275,7 +282,8 @@ const Header = ({ location: { pathname } }) => {
             <LogoWrapper
               className={`neumorphism ${
                 logoActiveAnimateState ? 'init-hover-animate-state' : ''
-              }`}>
+              }`}
+            >
               <Logo color="var(--color-accent)" />
             </LogoWrapper>
           </Link>
@@ -290,7 +298,8 @@ const Header = ({ location: { pathname } }) => {
                   key={`${link}_${pathname}`}
                   title={name}
                   className={`neumorphism ${active ? 'active' : ''}`}
-                  to={link}>
+                  to={link}
+                >
                   <IconWrapper active={active}>
                     <Icon active={active} />
                   </IconWrapper>
@@ -310,7 +319,7 @@ const Header = ({ location: { pathname } }) => {
                     className="neumorphism"
                     role="button"
                     tabIndex={0}
-                    onKeyPress={e => {
+                    onKeyPress={(e) => {
                       if (e.which === 13 || e.which === 32) {
                         switchTheme(theme, toggleTheme);
                       }
@@ -322,7 +331,8 @@ const Header = ({ location: { pathname } }) => {
                     }
                     onClick={() => {
                       switchTheme(theme, toggleTheme);
-                    }}>
+                    }}
+                  >
                     <ThemeSwitcher>
                       {/* <Switcher theme={theme} /> */}
                       <MoonOrSun isDark={theme === 'dark'} />

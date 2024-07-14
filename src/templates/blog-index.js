@@ -1,4 +1,4 @@
-import { Link, graphql } from 'gatsby';
+import { Link, graphql, navigate } from 'gatsby';
 import Img from 'gatsby-image';
 import React from 'react';
 import styled from 'styled-components';
@@ -71,11 +71,15 @@ class BlogIndex extends React.Component {
         <main>
           {posts.map(({ node: post }) => {
             const title = post.frontmatter.title || post.fields.slug;
+            const {
+              fields: { timeToRead: { text: timeToReadText } = {} } = {},
+            } = post;
             return (
               <Article
                 key={post.fields.slug}
                 // Skipping keyboard navigation as link inside will handle it
-                onClick={() => this.props.navigate(post.fields.slug)}>
+                onClick={() => navigate(post.fields.slug)}
+              >
                 <CoverImage>
                   <Img fluid={post.frontmatter.cover.childImageSharp.fluid} />
                 </CoverImage>
@@ -83,14 +87,15 @@ class BlogIndex extends React.Component {
                   <h3
                     style={{
                       marginBottom: rhythm(1 / 4),
-                    }}>
+                    }}
+                  >
                     <Link to={post.fields.slug} rel="bookmark">
                       {title}
                     </Link>
                   </h3>
                   <Small>
                     {formatPostDate(post.frontmatter.date)}
-                    {` • ${formatReadingTime(post.timeToRead)}`}
+                    {` • ${timeToReadText}`}
                   </Small>
                 </header>
                 <Spoiler
@@ -115,13 +120,15 @@ export const pageQuery = graphql`
         description
       }
     }
-    devMdx: allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+    devMdx: allMdx(sort: { frontmatter: { date: DESC } }) {
       edges {
         node {
           fields {
             slug
+            timeToRead {
+              text
+            }
           }
-          timeToRead
           frontmatter {
             date(formatString: "MMMM DD, YYYY")
             title
@@ -139,15 +146,17 @@ export const pageQuery = graphql`
       }
     }
     prodMdx: allMdx(
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { frontmatter: { date: DESC } }
       filter: { frontmatter: { draft: { eq: false } } }
     ) {
       edges {
         node {
           fields {
             slug
+            timeToRead {
+              text
+            }
           }
-          timeToRead
           frontmatter {
             date(formatString: "MMMM DD, YYYY")
             title

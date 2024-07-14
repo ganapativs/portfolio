@@ -1,3 +1,7 @@
+// TODO:
+// - Cleanup S3 bucket
+// - [gatsby-transformer-sharp] The "fixed" and "fluid" resolvers are now deprecated. Switch to "gatsby-plugin-image" for better performance and a simpler API. See https://gatsby.dev/migrate-images to learn how.
+// - gatsby-image@3.11.0: gatsby-image is now gatsby-plugin-image: https://npm.im/gatsby-plugin-image. This package will no longer receive updates.
 // eslint-disable-next-line import/no-extraneous-dependencies
 require('dotenv').config({
   path: '.env',
@@ -33,9 +37,6 @@ module.exports = {
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
-        // TODO: Remove this workaround
-        // https://github.com/gatsbyjs/gatsby/issues/15486
-        plugins: [`gatsby-remark-images`, `gatsby-remark-autolink-headers`],
         extensions: [`.mdx`, `.md`],
         gatsbyRemarkPlugins: [
           {
@@ -60,6 +61,13 @@ module.exports = {
               quality: 85,
               withWebp: { quality: 85 },
               tracedSVG: true,
+            },
+          },
+          {
+            resolve: `gatsby-remark-external-links`,
+            options: {
+              target: '_blank',
+              rel: 'nofollow noopener noreferrer',
             },
           },
           {
@@ -89,13 +97,6 @@ module.exports = {
           },
           {
             resolve: `gatsby-remark-smartypants`,
-          },
-          {
-            resolve: `gatsby-remark-external-links`,
-            options: {
-              target: '_blank',
-              rel: 'nofollow noopener noreferrer',
-            },
           },
         ],
       },
@@ -228,7 +229,6 @@ module.exports = {
     },
     `gatsby-plugin-twitter`,
     `gatsby-plugin-dark-mode`,
-    `gatsby-plugin-webpack-size`,
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-sitemap`,
     // Disabling temporarily
