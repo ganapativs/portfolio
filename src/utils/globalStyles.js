@@ -290,7 +290,7 @@ pre[data-line] {
 }
 ::view-transition-old(root) {
   z-index: -1;
-  animation: hide .15s linear;
+  animation: none;
 }
 
 // View transition animation triggered using document.startViewTransition
@@ -305,15 +305,6 @@ pre[data-line] {
 @keyframes reveal {
   from {
     clip-path: inset(var(--from, 0 0 100% 0));
-  }
-}
-
-@keyframes hide {
-  from {
-    filter: grayscale(0);
-  }
-  to {
-    filter: grayscale(1);
   }
 }
 `;

@@ -55,13 +55,11 @@ const HeaderWrapper = styled.div`
 `;
 
 const LogoWrapper = styled.div`
-  --opacity: 0.2;
-  border: 4px solid
-    rgb(
-      from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
-        var(--opacity)
-    );
-  background: transparent;
+  --opacity: 0.05;
+  background: rgb(
+    from rgb(from var(--color-light) r g b / var(--opacity)) r g b /
+      var(--opacity)
+  );
   width: 60px;
   height: 60px;
   display: flex;
