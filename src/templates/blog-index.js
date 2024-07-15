@@ -87,10 +87,14 @@ class BlogIndex extends React.Component {
                     }
                   />
                 </CoverImage>
-                <header>
+                <header
+                  style={{
+                    marginBottom: rhythm(1 / 4),
+                  }}
+                >
                   <h3
                     style={{
-                      marginBottom: rhythm(1 / 4),
+                      marginBottom: rhythm(1 / 8),
                     }}
                   >
                     <Link to={post.fields.slug} rel="bookmark">
