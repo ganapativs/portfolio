@@ -7,35 +7,23 @@ const Wrapper = styled.div`
   margin: 1rem 0;
 
   @media screen and (min-width: 768px) {
-    min-width: 160px;
     margin: 0;
   }
 
   .profile-logo {
     border-radius: 50%;
-    border-radius: 40% 60% 40% 60% / 35% 30% 70% 65%;
     overflow: hidden;
-    border: 8px solid var(--color-dark);
     background: var(--color-accent);
     background: linear-gradient(-135deg, var(--color-accent), transparent);
-    /* background: radial-gradient(
-          circle at 0% 50%,
-          transparent 9px,
-          var(--color-dark) 10px,
-          transparent 11px
-        )
-        0px 10px,
-      radial-gradient(
-        at 100% 100%,
-        transparent 9px,
-        var(--color-dark) 10px,
-        transparent 11px
-      ),
-      var(--color-accent);
-    background-size: 20px 20px; */
+    filter: sepia(1) grayscale(1) brightness(0.8);
 
-    .gatsby-image-wrapper {
-      transform: translateY(0);
+    @media screen and (hover: hover) and (pointer: fine) {
+      transition: filter 0.15s ease-in-out;
+
+      &:hover {
+        transition: filter 0.2s ease-in-out;
+        filter: sepia(0) grayscale(0) brightness(1);
+      }
     }
   }
 `;
@@ -61,7 +49,7 @@ export default function ProfileLogo({ profileLogo }) {
 
   return (
     <Wrapper>
-      <div className="neumorphism profile-logo">
+      <div className="profile-logo">
         {profileLogo ? <GatsbyImage image={images} draggable={false} /> : null}
       </div>
     </Wrapper>

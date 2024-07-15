@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 import { ThemeToggler } from 'gatsby-plugin-dark-mode';
@@ -12,6 +12,8 @@ import BlogIcon from '../assets/icons/blogIcon';
 const switchTheme = (theme, toggleTheme) => {
   const nextTheme = theme === 'dark' ? 'light' : 'dark';
   toggleTheme(nextTheme);
+  // Add attribute to html tag, useful for view transition
+  document.body.parentElement.setAttribute('data-theme', nextTheme);
   captureEvent(nextTheme, 'change', 'Theme');
 };
 
@@ -53,7 +55,11 @@ const HeaderWrapper = styled.div`
 `;
 
 const LogoWrapper = styled.div`
-  background: var(--color-dark);
+  --opacity: 0.1;
+  background: rgb(
+    from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
+      var(--opacity)
+  );
   width: 60px;
   height: 60px;
   display: flex;
@@ -64,6 +70,9 @@ const LogoWrapper = styled.div`
 
   svg {
     height: 30px;
+    path {
+      fill: var(--color-accent);
+    }
   }
 
   @media screen and (max-width: 767px) {
@@ -79,12 +88,19 @@ const LogoWrapper = styled.div`
   @media screen and (hover: hover) and (pointer: fine) {
     transition:
       transform 0.3s ease-out,
+      background 0.3s ease-out,
       border-radius 0.15s ease-out;
 
     &:hover,
     &.init-hover-animate-state {
+      --opacity: 0.2;
+      background: rgb(
+        from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
+          var(--opacity)
+      );
       transition:
         transform 0.5s ease-in-out,
+        background 0.5s ease-in-out,
         border-radius 0.2s ease-in-out;
       border-radius: 35% 65% 55% 45% / 48% 48% 52% 52%;
       transform: translateY(-2px);
@@ -129,7 +145,7 @@ const RouteLinks = styled.div`
 
   a {
     color: var(--color-light-dark);
-    margin: 0 0.8rem;
+    margin: 0 0.2rem;
     text-transform: lowercase;
     font-weight: bold;
     text-decoration: none;
@@ -138,8 +154,12 @@ const RouteLinks = styled.div`
     border-radius: 20px;
 
     &.active {
-      transition: color 0.25s ease-in;
       color: var(--color-accent);
+      --opacity: 0.1;
+      background: rgb(
+        from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
+          var(--opacity)
+      );
     }
 
     @media screen and (hover: hover) and (pointer: fine) {
@@ -147,9 +167,17 @@ const RouteLinks = styled.div`
         transition: fill 0.2s ease-out;
       }
 
-      &:hover {
-        transition: color 0.25s ease-in;
+      &.active svg:hover path {
+        fill: var(--color-accent) !important;
+      }
+
+      &:hover:not(.active) {
         color: var(--color-accent);
+        --opacity: 0.1;
+        background: rgb(
+          from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
+            var(--opacity)
+        );
 
         ${IconWrapper} path {
           transition: fill 0.25s ease-in;
@@ -243,7 +271,18 @@ const MoonMask = styled.div`
   background: var(--color-dark);
   transform: translate(${(p) => (p.isDark ? '14px, -14px' : '0, 0')});
   opacity: ${(p) => (p.isDark ? 0 : 1)};
-  transition: transform 0.35s ease;
+`;
+
+const MoonMaskDupe = styled(MoonMask)`
+  @media screen and (hover: hover) and (pointer: fine) {
+    ${SwitcherButton}:hover & {
+      --opacity: 0.1;
+      background: rgb(
+        from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
+          var(--opacity)
+      );
+    }
+  }
 `;
 
 const links = [
@@ -274,17 +313,25 @@ const Header = ({ location: { pathname } }) => {
     return () => clearTimeout(timer);
   }, []);
 
+  const onThemeChange = useCallback((theme, toggleTheme) => {
+    if (!document.startViewTransition) {
+      return switchTheme(theme, toggleTheme);
+    } else {
+      document.startViewTransition(() => switchTheme(theme, toggleTheme));
+    }
+  }, []);
+
   return (
     <HeaderRow>
       <HeaderWrapper>
         <Left>
           <Link title={'Meetguns.com | About'} to={'/'}>
             <LogoWrapper
-              className={`neumorphism ${
+              className={`${
                 logoActiveAnimateState ? 'init-hover-animate-state' : ''
               }`}
             >
-              <Logo color="var(--color-accent)" />
+              <Logo color="var(--color-dark)" />
             </LogoWrapper>
           </Link>
           <RouteLinks>
@@ -297,7 +344,7 @@ const Header = ({ location: { pathname } }) => {
                 <Link
                   key={`${link}_${pathname}`}
                   title={name}
-                  className={`neumorphism ${active ? 'active' : ''}`}
+                  className={`${active ? 'active' : ''}`}
                   to={link}
                 >
                   <IconWrapper active={active}>
@@ -316,12 +363,11 @@ const Header = ({ location: { pathname } }) => {
               <ThemeToggler>
                 {({ theme, toggleTheme }) => (
                   <SwitcherButton
-                    className="neumorphism"
                     role="button"
                     tabIndex={0}
                     onKeyPress={(e) => {
                       if (e.which === 13 || e.which === 32) {
-                        switchTheme(theme, toggleTheme);
+                        onThemeChange(theme, toggleTheme);
                       }
                     }}
                     title={
@@ -330,13 +376,13 @@ const Header = ({ location: { pathname } }) => {
                         : 'Switch to dark theme'
                     }
                     onClick={() => {
-                      switchTheme(theme, toggleTheme);
+                      onThemeChange(theme, toggleTheme);
                     }}
                   >
                     <ThemeSwitcher>
-                      {/* <Switcher theme={theme} /> */}
                       <MoonOrSun isDark={theme === 'dark'} />
                       <MoonMask isDark={theme === 'dark'} />
+                      <MoonMaskDupe isDark={theme === 'dark'} />
                     </ThemeSwitcher>
                   </SwitcherButton>
                 )}

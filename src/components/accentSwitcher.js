@@ -7,7 +7,7 @@ import SwitcherButton from './SwitcherButton';
 
 const AccentToggleWrapper = styled.div`
   position: relative;
-  transform: translateY(4px) translateX(1px);
+  transform: translateY(3px) translateX(1px);
 
   @media screen and (max-width: 767px) {
     transform: translateY(2px);
@@ -21,13 +21,14 @@ const AccentToggleWrapper = styled.div`
 const AccentToggle = styled.div`
   width: 20px;
   height: 20px;
-  background: ${p => p.background};
+  background: ${(p) => p.background};
   border-radius: 2px 50% 50% 50%;
   transform: rotate(45deg) scale(0.7) translateY(2px);
   transform-origin: 50% 50%;
   background: var(--color-accent);
   border: 1px solid var(--color-dark);
-  box-shadow: inset 0 0 0px 0 var(--color-light),
+  box-shadow:
+    inset 0 0 0px 0 var(--color-light),
     0px -15px 0 -6px var(--color-accent);
 
   @media screen and (max-width: 767px) {
@@ -48,15 +49,47 @@ const Div = styled.div`
   position: relative;
 
   @media screen and (min-width: 768px) {
+    .switcher-button {
+      z-index: 1;
+      margin: 0;
+
+      &.visible {
+        --opacity: 0.2;
+        background: rgb(
+          from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
+            var(--opacity)
+        );
+      }
+    }
+
     .github-picker {
       position: absolute !important;
-      right: 3px;
-      top: 54px;
+      right: 1px;
+      top: 0;
+      --opacity: 0.1;
+      box-shadow: 0 0 0 2px
+        rgb(
+          from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
+            calc(var(--opacity) * 4)
+        ) !important;
+      background: rgb(
+        from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
+          var(--opacity)
+      ) !important;
       border: none !important;
-      background: var(--color-dark) !important;
-      box-shadow: 0 0px 12px 1px var(--color-light-op-2) !important;
-      width: 36px !important;
+      width: 235px !important;
       z-index: 1;
+      height: 44px;
+      align-items: center;
+      border-radius: 50px !important;
+      padding: 5px 10px !important;
+      clip-path: inset(-10px -10px -10px 110%);
+      transition: clip-path 0.15s ease-in-out;
+
+      &.visible {
+        transition: clip-path 0.2s ease-in-out;
+        clip-path: inset(-10px -10px -10px -10px);
+      }
 
       > div:first-child {
         border: none !important;
@@ -95,6 +128,13 @@ const Div = styled.div`
       box-shadow: 0 -4px 4px -4px var(--color-light-op-2) !important;
       justify-content: space-around;
       padding: 1rem 0 0.5rem !important;
+      clip-path: inset(110% -10px -10px -10px);
+      transition: clip-path 0.15s ease-in-out;
+
+      &.visible {
+        transition: clip-path 0.2s ease-in-out;
+        clip-path: inset(-10px -10px -10px -10px);
+      }
 
       > span > div {
         border-radius: 50%;
@@ -115,7 +155,6 @@ function AccentSwitcher() {
   /* eslint-disable no-underscore-dangle */
   const toggleAccent = ({ hex: accent }) => {
     window.__setPreferredAccentColor(accent);
-    toggleVisibility();
   };
   useOutsideClick(wrapperRef, hideVisibility);
 
@@ -136,17 +175,16 @@ function AccentSwitcher() {
 
   return (
     <Div ref={wrapperRef}>
-      {visible ? (
-        <GithubPicker
-          triangle="hide"
-          colors={accentColors}
-          onChange={toggleAccent}
-        />
-      ) : null}
+      <GithubPicker
+        triangle="hide"
+        colors={accentColors}
+        onChange={toggleAccent}
+        className={`${visible ? 'visible' : ''}`}
+      />
       <SwitcherButton
-        className="neumorphism"
         onClick={toggleVisibility}
-        style={{ margin: 0 }}>
+        className={`switcher-button ${visible ? 'visible' : ''}`}
+      >
         <AccentToggleWrapper>
           <AccentToggle title="Change accent color" background={accentColor} />
         </AccentToggleWrapper>

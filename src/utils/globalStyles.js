@@ -18,10 +18,6 @@ body {
   --color-light-op-2: rgba(0, 0, 0, 0.1);
   --color-light-op-3: rgba(0, 0, 0, 0.05);
   --color-transparent: transparent;
-  --neumorphism-shadow: 15px 15px 24px var(--color-ultra-dark),
-      -15px -15px 24px var(--color-dark-2);
-  --neumorphism-shadow-mobile: 8px 8px 16px var(--color-ultra-dark),
-      -8px -8px 16px var(--color-dark-2);
 }
 
 body.dark {
@@ -80,17 +76,6 @@ noscript#gatsby-noscript {
   min-width: 320px;
   font-size: .8rem;
   text-align: center;
-}
-
-.neumorphism {
-  background: var(--color-dark);
-  box-shadow: var(--neumorphism-shadow);
-}
-
-@media screen and (max-width: 767px) {
-  .neumorphism {
-    box-shadow: var(--neumorphism-shadow-mobile);
-  }
 }
 
 /**
@@ -296,6 +281,40 @@ pre[data-line] {
 .twitter-tweet {
   margin-left: auto;
   margin-right: auto;
+}
+
+::view-transition-new(root) {
+  animation: reveal .25s linear;
+  clip-path: inset(0 0 0 0);
+  z-index: 2;
+}
+::view-transition-old(root) {
+  z-index: -1;
+  animation: hide .15s linear;
+}
+
+// View transition animation triggered using document.startViewTransition
+[data-theme="dark"] {
+  --from: 0 0 100% 0;
+}
+
+[data-theme="light"] {
+  --from: 100% 0 0 0;
+}
+
+@keyframes reveal {
+  from {
+    clip-path: inset(var(--from, 0 0 100% 0));
+  }
+}
+
+@keyframes hide {
+  from {
+    filter: grayscale(0);
+  }
+  to {
+    filter: grayscale(1);
+  }
 }
 `;
 
