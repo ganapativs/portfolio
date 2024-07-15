@@ -1,7 +1,6 @@
 // TODO:
 // - Cleanup S3 bucket
-// - [gatsby-transformer-sharp] The "fixed" and "fluid" resolvers are now deprecated. Switch to "gatsby-plugin-image" for better performance and a simpler API. See https://gatsby.dev/migrate-images to learn how.
-// - gatsby-image@3.11.0: gatsby-image is now gatsby-plugin-image: https://npm.im/gatsby-plugin-image. This package will no longer receive updates.
+// - gatsby-plugin-react-helmet: Gatsby now has built-in support for modifying the document head. Learn more at https://gatsby.dev/gatsby-head
 // eslint-disable-next-line import/no-extraneous-dependencies
 require('dotenv').config({
   path: '.env',
@@ -60,7 +59,6 @@ module.exports = {
               showCaptions: true,
               quality: 85,
               withWebp: { quality: 85 },
-              tracedSVG: true,
             },
           },
           {
@@ -161,6 +159,7 @@ module.exports = {
         ],
       },
     },
+    'gatsby-plugin-image',
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

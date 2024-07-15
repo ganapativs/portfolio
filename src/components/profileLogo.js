@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Img from 'gatsby-image';
+import { GatsbyImage, getImage, withArtDirection } from 'gatsby-plugin-image';
 
 const Wrapper = styled.div`
   min-width: 140px;
@@ -41,20 +41,28 @@ const Wrapper = styled.div`
 `;
 
 export default function ProfileLogo({ profileLogo }) {
-  const sources = profileLogo
-    ? [
-        profileLogo.mobileImage.childImageSharp.fluid,
-        {
-          ...profileLogo.desktopImage.childImageSharp.fluid,
-          media: `(min-width: 768px)`,
-        },
-      ]
-    : [];
+  const images = withArtDirection(
+    getImage(profileLogo.desktopImage.childImageSharp.gatsbyImageData),
+    [
+      {
+        media: `(max-width: 767px)`,
+        image: getImage(
+          profileLogo.mobileImage.childImageSharp.gatsbyImageData,
+        ),
+      },
+      {
+        media: `(min-width: 768px)`,
+        image: getImage(
+          profileLogo.desktopImage.childImageSharp.gatsbyImageData,
+        ),
+      },
+    ],
+  );
 
   return (
     <Wrapper>
       <div className="neumorphism profile-logo">
-        {profileLogo ? <Img draggable={false} fluid={sources} /> : null}
+        {profileLogo ? <GatsbyImage image={images} draggable={false} /> : null}
       </div>
     </Wrapper>
   );

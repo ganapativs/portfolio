@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import SEO from '../components/seo';
 import { formatPostDate, formatReadingTime } from '../utils/helpers';
@@ -109,7 +109,9 @@ class BlogPostTemplate extends React.Component {
             </header>
             {post.frontmatter.cover ? (
               <CoverImage>
-                <Img fluid={post.frontmatter.cover.childImageSharp.fluid} />
+                <GatsbyImage
+                  image={post.frontmatter.cover.childImageSharp.gatsbyImageData}
+                />
               </CoverImage>
             ) : null}
             {this.props.children}
@@ -171,10 +173,7 @@ export const pageQuery = graphql`
             keywords
             cover {
               childImageSharp {
-                # Expected cover image to have 1/2 aspect ratio
-                fluid(maxWidth: 1200, maxHeight: 600, quality: 85) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
+                gatsbyImageData(quality: 85, layout: FULL_WIDTH)
               }
             }
           }

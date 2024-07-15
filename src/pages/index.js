@@ -3,26 +3,18 @@ import { graphql } from 'gatsby';
 import SEO from '../components/seo';
 import AboutMe from '../components/aboutMe';
 
-export const query = graphql`
-  query {
-    mobileImage: file(relativePath: { eq: "ganapativs-no-bg.png" }) {
-      childImageSharp {
-        # 120 * 1.1 (-5% margin)
-        fluid(maxWidth: 140, maxHeight: 140, quality: 100) {
-          ...GatsbyImageSharpFluid_withWebp
-        }
-      }
-    }
-    desktopImage: file(relativePath: { eq: "ganapativs-no-bg.png" }) {
-      childImageSharp {
-        # 160 * 1.1 (-5% margin)
-        fluid(maxWidth: 160, maxHeight: 160, quality: 100) {
-          ...GatsbyImageSharpFluid_withWebp
-        }
-      }
+export const query = graphql`{
+  mobileImage: file(relativePath: {eq: "ganapativs-no-bg.png"}) {
+    childImageSharp {
+      gatsbyImageData(width: 140, height: 140, quality: 100, layout: CONSTRAINED)
     }
   }
-`;
+  desktopImage: file(relativePath: {eq: "ganapativs-no-bg.png"}) {
+    childImageSharp {
+      gatsbyImageData(width: 160, height: 160, quality: 100, layout: CONSTRAINED)
+    }
+  }
+}`;
 const About = ({ data: profileLogo }) => (
   <>
     <SEO title="Ganapati V S" />

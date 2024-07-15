@@ -36,6 +36,7 @@
     "gatsby-plugin-google-analytics": "^5.13.1",
     "gatsby-plugin-google-fonts": "^1.0.1",
     "gatsby-plugin-hotjar": "^1.1.1",
+    "gatsby-plugin-image": "^3.13.1",
     "gatsby-plugin-manifest": "^5.13.1",
     "gatsby-plugin-mdx": "^5.13.1",
     "gatsby-plugin-nprogress": "^5.13.1",

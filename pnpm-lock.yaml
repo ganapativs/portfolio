@@ -53,6 +53,9 @@ dependencies:
   gatsby-plugin-hotjar:
     specifier: ^1.1.1
     version: 1.1.1
+  gatsby-plugin-image:
+    specifier: ^3.13.1
+    version: 3.13.1(@babel/core@7.24.8)(gatsby-plugin-sharp@5.13.1)(gatsby-source-filesystem@5.13.1)(gatsby@5.13.7)(graphql@16.9.0)(react-dom@18.3.1)(react@18.3.1)
   gatsby-plugin-manifest:
     specifier: ^5.13.1
     version: 5.13.1(gatsby@5.13.7)(graphql@16.9.0)
@@ -8220,6 +8223,46 @@ packages:
       babel-runtime: 6.26.0
     dev: false
 
+  /gatsby-plugin-image@3.13.1(@babel/core@7.24.8)(gatsby-plugin-sharp@5.13.1)(gatsby-source-filesystem@5.13.1)(gatsby@5.13.7)(graphql@16.9.0)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-v5jGXxjr//iLk7LzpW6RW/9H4KNVezxee2Sgy9mxvdvekTuFQLYoQmtk2jOZINMZMP3Vm+Rl3MqWWVMfhHuWFw==}
+    peerDependencies:
+      '@babel/core': ^7.12.3
+      gatsby: ^5.0.0-next
+      gatsby-plugin-sharp: ^5.0.0-next
+      gatsby-source-filesystem: ^5.0.0-next
+      react: ^18.0.0 || ^0.0.0
+      react-dom: ^18.0.0 || ^0.0.0
+    peerDependenciesMeta:
+      gatsby-plugin-sharp:
+        optional: true
+      gatsby-source-filesystem:
+        optional: true
+    dependencies:
+      '@babel/code-frame': 7.24.7
+      '@babel/core': 7.24.8
+      '@babel/parser': 7.24.8
+      '@babel/runtime': 7.24.8
+      '@babel/traverse': 7.24.8
+      babel-jsx-utils: 1.1.0
+      babel-plugin-remove-graphql-queries: 5.13.1(@babel/core@7.24.8)(gatsby@5.13.7)
+      camelcase: 6.3.0
+      chokidar: 3.6.0
+      common-tags: 1.8.2
+      fs-extra: 11.2.0
+      gatsby: 5.13.7(babel-eslint@10.1.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+      gatsby-core-utils: 4.13.1
+      gatsby-plugin-sharp: 5.13.1(gatsby@5.13.7)(graphql@16.9.0)
+      gatsby-plugin-utils: 4.13.1(gatsby@5.13.7)(graphql@16.9.0)
+      gatsby-source-filesystem: 5.13.1(gatsby@5.13.7)
+      objectFitPolyfill: 2.3.5
+      prop-types: 15.8.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    transitivePeerDependencies:
+      - graphql
+      - supports-color
+    dev: false
+
   /gatsby-plugin-manifest@5.13.1(gatsby@5.13.7)(graphql@16.9.0):
     resolution: {integrity: sha512-F8zGMYz2tRDAzQO7hLrYv+xCFyIoeySeGsEk9j1KTdWB4liVQvLtFSXzj7yljyOTinDmA7mDStCiQFStC0rHZQ==}
     engines: {node: '>=18.0.0'}
@@ -12195,6 +12238,10 @@ packages:
       call-bind: 1.0.7
       define-properties: 1.2.1
       es-object-atoms: 1.0.0
+
+  /objectFitPolyfill@2.3.5:
+    resolution: {integrity: sha512-8Quz071ZmGi0QWEG4xB3Bv5Lpw6K0Uca87FLoLMKMWjB6qIq9IyBegP3b/VLNxv2WYvIMGoeUQ+c6ibUkNa8TA==}
+    dev: false
 
   /ofetch@1.3.4:
     resolution: {integrity: sha512-KLIET85ik3vhEfS+3fDlc/BAZiAp+43QEC/yCo5zkNoY2YaKvNkOaFr/6wCFgFH1kuYQM5pMNi0Tg8koiIemtw==}

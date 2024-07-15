@@ -1,5 +1,5 @@
 import { Link, graphql, navigate } from 'gatsby';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import React from 'react';
 import styled from 'styled-components';
 import { formatPostDate, formatReadingTime } from '../utils/helpers';
@@ -81,7 +81,11 @@ class BlogIndex extends React.Component {
                 onClick={() => navigate(post.fields.slug)}
               >
                 <CoverImage>
-                  <Img fluid={post.frontmatter.cover.childImageSharp.fluid} />
+                  <GatsbyImage
+                    image={
+                      post.frontmatter.cover.childImageSharp.gatsbyImageData
+                    }
+                  />
                 </CoverImage>
                 <header>
                   <h3
@@ -135,10 +139,7 @@ export const pageQuery = graphql`
             spoiler
             cover {
               childImageSharp {
-                # Expected cover image to have 1/2 aspect ratio
-                fluid(maxWidth: 1200, maxHeight: 600, quality: 85) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
+                gatsbyImageData(quality: 85, layout: FULL_WIDTH)
               }
             }
           }
@@ -163,10 +164,7 @@ export const pageQuery = graphql`
             spoiler
             cover {
               childImageSharp {
-                # Expected cover image to have 1/2 aspect ratio
-                fluid(maxWidth: 1200, maxHeight: 600, quality: 85) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
+                gatsbyImageData(quality: 85, layout: FULL_WIDTH)
               }
             }
           }
