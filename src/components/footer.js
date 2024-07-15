@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ExternalLink from './externalLink';
-import { FeedbackFish } from '@feedback-fish/react'
+import { FeedbackFish } from '@feedback-fish/react';
 
 const FooterWrapper = styled.footer`
   max-width: 840px;
@@ -11,11 +11,10 @@ const FooterWrapper = styled.footer`
   display: flex;
   justify-content: space-between;
   padding: 30px 0 15px 0;
-  transition: 0.25s ease;
   color: var(--color-light-dark);
 
   a {
-    transition: 0.25s ease;
+    transition: color 0.25s ease;
     color: var(--color-light-dark);
   }
 
@@ -44,11 +43,11 @@ const Right = styled.div`
 
 const Feedback = styled(ExternalLink)`
   cursor: pointer;
-`
+`;
 
 const Separator = styled.span`
   padding: 0 0.5rem;
-`
+`;
 
 const Footer = () => (
   <FooterWrapper>
@@ -57,14 +56,13 @@ const Footer = () => (
     </Left>
     <Right>
       <FeedbackFish projectId="0fdef6fa4b69d7">
-        <Feedback className="hide-xs">
-          Feedback
-        </Feedback>
+        <Feedback className="hide-xs">Feedback</Feedback>
       </FeedbackFish>
       <Separator className="hide-xs">・</Separator>
       <ExternalLink
         title="View source code on GitHub"
-        href={'https://github.com/ganapativs/portfolio?ref=meetguns.com'}>
+        href={'https://github.com/ganapativs/portfolio?ref=meetguns.com'}
+      >
         &lt;Code /&gt;
       </ExternalLink>
     </Right>
