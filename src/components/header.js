@@ -55,11 +55,13 @@ const HeaderWrapper = styled.div`
 `;
 
 const LogoWrapper = styled.div`
-  --opacity: 0.1;
-  background: rgb(
-    from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
-      var(--opacity)
-  );
+  --opacity: 0.2;
+  border: 4px solid
+    rgb(
+      from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
+        var(--opacity)
+    );
+  background: transparent;
   width: 60px;
   height: 60px;
   display: flex;
@@ -347,10 +349,10 @@ const Header = ({ location: { pathname } }) => {
                   className={`${active ? 'active' : ''}`}
                   to={link}
                 >
-                  <IconWrapper active={active}>
+                  <IconWrapper active={active} className="hide-xs">
                     <Icon active={active} />
                   </IconWrapper>
-                  <span className={active ? '' : 'hide-xs'}>{name}</span>
+                  <span>{name}</span>
                 </Link>
               );
             })}
