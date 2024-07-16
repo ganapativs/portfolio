@@ -172,7 +172,7 @@ pre[class*='language-'] ::selection {
   border-radius: 4px;
   background: var(--color-light-op-3);
   color: var(--color-light);
-  padding: 0.05em 0;
+  padding: 0;
   white-space: normal;
   margin: 0 0.1em 0 0;
   box-shadow: none;
