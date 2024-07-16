@@ -289,7 +289,7 @@ pre[data-line] {
 }
 
 ::view-transition-new(root) {
-  animation: reveal .25s linear;
+  animation: reveal .5s cubic-bezier(0.77, 0, 0.175, 1);
   clip-path: inset(0 0 0 0);
   z-index: 2;
 }
