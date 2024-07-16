@@ -175,7 +175,7 @@ pre[class*='language-'] ::selection {
   padding: 0.05em 0;
   white-space: normal;
   margin: 0 0.1em 0 0;
-  box-shadow: 0 0 1px var(--color-accent);
+  box-shadow: none;
   font-size: .8571429em;
 }
 
