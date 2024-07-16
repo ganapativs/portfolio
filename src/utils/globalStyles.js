@@ -21,7 +21,7 @@ body {
 }
 
 body.dark {
-  --color-dark: #121111;
+  --color-dark: #141414;
   --color-dark-2: #16181d;
   --color-ultra-dark: #22242b;
   --color-light: #ecf0f3;
