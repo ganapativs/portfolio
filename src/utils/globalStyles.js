@@ -169,13 +169,18 @@ pre[class*='language-'] ::selection {
 
 /* Inline code */
 :not(pre) > code[class*='language-'] {
-  border-radius: 2px;
+  border-radius: 4px;
   background: var(--color-light-op-3);
   color: var(--color-light);
-  padding: 0.1em 0;
+  padding: 0.05em 0;
   white-space: normal;
-  margin: 0 0.15em 0 0;
+  margin: 0 0.1em 0 0;
   box-shadow: 0 0 1px var(--color-accent);
+  font-size: .8571429em;
+}
+
+code:before, code:after, tt:before, tt:after {
+  letter-spacing: -0.4em;
 }
 
 .token.attr-name {
