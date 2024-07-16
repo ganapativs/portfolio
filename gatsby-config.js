@@ -1,4 +1,10 @@
 // TODO:
+// - Blog header improve list and detail
+// - Improve blog readability - change font
+// - Remove feedback, Hand-crafted in India with ❤
+// - Better dark mode transition
+// - SGB vercel + priority
+// - Page transition animation - blog
 // - Cleanup S3 bucket
 // - gatsby-plugin-react-helmet: Gatsby now has built-in support for modifying the document head. Learn more at https://gatsby.dev/gatsby-head
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -186,7 +192,7 @@ module.exports = {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [
-          `Merriweather\:400,400i`,
+          `Merriweather\:700,400,400i`,
           `Source Sans Pro\:400`,
           `Fira Code\:400,400i`,
         ],

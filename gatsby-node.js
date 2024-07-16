@@ -1,7 +1,7 @@
 const path = require('path');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { createFilePath } = require('gatsby-source-filesystem');
-const readingTime = require(`reading-time`)
+const readingTime = require(`reading-time`);
 
 exports.onCreateNode = async ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
@@ -20,8 +20,8 @@ exports.onCreateNode = async ({ node, actions, getNode }) => {
     await createNodeField({
       node,
       name: `timeToRead`,
-      value: readingTime(node.body)
-    })
+      value: readingTime(node.body),
+    });
   }
 };
 
@@ -30,7 +30,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const showAllPosts = process.env.NODE_ENV === 'development';
   createPage({
     path: `/blog/`,
-    component: path.resolve('./src/templates/blog-index.js'),
+    component: path.resolve('./src/template-files/blog-index.js'),
   });
 
   const blogPosts = await graphql(
@@ -68,7 +68,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   // Create blog posts pages.
   const posts = blogPosts.data.allMdx.nodes;
-  const blogPost = path.resolve('./src/templates/blog-post.js');
+  const blogPost = path.resolve('./src/template-files/blog-post.js');
   posts.forEach((post, index) => {
     const previous = index === posts.length - 1 ? null : posts[index + 1];
     const next = index === 0 ? null : posts[index - 1];

@@ -21,7 +21,7 @@ body {
 }
 
 body.dark {
-  --color-dark: #0f0f0f;
+  --color-dark: #121111;
   --color-dark-2: #16181d;
   --color-ultra-dark: #22242b;
   --color-light: #ecf0f3;
@@ -258,17 +258,17 @@ pre[data-line] {
   margin-bottom: 1.75rem;
   margin-left: -1.3125rem;
   margin-right: -1.3125rem;
-  /* background: #011627; */
-  /* background: linear-gradient(0deg, #060217, #10024c); */
-  background: linear-gradient(45deg, black, #191919);
+  background: linear-gradient(45deg, #210037, #050512);
   -webkit-overflow-scrolling: touch;
   overflow: auto;
+  border-radius: 1rem;
 }
 
 @media screen and (max-width: 767px) {
   .gatsby-highlight {
     margin-left: -1.11rem;
     margin-right: -1.11rem;
+    border-radius: 0;
   }
 }
 

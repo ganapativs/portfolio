@@ -9,7 +9,7 @@ const theme = {
   bodyColor: 'var(--color-light)',
   bodyFontFamily: ['Source Sans Pro', 'sans-serif'],
   headerFontFamily: ['Merriweather', 'serif'],
-  headerWeight: '400',
+  headerWeight: '700',
   bodyWeight: 400,
   boldWeight: 600,
   includeNormalize: true,
@@ -54,9 +54,8 @@ const theme = {
     },
     blockquote: {
       color: 'inherit',
-      fontFamily: "'Merriweather',sans-serif",
+      fontFamily: "'Source Sans Pro',sans-serif",
       margin: '2rem auto',
-      fontStyle: 'italic',
       padding: '0 1.5rem',
       lineHeight: 'inherit',
       borderLeft: '4px solid var(--color-accent)',
@@ -66,6 +65,8 @@ const theme = {
     },
     iframe: {
       border: 0,
+      maxWidth: '100%',
+      overflow: 'auto',
     },
     figure: {
       marginTop: '2.4rem',

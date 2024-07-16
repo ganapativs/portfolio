@@ -20,4 +20,4 @@ export const accentColors = [
   '#209396',
   '#00A0FF',
   '#4d80e4',
-];
+].map((hex) => hex.toLowerCase());

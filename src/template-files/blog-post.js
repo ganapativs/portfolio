@@ -11,11 +11,17 @@ const GITHUB_REPO_NAME = 'Portfolio';
 
 const Article = styled.article`
   line-height: 1.75rem;
-  font-family: 'Merriweather', serif;
+  font-family: 'Source Sans Pro', serif;
 
   // Put shadow around image(distinguish dark/light image from content)
   .gatsby-resp-image-wrapper {
-    box-shadow: 0 0 1px var(--color-accent);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 0 1px var(--color-light-dark);
+
+    img {
+      box-shadow: none !important;
+    }
   }
 `;
 
@@ -30,13 +36,27 @@ const Ul = styled.ul`
 `;
 
 const CoverImage = styled.div`
-  margin-top: ${rhythm(1.8)};
-  margin-bottom: ${rhythm(1.8)};
+  @media screen and (max-width: 767px) {
+    margin-bottom: ${rhythm(1.2)};
+    min-height: 280px;
+    margin-top: -20px;
+    margin-left: -20px;
+    margin-right: -20px;
+    width: calc(100% + 40px);
+
+    .gatsby-image-wrapper {
+      min-height: 280px;
+      width: 100%;
+    }
+  }
 
   @media screen and (min-width: 768px) {
+    border-radius: 1rem;
+    margin-top: ${rhythm(0.6)};
     margin-bottom: ${rhythm(2.5)};
     margin-left: -5rem;
     margin-right: -5rem;
+    min-height: 300px;
   }
 
   @media screen and (hover: hover) and (pointer: fine) {
@@ -51,6 +71,64 @@ const Div = styled.div`
 
   @media screen and (max-width: 767px) {
     padding-top: 1rem;
+  }
+`;
+
+const HeaderSection = styled.div`
+  position: relative;
+
+  @media screen and (max-width: 767px) {
+    min-height: 280px;
+  }
+
+  > header {
+    --opacity: 0.2;
+    position: absolute;
+    // https://css-tricks.com/easing-linear-gradients/
+    // https://larsenwork.com/easing-gradients/
+    background: linear-gradient(
+      to bottom,
+      hsla(0, 0%, 0%, 0) 0%,
+      hsla(0, 0%, 0%, 0.041) 12.3%,
+      hsla(0, 0%, 0%, 0.088) 22.2%,
+      hsla(0, 0%, 0%, 0.14) 30.1%,
+      hsla(0, 0%, 0%, 0.198) 36.3%,
+      hsla(0, 0%, 0%, 0.259) 41.3%,
+      hsla(0, 0%, 0%, 0.325) 45.3%,
+      hsla(0, 0%, 0%, 0.393) 48.7%,
+      hsla(0, 0%, 0%, 0.465) 52%,
+      hsla(0, 0%, 0%, 0.539) 55.4%,
+      hsla(0, 0%, 0%, 0.614) 59.4%,
+      hsla(0, 0%, 0%, 0.691) 64.3%,
+      hsla(0, 0%, 0%, 0.768) 70.4%,
+      hsla(0, 0%, 0%, 0.846) 78.2%,
+      hsla(0, 0%, 0%, 0.923) 87.9%,
+      hsl(0, 0%, 0%) 100%
+    );
+    height: 100%;
+    color: white;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-end;
+    left: -20px;
+    top: 0;
+    width: calc(100% + 40px);
+    padding-left: 20px;
+    padding-right: 20px;
+    width: calc(100% + 40px);
+
+    @media screen and (min-width: 768px) {
+      border-radius: 1rem;
+      width: calc(100% + 10rem);
+      padding-left: 5rem;
+      padding-right: 5rem;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      top: 0;
+      left: -5rem;
+      box-shadow: 0 0 1px var(--color-light-dark);
+    }
   }
 `;
 
@@ -78,42 +156,45 @@ class BlogPostTemplate extends React.Component {
         />
         <main>
           <Article>
-            <header>
-              <h1
-                style={{
-                  color: 'var(--textTitle)',
-                  marginTop: rhythm(1 / 2),
-                }}
-              >
-                {post.frontmatter.title}
-              </h1>
-              <PostInfo
-                style={{
-                  ...scale(-1 / 5),
-                  marginBottom: rhythm(1),
-                  marginTop: rhythm(-3 / 5),
-                }}
-              >
-                {formatPostDate(post.frontmatter.date)}
-                {` • ${timeToReadText}`} •{' '}
-                <a
-                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                    `Checkout this blog about "${post.frontmatter.title}" by @ganapativs\n\n${blogUrl}`,
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+            <HeaderSection>
+              {post.frontmatter.cover ? (
+                <CoverImage>
+                  <GatsbyImage
+                    image={
+                      post.frontmatter.cover.childImageSharp.gatsbyImageData
+                    }
+                  />
+                </CoverImage>
+              ) : null}
+              <header>
+                <h1
+                  style={{
+                    marginTop: rhythm(1 / 2),
+                  }}
                 >
-                  Tweet
-                </a>
-              </PostInfo>
-            </header>
-            {post.frontmatter.cover ? (
-              <CoverImage>
-                <GatsbyImage
-                  image={post.frontmatter.cover.childImageSharp.gatsbyImageData}
-                />
-              </CoverImage>
-            ) : null}
+                  {post.frontmatter.title}
+                </h1>
+                <PostInfo
+                  style={{
+                    ...scale(-1 / 5),
+                    marginBottom: rhythm(1),
+                    marginTop: rhythm(-3 / 5),
+                  }}
+                >
+                  {formatPostDate(post.frontmatter.date)}
+                  {` • ${timeToReadText}`} •{' '}
+                  <a
+                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                      `Checkout this blog about "${post.frontmatter.title}" by @ganapativs\n\n${blogUrl}`,
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Tweet
+                  </a>
+                </PostInfo>
+              </header>
+            </HeaderSection>
             {this.props.children}
             <footer>
               <p>

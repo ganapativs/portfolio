@@ -155,13 +155,14 @@ function AccentSwitcher() {
   /* eslint-disable no-underscore-dangle */
   const toggleAccent = ({ hex: accent }) => {
     window.__setPreferredAccentColor(accent);
+    setAccentColor(accent);
   };
   useOutsideClick(wrapperRef, hideVisibility);
 
   useEffect(() => {
     const setAccentColorOnBody = () => {
-      setAccentColor(window.__accentColor);
       document.body.style.setProperty('--color-accent', window.__accentColor);
+      setAccentColor(window.__accentColor);
     };
 
     setAccentColorOnBody();
@@ -175,6 +176,14 @@ function AccentSwitcher() {
 
   return (
     <Div ref={wrapperRef}>
+      <style>
+        {`
+          .github-picker [title="${accentColor}"] {
+            box-shadow: inset 0 0 0 8px var(--color-accent), inset 0 0 0 14px var(--color-dark) !important;
+            border-radius: 50% !important;
+          }
+        `}
+      </style>
       <GithubPicker
         triangle="hide"
         colors={accentColors}

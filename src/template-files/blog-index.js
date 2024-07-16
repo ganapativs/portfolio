@@ -11,6 +11,7 @@ const CoverImage = styled.div`
   margin-bottom: ${rhythm(0.5)};
   overflow: hidden;
   transition: all 0.2s ease-in-out;
+  border-radius: 1rem;
 `;
 
 const Article = styled.article`
@@ -94,7 +95,7 @@ class BlogIndex extends React.Component {
                 >
                   <h3
                     style={{
-                      marginBottom: rhythm(1 / 8),
+                      marginBottom: rhythm(1 / 10),
                     }}
                   >
                     <Link to={post.fields.slug} rel="bookmark">
