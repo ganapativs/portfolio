@@ -23,6 +23,10 @@ const Article = styled.article`
       box-shadow: none !important;
     }
   }
+
+  .gatsby-resp-image-figure {
+    margin: ${rhythm(1)} 0 ${rhythm(1)} 0;
+  }
 `;
 
 const PostInfo = styled.p`
@@ -53,7 +57,7 @@ const CoverImage = styled.div`
   @media screen and (min-width: 768px) {
     border-radius: 1rem;
     margin-top: ${rhythm(0.6)};
-    margin-bottom: ${rhythm(2.5)};
+    margin-bottom: ${rhythm(1.8)};
     margin-left: -5rem;
     margin-right: -5rem;
     min-height: 300px;

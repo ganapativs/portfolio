@@ -1,5 +1,5 @@
 // TODO:
-// - Blog header improve list and detail
+// - Image modal in blog
 // - Improve blog readability - change font
 // - Remove feedback, Hand-crafted in India with ❤
 // - Better dark mode transition
@@ -192,7 +192,7 @@ module.exports = {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [
-          `Merriweather\:700,400,400i`,
+          `Merriweather\:700`,
           `Source Sans Pro\:400`,
           `Fira Code\:400,400i`,
         ],

@@ -20,7 +20,7 @@ function CaniuseEmbed({ featureName }) {
 
       embed.innerHTML = iframe;
 
-      const onIframeMessage = e => {
+      const onIframeMessage = (e) => {
         const { data } = e;
         if (typeof data === 'string' && data.indexOf('ciu_embed') > -1) {
           const featureID = data.split(':')[1];
@@ -45,12 +45,13 @@ function CaniuseEmbed({ featureName }) {
   }, [featureName]);
 
   return featureName ? (
-    <p
+    <div
       ref={ref}
       className="ciu_embed"
       data-feature={featureName}
       data-periods="future_2,future_1,current,past_1,past_2"
-      data-accessible-colours="false">
+      data-accessible-colours="false"
+    >
       <a href={`http://caniuse.com/#feat=${featureName}`}>
         <picture>
           <source
@@ -63,7 +64,7 @@ function CaniuseEmbed({ featureName }) {
           />
         </picture>
       </a>
-    </p>
+    </div>
   ) : null;
 }
 

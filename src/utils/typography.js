@@ -67,6 +67,7 @@ const theme = {
       border: 0,
       maxWidth: '100%',
       overflow: 'auto',
+      marginBottom: 0,
     },
     figure: {
       marginTop: '2.4rem',
