@@ -1,6 +1,6 @@
 // TODO:
-// - Improve blog readability - change font
-// - Code copy button
+// - Selection color
+// - Code copy button - line no etc - https://www.gatsbyjs.com/plugins/gatsby-remark-prismjs-copy-button/
 // - Image modal in blog
 // - Remove feedback, Hand-crafted in India with ❤
 // - Better dark mode transition
@@ -102,6 +102,17 @@ module.exports = {
           },
           {
             resolve: `gatsby-remark-smartypants`,
+          },
+          {
+            resolve: 'gatsby-remark-code-buttons',
+            options: {
+              // Optional svg icon class name. Defaults to 'gatsby-code-button-icon'.
+              svgIconClass: `customSvgIconClass`,
+              // Optional svg icon. Defaults to svg string and can be
+              // replaced with any other valid svg. Use custom classes
+              // in the svg string and skip `iconClass` option.
+              svgIcon: `customSvgIcon`,
+            },
           },
         ],
       },

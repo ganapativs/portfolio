@@ -29,7 +29,6 @@
     "focus-visible": "^5.2.0",
     "fs-extra": "^11.2.0",
     "gatsby": "5.13.7",
-    "gatsby-image": "^3.11.0",
     "gatsby-plugin-catch-links": "^5.13.1",
     "gatsby-plugin-dark-mode": "^1.1.2",
     "gatsby-plugin-feed": "^5.13.1",

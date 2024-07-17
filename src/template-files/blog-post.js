@@ -41,7 +41,7 @@ const Ul = styled.ul`
 
 const CoverImage = styled.div`
   @media screen and (max-width: 767px) {
-    margin-bottom: ${rhythm(1.2)};
+    margin-bottom: ${rhythm(1.6)};
     min-height: 280px;
     margin-top: -20px;
     margin-left: -20px;
@@ -57,7 +57,7 @@ const CoverImage = styled.div`
   @media screen and (min-width: 768px) {
     border-radius: 1rem;
     margin-top: ${rhythm(0.6)};
-    margin-bottom: ${rhythm(1.8)};
+    margin-bottom: ${rhythm(1.6)};
     margin-left: -5rem;
     margin-right: -5rem;
     min-height: 300px;
@@ -181,7 +181,7 @@ class BlogPostTemplate extends React.Component {
                 <PostInfo
                   style={{
                     ...scale(-1 / 5),
-                    marginBottom: rhythm(1),
+                    marginBottom: rhythm(0.5),
                     marginTop: rhythm(-3 / 5),
                   }}
                 >
