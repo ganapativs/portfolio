@@ -263,10 +263,19 @@ pre[data-line] {
   margin-bottom: 1.75rem;
   margin-left: -1.3125rem;
   margin-right: -1.3125rem;
-  background: linear-gradient(45deg, #210037, #050512);
+  background-color: #000;
   -webkit-overflow-scrolling: touch;
   overflow: auto;
   border-radius: 1rem;
+
+  pre {
+    background-color: #000;
+    --opacity: 0.15;
+    background-image: linear-gradient(315deg, rgb(
+          from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
+            var(--opacity)
+        ) 15%, #050512 70%, #050512 100%);
+  }
 }
 
 @media screen and (max-width: 767px) {

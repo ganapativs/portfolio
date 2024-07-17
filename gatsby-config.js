@@ -1,6 +1,7 @@
 // TODO:
-// - Image modal in blog
 // - Improve blog readability - change font
+// - Code copy button
+// - Image modal in blog
 // - Remove feedback, Hand-crafted in India with ❤
 // - Better dark mode transition
 // - SGB vercel + priority
