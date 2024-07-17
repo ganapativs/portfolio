@@ -270,8 +270,8 @@ pre[data-line] {
 
   pre {
     background-color: #000;
-    --opacity: 0.15;
-    background-image: linear-gradient(315deg, rgb(
+    --opacity: 0.2;
+    background-image: linear-gradient(45deg, rgb(
           from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
             var(--opacity)
         ) 15%, #050512 70%, #050512 100%);

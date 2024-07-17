@@ -32,6 +32,12 @@ const Article = styled.article`
 const PostInfo = styled.p`
   color: var(--color-light-dark);
   font-weight: bold;
+  margin-bottom: ${rhythm(0.5)};
+  margin-top: ${rhythm(-3 / 5)};
+
+  @media screen and (max-width: 767px) {
+    margin-bottom: ${rhythm(0.8)};
+  }
 `;
 
 const Ul = styled.ul`
@@ -181,8 +187,6 @@ class BlogPostTemplate extends React.Component {
                 <PostInfo
                   style={{
                     ...scale(-1 / 5),
-                    marginBottom: rhythm(0.5),
-                    marginTop: rhythm(-3 / 5),
                   }}
                 >
                   {formatPostDate(post.frontmatter.date)}
