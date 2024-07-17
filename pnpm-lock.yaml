@@ -86,9 +86,6 @@ dependencies:
   gatsby-remark-autolink-headers:
     specifier: ^6.13.1
     version: 6.13.1(gatsby@5.13.7)(react-dom@18.3.1)(react@18.3.1)
-  gatsby-remark-code-buttons:
-    specifier: ^2.0.7
-    version: 2.0.7
   gatsby-remark-copy-linked-files:
     specifier: ^6.13.1
     version: 6.13.1(gatsby@5.13.7)
@@ -8533,13 +8530,6 @@ packages:
       unist-util-visit: 2.0.3
     dev: false
 
-  /gatsby-remark-code-buttons@2.0.7:
-    resolution: {integrity: sha512-weh6fX7NS31mQp3SR2U4isMVop1Mnk2/Qf7BneJt0S4dys3WCIZVOuhJN97aoOlu1y63UdZUpdZlBwwMvmqUEQ==}
-    dependencies:
-      query-string: 6.14.0
-      unist-util-visit: 2.0.3
-    dev: false
-
   /gatsby-remark-copy-linked-files@6.13.1(gatsby@5.13.7):
     resolution: {integrity: sha512-KBf+1NDdsKxD2144pgurTdWaQVLET19h1Wru4kWcq3oL1aahpWOMTw1+Zam+p3BMANu4joGgHY9yoYcdef1DSw==}
     engines: {node: '>=18.0.0'}
@@ -13289,16 +13279,6 @@ packages:
     dependencies:
       side-channel: 1.0.6
     dev: true
-
-  /query-string@6.14.0:
-    resolution: {integrity: sha512-In3o+lUxlgejoVJgwEdYtdxrmlL0cQWJXj0+kkI7RWVo7hg5AhFtybeKlC9Dpgbr8eOC4ydpEh8017WwyfzqVQ==}
-    engines: {node: '>=6'}
-    dependencies:
-      decode-uri-component: 0.2.2
-      filter-obj: 1.1.0
-      split-on-first: 1.1.0
-      strict-uri-encode: 2.0.0
-    dev: false
 
   /query-string@6.14.1:
     resolution: {integrity: sha512-XDxAeVmpfu1/6IjyT/gXHOl+S0vQ9owggJ30hhWKdHAsNPOcasn5o9BW0eejZqL2e4vMjhAxoW3jVHcD6mbcYw==}
