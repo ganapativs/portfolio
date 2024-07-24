@@ -12,6 +12,15 @@ export default function HTML(props) {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
+        <noscript>
+          <style>
+            {`
+            body {
+              --color-accent: #00A0FF;
+            }
+            `}
+          </style>
+        </noscript>
         {props.headComponents}
       </head>
       <body {...props.bodyAttributes}>

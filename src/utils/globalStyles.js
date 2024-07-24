@@ -18,7 +18,6 @@ body {
     Accent color is set initially at gatsby-plugin-accent-color plugin
     level and handled subsequently in accentSwitcher component
   */
-  --color-accent: ${window.__accentColor || '#f1404b'};
   --color-dark: #ecf0f3;
   --color-dark-2: #d4d8db;
   --color-ultra-dark: #fff;
@@ -33,7 +32,6 @@ body {
 }
 
 body.dark {
-  --color-accent: ${window.__accentColor || '#f1404b'};
   --color-dark: #141414;
   --color-dark-2: #16181d;
   --color-ultra-dark: #22242b;
