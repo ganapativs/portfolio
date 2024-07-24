@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@feedback-fish/react':
-    specifier: ^1.2.2
-    version: 1.2.2(react@18.3.1)
   '@mdx-js/react':
     specifier: ^3.0.1
     version: 3.0.1(@types/react@18.3.3)(react@18.3.1)
@@ -1815,15 +1812,6 @@ packages:
     resolution: {integrity: sha512-OIHZrb2ImZ7XG85HXOONLcJWGosv7sIvM2ifAPQVhg9Lv7qdmMBNVaai4QTdyuaqbKM5eO6sLSQOYI7wEQeCJQ==}
     engines: {node: '>=14'}
     dev: true
-
-  /@feedback-fish/react@1.2.2(react@18.3.1):
-    resolution: {integrity: sha512-T6VxMM8nNsD3b5ulVsrcvcrNDAc4d73RLYK8Iw+6PFPIdMU2I/mOiuAHvfGauBVIWYHflja4VOdjm3z4CtlvYQ==}
-    engines: {node: '>=10.16.0'}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      react: 18.3.1
-    dev: false
 
   /@ganapativs/eslint-config-react@0.2.0(@typescript-eslint/parser@5.62.0):
     resolution: {integrity: sha512-/wTZKCwExGnIZyHm8HnHJp/Huqmq5P4Fjkl+3X9rEsd9s2Xg00uzk6UIbiE4Z7OtXrP3g2wM4YvSj5kxK7hvSA==}
