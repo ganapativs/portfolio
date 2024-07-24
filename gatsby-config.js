@@ -1,14 +1,16 @@
 // TODO:
-// - Better dark mode icon - https://codepen.io/ganapativs/pen/ExBgxbw
+// - Spectrum
+// - Underline line/word on hover in blog (experimental)
 // - Code copy button - line no etc - https://www.gatsbyjs.com/plugins/gatsby-remark-prismjs-copy-button/
 // - Image modal in blog
-// - Remove feedback, Hand-crafted in India with ❤
+// - Remove Hand-crafted in India with ❤
 // - Better dark mode transition
 // - Read progress bar
 // - Page transition animation - blog
 // - SGB vercel + priority
 // - Cleanup S3 bucket
 // - gatsby-plugin-react-helmet: Gatsby now has built-in support for modifying the document head. Learn more at https://gatsby.dev/gatsby-head
+// - Print?
 // eslint-disable-next-line import/no-extraneous-dependencies
 require('dotenv').config({
   path: '.env',

@@ -7,6 +7,9 @@ import { rhythm } from '../utils/typography';
 const DevName = styled.h1`
   font-size: ${rhythm(1.4)};
   margin-bottom: ${rhythm(0.8)};
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 
   @media screen and (min-width: 768px) {
     margin-top: 0;
@@ -44,21 +47,64 @@ const DevDescription = styled.div`
 `;
 
 const Separator = styled.div`
-  margin-bottom: ${props => props.mb}px;
+  margin-bottom: ${(props) => props.mb}px;
 `;
+
+const FlagIndia = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="1em"
+    height="1em"
+    viewBox="0 0 36 36"
+    {...props}
+  >
+    <path
+      fill="#138808"
+      d="M0 27a4 4 0 0 0 4 4h28a4 4 0 0 0 4-4v-5H0v5z"
+    ></path>
+    <path fill="#F93" d="M36 14V9a4 4 0 0 0-4-4H4a4 4 0 0 0-4 4v5h36z"></path>
+    <path fill="#F7F7F7" d="M0 13.667h36v8.667H0z"></path>
+    <circle cx="18" cy="18" r="4" fill="navy"></circle>
+    <circle cx="18" cy="18" r="3.375" fill="#F7F7F7"></circle>
+    <path
+      fill="#6666B3"
+      d="m18.1 16.75l-.1.65l-.1-.65l.1-1.95zm-.928-1.841l.408 1.909l.265.602l-.072-.653zm-.772.32l.888 1.738l.412.513l-.238-.613zm-.663.508l1.308 1.45l.531.389l-.389-.531zm-.508.663l1.638 1.062l.613.238l-.513-.412zm-.32.772l1.858.601l.653.072l-.602-.265zM14.8 18l1.95.1l.65-.1l-.65-.1zm.109.828l1.909-.408l.602-.265l-.653.072zm.32.772l1.738-.888l.513-.412l-.613.238zm.508.663l1.45-1.308l.389-.531l-.531.389zm.663.508l1.062-1.638l.238-.613l-.412.513zm.772.32l.601-1.858l.072-.653l-.265.602zM18 21.2l.1-1.95l-.1-.65l-.1.65zm.828-.109l-.408-1.909l-.265-.602l.072.653zm.772-.32l-.888-1.738l-.412-.513l.238.613zm.663-.508l-1.308-1.45l-.531-.389l.389.531zm.508-.663l-1.638-1.062l-.613-.238l.513.412zm.32-.772l-1.858-.601l-.653-.072l.602.265zM21.2 18l-1.95-.1l-.65.1l.65.1zm-.109-.828l-1.909.408l-.602.265l.653-.072zm-.32-.772l-1.738.888l-.513.412l.613-.238zm-.508-.663l-1.45 1.308l-.389.531l.531-.389zm-.663-.508l-1.062 1.638l-.238.613l.412-.513zm-.772-.32l-.601 1.858l-.072.653l.265-.602z"
+    ></path>
+    <g fill="navy">
+      <circle cx="17.56" cy="14.659" r=".2"></circle>
+      <circle cx="16.71" cy="14.887" r=".2"></circle>
+      <circle cx="15.948" cy="15.326" r=".2"></circle>
+      <circle cx="15.326" cy="15.948" r=".2"></circle>
+      <circle cx="14.887" cy="16.71" r=".2"></circle>
+      <circle cx="14.659" cy="17.56" r=".2"></circle>
+      <circle cx="14.659" cy="18.44" r=".2"></circle>
+      <circle cx="14.887" cy="19.29" r=".2"></circle>
+      <circle cx="15.326" cy="20.052" r=".2"></circle>
+      <circle cx="15.948" cy="20.674" r=".2"></circle>
+      <circle cx="16.71" cy="21.113" r=".2"></circle>
+      <circle cx="17.56" cy="21.341" r=".2"></circle>
+      <circle cx="18.44" cy="21.341" r=".2"></circle>
+      <circle cx="19.29" cy="21.113" r=".2"></circle>
+      <circle cx="20.052" cy="20.674" r=".2"></circle>
+      <circle cx="20.674" cy="20.052" r=".2"></circle>
+      <circle cx="21.113" cy="19.29" r=".2"></circle>
+      <circle cx="21.341" cy="18.44" r=".2"></circle>
+      <circle cx="21.341" cy="17.56" r=".2"></circle>
+      <circle cx="21.113" cy="16.71" r=".2"></circle>
+      <circle cx="20.674" cy="15.948" r=".2"></circle>
+      <circle cx="20.052" cy="15.326" r=".2"></circle>
+      <circle cx="19.29" cy="14.887" r=".2"></circle>
+      <circle cx="18.44" cy="14.659" r=".2"></circle>
+      <circle cx="18" cy="18" r=".9"></circle>
+    </g>
+  </svg>
+);
 
 const DevInfo = () => {
   return (
     <>
       <DevName>
-        Ganapati V S{' '}
-        <ExternalLink
-          href="https://twitter.com/ganapativs?ref=meetguns.com"
-          onClick={() =>
-            captureEvent('Personal Twitter', 'click', 'Social Links')
-          }>
-          <span>(@ganapativs)</span>
-        </ExternalLink>
+        Ganapati V S <FlagIndia aria-label="India" aria-hidden="true" />
       </DevName>
       <DevDescription>
         Hi{' '}
@@ -74,7 +120,8 @@ const DevInfo = () => {
           onClick={() =>
             captureEvent('react-spectrum GitHub', 'click', 'Social Links')
           }
-          style={{ whiteSpace: 'nowrap' }}>
+          style={{ whiteSpace: 'nowrap' }}
+        >
           react-spectrum
         </ExternalLink>
         ,{' '}
@@ -87,7 +134,8 @@ const DevInfo = () => {
               'Social Links',
             )
           }
-          style={{ whiteSpace: 'nowrap' }}>
+          style={{ whiteSpace: 'nowrap' }}
+        >
           react-delightful-scroller
         </ExternalLink>
         ,{' '}
@@ -96,15 +144,15 @@ const DevInfo = () => {
           onClick={() =>
             captureEvent('react-dynamic-import GitHub', 'click', 'Social Links')
           }
-          style={{ whiteSpace: 'nowrap' }}>
+          style={{ whiteSpace: 'nowrap' }}
+        >
           react-dynamic-import
         </ExternalLink>
         ,{' '}
         <ExternalLink
           href="https://bttn.surge.sh/?ref=meetguns.com"
-          onClick={() =>
-            captureEvent('bttn.surge.sh', 'click', 'Social Links')
-          }>
+          onClick={() => captureEvent('bttn.surge.sh', 'click', 'Social Links')}
+        >
           bttn.css
         </ExternalLink>{' '}
         and{' '}
@@ -112,7 +160,8 @@ const DevInfo = () => {
           href="https://github.com/ganapativs?ref=meetguns.com"
           onClick={() =>
             captureEvent('Personal GitHub', 'click', 'Social Links')
-          }>
+          }
+        >
           many more
         </ExternalLink>{' '}
         <span role="img" aria-label="Yay!!!">

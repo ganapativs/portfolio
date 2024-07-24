@@ -13,7 +13,6 @@ export function formatPostDate(d) {
 }
 
 export const accentColors = [
-  '#f1404b',
   '#FF2E63',
   '#f07818',
   '#6abe83',

@@ -34,6 +34,7 @@ const HeaderRow = styled.header`
     top: unset;
     box-shadow: 0 -4px 4px -4px var(--color-light-op-2);
     margin-bottom: 0;
+    margin-top: 0;
   }
 
   @media screen and (min-width: 768px) and (max-width: 991px) {

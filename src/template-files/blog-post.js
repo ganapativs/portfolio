@@ -80,6 +80,7 @@ const Div = styled.div`
 
   @media screen and (max-width: 767px) {
     padding-top: 1rem;
+    max-width: 100%;
   }
 `;
 
