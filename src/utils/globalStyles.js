@@ -2,6 +2,17 @@ import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
+html {
+    scroll-padding-top: 10px;
+    scroll-behavior: smooth;
+}
+
+@media screen and (min-width: 768px) {
+  html {
+    scroll-padding-top: 110px;
+  }
+}
+
 body {
   /*
     Accent color is set initially at gatsby-plugin-accent-color plugin
@@ -35,6 +46,11 @@ body.dark {
 
 * {
   box-sizing: border-box;
+}
+
+::selection {
+  color: #fff;
+  background: var(--color-accent);
 }
 
 html, body {
@@ -271,10 +287,11 @@ pre[data-line] {
   pre {
     background-color: #000;
     --opacity: 0.15;
-    background-image: linear-gradient(45deg, rgb(
+    /* background-image: linear-gradient(45deg, rgb(
           from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
             var(--opacity)
-        ) 15%, #050512 70%, #050512 100%);
+        ) 15%, #050512 70%, #050512 100%); */
+    background-image: linear-gradient(235deg, rgb(from rgb(from var(--color-accent) r g b / var(--opacity)) r g b / var(--opacity)) 15%, #050512 70%, #050512 100%), repeating-radial-gradient(circle at 0 0, #000000 0, #050512 12px), repeating-linear-gradient(#050512, var(--color-accent));
   }
 }
 

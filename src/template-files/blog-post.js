@@ -17,7 +17,6 @@ const Article = styled.article`
   .gatsby-resp-image-wrapper {
     border-radius: 1rem;
     overflow: hidden;
-    box-shadow: 0 0 1px var(--color-light-dark);
 
     img {
       box-shadow: none !important;
@@ -137,7 +136,6 @@ const HeaderSection = styled.div`
       padding-bottom: 1rem;
       top: 0;
       left: -5rem;
-      box-shadow: 0 0 1px var(--color-light-dark);
     }
   }
 `;

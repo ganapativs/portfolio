@@ -1,11 +1,12 @@
 // TODO:
-// - Selection color
+// - Better dark mode icon - https://codepen.io/ganapativs/pen/ExBgxbw
 // - Code copy button - line no etc - https://www.gatsbyjs.com/plugins/gatsby-remark-prismjs-copy-button/
 // - Image modal in blog
 // - Remove feedback, Hand-crafted in India with ❤
 // - Better dark mode transition
-// - SGB vercel + priority
+// - Read progress bar
 // - Page transition animation - blog
+// - SGB vercel + priority
 // - Cleanup S3 bucket
 // - gatsby-plugin-react-helmet: Gatsby now has built-in support for modifying the document head. Learn more at https://gatsby.dev/gatsby-head
 // eslint-disable-next-line import/no-extraneous-dependencies

@@ -24,6 +24,9 @@ const HeaderRow = styled.header`
   z-index: 1;
   margin: 20px -20px;
   padding: 10px 15px;
+  background: color-mix(in srgb, var(--color-dark) 90%, transparent);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 
   @media screen and (max-width: 767px) {
     order: 1;
