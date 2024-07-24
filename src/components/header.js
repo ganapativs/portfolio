@@ -197,96 +197,56 @@ const RouteLinks = styled.div`
 `;
 
 const ThemeSwitcher = styled.div`
-  transform: scale(0.7);
+  display: flex;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
 
   @media screen and (max-width: 767px) {
-    transform: scale(0.8) translateY(-2px) translateX(-2px);
+    transform: translate(-2px, -2.4px);
   }
 `;
 
-// Much appreciated to: https://codepen.io/aaroniker/pen/KGpXZo
-const MoonOrSun = styled.div`
-  position: relative;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: ${(p) => (p.isDark ? '4px' : '2px')} solid var(--color-accent);
-  background: var(--color-accent);
-  transform: scale(${(p) => (p.isDark ? 0.55 : 1)});
-  transition:
-    all 0.45s ease-out,
-    opacity 0.1s ease-out;
-  overflow: ${(p) => (p.isDark ? 'visible' : 'hidden')};
+const ToggleInput = styled.input`
+  --size: 1rem;
 
-  @media screen and (hover: hover) and (pointer: fine) {
-    &:hover {
-      transition:
-        all 0.1s ease-in,
-        opacity 0.15s ease-in;
-      opacity: 0.8;
-    }
-  }
+  appearance: none;
+  outline: none;
+  cursor: pointer;
 
-  &::before {
-    content: '';
-    position: absolute;
-    right: -9px;
-    top: -9px;
-    height: 24px;
-    width: 24px;
-    border: 2px solid var(--color-accent);
-    border-radius: 50%;
-    transform: translate(${(p) => (p.isDark ? '14px, -14px' : '0, 0')});
-    opacity: ${(p) => (p.isDark ? 0 : 1)};
-    transition: transform 0.45s ease;
-  }
-  &::after {
-    content: '';
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin: -4px 0 0 -4px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
+  width: var(--size);
+  height: var(--size);
+  box-shadow: inset calc(var(--size) * 0.33) calc(var(--size) * -0.25) 0;
+  border-radius: 999px;
+  color: var(--color-accent);
+
+  transition: all 500ms;
+
+  &:checked {
+    --ray-size: calc(var(--size) * -0.4);
+    --offset-orthogonal: calc(var(--size) * 0.7);
+    --offset-diagonal: calc(var(--size) * 0.5);
+
+    transform: scale(0.75);
+    color: var(--color-accent);
     box-shadow:
-      0 -23px 0 var(--color-accent),
-      0 23px 0 var(--color-accent),
-      23px 0 0 var(--color-accent),
-      -23px 0 0 var(--color-accent),
-      15px 15px 0 var(--color-accent),
-      -15px 15px 0 var(--color-accent),
-      15px -15px 0 var(--color-accent),
-      -15px -15px 0 var(--color-accent);
-    transform: scale(${(p) => (p.isDark ? 1 : 0)});
-    transition: all 0.35s ease;
+      inset 0 0 0 var(--size),
+      calc(var(--offset-orthogonal) * -1) 0 0 var(--ray-size),
+      var(--offset-orthogonal) 0 0 var(--ray-size),
+      0 calc(var(--offset-orthogonal) * -1) 0 var(--ray-size),
+      0 var(--offset-orthogonal) 0 var(--ray-size),
+      calc(var(--offset-diagonal) * -1) calc(var(--offset-diagonal) * -1) 0
+        var(--ray-size),
+      var(--offset-diagonal) var(--offset-diagonal) 0 var(--ray-size),
+      calc(var(--offset-diagonal) * -1) var(--offset-diagonal) 0 var(--ray-size),
+      var(--offset-diagonal) calc(var(--offset-diagonal) * -1) 0 var(--ray-size);
   }
 `;
 
-const MoonMask = styled.div`
-  position: absolute;
-  right: -9px;
-  top: -9px;
-  height: 24px;
-  width: 24px;
-  border-radius: 50%;
-  border: 0;
-  background: var(--color-dark);
-  transform: translate(${(p) => (p.isDark ? '14px, -14px' : '0, 0')});
-  opacity: ${(p) => (p.isDark ? 0 : 1)};
-`;
-
-const MoonMaskDupe = styled(MoonMask)`
-  @media screen and (hover: hover) and (pointer: fine) {
-    ${SwitcherButton}:hover & {
-      --opacity: 0.1;
-      background: rgb(
-        from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
-          var(--opacity)
-      );
-    }
-  }
-`;
+function LightDarkMoonOrSun({ isDark }) {
+  return <ToggleInput type="checkbox" checked={isDark} />;
+}
 
 const links = [
   {
@@ -383,9 +343,7 @@ const Header = ({ location: { pathname } }) => {
                     }}
                   >
                     <ThemeSwitcher>
-                      <MoonOrSun isDark={theme === 'dark'} />
-                      <MoonMask isDark={theme === 'dark'} />
-                      <MoonMaskDupe isDark={theme === 'dark'} />
+                      <LightDarkMoonOrSun isDark={theme === 'dark'} />
                     </ThemeSwitcher>
                   </SwitcherButton>
                 )}
