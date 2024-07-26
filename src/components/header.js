@@ -20,11 +20,10 @@ const switchTheme = (theme, toggleTheme) => {
 const HeaderRow = styled.header`
   position: sticky;
   top: 0;
-  background: var(--color-dark);
+  background: transparent;
   z-index: 1;
   margin: 20px -20px;
   padding: 10px 15px;
-  background: color-mix(in srgb, var(--color-dark) 90%, transparent);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
 

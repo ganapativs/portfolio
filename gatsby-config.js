@@ -1,5 +1,8 @@
 // TODO:
-// - Spectrum
+// - Color change view transition
+// - Header margin top 0
+// - Mobile header - clicking on not working when codesandbox iframe is below it
+// - Blur header on sticky
 // - Underline line/word on hover in blog (experimental)
 // - Code copy button - line no etc - https://www.gatsbyjs.com/plugins/gatsby-remark-prismjs-copy-button/
 // - Image modal in blog

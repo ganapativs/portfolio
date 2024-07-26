@@ -54,7 +54,7 @@ const Div = styled.div`
           var(--opacity)
       ) !important;
       border: none !important;
-      width: 210px !important;
+      width: 185px !important;
       z-index: 1;
       height: 44px;
       align-items: center;
