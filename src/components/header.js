@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 import { ThemeToggler } from 'gatsby-plugin-dark-mode';
@@ -19,32 +19,64 @@ const switchTheme = (theme, toggleTheme) => {
 
 const HeaderRow = styled.header`
   position: sticky;
-  top: 0;
-  --opacity: 0.85;
-  background: rgb(from var(--color-dark) r g b / var(--opacity));
+  top: -1px;
   z-index: 1;
-  margin: 20px -20px;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: -20px;
+  margin-right: -20px;
   padding: 10px 15px;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  --opacity: 0;
+  background: transparent;
+  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(0);
+  transition:
+    background 0.2s ease-out,
+    backdrop-filter 0.2s ease-out,
+    padding 0.2s ease-out;
+
+  &.pinned {
+    --opacity: 0.85;
+    background: rgb(from var(--color-dark) r g b / var(--opacity));
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    transition:
+      background 0.25s ease-in,
+      backdrop-filter 0.25s ease-in,
+      padding 0.25s ease-in;
+  }
 
   @media screen and (max-width: 767px) {
     order: 1;
     bottom: 0;
     top: unset;
     box-shadow: 0 -4px 4px -4px var(--color-light-op-2);
-    margin-bottom: 0;
-    margin-top: 0;
+    --opacity: 0.85;
+    background: rgb(from var(--color-dark) r g b / var(--opacity));
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
   }
 
   @media screen and (min-width: 768px) and (max-width: 991px) {
-    margin: 0 -30px 0 -30px;
+    margin-left: -30px;
+    margin-right: -30px;
     padding: 20px 25px;
+
+    &.pinned {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
   }
 
   @media screen and (min-width: 992px) {
-    margin: 0 -30px 0 -30px;
+    margin-left: -30px;
+    margin-right: -30px;
     padding: 20px 0;
+
+    &.pinned {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
   }
 `;
 
@@ -135,7 +167,7 @@ const IconWrapper = styled.span`
 `;
 
 const RouteLinks = styled.div`
-  margin-left: 2rem;
+  margin-left: 1rem;
 
   @media screen and (max-width: 767px) {
     margin-left: 0.6rem;
@@ -260,6 +292,7 @@ const links = [
 const Header = ({ location: { pathname } }) => {
   const [logoActiveAnimateState, setLogoAnimateState] = useState(false);
   const [jsEnabled, setJSEnabled] = useState(false);
+  const headerRef = useRef(null);
 
   // Animate hover state to normal state initially on logo
   useEffect(() => {
@@ -272,6 +305,25 @@ const Header = ({ location: { pathname } }) => {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const el = headerRef.current;
+
+    if (!el) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([e]) => e.target.classList.toggle('pinned', e.intersectionRatio < 1),
+      { threshold: [1] },
+    );
+
+    observer.observe(el);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   const onThemeChange = useCallback((theme, toggleTheme) => {
     if (!document.startViewTransition) {
       return switchTheme(theme, toggleTheme);
@@ -281,7 +333,7 @@ const Header = ({ location: { pathname } }) => {
   }, []);
 
   return (
-    <HeaderRow>
+    <HeaderRow ref={headerRef}>
       <HeaderWrapper>
         <Left>
           <Link title={'Meetguns.com | About'} to={'/'}>
