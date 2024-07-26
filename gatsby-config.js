@@ -1,5 +1,5 @@
 // TODO:
-// - Spectrum
+// - Fix codesandbox links in blog
 // - Underline line/word on hover in blog (experimental)
 // - Code copy button - line no etc - https://www.gatsbyjs.com/plugins/gatsby-remark-prismjs-copy-button/
 // - Image modal in blog

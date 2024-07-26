@@ -15,7 +15,6 @@ export function formatPostDate(d) {
 export const accentColors = [
   '#FF2E63',
   '#f07818',
-  '#6abe83',
   '#209396',
   '#00A0FF',
   '#4d80e4',

@@ -22,6 +22,23 @@ const LayoutWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-image: linear-gradient(
+      235deg,
+      rgb(from var(--color-accent) r g b / 0.15) 15%,
+      var(--color-dark-2) 60%,
+      var(--color-dark) 100%
+    ),
+    repeating-radial-gradient(
+      circle at 0 0,
+      rgb(from var(--color-dark-2) r g b / 0.4) 0,
+      rgb(from var(--color-dark) r g b / 1) max(40vw, 50vh)
+    ),
+    repeating-linear-gradient(
+      rgb(from var(--color-dark) r g b / 1),
+      rgb(from var(--color-accent) r g b / 1)
+    );
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 
   @media screen and (min-width: 768px) {
     padding: 0 30px;
