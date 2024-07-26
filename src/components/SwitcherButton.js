@@ -13,10 +13,7 @@ const SwitcherButton = styled.div`
   @media screen and (hover: hover) and (pointer: fine) {
     &:hover {
       --opacity: 0.1;
-      background: rgb(
-        from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
-          var(--opacity)
-      );
+      background: rgb(from var(--color-accent) r g b / var(--opacity));
     }
   }
 

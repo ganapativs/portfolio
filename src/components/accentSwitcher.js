@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { GithubPicker } from 'react-color';
 import useOutsideClick from './hooks/useOutsideClick';
@@ -32,10 +32,7 @@ const Div = styled.div`
 
       &.visible {
         --opacity: 0.2;
-        background: rgb(
-          from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
-            var(--opacity)
-        );
+        background: rgb(from var(--color-accent) r g b / var(--opacity));
       }
     }
 
@@ -45,13 +42,9 @@ const Div = styled.div`
       top: 0;
       --opacity: 0.1;
       box-shadow: 0 0 0 2px
-        rgb(
-          from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
-            calc(var(--opacity) * 4)
-        ) !important;
+        rgb(from var(--color-accent) r g b / calc(var(--opacity) * 4)) !important;
       background: rgb(
-        from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
-          var(--opacity)
+        from var(--color-accent) r g b / var(--opacity)
       ) !important;
       border: none !important;
       width: 185px !important;
@@ -144,11 +137,26 @@ function AccentSwitcher() {
   const [visible, setVisibility] = useState(false);
   const hideVisibility = () => setVisibility(false);
   const toggleVisibility = () => setVisibility(!visible);
-  /* eslint-disable no-underscore-dangle */
-  const toggleAccent = ({ hex: accent }) => {
-    window.__setPreferredAccentColor(accent);
-    setAccentColor(accent);
-  };
+
+  const toggleAccent = useCallback(
+    ({ hex: accent }) => {
+      window.__setPreferredAccentColor(accent);
+      setAccentColor(accent);
+    },
+    [setAccentColor],
+  );
+
+  const toggleAccentTransition = useCallback(
+    (...args) => {
+      if (!document.startViewTransition) {
+        return toggleAccent(...args);
+      } else {
+        document.startViewTransition(() => toggleAccent(...args));
+      }
+    },
+    [toggleAccent],
+  );
+
   useOutsideClick(wrapperRef, hideVisibility);
 
   useEffect(() => {
@@ -164,7 +172,6 @@ function AccentSwitcher() {
       window.__onAccentColorChange = () => {};
     };
   }, []);
-  /* eslint-enable no-underscore-dangle */
 
   return (
     <Div ref={wrapperRef}>
@@ -179,7 +186,7 @@ function AccentSwitcher() {
       <GithubPicker
         triangle="hide"
         colors={accentColors}
-        onChange={toggleAccent}
+        onChange={toggleAccentTransition}
         className={`${visible ? 'visible' : ''}`}
       />
       <SwitcherButton

@@ -24,19 +24,18 @@ const LayoutWrapper = styled.div`
   justify-content: space-between;
   background-image: linear-gradient(
       235deg,
-      rgb(from rgb(from var(--color-accent) r g b / 0.15) r g b / 0.15) 15%,
+      rgb(from var(--color-accent) r g b / 0.15) 15%,
       var(--color-dark-2) 60%,
       var(--color-dark) 100%
     ),
     repeating-radial-gradient(
       circle at 0 0,
-      rgb(from rgb(from var(--color-dark-2) r g b / 0.15) r g b / 0.4) 0,
-      rgb(from rgb(from var(--color-dark) r g b / 0.15) r g b / 1)
-        max(40vw, 50vh)
+      rgb(from var(--color-dark-2) r g b / 0.4) 0,
+      rgb(from var(--color-dark) r g b / 1) max(40vw, 50vh)
     ),
     repeating-linear-gradient(
-      rgb(from rgb(from var(--color-dark) r g b / 0.15) r g b / 1),
-      rgb(from rgb(from var(--color-accent) r g b / 0.15) r g b / 1)
+      rgb(from var(--color-dark) r g b / 1),
+      rgb(from var(--color-accent) r g b / 1)
     );
   background-attachment: fixed;
   background-repeat: no-repeat;

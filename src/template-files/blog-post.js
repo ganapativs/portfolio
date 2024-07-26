@@ -45,6 +45,8 @@ const Ul = styled.ul`
 `;
 
 const CoverImage = styled.div`
+  overflow: hidden;
+
   @media screen and (max-width: 767px) {
     margin-bottom: ${rhythm(1.6)};
     min-height: 280px;
@@ -60,12 +62,20 @@ const CoverImage = styled.div`
   }
 
   @media screen and (min-width: 768px) {
-    border-radius: 1rem;
-    margin-top: ${rhythm(0.6)};
     margin-bottom: ${rhythm(1.6)};
     margin-left: -5rem;
     margin-right: -5rem;
     min-height: 300px;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 991px) {
+    margin-left: -3.5rem;
+    margin-right: -3.5rem;
+  }
+
+  @media screen and (min-width: 992px) {
+    border-radius: 1rem;
+    margin-top: ${rhythm(0.6)};
   }
 
   @media screen and (hover: hover) and (pointer: fine) {
@@ -137,6 +147,17 @@ const HeaderSection = styled.div`
       padding-bottom: 1rem;
       top: 0;
       left: -5rem;
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 991px) {
+      width: calc(100% + 7rem);
+      left: -3.5rem;
+      padding-left: 3.5rem;
+      padding-right: 3.5rem;
+    }
+
+    @media screen and (max-width: 991px) {
+      border-radius: 0;
     }
   }
 `;

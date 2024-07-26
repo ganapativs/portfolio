@@ -20,7 +20,8 @@ const switchTheme = (theme, toggleTheme) => {
 const HeaderRow = styled.header`
   position: sticky;
   top: 0;
-  background: transparent;
+  --opacity: 0.85;
+  background: rgb(from var(--color-dark) r g b / var(--opacity));
   z-index: 1;
   margin: 20px -20px;
   padding: 10px 15px;
@@ -37,12 +38,12 @@ const HeaderRow = styled.header`
   }
 
   @media screen and (min-width: 768px) and (max-width: 991px) {
-    margin: 40px -30px;
+    margin: 0 -30px 0 -30px;
     padding: 20px 25px;
   }
 
   @media screen and (min-width: 992px) {
-    margin: 40px 0;
+    margin: 0 -30px 0 -30px;
     padding: 20px 0;
   }
 `;
@@ -59,10 +60,7 @@ const HeaderWrapper = styled.div`
 
 const LogoWrapper = styled.div`
   --opacity: 0.05;
-  background: rgb(
-    from rgb(from var(--color-light) r g b / var(--opacity)) r g b /
-      var(--opacity)
-  );
+  background: rgb(from var(--color-light) r g b / var(--opacity));
   width: 60px;
   height: 60px;
   display: flex;
@@ -97,10 +95,7 @@ const LogoWrapper = styled.div`
     &:hover,
     &.init-hover-animate-state {
       --opacity: 0.2;
-      background: rgb(
-        from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
-          var(--opacity)
-      );
+      background: rgb(from var(--color-accent) r g b / var(--opacity));
       transition:
         transform 0.5s ease-in-out,
         background 0.5s ease-in-out,
@@ -147,7 +142,7 @@ const RouteLinks = styled.div`
   }
 
   a {
-    color: var(--color-light-dark);
+    color: var(--color-accent);
     margin: 0 0.2rem;
     font-weight: bold;
     text-decoration: none;
@@ -156,12 +151,17 @@ const RouteLinks = styled.div`
     border-radius: 20px;
 
     &.active {
-      color: var(--color-accent);
+      color: var(--color-dark);
       --opacity: 0.1;
-      background: rgb(
-        from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
-          var(--opacity)
-      );
+      background: var(--color-accent);
+    }
+
+    svg path {
+      fill: var(--color-accent);
+    }
+
+    &.active svg path {
+      fill: var(--color-dark);
     }
 
     @media screen and (hover: hover) and (pointer: fine) {
@@ -176,10 +176,7 @@ const RouteLinks = styled.div`
       &:hover:not(.active) {
         color: var(--color-accent);
         --opacity: 0.1;
-        background: rgb(
-          from rgb(from var(--color-accent) r g b / var(--opacity)) r g b /
-            var(--opacity)
-        );
+        background: rgb(from var(--color-accent) r g b / var(--opacity));
 
         ${IconWrapper} path {
           transition: fill 0.25s ease-in;
