@@ -102,13 +102,13 @@ module.exports = {
           {
             resolve: `gatsby-remark-smartypants`,
           },
-          {
-            resolve: `gatsby-remark-images-zoom`,
-            options: {
-              background: 'rgba(0, 0, 0, 0.85)',
-              zIndex: 0,
-            },
-          },
+          // {
+          //   resolve: `gatsby-remark-images-zoom`,
+          //   options: {
+          //     background: 'rgba(0, 0, 0, 0.85)',
+          //     zIndex: 0,
+          //   },
+          // },
         ],
       },
     },

@@ -21,7 +21,7 @@
   "license": "MIT",
   "main": "index.js",
   "peerDependencies": {
-    "gatsby": "^2.0.0",
+    "gatsby": "^5.0.0",
     "gatsby-remark-images": "^3.0.0"
   },
   "repository": "https://github.com/premieroctet/gatsby-remark-images-zoom"
