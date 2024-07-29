@@ -2,7 +2,6 @@
 // - Underline line/word on hover in blog (experimental)
 // - Code copy button - line no etc - https://www.gatsbyjs.com/plugins/gatsby-remark-prismjs-copy-button/
 // - Image modal in blog
-// - Better dark mode transition
 // - Page transition animation - blog
 // - SGB vercel + priority
 // - Cleanup S3 bucket
@@ -66,6 +65,7 @@ module.exports = {
               showCaptions: true,
               quality: 85,
               withWebp: { quality: 85 },
+              linkImagesToOriginal: false,
             },
           },
           {
@@ -102,6 +102,13 @@ module.exports = {
           },
           {
             resolve: `gatsby-remark-smartypants`,
+          },
+          {
+            resolve: `gatsby-remark-images-zoom`,
+            options: {
+              background: 'rgba(0, 0, 0, 0.85)',
+              zIndex: 0,
+            },
           },
         ],
       },

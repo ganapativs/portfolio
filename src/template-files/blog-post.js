@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, graphql } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
@@ -162,109 +162,109 @@ const HeaderSection = styled.div`
   }
 `;
 
-class BlogPostTemplate extends React.Component {
-  render() {
-    const { node: post } = this.props.data.blogPost.edges[0];
-    const { body, fields: { timeToRead: { text: timeToReadText } = {} } = {} } =
-      post;
-    const { previous, next, slug } = this.props.pageContext;
+function BlogPostTemplate(props) {
+  const { node: post } = props.data.blogPost.edges[0];
+  const { body, fields: { timeToRead: { text: timeToReadText } = {} } = {} } =
+    post;
+  const { previous, next, slug } = props.pageContext;
 
-    const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/src${slug}index.mdx`;
-    const blogUrl = `https://meetguns.com${slug}`;
-    const discussUrl = `https://mobile.twitter.com/search?q=${encodeURIComponent(
-      blogUrl,
-    )}`;
+  const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/src${slug}index.mdx`;
+  const blogUrl = `https://meetguns.com${slug}`;
+  const discussUrl = `https://mobile.twitter.com/search?q=${encodeURIComponent(
+    blogUrl,
+  )}`;
 
-    return (
-      <Div>
-        <style>
-          {`
+  useEffect(() => {
+    // TODO
+  }, []);
+
+  return (
+    <Div>
+      <style>
+        {`
           html {
               scroll-behavior: smooth;
           }
           `}
-        </style>
-        <SEO
-          title={post.frontmatter.title}
-          description={post.frontmatter.spoiler}
-          keywords={post.frontmatter.keywords}
-          fbBanner={`${blogUrl}twitter-card.jpg`}
-          twitterBanner={`${blogUrl}twitter-card.jpg`}
-        />
-        <main>
-          <Article>
-            <HeaderSection>
-              {post.frontmatter.cover ? (
-                <CoverImage>
-                  <GatsbyImage
-                    image={
-                      post.frontmatter.cover.childImageSharp.gatsbyImageData
-                    }
-                  />
-                </CoverImage>
-              ) : null}
-              <header>
-                <h1
-                  style={{
-                    marginTop: rhythm(1 / 2),
-                  }}
+      </style>
+      <SEO
+        title={post.frontmatter.title}
+        description={post.frontmatter.spoiler}
+        keywords={post.frontmatter.keywords}
+        fbBanner={`${blogUrl}twitter-card.jpg`}
+        twitterBanner={`${blogUrl}twitter-card.jpg`}
+      />
+      <main>
+        <Article>
+          <HeaderSection>
+            {post.frontmatter.cover ? (
+              <CoverImage>
+                <GatsbyImage
+                  image={post.frontmatter.cover.childImageSharp.gatsbyImageData}
+                />
+              </CoverImage>
+            ) : null}
+            <header>
+              <h1
+                style={{
+                  marginTop: rhythm(1 / 2),
+                }}
+              >
+                {post.frontmatter.title}
+              </h1>
+              <PostInfo
+                style={{
+                  ...scale(-1 / 5),
+                }}
+              >
+                {formatPostDate(post.frontmatter.date)}
+                {` • ${timeToReadText}`} •{' '}
+                <a
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                    `Checkout this blog about "${post.frontmatter.title}" by @ganapativs\n\n${blogUrl}`,
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  {post.frontmatter.title}
-                </h1>
-                <PostInfo
-                  style={{
-                    ...scale(-1 / 5),
-                  }}
-                >
-                  {formatPostDate(post.frontmatter.date)}
-                  {` • ${timeToReadText}`} •{' '}
-                  <a
-                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                      `Checkout this blog about "${post.frontmatter.title}" by @ganapativs\n\n${blogUrl}`,
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Tweet
-                  </a>
-                </PostInfo>
-              </header>
-            </HeaderSection>
-            {this.props.children}
-            <footer>
-              <p>
-                <a href={discussUrl} target="_blank" rel="noopener noreferrer">
-                  Discuss on Twitter
+                  Tweet
                 </a>
-                {` • `}
-                <a href={editUrl} target="_blank" rel="noopener noreferrer">
-                  Edit on GitHub
-                </a>
-              </p>
-            </footer>
-          </Article>
-        </main>
-        <nav>
-          <Ul>
-            <li>
-              {previous ? (
-                <Link to={previous.fields.slug} rel="prev">
-                  ← {previous.frontmatter.title}
-                </Link>
-              ) : null}
-            </li>
-            <li>
-              {next ? (
-                <Link to={next.fields.slug} rel="next">
-                  {next.frontmatter.title} →
-                </Link>
-              ) : null}
-            </li>
-          </Ul>
-        </nav>
-      </Div>
-    );
-  }
+              </PostInfo>
+            </header>
+          </HeaderSection>
+          {props.children}
+          <footer>
+            <p>
+              <a href={discussUrl} target="_blank" rel="noopener noreferrer">
+                Discuss on Twitter
+              </a>
+              {` • `}
+              <a href={editUrl} target="_blank" rel="noopener noreferrer">
+                Edit on GitHub
+              </a>
+            </p>
+          </footer>
+        </Article>
+      </main>
+      <nav>
+        <Ul>
+          <li>
+            {previous ? (
+              <Link to={previous.fields.slug} rel="prev">
+                ← {previous.frontmatter.title}
+              </Link>
+            ) : null}
+          </li>
+          <li>
+            {next ? (
+              <Link to={next.fields.slug} rel="next">
+                {next.frontmatter.title} →
+              </Link>
+            ) : null}
+          </li>
+        </Ul>
+      </nav>
+    </Div>
+  );
 }
 
 export default BlogPostTemplate;
