@@ -338,6 +338,10 @@ pre[data-line] {
 #gatsby-plugin-page-progress {
   background: linear-gradient(45deg, ${accentColors.join(', ')}) !important;
 }
+
+.medium-zoom-image {
+  box-shadow: none !important;
+}
 `;
 
 export default React.memo(GlobalStyles);
