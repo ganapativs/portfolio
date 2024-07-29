@@ -1,7 +1,6 @@
 // TODO:
 // - Underline line/word on hover in blog (experimental)
 // - Code copy button - line no etc - https://www.gatsbyjs.com/plugins/gatsby-remark-prismjs-copy-button/
-// - Image modal in blog
 // - Page transition animation - blog
 // - SGB vercel + priority
 // - Cleanup S3 bucket
