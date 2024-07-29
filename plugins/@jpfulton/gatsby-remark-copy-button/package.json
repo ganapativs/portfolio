@@ -1,0 +1,45 @@
+{
+  "name": "@jpfulton/gatsby-remark-copy-button",
+  "version": "1.0.10",
+  "description": "A Gatsby remark plugin to support copy buttons on code regions with support for MDX.",
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "mdx",
+    "remark",
+    "copy button"
+  ],
+  "main": "index.js",
+  "type": "module",
+  "repository": "git@github.com:jpfulton/gatsby-remark-copy-button.git",
+  "author": "J. Patrick Fulton <jpatrick.fulton@gmail.com>",
+  "license": "MIT",
+  "packageManager": "yarn@3.6.3",
+  "engines": {
+    "node": ">=18.16.0"
+  },
+  "dependencies": {
+    "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.22.9",
+    "@babel/core": "^7.22.9",
+    "@types/node": "^20.5.9",
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
+    "eslint": "^8.48.0",
+    "gatsby": "^5.0.0-next",
+    "sass": "^1.64.2",
+    "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "gatsby": "^5.0.0-next"
+  },
+  "scripts": {
+    "build": "yarn sass && tsc && yarn babel",
+    "babel": "babel dist --out-dir .",
+    "clean": "rm *.js && rm *.css && rm -rf dist",
+    "sass": "sass --style=compressed --no-source-map src/styles.scss ./styles.css",
+    "lint": "eslint ."
+  }
+}

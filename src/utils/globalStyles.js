@@ -335,10 +335,12 @@ pre[data-line] {
   }
 }
 
+// Page progress bar
 #gatsby-plugin-page-progress {
   background: linear-gradient(45deg, ${accentColors.join(', ')}) !important;
 }
 
+// Medium zoom
 .medium-zoom-overlay {
   --opacity: 0.75;
   background: rgb(from var(--color-dark) r g b / var(--opacity)) !important;
@@ -353,6 +355,36 @@ pre[data-line] {
 
   &.medium-zoom-image--opened  {
     z-index: 100;
+  }
+}
+
+// Copy code button
+span:has(.gatsby-remark-copy-button-container) {
+  margin-bottom: -5rem !important;
+  margin-top: 0.75rem !important;
+  top: 0 !important;
+}
+
+.gatsby-remark-copy-button-container {
+  transform: translateX(10px);
+}
+
+.gatsby-remark-copy-button {
+  background: rgb(from var(--color-light-dark) r g b / calc(var(--opacity) / 4)) !important;
+  border: none !important;
+  color: var(--color-accent) !important;
+  --opacity: 0.8 !important;
+  color: rgb(from var(--color-light-dark) r g b / var(--opacity)) !important;
+  transition: color 0.1s ease-in-out !important;
+
+  &:hover {
+    --opacity: 1;
+    color: rgb(from var(--color-light-dark) r g b / var(--opacity));
+  }
+
+  > .copy-icon, > .success-icon {
+    width: 24px;
+    height: 24px;
   }
 }
 `;

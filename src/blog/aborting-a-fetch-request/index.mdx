@@ -16,7 +16,7 @@ As of today, there are two primary ways to make a request in the browser. `XMLHt
 
 `XMLHttpRequest` was always abortable. An abortable `XHR` request looks something like this.
 
-```javascript
+```javascript {clipboardButton: true}
 let xhr = new XMLHttpRequest();
 xhr.method = 'GET';
 xhr.url = 'https://slowmo.glitch.me/5000';
@@ -48,7 +48,7 @@ As described in the [DOM spec documentation][DOM standard]
 > method that toggles the state of a corresponding `AbortSignal` object. The API which wishes to
 > support aborting can accept an `AbortSignal` object, and use its state to determine how to proceed.
 
-```js
+```js {clipboardButton: true}
 // Create a instance of the AbortController
 const controller = new AbortController();
 const signal = controller.signal;
@@ -66,7 +66,7 @@ controller.abort();
 
 `fetch` accepts `AbortSignal` as part of the second argument.
 
-```js
+```js {clipboardButton: true}
 const controller = new AbortController();
 const signal = controller.signal;
 
