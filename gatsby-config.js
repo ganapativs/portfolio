@@ -1,11 +1,8 @@
 // TODO:
-// - Fix codesandbox links in blog
 // - Underline line/word on hover in blog (experimental)
 // - Code copy button - line no etc - https://www.gatsbyjs.com/plugins/gatsby-remark-prismjs-copy-button/
 // - Image modal in blog
-// - Remove Hand-crafted in India with ❤
 // - Better dark mode transition
-// - Read progress bar
 // - Page transition animation - blog
 // - SGB vercel + priority
 // - Cleanup S3 bucket
@@ -219,6 +216,18 @@ module.exports = {
       resolve: `gatsby-plugin-accent-color`,
       options: {
         defaultAccentColor: `#FF2E63`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-page-progress',
+      options: {
+        includePaths: [{ regex: '^/blog/.*' }],
+        excludePaths: ['/', '/blog', '/blog/'],
+        height: 2,
+        prependToBody: false,
+        color: `var(--color-accent)`,
+        footerHeight: 40,
+        headerHeight: 0,
       },
     },
     `gatsby-plugin-twitter`,

@@ -1,10 +1,10 @@
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
+import { accentColors } from './helpers';
 
 const GlobalStyles = createGlobalStyle`
 html {
     scroll-padding-top: 10px;
-    scroll-behavior: smooth;
 }
 
 @media screen and (min-width: 768px) {
@@ -333,6 +333,10 @@ pre[data-line] {
   from {
     clip-path: inset(var(--from, 0 0 100% 0));
   }
+}
+
+#gatsby-plugin-page-progress {
+  background: linear-gradient(45deg, ${accentColors.join(', ')}) !important;
 }
 `;
 

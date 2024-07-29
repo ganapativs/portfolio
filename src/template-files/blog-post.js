@@ -177,6 +177,13 @@ class BlogPostTemplate extends React.Component {
 
     return (
       <Div>
+        <style>
+          {`
+          html {
+              scroll-behavior: smooth;
+          }
+          `}
+        </style>
         <SEO
           title={post.frontmatter.title}
           description={post.frontmatter.spoiler}

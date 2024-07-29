@@ -39,6 +39,7 @@
     "gatsby-plugin-mdx": "^5.13.1",
     "gatsby-plugin-nprogress": "^5.13.1",
     "gatsby-plugin-offline": "^6.13.2",
+    "gatsby-plugin-page-progress": "^2.2.1",
     "gatsby-plugin-react-helmet": "^6.13.1",
     "gatsby-plugin-sharp": "^5.13.1",
     "gatsby-plugin-sitemap": "^6.13.1",
