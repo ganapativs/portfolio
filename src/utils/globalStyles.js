@@ -286,7 +286,7 @@ pre[data-line] {
 
   pre {
     background-color: #000;
-    --opacity: 0.2;
+    --opacity: 0.1;
     background-image: linear-gradient(235deg, rgb(from var(--color-dark-2) r g b / var(--opacity)) 15%, #050512 70%, #050512 100%), repeating-radial-gradient(circle at 0 0, #000000 0, #050512 max(4vw, 10vh)), repeating-linear-gradient(#050512, var(--color-accent));
   }
 }
@@ -370,10 +370,10 @@ span:has(.gatsby-remark-copy-button-container) {
 }
 
 .gatsby-remark-copy-button {
+  --opacity: 0.8 !important;
   background: rgb(from var(--color-light-dark) r g b / calc(var(--opacity) / 4)) !important;
   border: none !important;
   color: var(--color-accent) !important;
-  --opacity: 0.8 !important;
   color: rgb(from var(--color-light-dark) r g b / var(--opacity)) !important;
   transition: color 0.1s ease-in-out !important;
 
@@ -386,6 +386,26 @@ span:has(.gatsby-remark-copy-button-container) {
     width: 24px;
     height: 24px;
   }
+}
+
+// Code title
+span:has(.gatsby-code-title) {
+    display: block;
+}
+
+.gatsby-code-title {
+    color: var(--color-light-dark);
+    padding: 0 1rem;
+    float: right;
+    margin-bottom: -5rem;
+    font-size: 70%;
+    line-height: 1.5;
+    margin-left: -.95rem;
+    transform: translateY(-1rem);
+    font-weight: bold;
+    --opacity: 0.8 !important;
+    background: rgb(from var(--color-light-dark) r g b / calc(var(--opacity) / 4)) !important;
+    border-radius: 2rem 2rem 0 0;
 }
 `;
 
