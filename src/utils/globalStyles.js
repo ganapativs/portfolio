@@ -339,8 +339,21 @@ pre[data-line] {
   background: linear-gradient(45deg, ${accentColors.join(', ')}) !important;
 }
 
+.medium-zoom-overlay {
+  --opacity: 0.75;
+  background: rgb(from var(--color-dark) r g b / var(--opacity)) !important;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(0);
+  z-index: 100;
+}
+
 .medium-zoom-image {
   box-shadow: none !important;
+  border-radius: 1rem;
+
+  &.medium-zoom-image--opened  {
+    z-index: 100;
+  }
 }
 `;
 
