@@ -49,7 +49,7 @@ const Resume = ({ size: { width } }) => {
 						href={`/resume/${theme}.pdf`}
 						download={`Ganapati V S - Resume - ${theme}.pdf`}
 					>
-						<button>Download resume</button>
+						<button type="button">Download resume</button>
 					</a>
 				</p>
 				{!visible ? (

@@ -88,7 +88,8 @@ const theme = {
 };
 
 // Fonts are loaded globally in gatsby-config
-theme.googleFonts = undefined;
+// biome-ignore lint/performance/noDelete: Breaks font loading otherwise
+delete theme.googleFonts;
 
 const typography = new Typography(theme);
 

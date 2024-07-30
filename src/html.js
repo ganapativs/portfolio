@@ -30,11 +30,9 @@ export default function HTML(props) {
 						🙏
 					</span>
 				</noscript>
-				<div
-					key={"body"}
-					id="___gatsby"
-					dangerouslySetInnerHTML={{ __html: props.body }}
-				/>
+				<div key={"body"} id="___gatsby">
+					{props.body}
+				</div>
 				{props.postBodyComponents}
 			</body>
 		</html>

@@ -106,9 +106,7 @@ function BlogIndex(props) {
 									{` • ${timeToReadText}`}
 								</Small>
 							</header>
-							<Spoiler
-								dangerouslySetInnerHTML={{ __html: post.frontmatter.spoiler }}
-							/>
+							<Spoiler>{post.frontmatter.spoiler}</Spoiler>
 						</Article>
 					);
 				})}

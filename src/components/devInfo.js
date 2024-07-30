@@ -83,6 +83,7 @@ const FlagIndia = (props) => (
 		viewBox="0 0 36 36"
 		{...props}
 	>
+		<title>Indian Flag</title>
 		<path fill="#138808" d="M0 27a4 4 0 0 0 4 4h28a4 4 0 0 0 4-4v-5H0v5z" />
 		<path fill="#F93" d="M36 14V9a4 4 0 0 0-4-4H4a4 4 0 0 0-4 4v5h36z" />
 		<path fill="#F7F7F7" d="M0 13.667h36v8.667H0z" />
