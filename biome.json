@@ -1,0 +1,17 @@
+{
+	"organizeImports": { "enabled": true },
+	"linter": {
+		"enabled": true,
+		"rules": { "recommended": true }
+	},
+	"files": {
+		"ignore": [
+			".cache",
+			"public",
+			"node_modules",
+			"plugins",
+			".husky",
+			".vscode"
+		]
+	}
+}

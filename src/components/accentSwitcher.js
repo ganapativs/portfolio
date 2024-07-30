@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import styled from 'styled-components';
-import { GithubPicker } from 'react-color';
-import useOutsideClick from './hooks/useOutsideClick';
-import { accentColors } from '../utils/helpers';
-import SwitcherButton from './SwitcherButton';
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { GithubPicker } from "react-color";
+import styled from "styled-components";
+import { accentColors } from "../utils/helpers";
+import SwitcherButton from "./SwitcherButton";
+import useOutsideClick from "./hooks/useOutsideClick";
 
 const AccentToggleWrapper = styled.div`
   position: relative;
@@ -117,88 +117,87 @@ const Div = styled.div`
 `;
 
 const Color = (props) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    {...props}
-  >
-    <path
-      fill="var(--color-accent)"
-      d="M7.08 11.25A4.84 4.84 0 0 1 8 9.05L4.43 5.49A9.88 9.88 0 0 0 2 11.25zM9.05 8a4.84 4.84 0 0 1 2.2-.91V2a9.88 9.88 0 0 0-5.76 2.43zm3.7-6v5A4.84 4.84 0 0 1 15 8l3.56-3.56A9.88 9.88 0 0 0 12.75 2zM8 15a4.84 4.84 0 0 1-.91-2.2H2a9.88 9.88 0 0 0 2.39 5.76zm3.25 1.92a4.84 4.84 0 0 1-2.2-.92l-3.56 3.57A9.88 9.88 0 0 0 11.25 22zM16 9.05a4.84 4.84 0 0 1 .91 2.2h5a9.88 9.88 0 0 0-2.39-5.76zM15 16a4.84 4.84 0 0 1-2.2.91v5a9.88 9.88 0 0 0 5.76-2.39zm1.92-3.25A4.84 4.84 0 0 1 16 15l3.56 3.56A9.88 9.88 0 0 0 22 12.75z"
-    ></path>
-  </svg>
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="24"
+		height="24"
+		viewBox="0 0 24 24"
+		{...props}
+	>
+		<path
+			fill="var(--color-accent)"
+			d="M7.08 11.25A4.84 4.84 0 0 1 8 9.05L4.43 5.49A9.88 9.88 0 0 0 2 11.25zM9.05 8a4.84 4.84 0 0 1 2.2-.91V2a9.88 9.88 0 0 0-5.76 2.43zm3.7-6v5A4.84 4.84 0 0 1 15 8l3.56-3.56A9.88 9.88 0 0 0 12.75 2zM8 15a4.84 4.84 0 0 1-.91-2.2H2a9.88 9.88 0 0 0 2.39 5.76zm3.25 1.92a4.84 4.84 0 0 1-2.2-.92l-3.56 3.57A9.88 9.88 0 0 0 11.25 22zM16 9.05a4.84 4.84 0 0 1 .91 2.2h5a9.88 9.88 0 0 0-2.39-5.76zM15 16a4.84 4.84 0 0 1-2.2.91v5a9.88 9.88 0 0 0 5.76-2.39zm1.92-3.25A4.84 4.84 0 0 1 16 15l3.56 3.56A9.88 9.88 0 0 0 22 12.75z"
+		/>
+	</svg>
 );
 
 function AccentSwitcher() {
-  const wrapperRef = useRef(null);
-  const [accentColor, setAccentColor] = useState(null);
-  const [visible, setVisibility] = useState(false);
-  const hideVisibility = () => setVisibility(false);
-  const toggleVisibility = () => setVisibility(!visible);
+	const wrapperRef = useRef(null);
+	const [accentColor, setAccentColor] = useState(null);
+	const [visible, setVisibility] = useState(false);
+	const hideVisibility = () => setVisibility(false);
+	const toggleVisibility = () => setVisibility(!visible);
 
-  const toggleAccent = useCallback(
-    ({ hex: accent }) => {
-      window.__setPreferredAccentColor(accent);
-      setAccentColor(accent);
-    },
-    [setAccentColor],
-  );
+	const toggleAccent = useCallback(
+		({ hex: accent }) => {
+			window.__setPreferredAccentColor(accent);
+			setAccentColor(accent);
+		},
+		[setAccentColor],
+	);
 
-  const toggleAccentTransition = useCallback(
-    (...args) => {
-      if (!document.startViewTransition) {
-        return toggleAccent(...args);
-      } else {
-        document.startViewTransition(() => toggleAccent(...args));
-      }
-    },
-    [toggleAccent],
-  );
+	const toggleAccentTransition = useCallback(
+		(...args) => {
+			if (!document.startViewTransition) {
+				return toggleAccent(...args);
+			}
+			document.startViewTransition(() => toggleAccent(...args));
+		},
+		[toggleAccent],
+	);
 
-  useOutsideClick(wrapperRef, hideVisibility);
+	useOutsideClick(wrapperRef, hideVisibility);
 
-  useEffect(() => {
-    const setAccentColorOnBody = () => {
-      document.body.style.setProperty('--color-accent', window.__accentColor);
-      setAccentColor(window.__accentColor);
-    };
+	useEffect(() => {
+		const setAccentColorOnBody = () => {
+			document.body.style.setProperty("--color-accent", window.__accentColor);
+			setAccentColor(window.__accentColor);
+		};
 
-    setAccentColorOnBody();
-    window.__onAccentColorChange = setAccentColorOnBody;
+		setAccentColorOnBody();
+		window.__onAccentColorChange = setAccentColorOnBody;
 
-    return () => {
-      window.__onAccentColorChange = () => {};
-    };
-  }, []);
+		return () => {
+			window.__onAccentColorChange = () => {};
+		};
+	}, []);
 
-  return (
-    <Div ref={wrapperRef}>
-      <style>
-        {`
+	return (
+		<Div ref={wrapperRef}>
+			<style>
+				{`
           .github-picker [title="${accentColor}"] {
             box-shadow: inset 0 0 0 8px var(--color-accent), inset 0 0 0 14px var(--color-dark) !important;
             border-radius: 50% !important;
           }
         `}
-      </style>
-      <GithubPicker
-        triangle="hide"
-        colors={accentColors}
-        onChange={toggleAccentTransition}
-        className={`${visible ? 'visible' : ''}`}
-      />
-      <SwitcherButton
-        onClick={toggleVisibility}
-        className={`switcher-button ${visible ? 'visible' : ''}`}
-      >
-        <AccentToggleWrapper title="Change accent color">
-          <Color />
-        </AccentToggleWrapper>
-      </SwitcherButton>
-    </Div>
-  );
+			</style>
+			<GithubPicker
+				triangle="hide"
+				colors={accentColors}
+				onChange={toggleAccentTransition}
+				className={`${visible ? "visible" : ""}`}
+			/>
+			<SwitcherButton
+				onClick={toggleVisibility}
+				className={`switcher-button ${visible ? "visible" : ""}`}
+			>
+				<AccentToggleWrapper title="Change accent color">
+					<Color />
+				</AccentToggleWrapper>
+			</SwitcherButton>
+		</Div>
+	);
 }
 
 export default AccentSwitcher;

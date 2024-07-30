@@ -1,10 +1,10 @@
-import { Link, graphql, navigate } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import React from 'react';
-import styled from 'styled-components';
-import { formatPostDate, formatReadingTime } from '../utils/helpers';
-import SEO from '../components/seo';
-import { rhythm } from '../utils/typography';
+import { Link, graphql, navigate } from "gatsby";
+import { GatsbyImage } from "gatsby-plugin-image";
+import React from "react";
+import styled from "styled-components";
+import Seo from "../components/seo";
+import { formatPostDate } from "../utils/helpers";
+import { rhythm } from "../utils/typography";
 
 const CoverImage = styled.div`
   width: 100%;
@@ -59,59 +59,62 @@ const Div = styled.div`
 `;
 
 function BlogIndex(props) {
-  const isDev = process.env.NODE_ENV === 'development';
-  const { edges: posts } = props.data[`${isDev ? 'dev' : 'prod'}Mdx`];
+	const isDev = process.env.NODE_ENV === "development";
+	const { edges: posts } = props.data[`${isDev ? "dev" : "prod"}Mdx`];
 
-  return (
-    <Div>
-      <SEO
-        title="Blog by Ganapati V S"
-        description="Tech blog by Ganapati V S"
-      />
-      <main>
-        {posts.map(({ node: post }) => {
-          const title = post.frontmatter.title || post.fields.slug;
-          const { fields: { timeToRead: { text: timeToReadText } = {} } = {} } =
-            post;
-          return (
-            <Article
-              key={post.fields.slug}
-              // Skipping keyboard navigation as link inside will handle it
-              onClick={() => navigate(post.fields.slug)}
-            >
-              <CoverImage>
-                <GatsbyImage
-                  image={post.frontmatter.cover.childImageSharp.gatsbyImageData}
-                />
-              </CoverImage>
-              <header
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <h3
-                  style={{
-                    marginBottom: rhythm(1 / 10),
-                  }}
-                >
-                  <Link to={post.fields.slug} rel="bookmark">
-                    {title}
-                  </Link>
-                </h3>
-                <Small>
-                  {formatPostDate(post.frontmatter.date)}
-                  {` • ${timeToReadText}`}
-                </Small>
-              </header>
-              <Spoiler
-                dangerouslySetInnerHTML={{ __html: post.frontmatter.spoiler }}
-              />
-            </Article>
-          );
-        })}
-      </main>
-    </Div>
-  );
+	return (
+		<Div>
+			<Seo
+				title="Blog by Ganapati V S"
+				description="Tech blog by Ganapati V S"
+			/>
+			<main>
+				{posts.map(({ node: post }) => {
+					const title = post.frontmatter.title || post.fields.slug;
+					const {
+						fields: {
+							timeToRead: { text: timeToReadText } = {},
+						} = {},
+					} = post;
+					return (
+						<Article
+							key={post.fields.slug}
+							// Skipping keyboard navigation as link inside will handle it
+							onClick={() => navigate(post.fields.slug)}
+						>
+							<CoverImage>
+								<GatsbyImage
+									image={post.frontmatter.cover.childImageSharp.gatsbyImageData}
+								/>
+							</CoverImage>
+							<header
+								style={{
+									marginBottom: rhythm(1 / 4),
+								}}
+							>
+								<h3
+									style={{
+										marginBottom: rhythm(1 / 10),
+									}}
+								>
+									<Link to={post.fields.slug} rel="bookmark">
+										{title}
+									</Link>
+								</h3>
+								<Small>
+									{formatPostDate(post.frontmatter.date)}
+									{` • ${timeToReadText}`}
+								</Small>
+							</header>
+							<Spoiler
+								dangerouslySetInnerHTML={{ __html: post.frontmatter.spoiler }}
+							/>
+						</Article>
+					);
+				})}
+			</main>
+		</Div>
+	);
 }
 
 export default BlogIndex;

@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Path = styled.path`
   transition: fill 0.1s ease-out;
-  fill: ${(p) => (p.active ? 'var(--color-accent)' : 'var(--color-light)')};
+  fill: ${(p) => (p.active ? "var(--color-accent)" : "var(--color-light)")};
 `;
 
 export const Svg = styled.svg`

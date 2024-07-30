@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import ProfileLinks from './profileLinks';
-import ProfileLogo from './profileLogo';
-import DevInfo from './devInfo';
+import React from "react";
+import styled from "styled-components";
+import DevInfo from "./devInfo";
+import ProfileLinks from "./profileLinks";
+import ProfileLogo from "./profileLogo";
 
 const Div = styled.div`
   display: flex;
@@ -29,15 +29,15 @@ const ProfileInfo = styled.div`
 `;
 
 const AboutMe = ({ profileLogo }) => {
-  return (
-    <Div>
-      <ProfileLogo profileLogo={profileLogo} />
-      <ProfileInfo>
-        <DevInfo />
-        <ProfileLinks />
-      </ProfileInfo>
-    </Div>
-  );
+	return (
+		<Div>
+			<ProfileLogo profileLogo={profileLogo} />
+			<ProfileInfo>
+				<DevInfo />
+				<ProfileLinks />
+			</ProfileInfo>
+		</Div>
+	);
 };
 
 export default AboutMe;

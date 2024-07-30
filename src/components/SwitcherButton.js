@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const SwitcherButton = styled.div`
   position: relative;
