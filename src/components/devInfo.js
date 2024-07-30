@@ -4,6 +4,10 @@ import { captureEvent } from '../utils/ga';
 import ExternalLink from './externalLink';
 import { rhythm } from '../utils/typography';
 
+const Div = styled.div`
+  text-wrap: pretty;
+`;
+
 const DevName = styled.h1`
   font-size: ${rhythm(1.4)};
   margin-bottom: ${rhythm(0.8)};
@@ -48,6 +52,27 @@ const DevDescription = styled.div`
 
 const Separator = styled.div`
   margin-bottom: ${(props) => props.mb}px;
+`;
+
+const Ul = styled.ul`
+  list-style: none;
+  margin-top: 1rem;
+  margin-bottom: 0;
+
+  li {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0.55rem;
+      left: -1rem;
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 50%;
+      background: currentColor;
+    }
+  }
 `;
 
 const FlagIndia = (props) => (
@@ -102,7 +127,7 @@ const FlagIndia = (props) => (
 
 const DevInfo = () => {
   return (
-    <>
+    <Div>
       <DevName>
         Ganapati V S <FlagIndia aria-label="India" aria-hidden="true" />
       </DevName>
@@ -111,79 +136,148 @@ const DevInfo = () => {
         <span role="img" aria-label="Hi!">
           👋
         </span>{' '}
-        I&#39;m a Full-Stack JavaScript developer with over 9.5 years of
-        experience.
-        <Separator mb={8} />I love coding, contributing to the open source and
-        have created{' '}
+        I&#39;m a Full-Stack JavaScript developer with over 10 years of
+        experience in turning coffee into cutting-edge code. Currently steering
+        the ship as Vice President - Technology at{' '}
         <ExternalLink
-          href="https://github.com/ganapativs/react-spectrum?ref=meetguns.com"
+          href="https://tracxn.com/?ref=meetguns.com"
           onClick={() =>
-            captureEvent('react-spectrum GitHub', 'click', 'Social Links')
+            captureEvent('Tracxn Website', 'click', 'Work Link')
           }
-          style={{ whiteSpace: 'nowrap' }}
         >
-          react-spectrum
+          Tracxn
         </ExternalLink>
-        ,{' '}
+        , where we're revolutionizing the world of private market intelligence.
+        <Separator mb={24} />
+        My passion lies in coding, architecting elegant solutions, and
+        contributing to the vibrant open-source ecosystem. Some of my proudest
+        creations include: <Separator mb={8} />
+        <Ul style={{ color: 'var(--color-accent)' }}>
+          <li>
+            <ExternalLink
+              href="https://sgb.vercel.app/?ref=meetguns.com"
+              onClick={() =>
+                captureEvent('sgb.vercel.app', 'click', 'Social Links')
+              }
+              style={{ whiteSpace: 'nowrap' }}
+            >
+              SGB.vercel.app
+            </ExternalLink>
+          </li>
+          <li>
+            <ExternalLink
+              href="https://github.com/ganapativs/react-spectrum?ref=meetguns.com"
+              onClick={() =>
+                captureEvent('react-spectrum GitHub', 'click', 'Social Links')
+              }
+              style={{ whiteSpace: 'nowrap' }}
+            >
+              React Spectrum
+            </ExternalLink>
+          </li>
+          <li>
+            <ExternalLink
+              href="https://github.com/ganapativs/react-delightful-scroller?ref=meetguns.com"
+              onClick={() =>
+                captureEvent(
+                  'react-delightful-scroller GitHub',
+                  'click',
+                  'Social Links',
+                )
+              }
+              style={{ whiteSpace: 'nowrap' }}
+            >
+              React Delightful Scroller
+            </ExternalLink>
+          </li>
+          <li>
+            <ExternalLink
+              href="https://github.com/ganapativs/priority-browser-extension?ref=meetguns.com"
+              onClick={() =>
+                captureEvent(
+                  'Priority browser extension Github',
+                  'click',
+                  'Priority Browser Extension',
+                )
+              }
+              style={{ whiteSpace: 'nowrap' }}
+            >
+              Priority browser extension
+            </ExternalLink>
+          </li>
+          <li>
+            <ExternalLink
+              href="https://github.com/ganapativs/react-dynamic-import?ref=meetguns.com"
+              onClick={() =>
+                captureEvent(
+                  'react-dynamic-import GitHub',
+                  'click',
+                  'Social Links',
+                )
+              }
+              style={{ whiteSpace: 'nowrap' }}
+            >
+              React Dynamic Import
+            </ExternalLink>
+          </li>
+          <li>
+            <ExternalLink
+              href="https://bttn.surge.sh/?ref=meetguns.com"
+              onClick={() =>
+                captureEvent('bttn.surge.sh', 'click', 'Social Links')
+              }
+            >
+              Bttn.css
+            </ExternalLink>
+          </li>
+        </Ul>
+        <Separator mb={24} />
+        When I'm not wrestling with code, you'll find me:
+        <Separator mb={8} />
+        <Ul style={{ color: 'var(--color-light)' }}>
+          <li>
+            Exploring new horizons{' '}
+            <span role="img" aria-label="Travel">
+              ✈️
+            </span>
+          </li>
+          <li>
+            Capturing moments through my lens{' '}
+            <span role="img" aria-label="Photography">
+              📸
+            </span>
+          </li>
+          <li>
+            Scoring goals (or trying to){' '}
+            <span role="img" aria-label="Soccer">
+              ⚽️
+            </span>
+          </li>
+          <li>
+            Smashing shuttlecocks{' '}
+            <span role="img" aria-label="Badminton">
+              🏸
+            </span>
+          </li>
+          <li>
+            Saving virtual worlds{' '}
+            <span role="img" aria-label="FIFA gaming">
+              🎮
+            </span>
+          </li>
+        </Ul>
+        <Separator mb={24} />
+        Let's{' '}
         <ExternalLink
-          href="https://github.com/ganapativs/react-delightful-scroller?ref=meetguns.com"
-          onClick={() =>
-            captureEvent(
-              'react-delightful-scroller GitHub',
-              'click',
-              'Social Links',
-            )
-          }
-          style={{ whiteSpace: 'nowrap' }}
+          href="https://twitter.com/ganapativs?ref=meetguns.com"
+          onClick={() => captureEvent('Personal Twitter', 'click', 'Connect')}
         >
-          react-delightful-scroller
-        </ExternalLink>
-        ,{' '}
-        <ExternalLink
-          href="https://github.com/ganapativs/react-dynamic-import?ref=meetguns.com"
-          onClick={() =>
-            captureEvent('react-dynamic-import GitHub', 'click', 'Social Links')
-          }
-          style={{ whiteSpace: 'nowrap' }}
-        >
-          react-dynamic-import
-        </ExternalLink>
-        ,{' '}
-        <ExternalLink
-          href="https://bttn.surge.sh/?ref=meetguns.com"
-          onClick={() => captureEvent('bttn.surge.sh', 'click', 'Social Links')}
-        >
-          bttn.css
+          connect
         </ExternalLink>{' '}
-        and{' '}
-        <ExternalLink
-          href="https://github.com/ganapativs?ref=meetguns.com"
-          onClick={() =>
-            captureEvent('Personal GitHub', 'click', 'Social Links')
-          }
-        >
-          many more
-        </ExternalLink>{' '}
-        <span role="img" aria-label="Yay!!!">
-          🎉
-        </span>
-        <Separator mb={8} />I like travelling, capturing photos and I play{' '}
-        <span role="img" aria-label="Soccer">
-          ⚽️
-        </span>{' '}
-        <span role="img" aria-label="Badminton">
-          🏸
-        </span>{' '}
-        <span role="img" aria-label="FIFA gaming">
-          🎮
-        </span>{' '}
-        in my free time{' '}
-        <span role="img" aria-label="Celebrates">
-          🙌
-        </span>
+        and explore the endless possibilities of tech 🌟
       </DevDescription>
       <Separator mb={24} />
-    </>
+    </Div>
   );
 };
 

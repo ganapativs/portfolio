@@ -10,8 +10,10 @@ const Div = styled.div`
   flex-direction: column;
   position: relative;
   padding-top: 1rem;
+  margin-bottom: 2rem;
 
   @media screen and (min-width: 768px) {
+    margin-bottom: 1rem;
     flex-direction: row;
     padding-top: 2rem;
   }
