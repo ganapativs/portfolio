@@ -273,7 +273,7 @@ const ToggleInput = styled.input`
 `;
 
 function LightDarkMoonOrSun({ isDark }) {
-  return <ToggleInput type="checkbox" checked={isDark} />;
+  return <ToggleInput type='checkbox' checked={isDark} />;
 }
 
 const links = [
@@ -341,7 +341,7 @@ const Header = ({ location: { pathname } }) => {
                 logoActiveAnimateState ? "init-hover-animate-state" : ""
               }`}
             >
-              <Logo color="var(--color-dark)" />
+              <Logo color='var(--color-dark)' />
             </LogoWrapper>
           </Link>
           <RouteLinks>
@@ -357,7 +357,7 @@ const Header = ({ location: { pathname } }) => {
                   className={`${active ? "active" : ""}`}
                   to={link}
                 >
-                  <IconWrapper active={active} className="hide-xs">
+                  <IconWrapper active={active} className='hide-xs'>
                     <Icon active={active} />
                   </IconWrapper>
                   <span>{name}</span>
@@ -373,7 +373,7 @@ const Header = ({ location: { pathname } }) => {
               <ThemeToggler>
                 {({ theme, toggleTheme }) => (
                   <SwitcherButton
-                    role="button"
+                    role='button'
                     tabIndex={0}
                     onKeyPress={(e) => {
                       if (e.which === 13 || e.which === 32) {

@@ -49,7 +49,7 @@ export default function ProfileLogo({ profileLogo }) {
 
   return (
     <Wrapper>
-      <div className="profile-logo">
+      <div className='profile-logo'>
         {profileLogo ? <GatsbyImage image={images} draggable={false} /> : null}
       </div>
     </Wrapper>

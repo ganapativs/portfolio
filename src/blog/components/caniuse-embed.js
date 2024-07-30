@@ -47,15 +47,15 @@ function CaniuseEmbed({ featureName }) {
   return featureName ? (
     <div
       ref={ref}
-      className="ciu_embed"
+      className='ciu_embed'
       data-feature={featureName}
-      data-periods="future_2,future_1,current,past_1,past_2"
-      data-accessible-colours="false"
+      data-periods='future_2,future_1,current,past_1,past_2'
+      data-accessible-colours='false'
     >
       <a href={`http://caniuse.com/#feat=${featureName}`}>
         <picture>
           <source
-            type="image/webp"
+            type='image/webp'
             srcSet={`https://caniuse.bitsofco.de/image/${featureName}.webp`}
           />
           <img

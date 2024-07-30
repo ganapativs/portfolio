@@ -7,7 +7,7 @@ function ResumePdf({ theme, width, onRender = () => {} }) {
   return (
     <Document
       file={`/resume/${theme}.pdf`}
-      externalLinkTarget="_blank"
+      externalLinkTarget='_blank'
       loading={<div />}
     >
       <Page
