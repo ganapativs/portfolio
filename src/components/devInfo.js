@@ -202,7 +202,7 @@ const DevInfo = () => {
               }
               style={{ whiteSpace: 'nowrap' }}
             >
-              Priority browser extension
+              Priority Browser Extension
             </ExternalLink>
           </li>
           <li>
