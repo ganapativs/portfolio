@@ -150,8 +150,8 @@ const DevInfo = () => {
         , where we're revolutionizing the world of private market intelligence.
         <Separator mb={24} />
         My passion lies in coding, architecting elegant solutions, and
-        contributing to the vibrant open-source ecosystem. Some of my proudest
-        creations include: <Separator mb={8} />
+        contributing to the vibrant open-source ecosystem. I've had the thrill
+		of building: <Separator mb={8} />
         <Ul style={{ color: 'var(--color-accent)' }}>
           <li>
             <ExternalLink
