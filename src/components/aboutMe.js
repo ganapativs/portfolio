@@ -29,15 +29,15 @@ const ProfileInfo = styled.div`
 `;
 
 const AboutMe = ({ profileLogo }) => {
-	return (
-		<Div>
-			<ProfileLogo profileLogo={profileLogo} />
-			<ProfileInfo>
-				<DevInfo />
-				<ProfileLinks />
-			</ProfileInfo>
-		</Div>
-	);
+  return (
+    <Div>
+      <ProfileLogo profileLogo={profileLogo} />
+      <ProfileInfo>
+        <DevInfo />
+        <ProfileLinks />
+      </ProfileInfo>
+    </Div>
+  );
 };
 
 export default AboutMe;

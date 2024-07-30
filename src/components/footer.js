@@ -31,21 +31,21 @@ const FooterWrapper = styled.footer`
 `;
 
 const Footer = ({ size: { width } }) =>
-	width <= 767 ? null : (
-		<FooterWrapper data-width={width}>
-			<Suspense fallback={null}>
-				<SuspenseReactSpectrum
-					width={width / 2}
-					linesPerParagraph={1}
-					lineDistance={0}
-					paragraphDistance={0}
-					wordHeight={4}
-					wordWidths={[20, 30, 40, 50, 60]}
-					truncateLastLine={false}
-					colors={accentColors}
-				/>
-			</Suspense>
-		</FooterWrapper>
-	);
+  width <= 767 ? null : (
+    <FooterWrapper data-width={width}>
+      <Suspense fallback={null}>
+        <SuspenseReactSpectrum
+          width={width / 2}
+          linesPerParagraph={1}
+          lineDistance={0}
+          paragraphDistance={0}
+          wordHeight={4}
+          wordWidths={[20, 30, 40, 50, 60]}
+          truncateLastLine={false}
+          colors={accentColors}
+        />
+      </Suspense>
+    </FooterWrapper>
+  );
 
 export default sizeMe()(Footer);

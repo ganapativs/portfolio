@@ -6,7 +6,7 @@ const Div = styled.div`
 `;
 
 function Hello() {
-	return <Div>Hello from Component 🙌</Div>;
+  return <Div>Hello from Component 🙌</Div>;
 }
 
 export default Hello;

@@ -29,29 +29,29 @@ const Wrapper = styled.div`
 `;
 
 export default function ProfileLogo({ profileLogo }) {
-	const images = withArtDirection(
-		getImage(profileLogo.desktopImage.childImageSharp.gatsbyImageData),
-		[
-			{
-				media: "(max-width: 767px)",
-				image: getImage(
-					profileLogo.mobileImage.childImageSharp.gatsbyImageData,
-				),
-			},
-			{
-				media: "(min-width: 768px)",
-				image: getImage(
-					profileLogo.desktopImage.childImageSharp.gatsbyImageData,
-				),
-			},
-		],
-	);
+  const images = withArtDirection(
+    getImage(profileLogo.desktopImage.childImageSharp.gatsbyImageData),
+    [
+      {
+        media: "(max-width: 767px)",
+        image: getImage(
+          profileLogo.mobileImage.childImageSharp.gatsbyImageData,
+        ),
+      },
+      {
+        media: "(min-width: 768px)",
+        image: getImage(
+          profileLogo.desktopImage.childImageSharp.gatsbyImageData,
+        ),
+      },
+    ],
+  );
 
-	return (
-		<Wrapper>
-			<div className="profile-logo">
-				{profileLogo ? <GatsbyImage image={images} draggable={false} /> : null}
-			</div>
-		</Wrapper>
-	);
+  return (
+    <Wrapper>
+      <div className="profile-logo">
+        {profileLogo ? <GatsbyImage image={images} draggable={false} /> : null}
+      </div>
+    </Wrapper>
+  );
 }

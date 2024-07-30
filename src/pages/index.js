@@ -28,10 +28,10 @@ export const query = graphql`
   }
 `;
 const About = ({ data: profileLogo }) => (
-	<>
-		<Seo title="Ganapati V S" />
-		<AboutMe profileLogo={profileLogo} />
-	</>
+  <>
+    <Seo title="Ganapati V S" />
+    <AboutMe profileLogo={profileLogo} />
+  </>
 );
 
 export default About;

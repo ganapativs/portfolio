@@ -10,11 +10,11 @@ import SwitcherButton from "./SwitcherButton";
 import AccentSwitcher from "./accentSwitcher";
 
 const switchTheme = (theme, toggleTheme) => {
-	const nextTheme = theme === "dark" ? "light" : "dark";
-	toggleTheme(nextTheme);
-	// Add attribute to html tag, useful for view transition
-	document.body.parentElement.setAttribute("data-theme", nextTheme);
-	captureEvent(nextTheme, "change", "Theme");
+  const nextTheme = theme === "dark" ? "light" : "dark";
+  toggleTheme(nextTheme);
+  // Add attribute to html tag, useful for view transition
+  document.body.parentElement.setAttribute("data-theme", nextTheme);
+  captureEvent(nextTheme, "change", "Theme");
 };
 
 const HeaderRow = styled.header`
@@ -273,134 +273,134 @@ const ToggleInput = styled.input`
 `;
 
 function LightDarkMoonOrSun({ isDark }) {
-	return <ToggleInput type="checkbox" checked={isDark} />;
+  return <ToggleInput type="checkbox" checked={isDark} />;
 }
 
 const links = [
-	{
-		link: "/",
-		name: "About",
-		icon: UserIcon,
-	},
-	{
-		link: "/blog/",
-		name: "Blog",
-		icon: BlogIcon,
-	},
+  {
+    link: "/",
+    name: "About",
+    icon: UserIcon,
+  },
+  {
+    link: "/blog/",
+    name: "Blog",
+    icon: BlogIcon,
+  },
 ];
 
 const Header = ({ location: { pathname } }) => {
-	const [logoActiveAnimateState, setLogoAnimateState] = useState(false);
-	const [jsEnabled, setJSEnabled] = useState(false);
-	const headerRef = useRef(null);
+  const [logoActiveAnimateState, setLogoAnimateState] = useState(false);
+  const [jsEnabled, setJSEnabled] = useState(false);
+  const headerRef = useRef(null);
 
-	// Animate hover state to normal state initially on logo
-	useEffect(() => {
-		setJSEnabled(true);
-		setLogoAnimateState(true);
-		const timer = setTimeout(() => {
-			setLogoAnimateState(false);
-		}, 500);
+  // Animate hover state to normal state initially on logo
+  useEffect(() => {
+    setJSEnabled(true);
+    setLogoAnimateState(true);
+    const timer = setTimeout(() => {
+      setLogoAnimateState(false);
+    }, 500);
 
-		return () => clearTimeout(timer);
-	}, []);
+    return () => clearTimeout(timer);
+  }, []);
 
-	useEffect(() => {
-		const el = headerRef.current;
+  useEffect(() => {
+    const el = headerRef.current;
 
-		if (!el) {
-			return;
-		}
+    if (!el) {
+      return;
+    }
 
-		const observer = new IntersectionObserver(
-			([e]) => e.target.classList.toggle("pinned", e.intersectionRatio < 1),
-			{ threshold: [1] },
-		);
+    const observer = new IntersectionObserver(
+      ([e]) => e.target.classList.toggle("pinned", e.intersectionRatio < 1),
+      { threshold: [1] },
+    );
 
-		observer.observe(el);
+    observer.observe(el);
 
-		return () => {
-			observer.disconnect();
-		};
-	}, []);
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
-	const onThemeChange = useCallback((theme, toggleTheme) => {
-		if (!document.startViewTransition) {
-			return switchTheme(theme, toggleTheme);
-		}
-		document.startViewTransition(() => switchTheme(theme, toggleTheme));
-	}, []);
+  const onThemeChange = useCallback((theme, toggleTheme) => {
+    if (!document.startViewTransition) {
+      return switchTheme(theme, toggleTheme);
+    }
+    document.startViewTransition(() => switchTheme(theme, toggleTheme));
+  }, []);
 
-	return (
-		<HeaderRow ref={headerRef}>
-			<HeaderWrapper>
-				<Left>
-					<Link title={"Meetguns.com | About"} to={"/"}>
-						<LogoWrapper
-							className={`${
-								logoActiveAnimateState ? "init-hover-animate-state" : ""
-							}`}
-						>
-							<Logo color="var(--color-dark)" />
-						</LogoWrapper>
-					</Link>
-					<RouteLinks>
-						{links.map(({ link, name, icon: Icon }) => {
-							const active =
-								(pathname === "/" && pathname === link) ||
-								(link !== "/" && pathname.startsWith(link));
+  return (
+    <HeaderRow ref={headerRef}>
+      <HeaderWrapper>
+        <Left>
+          <Link title={"Meetguns.com | About"} to={"/"}>
+            <LogoWrapper
+              className={`${
+                logoActiveAnimateState ? "init-hover-animate-state" : ""
+              }`}
+            >
+              <Logo color="var(--color-dark)" />
+            </LogoWrapper>
+          </Link>
+          <RouteLinks>
+            {links.map(({ link, name, icon: Icon }) => {
+              const active =
+                (pathname === "/" && pathname === link) ||
+                (link !== "/" && pathname.startsWith(link));
 
-							return (
-								<Link
-									key={`${link}_${pathname}`}
-									title={name}
-									className={`${active ? "active" : ""}`}
-									to={link}
-								>
-									<IconWrapper active={active} className="hide-xs">
-										<Icon active={active} />
-									</IconWrapper>
-									<span>{name}</span>
-								</Link>
-							);
-						})}
-					</RouteLinks>
-				</Left>
-				<Right>
-					{jsEnabled ? (
-						<>
-							<AccentSwitcher />
-							<ThemeToggler>
-								{({ theme, toggleTheme }) => (
-									<SwitcherButton
-										role="button"
-										tabIndex={0}
-										onKeyPress={(e) => {
-											if (e.which === 13 || e.which === 32) {
-												onThemeChange(theme, toggleTheme);
-											}
-										}}
-										title={
-											theme === "dark"
-												? "Switch to light theme"
-												: "Switch to dark theme"
-										}
-										onClick={() => {
-											onThemeChange(theme, toggleTheme);
-										}}
-									>
-										<ThemeSwitcher>
-											<LightDarkMoonOrSun isDark={theme === "dark"} />
-										</ThemeSwitcher>
-									</SwitcherButton>
-								)}
-							</ThemeToggler>
-						</>
-					) : null}
-				</Right>
-			</HeaderWrapper>
-		</HeaderRow>
-	);
+              return (
+                <Link
+                  key={`${link}_${pathname}`}
+                  title={name}
+                  className={`${active ? "active" : ""}`}
+                  to={link}
+                >
+                  <IconWrapper active={active} className="hide-xs">
+                    <Icon active={active} />
+                  </IconWrapper>
+                  <span>{name}</span>
+                </Link>
+              );
+            })}
+          </RouteLinks>
+        </Left>
+        <Right>
+          {jsEnabled ? (
+            <>
+              <AccentSwitcher />
+              <ThemeToggler>
+                {({ theme, toggleTheme }) => (
+                  <SwitcherButton
+                    role="button"
+                    tabIndex={0}
+                    onKeyPress={(e) => {
+                      if (e.which === 13 || e.which === 32) {
+                        onThemeChange(theme, toggleTheme);
+                      }
+                    }}
+                    title={
+                      theme === "dark"
+                        ? "Switch to light theme"
+                        : "Switch to dark theme"
+                    }
+                    onClick={() => {
+                      onThemeChange(theme, toggleTheme);
+                    }}
+                  >
+                    <ThemeSwitcher>
+                      <LightDarkMoonOrSun isDark={theme === "dark"} />
+                    </ThemeSwitcher>
+                  </SwitcherButton>
+                )}
+              </ThemeToggler>
+            </>
+          ) : null}
+        </Right>
+      </HeaderWrapper>
+    </HeaderRow>
+  );
 };
 
 export default Header;

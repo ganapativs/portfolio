@@ -57,28 +57,28 @@ const Div = styled.div`
 const fullPathPatterns = []; // ['/full-path-url/']
 
 const Layout = (props) => {
-	const { location } = props;
+  const { location } = props;
 
-	// Gatsby plugin offline messes up hydration and removes some styled component classes
-	// Temp workaround is to render empty layout in offline page by default
-	// https://github.com/gatsbyjs/gatsby/issues/11738#issuecomment-488660043
-	if (location.pathname === "/offline-plugin-app-shell-fallback/") {
-		return null;
-	}
+  // Gatsby plugin offline messes up hydration and removes some styled component classes
+  // Temp workaround is to render empty layout in offline page by default
+  // https://github.com/gatsbyjs/gatsby/issues/11738#issuecomment-488660043
+  if (location.pathname === "/offline-plugin-app-shell-fallback/") {
+    return null;
+  }
 
-	const isFullWidth =
-		props.full || fullPathPatterns.some((p) => location.pathname.startsWith(p));
+  const isFullWidth =
+    props.full || fullPathPatterns.some((p) => location.pathname.startsWith(p));
 
-	return (
-		<>
-			<GlobalStyles />
-			<LayoutWrapper>
-				<Header full={isFullWidth} location={location} />
-				<Div full={isFullWidth}>{props.children}</Div>
-				<Footer full={isFullWidth} />
-			</LayoutWrapper>
-		</>
-	);
+  return (
+    <>
+      <GlobalStyles />
+      <LayoutWrapper>
+        <Header full={isFullWidth} location={location} />
+        <Div full={isFullWidth}>{props.children}</Div>
+        <Footer full={isFullWidth} />
+      </LayoutWrapper>
+    </>
+  );
 };
 
 export default React.memo(Layout);

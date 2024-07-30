@@ -1,17 +1,23 @@
 {
-	"organizeImports": { "enabled": true },
-	"linter": {
-		"enabled": true,
-		"rules": { "recommended": true }
-	},
-	"files": {
-		"ignore": [
-			".cache",
-			"public",
-			"node_modules",
-			"plugins",
-			".husky",
-			".vscode"
-		]
-	}
+  "organizeImports": { "enabled": true },
+  "linter": {
+    "enabled": true,
+    "rules": { "recommended": true }
+  },
+  "files": {
+    "ignore": [
+      ".cache",
+      "public",
+      "node_modules",
+      "plugins",
+      ".husky",
+      ".vscode"
+    ]
+  },
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 80,
+    "lineEnding": "lf"
+  }
 }
