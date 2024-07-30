@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import React from "react";
+import PropTypes from 'prop-types';
+import React from 'react';
 
 export default function HTML(props) {
   return (
@@ -25,12 +25,12 @@ export default function HTML(props) {
       <body {...props.bodyAttributes}>
         {props.preBodyComponents}
         <noscript key='noscript' id='gatsby-noscript'>
-          This site works best with JavaScript enabled{" "}
+          This site works best with JavaScript enabled{' '}
           <span role='img' aria-label='Please!'>
             🙏
           </span>
         </noscript>
-        <div key={"body"} id='___gatsby'>
+        <div key={'body'} id='___gatsby'>
           {props.body}
         </div>
         {props.postBodyComponents}

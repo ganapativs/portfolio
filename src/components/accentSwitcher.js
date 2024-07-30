@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
-import { GithubPicker } from "react-color";
-import styled from "styled-components";
-import { accentColors } from "../utils/helpers";
-import SwitcherButton from "./SwitcherButton";
-import useOutsideClick from "./hooks/useOutsideClick";
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { GithubPicker } from 'react-color';
+import styled from 'styled-components';
+import { accentColors } from '../utils/helpers';
+import SwitcherButton from './SwitcherButton';
+import useOutsideClick from './hooks/useOutsideClick';
 
 const AccentToggleWrapper = styled.div`
   position: relative;
@@ -158,7 +158,7 @@ function AccentSwitcher() {
 
   useEffect(() => {
     const setAccentColorOnBody = () => {
-      document.body.style.setProperty("--color-accent", window.__accentColor);
+      document.body.style.setProperty('--color-accent', window.__accentColor);
       setAccentColor(window.__accentColor);
     };
 
@@ -184,11 +184,11 @@ function AccentSwitcher() {
         triangle='hide'
         colors={accentColors}
         onChange={toggleAccentTransition}
-        className={`${visible ? "visible" : ""}`}
+        className={`${visible ? 'visible' : ''}`}
       />
       <SwitcherButton
         onClick={toggleVisibility}
-        className={`switcher-button ${visible ? "visible" : ""}`}
+        className={`switcher-button ${visible ? 'visible' : ''}`}
       >
         <AccentToggleWrapper title='Change accent color'>
           <Color />

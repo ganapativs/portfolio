@@ -1,6 +1,6 @@
-import React from "react";
-import { createGlobalStyle } from "styled-components";
-import { accentColors } from "./helpers";
+import React from 'react';
+import { createGlobalStyle } from 'styled-components';
+import { accentColors } from './helpers';
 
 const GlobalStyles = createGlobalStyle`
 html {
@@ -337,7 +337,7 @@ pre[data-line] {
 
 // Page progress bar
 #gatsby-plugin-page-progress {
-  background: linear-gradient(45deg, ${accentColors.join(", ")}) !important;
+  background: linear-gradient(45deg, ${accentColors.join(', ')}) !important;
 }
 
 // Medium zoom

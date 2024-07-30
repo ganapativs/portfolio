@@ -1,20 +1,20 @@
-import { Link } from "gatsby";
-import { ThemeToggler } from "gatsby-plugin-dark-mode";
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import styled from "styled-components";
-import BlogIcon from "../assets/icons/blogIcon";
-import UserIcon from "../assets/icons/userIcon";
-import Logo from "../assets/logo/meetguns";
-import { captureEvent } from "../utils/ga";
-import SwitcherButton from "./SwitcherButton";
-import AccentSwitcher from "./accentSwitcher";
+import { Link } from 'gatsby';
+import { ThemeToggler } from 'gatsby-plugin-dark-mode';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import styled from 'styled-components';
+import BlogIcon from '../assets/icons/blogIcon';
+import UserIcon from '../assets/icons/userIcon';
+import Logo from '../assets/logo/meetguns';
+import { captureEvent } from '../utils/ga';
+import SwitcherButton from './SwitcherButton';
+import AccentSwitcher from './accentSwitcher';
 
 const switchTheme = (theme, toggleTheme) => {
-  const nextTheme = theme === "dark" ? "light" : "dark";
+  const nextTheme = theme === 'dark' ? 'light' : 'dark';
   toggleTheme(nextTheme);
   // Add attribute to html tag, useful for view transition
-  document.body.parentElement.setAttribute("data-theme", nextTheme);
-  captureEvent(nextTheme, "change", "Theme");
+  document.body.parentElement.setAttribute('data-theme', nextTheme);
+  captureEvent(nextTheme, 'change', 'Theme');
 };
 
 const HeaderRow = styled.header`
@@ -149,7 +149,7 @@ const Right = styled.div`
 
 const IconWrapper = styled.span`
   @media screen and (max-width: 767px) {
-    margin-right: ${(prop) => (prop.active ? "0.25rem" : 0)};
+    margin-right: ${(prop) => (prop.active ? '0.25rem' : 0)};
   }
 
   @media screen and (min-width: 768px) {
@@ -278,13 +278,13 @@ function LightDarkMoonOrSun({ isDark }) {
 
 const links = [
   {
-    link: "/",
-    name: "About",
+    link: '/',
+    name: 'About',
     icon: UserIcon,
   },
   {
-    link: "/blog/",
-    name: "Blog",
+    link: '/blog/',
+    name: 'Blog',
     icon: BlogIcon,
   },
 ];
@@ -313,7 +313,7 @@ const Header = ({ location: { pathname } }) => {
     }
 
     const observer = new IntersectionObserver(
-      ([e]) => e.target.classList.toggle("pinned", e.intersectionRatio < 1),
+      ([e]) => e.target.classList.toggle('pinned', e.intersectionRatio < 1),
       { threshold: [1] },
     );
 
@@ -335,10 +335,10 @@ const Header = ({ location: { pathname } }) => {
     <HeaderRow ref={headerRef}>
       <HeaderWrapper>
         <Left>
-          <Link title={"Meetguns.com | About"} to={"/"}>
+          <Link title={'Meetguns.com | About'} to={'/'}>
             <LogoWrapper
               className={`${
-                logoActiveAnimateState ? "init-hover-animate-state" : ""
+                logoActiveAnimateState ? 'init-hover-animate-state' : ''
               }`}
             >
               <Logo color='var(--color-dark)' />
@@ -347,14 +347,14 @@ const Header = ({ location: { pathname } }) => {
           <RouteLinks>
             {links.map(({ link, name, icon: Icon }) => {
               const active =
-                (pathname === "/" && pathname === link) ||
-                (link !== "/" && pathname.startsWith(link));
+                (pathname === '/' && pathname === link) ||
+                (link !== '/' && pathname.startsWith(link));
 
               return (
                 <Link
                   key={`${link}_${pathname}`}
                   title={name}
-                  className={`${active ? "active" : ""}`}
+                  className={`${active ? 'active' : ''}`}
                   to={link}
                 >
                   <IconWrapper active={active} className='hide-xs'>
@@ -381,16 +381,16 @@ const Header = ({ location: { pathname } }) => {
                       }
                     }}
                     title={
-                      theme === "dark"
-                        ? "Switch to light theme"
-                        : "Switch to dark theme"
+                      theme === 'dark'
+                        ? 'Switch to light theme'
+                        : 'Switch to dark theme'
                     }
                     onClick={() => {
                       onThemeChange(theme, toggleTheme);
                     }}
                   >
                     <ThemeSwitcher>
-                      <LightDarkMoonOrSun isDark={theme === "dark"} />
+                      <LightDarkMoonOrSun isDark={theme === 'dark'} />
                     </ThemeSwitcher>
                   </SwitcherButton>
                 )}

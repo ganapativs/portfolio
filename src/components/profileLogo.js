@@ -1,6 +1,6 @@
-import { GatsbyImage, getImage, withArtDirection } from "gatsby-plugin-image";
-import React from "react";
-import styled from "styled-components";
+import { GatsbyImage, getImage, withArtDirection } from 'gatsby-plugin-image';
+import React from 'react';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   min-width: 140px;
@@ -33,13 +33,13 @@ export default function ProfileLogo({ profileLogo }) {
     getImage(profileLogo.desktopImage.childImageSharp.gatsbyImageData),
     [
       {
-        media: "(max-width: 767px)",
+        media: '(max-width: 767px)',
         image: getImage(
           profileLogo.mobileImage.childImageSharp.gatsbyImageData,
         ),
       },
       {
-        media: "(min-width: 768px)",
+        media: '(min-width: 768px)',
         image: getImage(
           profileLogo.desktopImage.childImageSharp.gatsbyImageData,
         ),

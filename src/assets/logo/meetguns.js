@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-const SVG = ({ color = "var(--color-dark)", ...rest }) => (
+const SVG = ({ color = 'var(--color-dark)', ...rest }) => (
   <svg
     data-name='Layer 1'
     xmlns='http://www.w3.org/2000/svg'
@@ -10,8 +10,8 @@ const SVG = ({ color = "var(--color-dark)", ...rest }) => (
     <title>Meetguns.com | Ganapati V S | logo</title>
     <g data-name='Layer 1'>
       <g data-name='G logo'>
-        <g style={{ isolation: "isolate" }}>
-          <g style={{ isolation: "isolate" }}>
+        <g style={{ isolation: 'isolate' }}>
+          <g style={{ isolation: 'isolate' }}>
             <path
               d='M99.94629,118.40074l-28.79883.14941c-14.84912,0-28.34863-2.39941-40.498-13.64941C20.89941,95.75133,17.74951,83.15172,17,66.3524c1.6499-30.59961,21.14893-52.498,55.498-52.94824,12.59961,1.0498,20.54883,3.75,25.79883,5.09961L81.19727,64.8524l19.499-.15039-0.75,46.94873v6.75Zm-47.248-14.84961L80.89648,25.55357C54.04834,22.40416,30.94922,35.90318,30.499,66.3524,30.04932,83.75133,39.64893,97.55113,52.69824,103.55113Zm12.14941,3.2998c7.65039,0,18.89941-.4502,22.94922-0.4502l0.4502-32.24951H75.79688Z'
               transform='translate(-16.7 -13.39998)'

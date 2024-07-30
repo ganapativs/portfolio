@@ -1,8 +1,8 @@
-import React from "react";
-import styled, { keyframes } from "styled-components";
-import { captureEvent } from "../utils/ga";
-import { rhythm } from "../utils/typography";
-import ExternalLink from "./externalLink";
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
+import { captureEvent } from '../utils/ga';
+import { rhythm } from '../utils/typography';
+import ExternalLink from './externalLink';
 
 const Div = styled.div`
   text-wrap: pretty;
@@ -130,16 +130,16 @@ const DevInfo = () => {
         Ganapati V S <FlagIndia aria-label='India' aria-hidden='true' />
       </DevName>
       <DevDescription>
-        Hi{" "}
+        Hi{' '}
         <span role='img' aria-label='Hi!'>
           👋
-        </span>{" "}
+        </span>{' '}
         I&#39;m a Full-Stack JavaScript developer with over 10 years of
         experience in turning coffee into cutting-edge code. Currently steering
-        the ship as Vice President - Technology at{" "}
+        the ship as Vice President - Technology at{' '}
         <ExternalLink
           href='https://tracxn.com/?ref=meetguns.com'
-          onClick={() => captureEvent("Tracxn Website", "click", "Work Link")}
+          onClick={() => captureEvent('Tracxn Website', 'click', 'Work Link')}
         >
           Tracxn
         </ExternalLink>
@@ -148,14 +148,14 @@ const DevInfo = () => {
         My passion lies in coding, architecting elegant solutions, and
         contributing to the vibrant open-source ecosystem. I've had the thrill
         of building: <Separator mb={8} />
-        <Ul style={{ color: "var(--color-accent)" }}>
+        <Ul style={{ color: 'var(--color-accent)' }}>
           <li>
             <ExternalLink
               href='https://sgb.vercel.app/?ref=meetguns.com'
               onClick={() =>
-                captureEvent("sgb.vercel.app", "click", "Social Links")
+                captureEvent('sgb.vercel.app', 'click', 'Social Links')
               }
-              style={{ whiteSpace: "nowrap" }}
+              style={{ whiteSpace: 'nowrap' }}
             >
               SGB.vercel.app
             </ExternalLink>
@@ -164,9 +164,9 @@ const DevInfo = () => {
             <ExternalLink
               href='https://github.com/ganapativs/react-spectrum?ref=meetguns.com'
               onClick={() =>
-                captureEvent("react-spectrum GitHub", "click", "Social Links")
+                captureEvent('react-spectrum GitHub', 'click', 'Social Links')
               }
-              style={{ whiteSpace: "nowrap" }}
+              style={{ whiteSpace: 'nowrap' }}
             >
               React Spectrum
             </ExternalLink>
@@ -176,12 +176,12 @@ const DevInfo = () => {
               href='https://github.com/ganapativs/react-delightful-scroller?ref=meetguns.com'
               onClick={() =>
                 captureEvent(
-                  "react-delightful-scroller GitHub",
-                  "click",
-                  "Social Links",
+                  'react-delightful-scroller GitHub',
+                  'click',
+                  'Social Links',
                 )
               }
-              style={{ whiteSpace: "nowrap" }}
+              style={{ whiteSpace: 'nowrap' }}
             >
               React Delightful Scroller
             </ExternalLink>
@@ -191,12 +191,12 @@ const DevInfo = () => {
               href='https://github.com/ganapativs/priority-browser-extension?ref=meetguns.com'
               onClick={() =>
                 captureEvent(
-                  "Priority browser extension Github",
-                  "click",
-                  "Priority Browser Extension",
+                  'Priority browser extension Github',
+                  'click',
+                  'Priority Browser Extension',
                 )
               }
-              style={{ whiteSpace: "nowrap" }}
+              style={{ whiteSpace: 'nowrap' }}
             >
               Priority Browser Extension
             </ExternalLink>
@@ -206,12 +206,12 @@ const DevInfo = () => {
               href='https://github.com/ganapativs/react-dynamic-import?ref=meetguns.com'
               onClick={() =>
                 captureEvent(
-                  "react-dynamic-import GitHub",
-                  "click",
-                  "Social Links",
+                  'react-dynamic-import GitHub',
+                  'click',
+                  'Social Links',
                 )
               }
-              style={{ whiteSpace: "nowrap" }}
+              style={{ whiteSpace: 'nowrap' }}
             >
               React Dynamic Import
             </ExternalLink>
@@ -220,7 +220,7 @@ const DevInfo = () => {
             <ExternalLink
               href='https://bttn.surge.sh/?ref=meetguns.com'
               onClick={() =>
-                captureEvent("bttn.surge.sh", "click", "Social Links")
+                captureEvent('bttn.surge.sh', 'click', 'Social Links')
               }
             >
               Bttn.css
@@ -230,46 +230,46 @@ const DevInfo = () => {
         <Separator mb={24} />
         When I'm not wrestling with code, you'll find me:
         <Separator mb={8} />
-        <Ul style={{ color: "var(--color-light)" }}>
+        <Ul style={{ color: 'var(--color-light)' }}>
           <li>
-            Exploring new horizons{" "}
+            Exploring new horizons{' '}
             <span role='img' aria-label='Travel'>
               ✈️
             </span>
           </li>
           <li>
-            Capturing moments through my lens{" "}
+            Capturing moments through my lens{' '}
             <span role='img' aria-label='Photography'>
               📸
             </span>
           </li>
           <li>
-            Scoring goals (or trying to){" "}
+            Scoring goals (or trying to){' '}
             <span role='img' aria-label='Soccer'>
               ⚽️
             </span>
           </li>
           <li>
-            Smashing shuttlecocks{" "}
+            Smashing shuttlecocks{' '}
             <span role='img' aria-label='Badminton'>
               🏸
             </span>
           </li>
           <li>
-            Saving virtual worlds{" "}
+            Saving virtual worlds{' '}
             <span role='img' aria-label='FIFA gaming'>
               🎮
             </span>
           </li>
         </Ul>
         <Separator mb={24} />
-        Let's{" "}
+        Let's{' '}
         <ExternalLink
           href='https://twitter.com/ganapativs?ref=meetguns.com'
-          onClick={() => captureEvent("Personal Twitter", "click", "Connect")}
+          onClick={() => captureEvent('Personal Twitter', 'click', 'Connect')}
         >
           connect
-        </ExternalLink>{" "}
+        </ExternalLink>{' '}
         and explore the endless possibilities of tech 🌟
       </DevDescription>
       <Separator mb={24} />

@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { Path, Svg } from "./svg";
+import React from 'react';
+import styled from 'styled-components';
+import { Path, Svg } from './svg';
 
 const LocalSvg = styled(Svg)`
   transform: scale(0.95);

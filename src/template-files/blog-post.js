@@ -1,13 +1,13 @@
-import { Link, graphql } from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image";
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import Seo from "../components/seo";
-import { formatPostDate } from "../utils/helpers";
-import { rhythm, scale } from "../utils/typography";
+import { Link, graphql } from 'gatsby';
+import { GatsbyImage } from 'gatsby-plugin-image';
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import Seo from '../components/seo';
+import { formatPostDate } from '../utils/helpers';
+import { rhythm, scale } from '../utils/typography';
 
-const GITHUB_USERNAME = "ganapativs";
-const GITHUB_REPO_NAME = "Portfolio";
+const GITHUB_USERNAME = 'ganapativs';
+const GITHUB_REPO_NAME = 'Portfolio';
 
 const Article = styled.article`
   line-height: 1.75rem;
@@ -221,7 +221,7 @@ function BlogPostTemplate(props) {
                 }}
               >
                 {formatPostDate(post.frontmatter.date)}
-                {` • ${timeToReadText}`} •{" "}
+                {` • ${timeToReadText}`} •{' '}
                 <a
                   href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
                     `Checkout this blog about "${post.frontmatter.title}" by @ganapativs\n\n${blogUrl}`,
@@ -240,7 +240,7 @@ function BlogPostTemplate(props) {
               <a href={discussUrl} target='_blank' rel='noopener noreferrer'>
                 Discuss on Twitter
               </a>
-              {" • "}
+              {' • '}
               <a href={editUrl} target='_blank' rel='noopener noreferrer'>
                 Edit on GitHub
               </a>

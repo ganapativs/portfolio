@@ -1,5 +1,5 @@
-import React from "react";
-import { Path, Svg } from "./svg";
+import React from 'react';
+import { Path, Svg } from './svg';
 
 // https://www.flaticon.com/free-icon/arroba_684816#term=email&page=1&position=39
 function Icon(props) {

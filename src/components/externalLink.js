@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ExternalLink = (props) => (
   <a rel='noopener noreferrer' target='_blank' {...props}>

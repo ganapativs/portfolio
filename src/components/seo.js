@@ -1,13 +1,13 @@
-import { graphql, useStaticQuery } from "gatsby";
-import React from "react";
-import { Helmet } from "react-helmet";
+import { graphql, useStaticQuery } from 'gatsby';
+import React from 'react';
+import { Helmet } from 'react-helmet';
 
 function SEO({
-  title = "",
-  description = "",
-  keywords = "",
-  fbBanner = "",
-  twitterBanner = "",
+  title = '',
+  description = '',
+  keywords = '',
+  fbBanner = '',
+  twitterBanner = '',
 }) {
   const { site } = useStaticQuery(
     graphql`
@@ -26,9 +26,9 @@ function SEO({
   return (
     <Helmet
       title={title}
-      titleTemplate={"%s"}
+      titleTemplate={'%s'}
       htmlAttributes={{
-        lang: "en",
+        lang: 'en',
       }}
     >
       <link rel='shortcut icon' href='/favicon.ico' />
@@ -56,7 +56,7 @@ function SEO({
         name='keywords'
         content={
           keywords ||
-          "HTML5,CSS3,JavaScript,React,UI,UX,CSS-in-JS,Animation,Frontend Developer,Webpack,Node.js,GraphQL,Performance,60fps,Full-Stack Developer in Bangalore,Full-Stack Developer in Bengaluru"
+          'HTML5,CSS3,JavaScript,React,UI,UX,CSS-in-JS,Animation,Frontend Developer,Webpack,Node.js,GraphQL,Performance,60fps,Full-Stack Developer in Bangalore,Full-Stack Developer in Bengaluru'
         }
       />
       <link rel='author' href='/humans.txt' />
@@ -88,7 +88,7 @@ function SEO({
       <meta property='og:title' content={title || site.siteMetadata.title} />
       <meta
         property='og:image'
-        content={fbBanner || "https://meetguns.com/images/fb-banner.png"}
+        content={fbBanner || 'https://meetguns.com/images/fb-banner.png'}
       />
       <meta
         property='og:description'
@@ -106,7 +106,7 @@ function SEO({
       <meta
         name='twitter:image'
         content={
-          twitterBanner || "https://meetguns.com/images/twitter-banner.png"
+          twitterBanner || 'https://meetguns.com/images/twitter-banner.png'
         }
       />
     </Helmet>

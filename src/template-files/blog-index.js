@@ -1,10 +1,10 @@
-import { Link, graphql, navigate } from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image";
-import React from "react";
-import styled from "styled-components";
-import Seo from "../components/seo";
-import { formatPostDate } from "../utils/helpers";
-import { rhythm } from "../utils/typography";
+import { Link, graphql, navigate } from 'gatsby';
+import { GatsbyImage } from 'gatsby-plugin-image';
+import React from 'react';
+import styled from 'styled-components';
+import Seo from '../components/seo';
+import { formatPostDate } from '../utils/helpers';
+import { rhythm } from '../utils/typography';
 
 const CoverImage = styled.div`
   width: 100%;
@@ -59,8 +59,8 @@ const Div = styled.div`
 `;
 
 function BlogIndex(props) {
-  const isDev = process.env.NODE_ENV === "development";
-  const { edges: posts } = props.data[`${isDev ? "dev" : "prod"}Mdx`];
+  const isDev = process.env.NODE_ENV === 'development';
+  const { edges: posts } = props.data[`${isDev ? 'dev' : 'prod'}Mdx`];
 
   return (
     <Div>

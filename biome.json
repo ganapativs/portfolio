@@ -25,6 +25,7 @@
       "arrowParentheses": "always",
       "bracketSameLine": false,
       "bracketSpacing": true,
+      "quoteStyle": "single",
       "jsxQuoteStyle": "single",
       "quoteProperties": "asNeeded",
       "semicolons": "always",

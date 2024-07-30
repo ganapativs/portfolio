@@ -1,6 +1,6 @@
-import { Link } from "gatsby";
-import React from "react";
-import Seo from "../components/seo";
+import { Link } from 'gatsby';
+import React from 'react';
+import Seo from '../components/seo';
 
 const NotFoundPage = () => (
   <>

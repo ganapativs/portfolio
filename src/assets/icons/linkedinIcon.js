@@ -1,5 +1,5 @@
-import React from "react";
-import { Path, Svg } from "./svg";
+import React from 'react';
+import { Path, Svg } from './svg';
 
 // https://www.flaticon.com/free-icon/linkedin_1216879#term=linkedin&page=1&position=85
 function Icon(props) {

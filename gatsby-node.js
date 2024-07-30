@@ -1,24 +1,24 @@
-const path = require("node:path");
-const { createFilePath } = require("gatsby-source-filesystem");
-const readingTime = require("reading-time");
+const path = require('node:path');
+const { createFilePath } = require('gatsby-source-filesystem');
+const readingTime = require('reading-time');
 
 exports.onCreateNode = async ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
 
-  if (node.internal.type === "Mdx") {
-    const basePath = "blog";
+  if (node.internal.type === 'Mdx') {
+    const basePath = 'blog';
     const slug = createFilePath({ node, getNode, basePath });
 
     await createNodeField({
       node,
-      name: "slug",
+      name: 'slug',
       value: `/${basePath}${slug}`,
     });
 
     // https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/?=gatsby-plugin-mdx#updating-mdx-nodes
     await createNodeField({
       node,
-      name: "timeToRead",
+      name: 'timeToRead',
       value: readingTime(node.body),
     });
   }
@@ -26,10 +26,10 @@ exports.onCreateNode = async ({ node, actions, getNode }) => {
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
-  const showAllPosts = process.env.NODE_ENV === "development";
+  const showAllPosts = process.env.NODE_ENV === 'development';
   createPage({
-    path: "/blog/",
-    component: path.resolve("./src/template-files/blog-index.js"),
+    path: '/blog/',
+    component: path.resolve('./src/template-files/blog-index.js'),
   });
 
   const blogPosts = await graphql(
@@ -39,8 +39,8 @@ exports.createPages = async ({ graphql, actions }) => {
           sort: { frontmatter: { date: DESC } }
           ${
             showAllPosts
-              ? ""
-              : "filter: { frontmatter: { draft: { eq: false } } }"
+              ? ''
+              : 'filter: { frontmatter: { draft: { eq: false } } }'
           }
           limit: 1000
         ) {
@@ -67,7 +67,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   // Create blog posts pages.
   const posts = blogPosts.data.allMdx.nodes;
-  const blogPost = path.resolve("./src/template-files/blog-post.js");
+  const blogPost = path.resolve('./src/template-files/blog-post.js');
   posts.forEach((post, index) => {
     const previous = index === posts.length - 1 ? null : posts[index + 1];
     const next = index === 0 ? null : posts[index - 1];

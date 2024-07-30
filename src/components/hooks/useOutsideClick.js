@@ -1,5 +1,5 @@
 // Detects clicks outside of the passed element ref
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 function useOutsideClick(elementRef, onOutsideClick) {
   useEffect(() => {
@@ -9,8 +9,8 @@ function useOutsideClick(elementRef, onOutsideClick) {
       }
     }
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   });
 }
 

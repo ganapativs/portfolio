@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect } from 'react';
 
 /**
  * Usage:
@@ -11,7 +11,7 @@ import React, { useRef, useEffect } from "react";
 const Sentinel = ({
   fetchMoreBufferDistance,
   onFetchMore,
-  wrapperElement = "div",
+  wrapperElement = 'div',
   children,
   root,
 }) => {

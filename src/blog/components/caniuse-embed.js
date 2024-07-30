@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, memo } from "react";
+import React, { useEffect, useRef, memo } from 'react';
 
 // get featureName from https://caniuse.com/
 function CaniuseEmbed({ featureName }) {
@@ -9,24 +9,24 @@ function CaniuseEmbed({ featureName }) {
     // Modified https://github.com/ireade/caniuse-embed/blob/master/src/caniuse-embed.js
     if (featureName) {
       const embed = ref.current;
-      const feature = embed.getAttribute("data-feature");
-      const periods = embed.getAttribute("data-periods");
+      const feature = embed.getAttribute('data-feature');
+      const periods = embed.getAttribute('data-periods');
       const accessibleColours =
-        embed.getAttribute("data-accessible-colours") || "false";
-      const imageBase = embed.getAttribute("data-image-base") || "none";
+        embed.getAttribute('data-accessible-colours') || 'false';
+      const imageBase = embed.getAttribute('data-image-base') || 'none';
 
-      const url = "https://caniuse.bitsofco.de/embed/index.html";
+      const url = 'https://caniuse.bitsofco.de/embed/index.html';
       const iframe = `<iframe src="${url}?feat=${feature}&periods=${periods}&accessible-colours=${accessibleColours}&image-base=${imageBase}" frameborder="0" width="100%" height="400px"></iframe>`;
 
       embed.innerHTML = iframe;
 
       const onIframeMessage = (e) => {
         const { data } = e;
-        if (typeof data === "string" && data.indexOf("ciu_embed") > -1) {
-          const featureID = data.split(":")[1];
-          const height = data.split(":")[2];
+        if (typeof data === 'string' && data.indexOf('ciu_embed') > -1) {
+          const featureID = data.split(':')[1];
+          const height = data.split(':')[2];
 
-          if (embed.getAttribute("data-feature") === featureID) {
+          if (embed.getAttribute('data-feature') === featureID) {
             const iframeHeight = Number.parseInt(height, 10) + 30;
             embed.childNodes[0].height = `${iframeHeight}px`;
           }
@@ -34,10 +34,10 @@ function CaniuseEmbed({ featureName }) {
       };
 
       // GET RESPONSIVE HEIGHT PASSED FROM IFRAME
-      window.addEventListener("message", onIframeMessage, false);
+      window.addEventListener('message', onIframeMessage, false);
 
       return () => {
-        window.removeEventListener("message", onIframeMessage, false);
+        window.removeEventListener('message', onIframeMessage, false);
       };
     }
 

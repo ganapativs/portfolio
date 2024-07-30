@@ -1,5 +1,5 @@
-import React from "react";
-import { Path, Svg } from "./svg";
+import React from 'react';
+import { Path, Svg } from './svg';
 
 // https://www.flaticon.com/free-icon/github_1051377#term=github&page=1&position=10
 function Icon(props) {
