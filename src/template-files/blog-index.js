@@ -65,8 +65,8 @@ function BlogIndex(props) {
   return (
     <Div>
       <Seo
-        title='Blog by Ganapati V S'
-        description='Tech blog by Ganapati V S'
+        title="Blog by Ganapati V S"
+        description="Tech blog by Ganapati V S"
       />
       <main>
         {posts.map(({ node: post }) => {
@@ -97,7 +97,7 @@ function BlogIndex(props) {
                     marginBottom: rhythm(1 / 10),
                   }}
                 >
-                  <Link to={post.fields.slug} rel='bookmark'>
+                  <Link to={post.fields.slug} rel="bookmark">
                     {title}
                   </Link>
                 </h3>

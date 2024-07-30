@@ -42,14 +42,14 @@ const Resume = ({ size: { width } }) => {
 
   return (
     <ResumeWrapper>
-      <Seo title='Resume' />
+      <Seo title="Resume" />
       <div key={theme}>
         <p style={{ textAlign: 'right' }}>
           <a
             href={`/resume/${theme}.pdf`}
             download={`Ganapati V S - Resume - ${theme}.pdf`}
           >
-            <button type='button'>Download resume</button>
+            <button type="button">Download resume</button>
           </a>
         </p>
         {!visible ? (
@@ -66,7 +66,7 @@ const Resume = ({ size: { width } }) => {
           </div>
         ) : null}
         <ResumeDoc
-          className='animated fadeIn'
+          className="animated fadeIn"
           style={{ visibility: visible ? 'visible' : 'hidden' }}
         >
           <Suspense fallback={<div>Loading...</div>}>

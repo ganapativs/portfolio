@@ -226,8 +226,8 @@ function BlogPostTemplate(props) {
                   href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
                     `Checkout this blog about "${post.frontmatter.title}" by @ganapativs\n\n${blogUrl}`,
                   )}`}
-                  target='_blank'
-                  rel='noopener noreferrer'
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Tweet
                 </a>
@@ -237,11 +237,11 @@ function BlogPostTemplate(props) {
           {props.children}
           <footer>
             <p>
-              <a href={discussUrl} target='_blank' rel='noopener noreferrer'>
+              <a href={discussUrl} target="_blank" rel="noopener noreferrer">
                 Discuss on Twitter
               </a>
               {' • '}
-              <a href={editUrl} target='_blank' rel='noopener noreferrer'>
+              <a href={editUrl} target="_blank" rel="noopener noreferrer">
                 Edit on GitHub
               </a>
             </p>
@@ -252,14 +252,14 @@ function BlogPostTemplate(props) {
         <Ul>
           <li>
             {previous ? (
-              <Link to={previous.fields.slug} rel='prev'>
+              <Link to={previous.fields.slug} rel="prev">
                 ← {previous.frontmatter.title}
               </Link>
             ) : null}
           </li>
           <li>
             {next ? (
-              <Link to={next.fields.slug} rel='next'>
+              <Link to={next.fields.slug} rel="next">
                 {next.frontmatter.title} →
               </Link>
             ) : null}

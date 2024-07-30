@@ -29,7 +29,7 @@ export const query = graphql`
 `;
 const About = ({ data: profileLogo }) => (
   <>
-    <Seo title='Ganapati V S' />
+    <Seo title="Ganapati V S" />
     <AboutMe profileLogo={profileLogo} />
   </>
 );
