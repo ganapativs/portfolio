@@ -30,9 +30,12 @@ export default function HTML(props) {
             🙏
           </span>
         </noscript>
-        <div key={'body'} id="___gatsby">
-          {props.body}
-        </div>
+        <div
+          key={'body'}
+          id="___gatsby"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: In production, raw HTML is shown otherwise
+          dangerouslySetInnerHTML={{ __html: props.body }}
+        />
         {props.postBodyComponents}
       </body>
     </html>

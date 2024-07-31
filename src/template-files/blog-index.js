@@ -106,7 +106,10 @@ function BlogIndex(props) {
                   {` • ${timeToReadText}`}
                 </Small>
               </header>
-              <Spoiler>{post.frontmatter.spoiler}</Spoiler>
+              <Spoiler
+                // biome-ignore lint/security/noDangerouslySetInnerHtml: In production, raw HTML is shown otherwise
+                dangerouslySetInnerHTML={{ __html: post.frontmatter.spoiler }}
+              />
             </Article>
           );
         })}
