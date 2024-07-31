@@ -1,7 +1,8 @@
-import { Link, graphql, navigate } from 'gatsby';
+import { graphql, navigate } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import React from 'react';
 import styled from 'styled-components';
+import LinkTransition from '../components/LinkTransition';
 import Seo from '../components/seo';
 import { formatPostDate } from '../utils/helpers';
 import { rhythm } from '../utils/typography';
@@ -80,7 +81,15 @@ function BlogIndex(props) {
             <Article
               key={post.fields.slug}
               // Skipping keyboard navigation as link inside will handle it
-              onClick={() => navigate(post.fields.slug)}
+              onClick={(e) => {
+                e.preventDefault();
+
+                if (!document.startViewTransition) {
+                  return navigate(post.fields.slug);
+                }
+
+                document.startViewTransition(() => navigate(post.fields.slug));
+              }}
             >
               <CoverImage>
                 <GatsbyImage
@@ -97,9 +106,9 @@ function BlogIndex(props) {
                     marginBottom: rhythm(1 / 10),
                   }}
                 >
-                  <Link to={post.fields.slug} rel="bookmark">
+                  <LinkTransition to={post.fields.slug} rel="bookmark">
                     {title}
-                  </Link>
+                  </LinkTransition>
                 </h3>
                 <Small>
                   {formatPostDate(post.frontmatter.date)}

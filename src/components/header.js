@@ -1,4 +1,3 @@
-import { Link } from 'gatsby';
 import { ThemeToggler } from 'gatsby-plugin-dark-mode';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styled from 'styled-components';
@@ -6,6 +5,7 @@ import BlogIcon from '../assets/icons/blogIcon';
 import UserIcon from '../assets/icons/userIcon';
 import Logo from '../assets/logo/meetguns';
 import { captureEvent } from '../utils/ga';
+import LinkTransition from './LinkTransition';
 import SwitcherButton from './SwitcherButton';
 import AccentSwitcher from './accentSwitcher';
 
@@ -202,7 +202,7 @@ const RouteLinks = styled.div`
       }
 
       &.active svg:hover path {
-        fill: var(--color-accent) !important;
+        fill: var(--color-dark) !important;
       }
 
       &:hover:not(.active) {
@@ -335,7 +335,7 @@ const Header = ({ location: { pathname } }) => {
     <HeaderRow ref={headerRef}>
       <HeaderWrapper>
         <Left>
-          <Link title={'Meetguns.com | About'} to={'/'}>
+          <LinkTransition title={'Meetguns.com | About'} to={'/'}>
             <LogoWrapper
               className={`${
                 logoActiveAnimateState ? 'init-hover-animate-state' : ''
@@ -343,7 +343,7 @@ const Header = ({ location: { pathname } }) => {
             >
               <Logo color="var(--color-dark)" />
             </LogoWrapper>
-          </Link>
+          </LinkTransition>
           <RouteLinks>
             {links.map(({ link, name, icon: Icon }) => {
               const active =
@@ -351,7 +351,7 @@ const Header = ({ location: { pathname } }) => {
                 (link !== '/' && pathname.startsWith(link));
 
               return (
-                <Link
+                <LinkTransition
                   key={`${link}_${pathname}`}
                   title={name}
                   className={`${active ? 'active' : ''}`}
@@ -361,7 +361,7 @@ const Header = ({ location: { pathname } }) => {
                     <Icon active={active} />
                   </IconWrapper>
                   <span>{name}</span>
-                </Link>
+                </LinkTransition>
               );
             })}
           </RouteLinks>
