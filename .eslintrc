@@ -1,0 +1,5 @@
+// !!! Not using ESLINT - Using biome instead !!!
+// Disabling gatsby eslint rules by creating empty file
+// Also disable eslint and prettier VSCode extension for the workspace to avoid conflicts
+// https://www.gatsbyjs.com/docs/how-to/custom-configuration/eslint/#disabling-eslint
+{}
