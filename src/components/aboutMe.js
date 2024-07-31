@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import DevInfo from './devInfo';
 import ProfileLinks from './profileLinks';
 import ProfileLogo from './profileLogo';
-import DevInfo from './devInfo';
 
 const Div = styled.div`
   display: flex;

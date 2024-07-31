@@ -2,8 +2,8 @@ import { Link, graphql, navigate } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import React from 'react';
 import styled from 'styled-components';
-import { formatPostDate, formatReadingTime } from '../utils/helpers';
-import SEO from '../components/seo';
+import Seo from '../components/seo';
+import { formatPostDate } from '../utils/helpers';
 import { rhythm } from '../utils/typography';
 
 const CoverImage = styled.div`
@@ -64,15 +64,18 @@ function BlogIndex(props) {
 
   return (
     <Div>
-      <SEO
+      <Seo
         title="Blog by Ganapati V S"
         description="Tech blog by Ganapati V S"
       />
       <main>
         {posts.map(({ node: post }) => {
           const title = post.frontmatter.title || post.fields.slug;
-          const { fields: { timeToRead: { text: timeToReadText } = {} } = {} } =
-            post;
+          const {
+            fields: {
+              timeToRead: { text: timeToReadText } = {},
+            } = {},
+          } = post;
           return (
             <Article
               key={post.fields.slug}
@@ -104,6 +107,7 @@ function BlogIndex(props) {
                 </Small>
               </header>
               <Spoiler
+                // biome-ignore lint/security/noDangerouslySetInnerHtml: In production, raw HTML is shown otherwise
                 dangerouslySetInnerHTML={{ __html: post.frontmatter.spoiler }}
               />
             </Article>

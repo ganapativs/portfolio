@@ -1,8 +1,8 @@
 import React, { Suspense, useState, useEffect } from 'react';
-import styled from 'styled-components';
-import Spectrum from 'react-spectrum';
 import SizeMe from 'react-sizeme';
-import SEO from '../components/seo';
+import Spectrum from 'react-spectrum';
+import styled from 'styled-components';
+import Seo from '../components/seo';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 
@@ -19,7 +19,6 @@ const ResumeDoc = styled.div`
 `;
 
 const Resume = ({ size: { width } }) => {
-  /* eslint-disable no-underscore-dangle */
   const [theme, setTheme] = useState(window.__theme);
   // This state is needed because the pdf js remote worker renders
   // a white canvas for sometime, looks odd in dark mode.
@@ -40,18 +39,17 @@ const Resume = ({ size: { width } }) => {
       window.__onThemeChange = originalOnThemeChange;
     };
   }, []);
-  /* eslint-enable no-underscore-dangle */
 
   return (
     <ResumeWrapper>
-      <SEO title="Resume" />
+      <Seo title="Resume" />
       <div key={theme}>
         <p style={{ textAlign: 'right' }}>
           <a
             href={`/resume/${theme}.pdf`}
             download={`Ganapati V S - Resume - ${theme}.pdf`}
           >
-            <button>Download resume</button>
+            <button type="button">Download resume</button>
           </a>
         </p>
         {!visible ? (
@@ -72,7 +70,11 @@ const Resume = ({ size: { width } }) => {
           style={{ visibility: visible ? 'visible' : 'hidden' }}
         >
           <Suspense fallback={<div>Loading...</div>}>
-            <ResumePdf theme={theme} width={width} onRender={() => setVisible(true)} />
+            <ResumePdf
+              theme={theme}
+              width={width}
+              onRender={() => setVisible(true)}
+            />
           </Suspense>
         </ResumeDoc>
         {visible ? (

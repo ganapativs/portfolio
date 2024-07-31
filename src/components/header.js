@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'gatsby';
-import styled from 'styled-components';
 import { ThemeToggler } from 'gatsby-plugin-dark-mode';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import styled from 'styled-components';
+import BlogIcon from '../assets/icons/blogIcon';
+import UserIcon from '../assets/icons/userIcon';
 import Logo from '../assets/logo/meetguns';
 import { captureEvent } from '../utils/ga';
-import AccentSwitcher from './accentSwitcher';
 import SwitcherButton from './SwitcherButton';
-import UserIcon from '../assets/icons/userIcon';
-import BlogIcon from '../assets/icons/blogIcon';
+import AccentSwitcher from './accentSwitcher';
 
 const switchTheme = (theme, toggleTheme) => {
   const nextTheme = theme === 'dark' ? 'light' : 'dark';
@@ -327,9 +327,8 @@ const Header = ({ location: { pathname } }) => {
   const onThemeChange = useCallback((theme, toggleTheme) => {
     if (!document.startViewTransition) {
       return switchTheme(theme, toggleTheme);
-    } else {
-      document.startViewTransition(() => switchTheme(theme, toggleTheme));
     }
+    document.startViewTransition(() => switchTheme(theme, toggleTheme));
   }, []);
 
   return (

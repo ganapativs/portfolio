@@ -1,6 +1,6 @@
 import Typography from 'typography';
-import CodePlugin from 'typography-plugin-code';
 import { TABLET_MEDIA_QUERY } from 'typography-breakpoint-constants';
+import CodePlugin from 'typography-plugin-code';
 
 const theme = {
   title: 'Meetguns',
@@ -88,6 +88,7 @@ const theme = {
 };
 
 // Fonts are loaded globally in gatsby-config
+// biome-ignore lint/performance/noDelete: Breaks font loading otherwise
 delete theme.googleFonts;
 
 const typography = new Typography(theme);

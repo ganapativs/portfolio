@@ -1,7 +1,7 @@
-import React from 'react';
 import { graphql } from 'gatsby';
-import SEO from '../components/seo';
+import React from 'react';
 import AboutMe from '../components/aboutMe';
+import Seo from '../components/seo';
 
 export const query = graphql`
   {
@@ -29,7 +29,7 @@ export const query = graphql`
 `;
 const About = ({ data: profileLogo }) => (
   <>
-    <SEO title="Ganapati V S" />
+    <Seo title="Ganapati V S" />
     <AboutMe profileLogo={profileLogo} />
   </>
 );

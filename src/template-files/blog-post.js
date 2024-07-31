@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
 import { Link, graphql } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
+import React from 'react';
 import styled from 'styled-components';
-import SEO from '../components/seo';
-import { formatPostDate, formatReadingTime } from '../utils/helpers';
+import Seo from '../components/seo';
+import { formatPostDate } from '../utils/helpers';
 import { rhythm, scale } from '../utils/typography';
 
 const GITHUB_USERNAME = 'ganapativs';
@@ -164,8 +164,11 @@ const HeaderSection = styled.div`
 
 function BlogPostTemplate(props) {
   const { node: post } = props.data.blogPost.edges[0];
-  const { body, fields: { timeToRead: { text: timeToReadText } = {} } = {} } =
-    post;
+  const {
+    fields: {
+      timeToRead: { text: timeToReadText } = {},
+    } = {},
+  } = post;
   const { previous, next, slug } = props.pageContext;
 
   const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/src${slug}index.mdx`;
@@ -173,10 +176,6 @@ function BlogPostTemplate(props) {
   const discussUrl = `https://mobile.twitter.com/search?q=${encodeURIComponent(
     blogUrl,
   )}`;
-
-  useEffect(() => {
-    // TODO
-  }, []);
 
   return (
     <Div>
@@ -187,7 +186,7 @@ function BlogPostTemplate(props) {
           }
           `}
       </style>
-      <SEO
+      <Seo
         title={post.frontmatter.title}
         description={post.frontmatter.spoiler}
         keywords={post.frontmatter.keywords}
@@ -237,7 +236,7 @@ function BlogPostTemplate(props) {
               <a href={discussUrl} target="_blank" rel="noopener noreferrer">
                 Discuss on Twitter
               </a>
-              {` • `}
+              {' • '}
               <a href={editUrl} target="_blank" rel="noopener noreferrer">
                 Edit on GitHub
               </a>

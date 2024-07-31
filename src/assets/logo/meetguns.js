@@ -5,7 +5,8 @@ const SVG = ({ color = 'var(--color-dark)', ...rest }) => (
     data-name="Layer 1"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 84 131.615"
-    {...rest}>
+    {...rest}
+  >
     <title>Meetguns.com | Ganapati V S | logo</title>
     <g data-name="Layer 1">
       <g data-name="G logo">

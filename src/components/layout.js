@@ -11,8 +11,8 @@ import GlobalStyles from '../utils/globalStyles';
  * https://davidwalsh.name/css-focus
  */
 import 'focus-visible';
-import Header from './header';
 import Footer from './footer';
+import Header from './header';
 
 const LayoutWrapper = styled.div`
   width: 100%;
@@ -75,7 +75,7 @@ const Layout = (props) => {
       <LayoutWrapper>
         <Header full={isFullWidth} location={location} />
         <Div full={isFullWidth}>{props.children}</Div>
-        <Footer full={isFullWidth}></Footer>
+        <Footer full={isFullWidth} />
       </LayoutWrapper>
     </>
   );

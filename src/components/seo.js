@@ -1,6 +1,6 @@
+import { graphql, useStaticQuery } from 'gatsby';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { useStaticQuery, graphql } from 'gatsby';
 
 function SEO({
   title = '',
@@ -26,10 +26,11 @@ function SEO({
   return (
     <Helmet
       title={title}
-      titleTemplate={`%s`}
+      titleTemplate={'%s'}
       htmlAttributes={{
         lang: 'en',
-      }}>
+      }}
+    >
       <link rel="shortcut icon" href="/favicon.ico" />
       <meta
         name="viewport"

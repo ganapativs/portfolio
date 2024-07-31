@@ -1,25 +1,24 @@
-const path = require('path');
-// eslint-disable-next-line import/no-extraneous-dependencies
+const path = require('node:path');
 const { createFilePath } = require('gatsby-source-filesystem');
-const readingTime = require(`reading-time`);
+const readingTime = require('reading-time');
 
 exports.onCreateNode = async ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
 
-  if (node.internal.type === `Mdx`) {
-    const basePath = `blog`;
+  if (node.internal.type === 'Mdx') {
+    const basePath = 'blog';
     const slug = createFilePath({ node, getNode, basePath });
 
     await createNodeField({
       node,
-      name: `slug`,
+      name: 'slug',
       value: `/${basePath}${slug}`,
     });
 
     // https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/?=gatsby-plugin-mdx#updating-mdx-nodes
     await createNodeField({
       node,
-      name: `timeToRead`,
+      name: 'timeToRead',
       value: readingTime(node.body),
     });
   }
@@ -29,7 +28,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
   const showAllPosts = process.env.NODE_ENV === 'development';
   createPage({
-    path: `/blog/`,
+    path: '/blog/',
     component: path.resolve('./src/template-files/blog-index.js'),
   });
 

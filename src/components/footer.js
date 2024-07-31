@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
-import styled from 'styled-components';
 import sizeMe from 'react-sizeme';
+import styled from 'styled-components';
 import { accentColors } from '../utils/helpers';
 
 const SuspenseReactSpectrum = React.lazy(() => import('react-spectrum'));

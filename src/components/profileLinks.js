@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import GitHubIcon from '../assets/icons/githubIcon';
-import TwitterIcon from '../assets/icons/twitterIcon';
-import StackoverflowIcon from '../assets/icons/stackoverflowIcon';
-import LinkedInIcon from '../assets/icons/linkedinIcon';
 import DribbbleIcon from '../assets/icons/dribbbleIcon';
 import EmailIcon from '../assets/icons/emailIcon';
+import GitHubIcon from '../assets/icons/githubIcon';
+import LinkedInIcon from '../assets/icons/linkedinIcon';
+import StackoverflowIcon from '../assets/icons/stackoverflowIcon';
+import TwitterIcon from '../assets/icons/twitterIcon';
 import { captureEvent } from '../utils/ga';
 import ExternalLink from './externalLink';
 
@@ -75,7 +75,8 @@ export default function ProfileLinks() {
         <Icons key={link} title={title}>
           <ExternalLink
             href={link}
-            onClick={() => captureEvent(seo, 'click', 'Social Links')}>
+            onClick={() => captureEvent(seo, 'click', 'Social Links')}
+          >
             <Component
               width={26}
               height={26}

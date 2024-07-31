@@ -1,10 +1,10 @@
-import React from 'react';
 import { Link } from 'gatsby';
-import SEO from '../components/seo';
+import React from 'react';
+import Seo from '../components/seo';
 
 const NotFoundPage = () => (
   <>
-    <SEO title="404: Not found" />
+    <Seo title="404: Not found" />
     <div>
       <h2>This route doesn&#39;t exist...</h2>
       <p>

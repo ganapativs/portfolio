@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Svg, Path } from './svg';
+import { Path, Svg } from './svg';
 
 const LocalSvg = styled(Svg)`
   transform: scale(0.95) translateY(4px);
@@ -16,7 +16,8 @@ function Icon(props) {
       xmlns="http://www.w3.org/2000/svg"
       aria-label="User"
       role="img"
-      viewBox="0 0 512 512">
+      viewBox="0 0 512 512"
+    >
       <Path
         active={props.active}
         d="M437.02,330.98c-27.883-27.882-61.071-48.523-97.281-61.018C378.521,243.251,404,198.548,404,148

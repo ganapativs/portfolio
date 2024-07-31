@@ -10,14 +10,8 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,json}": [
-      "eslint --fix",
-      "git add"
-    ],
-    "src/**/*.css": [
-      "prettier --write",
-      "git add"
-    ]
+    "src/**/*.{js,json}": ["biome check --write"],
+    "src/**/*.css": ["biome check --write"]
   },
   "dependencies": {
     "@mdx-js/react": "^3.0.1",
@@ -70,37 +64,27 @@
     "react-spectrum": "^1.2.6",
     "react-typography": "^0.16.23",
     "reading-time": "^1.5.0",
-    "styled-components": "^6.1.11",
+    "styled-components": "^6.1.12",
     "typography": "^0.16.24",
     "typography-breakpoint-constants": "^0.16.19",
     "typography-plugin-code": "^0.16.20",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "@ganapativs/eslint-config-react": "^0.2.0",
+    "@biomejs/biome": "1.8.3",
     "@netlify/plugin-gatsby": "^3.8.1",
-    "eslint": "^9.7.0",
-    "eslint-plugin-jsx-a11y": "^6.9.0",
-    "eslint-plugin-mdx": "^3.1.5",
-    "eslint-plugin-prettier": "^5.1.3",
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.7",
-    "prettier": "^3.3.3"
+    "husky": "^9.1.4",
+    "lint-staged": "^15.2.7"
   },
-  "keywords": [
-    "portfolio",
-    "react",
-    "performance",
-    "gatsby",
-    "blog",
-    "mdx"
-  ],
+  "keywords": ["portfolio", "react", "performance", "gatsby", "blog", "mdx"],
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "format": "eslint src --ext .js --ext .json --fix && prettier --write \"**/*.{css,md}\""
+    "format": "biome check --write",
+    "format-unsafe": "biome check --write --unsafe",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",

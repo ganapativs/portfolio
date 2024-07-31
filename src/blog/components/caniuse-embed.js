@@ -27,7 +27,7 @@ function CaniuseEmbed({ featureName }) {
           const height = data.split(':')[2];
 
           if (embed.getAttribute('data-feature') === featureID) {
-            const iframeHeight = parseInt(height, 10) + 30;
+            const iframeHeight = Number.parseInt(height, 10) + 30;
             embed.childNodes[0].height = `${iframeHeight}px`;
           }
         }

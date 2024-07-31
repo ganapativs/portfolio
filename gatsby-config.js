@@ -2,16 +2,16 @@
 // - Underline line/word on hover in blog (experimental)
 // - Cleanup S3 bucket
 // - gatsby-plugin-react-helmet: Gatsby now has built-in support for modifying the document head. Learn more at https://gatsby.dev/gatsby-head
-// eslint-disable-next-line import/no-extraneous-dependencies
 require('dotenv').config({
   path: '.env',
 });
 
 module.exports = {
   siteMetadata: {
-    title: `Ganapati V S`,
-    description: `Full-Stack JavaScript developer building stuff using bleeding-edge technologies 🎉`,
-    author: `@ganapativs`,
+    title: 'Ganapati V S',
+    description:
+      'Full-Stack JavaScript developer building stuff using bleeding-edge technologies 🎉',
+    author: '@ganapativs',
     siteUrl: 'https://meetguns.com',
     social: {
       twitter: '@ganapativs',
@@ -19,28 +19,28 @@ module.exports = {
     },
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
+    'gatsby-plugin-react-helmet',
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: `images`,
+        name: 'images',
         path: `${__dirname}/src/images`,
       },
     },
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: `blog`,
+        name: 'blog',
         path: `${__dirname}/src/blog`,
       },
     },
     {
-      resolve: `gatsby-plugin-mdx`,
+      resolve: 'gatsby-plugin-mdx',
       options: {
-        extensions: [`.mdx`, `.md`],
+        extensions: ['.mdx', '.md'],
         gatsbyRemarkPlugins: [
           {
-            resolve: `gatsby-remark-twitter-cards`,
+            resolve: 'gatsby-remark-twitter-cards',
             options: {
               title: 'meetguns.com',
               separator: '|',
@@ -54,7 +54,7 @@ module.exports = {
             },
           },
           {
-            resolve: `gatsby-remark-images`,
+            resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 1500,
               showCaptions: true,
@@ -64,30 +64,30 @@ module.exports = {
             },
           },
           {
-            resolve: `gatsby-remark-external-links`,
+            resolve: 'gatsby-remark-external-links',
             options: {
               target: '_blank',
               rel: 'nofollow noopener noreferrer',
             },
           },
           {
-            resolve: `gatsby-remark-embedder`,
+            resolve: 'gatsby-remark-embedder',
           },
           {
-            resolve: `gatsby-remark-responsive-iframe`,
+            resolve: 'gatsby-remark-responsive-iframe',
             options: {
-              wrapperStyle: `margin-bottom: 1.0725rem`,
+              wrapperStyle: 'margin-bottom: 1.0725rem',
             },
           },
           {
             // TODO: Replace with "mdx-component-autolink-headers" when offset is supported
-            resolve: `gatsby-remark-autolink-headers`,
+            resolve: 'gatsby-remark-autolink-headers',
             options: {
               offsetY: 100,
             },
           },
           {
-            resolve: `@jpfulton/gatsby-remark-copy-button`,
+            resolve: '@jpfulton/gatsby-remark-copy-button',
             options: {
               copySvg: `<svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                   <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -101,22 +101,22 @@ module.exports = {
             },
           },
           {
-            resolve: `gatsby-remark-code-titles`,
+            resolve: 'gatsby-remark-code-titles',
           },
           {
-            resolve: `gatsby-remark-prismjs`,
+            resolve: 'gatsby-remark-prismjs',
             options: {
               inlineCodeMarker: '÷',
             },
           },
           {
-            resolve: `gatsby-remark-copy-linked-files`,
+            resolve: 'gatsby-remark-copy-linked-files',
           },
           {
-            resolve: `gatsby-remark-smartypants`,
+            resolve: 'gatsby-remark-smartypants',
           },
           {
-            resolve: `gatsby-remark-images-zoom`,
+            resolve: 'gatsby-remark-images-zoom',
             options: {
               background: 'rgba(0, 0, 0, 0.85)',
               zIndex: 0,
@@ -126,7 +126,7 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-feed`,
+      resolve: 'gatsby-plugin-feed',
       options: {
         query: `
           {
@@ -186,10 +186,10 @@ module.exports = {
       },
     },
     'gatsby-plugin-image',
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: 'gatsby-plugin-manifest',
       options: {
         short_name: 'meetguns',
         name: 'meetguns',
@@ -202,39 +202,39 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: 'gatsby-plugin-google-analytics',
       options: {
         trackingId: 'UA-52929584-1',
       },
     },
-    `gatsby-plugin-styled-components`,
+    'gatsby-plugin-styled-components',
     {
-      resolve: `gatsby-plugin-google-fonts`,
+      resolve: 'gatsby-plugin-google-fonts',
       options: {
         fonts: [
-          `Merriweather\:700`,
-          `Source Sans Pro\:400`,
-          `Fira Code\:400,400i`,
+          'Merriweather:700',
+          'Source Sans Pro:400',
+          'Fira Code:400,400i',
         ],
       },
     },
     {
-      resolve: `gatsby-plugin-typography`,
+      resolve: 'gatsby-plugin-typography',
       options: {
         pathToConfigModule: 'src/utils/typography',
       },
     },
     {
-      resolve: `gatsby-plugin-nprogress`,
+      resolve: 'gatsby-plugin-nprogress',
       options: {
-        color: `var(--color-accent)`,
+        color: 'var(--color-accent)',
         showSpinner: false,
       },
     },
     {
-      resolve: `gatsby-plugin-accent-color`,
+      resolve: 'gatsby-plugin-accent-color',
       options: {
-        defaultAccentColor: `#FF2E63`,
+        defaultAccentColor: '#FF2E63',
       },
     },
     {
@@ -244,15 +244,15 @@ module.exports = {
         excludePaths: ['/', '/blog', '/blog/'],
         height: 2,
         prependToBody: false,
-        color: `var(--color-accent)`,
+        color: 'var(--color-accent)',
         footerHeight: 40,
         headerHeight: 0,
       },
     },
-    `gatsby-plugin-twitter`,
-    `gatsby-plugin-dark-mode`,
-    `gatsby-plugin-catch-links`,
-    `gatsby-plugin-sitemap`,
+    'gatsby-plugin-twitter',
+    'gatsby-plugin-dark-mode',
+    'gatsby-plugin-catch-links',
+    'gatsby-plugin-sitemap',
     // Disabling temporarily
     // {
     //   resolve: `gatsby-plugin-hotjar`,
@@ -262,6 +262,6 @@ module.exports = {
     //   },
     // },
     // https://www.gatsbyjs.org/packages/gatsby-plugin-offline/
-    `gatsby-plugin-offline`,
+    'gatsby-plugin-offline',
   ],
 };

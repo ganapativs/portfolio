@@ -1,9 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 export default function HTML(props) {
   return (
-    // eslint-disable-next-line jsx-a11y/html-has-lang
     <html {...props.htmlAttributes}>
       <head>
         <meta charSet="utf-8" />
@@ -32,8 +31,9 @@ export default function HTML(props) {
           </span>
         </noscript>
         <div
-          key={`body`}
+          key={'body'}
           id="___gatsby"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: In production, raw HTML is shown otherwise
           dangerouslySetInnerHTML={{ __html: props.body }}
         />
         {props.postBodyComponents}
