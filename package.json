@@ -10,8 +10,12 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,json}": ["biome check --write --unsafe", "git add"],
-    "src/**/*.css": ["biome check --write --unsafe", "git add"]
+    "src/**/*.{js,json}": [
+      "biome check --write"
+    ],
+    "src/**/*.css": [
+      "biome check --write"
+    ]
   },
   "dependencies": {
     "@mdx-js/react": "^3.0.1",
@@ -76,13 +80,22 @@
     "husky": "^9.1.4",
     "lint-staged": "^15.2.7"
   },
-  "keywords": ["portfolio", "react", "performance", "gatsby", "blog", "mdx"],
+  "keywords": [
+    "portfolio",
+    "react",
+    "performance",
+    "gatsby",
+    "blog",
+    "mdx"
+  ],
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "format": "biome check --write --unsafe"
+    "format": "biome check --write",
+    "format-unsafe": "biome check --write --unsafe",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
