@@ -94,12 +94,15 @@ const Div = styled.div`
       border: none !important;
       bottom: 60px;
       border-radius: 0 !important;
-      background: var(--color-dark) !important;
       box-shadow: 0 -4px 4px -4px var(--color-light-op-2) !important;
       justify-content: space-around;
       padding: 1rem 0 0.5rem !important;
       clip-path: inset(110% -10px -10px -10px);
       transition: clip-path 0.15s ease-in-out;
+      --opacity: 0.85;
+      background: rgb(from var(--color-dark) r g b / var(--opacity)) !important;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
 
       &.visible {
         transition: clip-path 0.2s ease-in-out;

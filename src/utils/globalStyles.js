@@ -311,10 +311,66 @@ pre[data-line] {
 }
 
 ::view-transition-new(root) {
+  animation: reveal .4s cubic-bezier(0.77, 0, 0.175, 1);
+  z-index: 2;
+}
+
+::view-transition-old(root) {
+  z-index: -1;
+  animation: none;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*
+// Faster view transition with blur, might hurt some users
+::view-transition-new(root) {
+  animation: reveal .25s cubic-bezier(0.77, 0, 0.175, 1);
+  z-index: 2;
+}
+
+::view-transition-old(root) {
+  z-index: -1;
+  animation: none;
+}
+
+// View transition animation triggered using document.startViewTransition
+[data-theme="dark"] {
+  --from: -5deg;
+}
+
+[data-theme="light"] {
+  --from: 5deg;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1rem, 0) skewX(var(--from));
+    filter: blur(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) skewY(0deg);
+    filter: blur(0);
+  }
+} */
+
+/*
+// Slide up animation, doesn't look good on route change
+::view-transition-new(root) {
   animation: reveal .5s cubic-bezier(0.77, 0, 0.175, 1);
   clip-path: inset(0 0 0 0);
   z-index: 2;
 }
+
 ::view-transition-old(root) {
   z-index: -1;
   animation: none;
@@ -333,7 +389,7 @@ pre[data-line] {
   from {
     clip-path: inset(var(--from, 0 0 100% 0));
   }
-}
+} */
 
 // Page progress bar
 #gatsby-plugin-page-progress {
@@ -390,22 +446,22 @@ span:has(.gatsby-remark-copy-button-container) {
 
 // Code title
 span:has(.gatsby-code-title) {
-    display: block;
+  display: block;
 }
 
 .gatsby-code-title {
-    color: var(--color-light-dark);
-    padding: 0 1rem;
-    float: right;
-    margin-bottom: -5rem;
-    font-size: 70%;
-    line-height: 1.5;
-    margin-left: -.95rem;
-    transform: translateY(-1rem);
-    font-weight: bold;
-    --opacity: 0.8 !important;
-    background: rgb(from var(--color-light-dark) r g b / calc(var(--opacity) / 4)) !important;
-    border-radius: 2rem 2rem 0 0;
+  color: var(--color-light-dark);
+  padding: 0 1rem;
+  float: right;
+  margin-bottom: -5rem;
+  font-size: 70%;
+  line-height: 1.5;
+  margin-left: -.95rem;
+  transform: translateY(-1rem);
+  font-weight: bold;
+  --opacity: 0.8 !important;
+  background: rgb(from var(--color-light-dark) r g b / calc(var(--opacity) / 4)) !important;
+  border-radius: 2rem 2rem 0 0;
 }
 `;
 
