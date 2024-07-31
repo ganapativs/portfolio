@@ -22,7 +22,7 @@ const LayoutWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-image: linear-gradient(
+  --background-image: linear-gradient(
       235deg,
       rgb(from var(--color-accent) r g b / 0.15) 15%,
       var(--color-dark-2) 60%,
@@ -37,10 +37,13 @@ const LayoutWrapper = styled.div`
       rgb(from var(--color-dark) r g b / 1),
       rgb(from var(--color-accent) r g b / 1)
     );
+  background-image: ${(props) =>
+    props.disableBackground ? 'none' : 'var(--background-image)'};
   background-attachment: fixed;
   background-repeat: no-repeat;
 
   @media screen and (min-width: 768px) {
+    background-image: var(--background-image);
     padding: 0 30px;
   }
 `;
@@ -55,6 +58,7 @@ const Div = styled.div`
 `;
 
 const fullPathPatterns = []; // ['/full-path-url/']
+const disableBackgroundPatterns = ['/blog/'];
 
 const Layout = (props) => {
   const { location } = props;
@@ -68,11 +72,14 @@ const Layout = (props) => {
 
   const isFullWidth =
     props.full || fullPathPatterns.some((p) => location.pathname.startsWith(p));
+  const disableBackground =
+    props.disableBackground ||
+    disableBackgroundPatterns.some((p) => location.pathname.startsWith(p));
 
   return (
     <>
       <GlobalStyles />
-      <LayoutWrapper>
+      <LayoutWrapper disableBackground={disableBackground}>
         <Header full={isFullWidth} location={location} />
         <Div full={isFullWidth}>{props.children}</Div>
         <Footer full={isFullWidth} />
