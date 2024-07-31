@@ -10,12 +10,8 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,json}": [
-      "biome check --write"
-    ],
-    "src/**/*.css": [
-      "biome check --write"
-    ]
+    "src/**/*.{js,json}": ["biome check --write"],
+    "src/**/*.css": ["biome check --write"]
   },
   "dependencies": {
     "@mdx-js/react": "^3.0.1",
@@ -80,14 +76,7 @@
     "husky": "^9.1.4",
     "lint-staged": "^15.2.7"
   },
-  "keywords": [
-    "portfolio",
-    "react",
-    "performance",
-    "gatsby",
-    "blog",
-    "mdx"
-  ],
+  "keywords": ["portfolio", "react", "performance", "gatsby", "blog", "mdx"],
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
