@@ -1,6 +1,6 @@
 import { Link, graphql } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Seo from '../components/seo';
 import { formatPostDate } from '../utils/helpers';
@@ -176,10 +176,6 @@ function BlogPostTemplate(props) {
   const discussUrl = `https://mobile.twitter.com/search?q=${encodeURIComponent(
     blogUrl,
   )}`;
-
-  useEffect(() => {
-    // TODO
-  }, []);
 
   return (
     <Div>
