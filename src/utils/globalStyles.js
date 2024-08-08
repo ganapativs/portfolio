@@ -286,8 +286,9 @@ pre[data-line] {
 
   pre {
     background-color: #000;
-    --opacity: 0.1;
-    background-image: linear-gradient(235deg, rgb(from var(--color-dark-2) r g b / var(--opacity)) 15%, #050512 70%, #050512 100%), repeating-radial-gradient(circle at 0 0, #000000 0, #050512 max(4vw, 10vh)), repeating-linear-gradient(#050512, var(--color-accent));
+    // Removed for performance
+    /* --opacity: 0.1;
+    background-image: linear-gradient(235deg, rgb(from var(--color-dark-2) r g b / var(--opacity)) 15%, #050512 70%, #050512 100%), repeating-radial-gradient(circle at 0 0, #000000 0, #050512 max(4vw, 10vh)), repeating-linear-gradient(#050512, var(--color-accent)); */
   }
 }
 

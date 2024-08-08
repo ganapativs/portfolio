@@ -37,13 +37,15 @@ const LayoutWrapper = styled.div`
       rgb(from var(--color-dark) r g b / 1),
       rgb(from var(--color-accent) r g b / 1)
     );
+  // Impacts performance
   background-image: ${(props) =>
     props.disableBackground ? 'none' : 'var(--background-image)'};
   background-attachment: fixed;
   background-repeat: no-repeat;
+  will-change: transform;
+  transform: translateZ(0);
 
   @media screen and (min-width: 768px) {
-    background-image: var(--background-image);
     padding: 0 30px;
   }
 `;
