@@ -149,7 +149,7 @@ const Right = styled.div`
 
 const IconWrapper = styled.span`
   @media screen and (max-width: 767px) {
-    margin-right: ${(prop) => (prop.active ? '0.25rem' : 0)};
+    margin-right: ${(prop) => (prop.$active ? '0.25rem' : 0)};
   }
 
   @media screen and (min-width: 768px) {
@@ -273,7 +273,17 @@ const ToggleInput = styled.input`
 `;
 
 function LightDarkMoonOrSun({ isDark }) {
-  return <ToggleInput type="checkbox" checked={isDark} />;
+  return (
+    <ToggleInput
+      type="checkbox"
+      checked={isDark}
+      // Fix for "You provided a `checked` prop to a form field without an `onChange` handler.
+      // This will render a read-only field. If the field should be mutable use `defaultChecked`.
+      // Otherwise, set either `onChange` or `readOnly`."
+      onChange={() => {}}
+      aria-label="Toggle theme"
+    />
+  );
 }
 
 const links = [
@@ -357,8 +367,8 @@ const Header = ({ location: { pathname } }) => {
                   className={`${active ? 'active' : ''}`}
                   to={link}
                 >
-                  <IconWrapper active={active} className="hide-xs">
-                    <Icon active={active} />
+                  <IconWrapper $active={active} className="hide-xs">
+                    <Icon $active={active} />
                   </IconWrapper>
                   <span>{name}</span>
                 </LinkTransition>

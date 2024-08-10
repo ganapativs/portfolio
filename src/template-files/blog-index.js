@@ -94,6 +94,7 @@ function BlogIndex(props) {
               <CoverImage>
                 <GatsbyImage
                   image={post.frontmatter.cover.childImageSharp.gatsbyImageData}
+                  alt={`Cover image for ${title}`}
                 />
               </CoverImage>
               <header

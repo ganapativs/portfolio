@@ -82,6 +82,7 @@ const FlagIndia = (props) => (
     height="1em"
     viewBox="0 0 36 36"
     {...props}
+    aria-label="Indian Flag"
   >
     <title>Indian Flag</title>
     <path fill="#138808" d="M0 27a4 4 0 0 0 4 4h28a4 4 0 0 0 4-4v-5H0v5z" />
@@ -123,20 +124,21 @@ const FlagIndia = (props) => (
   </svg>
 );
 
+const AccessibleEmoji = ({ symbol, label }) => (
+  <span aria-label={label}>{symbol}</span>
+);
+
 const DevInfo = () => {
   return (
     <Div>
       <DevName>
-        Ganapati V S <FlagIndia aria-label="India" aria-hidden="true" />
+        Ganapati V S <FlagIndia aria-hidden="true" />
       </DevName>
       <DevDescription>
-        Hi{' '}
-        <span role="img" aria-label="Hi!">
-          👋
-        </span>{' '}
-        I&#39;m a Full-Stack JavaScript developer with over 10 years of
-        experience in turning coffee into cutting-edge code. Currently steering
-        the ship as Vice President - Technology at{' '}
+        Hi <AccessibleEmoji symbol="👋" label="Waving hand" /> I&#39;m a
+        Full-Stack JavaScript developer with over 10 years of experience in
+        turning coffee into cutting-edge code. Currently steering the ship as
+        Vice President - Technology at{' '}
         <ExternalLink
           href="https://tracxn.com/?ref=meetguns.com"
           onClick={() => captureEvent('Tracxn Website', 'click', 'Work Link')}
@@ -148,7 +150,10 @@ const DevInfo = () => {
         My passion lies in coding, architecting elegant solutions, and
         contributing to the vibrant open-source ecosystem. I've had the thrill
         of building: <Separator mb={8} />
-        <Ul style={{ color: 'var(--color-accent)' }}>
+        <Ul
+          aria-label="Projects I've built"
+          style={{ color: 'var(--color-accent)' }}
+        >
           <li>
             <ExternalLink
               href="https://sgb.vercel.app/?ref=meetguns.com"
@@ -156,6 +161,7 @@ const DevInfo = () => {
                 captureEvent('sgb.vercel.app', 'click', 'Social Links')
               }
               style={{ whiteSpace: 'nowrap' }}
+              aria-label="SGB.vercel.app - External link"
             >
               SGB.vercel.app
             </ExternalLink>
@@ -167,6 +173,7 @@ const DevInfo = () => {
                 captureEvent('react-spectrum GitHub', 'click', 'Social Links')
               }
               style={{ whiteSpace: 'nowrap' }}
+              aria-label="React Spectrum GitHub - External link"
             >
               React Spectrum
             </ExternalLink>
@@ -182,6 +189,7 @@ const DevInfo = () => {
                 )
               }
               style={{ whiteSpace: 'nowrap' }}
+              aria-label="React Delightful Scroller GitHub - External link"
             >
               React Delightful Scroller
             </ExternalLink>
@@ -197,6 +205,7 @@ const DevInfo = () => {
                 )
               }
               style={{ whiteSpace: 'nowrap' }}
+              aria-label="Priority Browser Extension GitHub - External link"
             >
               Priority Browser Extension
             </ExternalLink>
@@ -212,6 +221,7 @@ const DevInfo = () => {
                 )
               }
               style={{ whiteSpace: 'nowrap' }}
+              aria-label="React Dynamic Import GitHub - External link"
             >
               React Dynamic Import
             </ExternalLink>
@@ -222,6 +232,7 @@ const DevInfo = () => {
               onClick={() =>
                 captureEvent('bttn.surge.sh', 'click', 'Social Links')
               }
+              aria-label="Bttn.css - External link"
             >
               Bttn.css
             </ExternalLink>
@@ -230,36 +241,26 @@ const DevInfo = () => {
         <Separator mb={24} />
         When I'm not wrestling with code, you'll find me:
         <Separator mb={8} />
-        <Ul style={{ color: 'var(--color-light)' }}>
+        <Ul aria-label="My hobbies" style={{ color: 'var(--color-light)' }}>
           <li>
             Exploring new horizons{' '}
-            <span role="img" aria-label="Travel">
-              ✈️
-            </span>
+            <AccessibleEmoji symbol="✈️" label="Airplane" />
           </li>
           <li>
             Capturing moments through my lens{' '}
-            <span role="img" aria-label="Photography">
-              📸
-            </span>
+            <AccessibleEmoji symbol="📸" label="Camera" />
           </li>
           <li>
             Scoring goals (or trying to){' '}
-            <span role="img" aria-label="Soccer">
-              ⚽️
-            </span>
+            <AccessibleEmoji symbol="⚽️" label="Soccer ball" />
           </li>
           <li>
             Smashing shuttlecocks{' '}
-            <span role="img" aria-label="Badminton">
-              🏸
-            </span>
+            <AccessibleEmoji symbol="🏸" label="Badminton racket" />
           </li>
           <li>
             Saving virtual worlds{' '}
-            <span role="img" aria-label="FIFA gaming">
-              🎮
-            </span>
+            <AccessibleEmoji symbol="🎮" label="Video game controller" />
           </li>
         </Ul>
         <Separator mb={24} />
@@ -267,6 +268,7 @@ const DevInfo = () => {
         <ExternalLink
           href="https://twitter.com/ganapativs?ref=meetguns.com"
           onClick={() => captureEvent('Personal Twitter', 'click', 'Connect')}
+          aria-label="Connect with me on Twitter - External link"
         >
           connect
         </ExternalLink>{' '}

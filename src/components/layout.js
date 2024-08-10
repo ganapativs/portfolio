@@ -39,7 +39,7 @@ const LayoutWrapper = styled.div`
     );
   // Impacts performance
   background-image: ${(props) =>
-    props.disableBackground ? 'none' : 'var(--background-image)'};
+    props.$disableBackground ? 'none' : 'var(--background-image)'};
   background-attachment: fixed;
   background-repeat: no-repeat;
   will-change: transform;
@@ -54,7 +54,7 @@ const Div = styled.div`
   display: flex;
   align-items: flex-start;
   flex: 1;
-  max-width: ${(props) => (props.full ? '100%' : '840px')};
+  max-width: ${(props) => (props.$full ? '100%' : '840px')};
   width: 100%;
   margin: 0 auto;
 `;
@@ -81,10 +81,10 @@ const Layout = (props) => {
   return (
     <>
       <GlobalStyles />
-      <LayoutWrapper disableBackground={disableBackground}>
-        <Header full={isFullWidth} location={location} />
-        <Div full={isFullWidth}>{props.children}</Div>
-        <Footer full={isFullWidth} />
+      <LayoutWrapper $disableBackground={disableBackground}>
+        <Header location={location} />
+        <Div $full={isFullWidth}>{props.children}</Div>
+        <Footer />
       </LayoutWrapper>
     </>
   );

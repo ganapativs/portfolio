@@ -50,7 +50,13 @@ export default function ProfileLogo({ profileLogo }) {
   return (
     <Wrapper>
       <div className="profile-logo">
-        {profileLogo ? <GatsbyImage image={images} draggable={false} /> : null}
+        {profileLogo ? (
+          <GatsbyImage
+            image={images}
+            draggable={false}
+            alt="Picture of Ganapati V S"
+          />
+        ) : null}
       </div>
     </Wrapper>
   );

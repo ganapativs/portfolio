@@ -200,6 +200,7 @@ function BlogPostTemplate(props) {
               <CoverImage>
                 <GatsbyImage
                   image={post.frontmatter.cover.childImageSharp.gatsbyImageData}
+                  alt={`Cover image for ${post.frontmatter.title}`}
                 />
               </CoverImage>
             ) : null}
