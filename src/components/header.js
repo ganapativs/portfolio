@@ -15,6 +15,7 @@ const switchTheme = (theme, toggleTheme) => {
   // Add attribute to html tag, useful for view transition
   document.body.parentElement.setAttribute('data-theme', nextTheme);
   captureEvent(nextTheme, 'change', 'Theme');
+  window.dispatchEvent(new Event('theme-change'));
 };
 
 const HeaderRow = styled.header`
@@ -327,7 +328,9 @@ const Header = ({ location: { pathname } }) => {
       { threshold: [1] },
     );
 
-    observer.observe(el);
+    setTimeout(() => {
+      observer.observe(el);
+    }, 50);
 
     return () => {
       observer.disconnect();

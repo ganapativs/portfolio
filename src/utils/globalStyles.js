@@ -69,7 +69,7 @@ body {
   color: var(--color-light);
   line-height: 1.42857143;
   /* transition: background 0.1s ease-in; */
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Source Sans 3', sans-serif;
 }
 
 @media (print), (prefers-reduced-motion) {
@@ -463,6 +463,51 @@ span:has(.gatsby-code-title) {
   --opacity: 0.8 !important;
   background: rgb(from var(--color-light-dark) r g b / calc(var(--opacity) / 4)) !important;
   border-radius: 2rem 2rem 0 0;
+}
+
+// Sandpack styles
+.sandpack-editor-wrapper {
+  border-radius: 1rem;
+  margin-bottom: 1.75rem;
+  margin-left: -1.3125rem;
+  margin-right: -1.3125rem;
+  background-color: #000;
+}
+
+@media screen and (max-width: 767px) {
+  .sandpack-editor-wrapper {
+    margin-left: -1.11rem;
+    margin-right: -1.11rem;
+    border-radius: 0;
+  }
+}
+
+.sandpack-editor-layout {
+  border-radius: 1rem;
+  overflow: hidden;
+  border: none !important;
+}
+
+@media screen and (max-width: 767px) {
+  .sandpack-editor-layout {
+    border-radius: 0;
+  }
+}
+
+.sandpack-editor-preview {
+  background: transparent !important;
+}
+
+.sandpack-editor-preview * {
+  z-index: initial !important;
+}
+
+.sandpack-editor {
+  background-color: transparent !important;
+}
+
+.sandpack-pre-placeholder {
+  background: transparent !important;
 }
 `;
 

@@ -11,7 +11,7 @@ const GITHUB_REPO_NAME = 'Portfolio';
 
 const Article = styled.article`
   line-height: 1.75rem;
-  font-family: 'Source Sans Pro', serif;
+  font-family: 'Source Sans 3', serif;
 
   // Put shadow around image(distinguish dark/light image from content)
   .gatsby-resp-image-wrapper {
