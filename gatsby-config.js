@@ -1,7 +1,5 @@
 // TODO
-// - Sandpack styles
-// - Sandpack fullscreen option, show file explorer
-// - Light mode on prism code
+// - Light mode on prism code?
 require('dotenv').config({
   path: '.env',
 });

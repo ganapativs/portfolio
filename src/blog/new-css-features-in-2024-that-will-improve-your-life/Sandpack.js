@@ -8,7 +8,120 @@ import {
   SandpackProvider,
 } from '@codesandbox/sandpack-react';
 import { amethyst, githubLight } from '@codesandbox/sandpack-themes';
-import React from 'react';
+import React, { useRef, useState, useLayoutEffect } from 'react';
+import styled from 'styled-components';
+
+/**
+ * TODO
+ *
+ * - Resizable Sandpack when collapsed
+ * - View transition off on theme change
+ * - File explorer in fullscreen mode in desktop
+ * - Highlight exit button in fullscreen mode
+ */
+
+const Toolbar = styled.div`
+    padding: 0 .75rem;
+    background: var(--color-ultra-dark);
+    border-bottom: 2px solid var(--color-light-op-3);
+    border-radius: 1rem 1rem 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: .8rem;
+    color: var(--color-light-dark);
+
+    .left {
+        flex: 1;
+    }
+`;
+
+const Placeholder = styled.div`
+    height: 100vh;
+    margin-bottom: 1.75rem;
+`;
+
+const TextButton = styled.button`
+    background: none;
+    border: none;
+    color: currentColor;
+    font-size: small;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+        color: var(--color-accent);
+    }
+`;
+
+const SandpackContainer = styled.div`
+    border-radius: 1rem;
+    margin-bottom: 1.75rem;
+    margin-left: -1.3125rem;
+    margin-right: -1.3125rem;
+    position: relative;
+    view-transition-name: sandpack-container;
+
+    @media screen and (max-width: 767px) {
+        margin-left: -1.11rem;
+        margin-right: -1.11rem;
+        border-radius: 0;
+    }
+
+    &.fullscreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 10000;
+        margin-bottom: 0;
+        margin-left: 0;
+        margin-right: 0;
+
+        ${Toolbar} {
+            border-radius: 0 !important;
+        }
+
+        .sandpack-editor-layout {
+            border-radius: 0 !important;
+        }
+    }
+
+    .sandpack-editor-wrapper {
+        height: 100%;
+    }
+
+    .sandpack-editor-layout {
+        border-radius: 0 0 1rem 1rem;;
+        overflow: hidden;
+        border: none !important;
+    }
+
+    @media screen and (max-width: 767px) {
+        .sandpack-editor-layout {
+            border-radius: 0;
+        }
+    }
+
+    .sandpack-editor-preview {
+        background: transparent !important;
+    }
+
+    .sandpack-editor-preview * {
+        z-index: initial !important;
+    }
+
+    .sandpack-editor {
+        background-color: transparent !important;
+    }
+
+    .sandpack-pre-placeholder {
+        background: transparent !important;
+    }
+`;
 
 function getTheme(theme) {
   return theme === 'dark'
@@ -38,14 +151,14 @@ function getTheme(theme) {
       };
 }
 
-function SandpackPlugin() {
-  const [theme, setTheme] = React.useState(
-    localStorage.getItem('theme') || 'dark',
-  );
+function SandpackPlugin({ height = 400 }) {
+  const [theme, setTheme] = React.useState('dark');
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const sandpackRef = useRef(null);
 
   React.useEffect(() => {
     function handleThemeChange() {
-      setTheme(localStorage.getItem('theme') || 'dark');
+      setTheme(localStorage?.getItem('theme') || 'dark');
     }
 
     window.addEventListener('theme-change', handleThemeChange);
@@ -59,8 +172,7 @@ function SandpackPlugin() {
     template: 'react',
     theme: getTheme(theme),
     options: {
-      //   showNavigator: false,
-      //   showTabs: true,
+      editorHeight: height,
       externalResources: [
         'https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap',
       ],
@@ -189,25 +301,81 @@ pre, code {
     },
   };
 
-  // Default Sandpack
-  // <Sandpack {...editorProps} />;
+  useLayoutEffect(() => {
+    if (sandpackRef.current) {
+      sandpackRef.current.style.viewTransitionName = 'sandpack-container';
+    }
 
-  // Custom Rendering of Sandpack
+    // Initial theme set
+    if (window.localStorage) {
+      setTheme(localStorage?.getItem('theme') || 'dark');
+    }
+  }, []);
+
+  const toggleFullscreen = () => {
+    if (!document.startViewTransition) {
+      const nextFS = !isFullscreen;
+      setIsFullscreen(nextFS);
+      document.body.style.overflow = nextFS ? 'hidden' : '';
+      document.documentElement.style.overflow = nextFS ? 'hidden' : '';
+      return;
+    }
+
+    document.startViewTransition(() => {
+      setIsFullscreen((prev) => {
+        const nextFS = !prev;
+        document.body.style.overflow = nextFS ? 'hidden' : '';
+        document.documentElement.style.overflow = nextFS ? 'hidden' : '';
+        return nextFS;
+      });
+    });
+  };
+
   return (
-    <SandpackProvider {...editorProps}>
-      <SandpackLayout>
-        {/* <SandpackFileExplorer /> */}
-        <SandpackCodeEditor
-          showTabs
-          wrapContent={false}
-          closableTabs={false}
-          showLineNumbers={false}
-          showRunButton={false}
-          showNavigator={false}
-        />
-        <SandpackPreview showOpenInCodeSandbox={false} showNavigator={false} />
-      </SandpackLayout>
-    </SandpackProvider>
+    <>
+      {isFullscreen ? <Placeholder style={{ height: height + 34 }} /> : null}
+      <SandpackContainer
+        ref={sandpackRef}
+        className={`${isFullscreen ? 'fullscreen' : ''}`}
+      >
+        <Toolbar>
+          <div className="left">Playground</div>
+          <div className="right">
+            <TextButton
+              onClick={toggleFullscreen}
+              className="fullscreen-toggle"
+              type="button"
+            >
+              {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+            </TextButton>
+          </div>
+        </Toolbar>
+        <div
+          style={{
+            height: isFullscreen ? 'calc(100vh - 34px)' : `${height}px`,
+          }}
+        >
+          <SandpackProvider {...editorProps}>
+            <SandpackLayout style={{ height: '100%' }}>
+              <SandpackCodeEditor
+                showTabs
+                wrapContent={false}
+                closableTabs={false}
+                showLineNumbers={false}
+                showRunButton={false}
+                showNavigator={false}
+                style={{ height: '100%' }}
+              />
+              <SandpackPreview
+                showOpenInCodeSandbox={false}
+                showNavigator={false}
+                style={{ height: '100%' }}
+              />
+            </SandpackLayout>
+          </SandpackProvider>
+        </div>
+      </SandpackContainer>
+    </>
   );
 }
 

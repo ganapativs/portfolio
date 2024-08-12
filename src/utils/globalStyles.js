@@ -466,48 +466,41 @@ span:has(.gatsby-code-title) {
 }
 
 // Sandpack styles
-.sandpack-editor-wrapper {
-  border-radius: 1rem;
-  margin-bottom: 1.75rem;
-  margin-left: -1.3125rem;
-  margin-right: -1.3125rem;
-  background-color: #000;
+@keyframes fullscreen-open {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
-@media screen and (max-width: 767px) {
-  .sandpack-editor-wrapper {
-    margin-left: -1.11rem;
-    margin-right: -1.11rem;
-    border-radius: 0;
-  }
+@keyframes fullscreen-close {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(0.8);
+        opacity: 0;
+        overflow: hidden;
+    }
 }
 
-.sandpack-editor-layout {
-  border-radius: 1rem;
-  overflow: hidden;
-  border: none !important;
+::view-transition-new(sandpack-container) {
+  z-index: 2;
+  animation-duration: .3s;
+  animation-timing-function: ease-in-out;
+  animation-name: fullscreen-open;
 }
 
-@media screen and (max-width: 767px) {
-  .sandpack-editor-layout {
-    border-radius: 0;
-  }
-}
-
-.sandpack-editor-preview {
-  background: transparent !important;
-}
-
-.sandpack-editor-preview * {
-  z-index: initial !important;
-}
-
-.sandpack-editor {
-  background-color: transparent !important;
-}
-
-.sandpack-pre-placeholder {
-  background: transparent !important;
+::view-transition-old(sandpack-container) {
+  z-index: -1;
+  animation-duration: .15s;
+  animation-timing-function: ease-in-out;
+  animation-name: fullscreen-close;
 }
 `;
 

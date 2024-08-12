@@ -42,8 +42,8 @@ const LayoutWrapper = styled.div`
     props.$disableBackground ? 'none' : 'var(--background-image)'};
   background-attachment: fixed;
   background-repeat: no-repeat;
-  will-change: transform;
-  transform: translateZ(0);
+  will-change: ${(props) => (props.$disableBackground ? 'none' : 'transform')};
+  transform: ${(props) => (props.$disableBackground ? 'none' : 'translateZ(0)')};
 
   @media screen and (min-width: 768px) {
     padding: 0 30px;
