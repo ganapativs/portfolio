@@ -485,21 +485,20 @@ span:has(.gatsby-code-title) {
     to {
         transform: scale(0.8);
         opacity: 0;
-        overflow: hidden;
     }
 }
 
 ::view-transition-new(sandpack-container) {
   z-index: 2;
   animation-duration: .3s;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in;
   animation-name: fullscreen-open;
 }
 
 ::view-transition-old(sandpack-container) {
   z-index: -1;
   animation-duration: .15s;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: ease-out;
   animation-name: fullscreen-close;
 }
 `;

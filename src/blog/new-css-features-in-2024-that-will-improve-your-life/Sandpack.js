@@ -20,17 +20,19 @@ import styled from 'styled-components';
 /**
  * TODO
  *
+ * - Vertical sandbox layout in desktop also - https://www.joshwcomeau.com/react/next-level-playground/
  * - Resizable Sandpack when collapsed
  * - View transition off on theme change
  * - File explorer in fullscreen mode in desktop
  * - Fix mobile height
  * - Highlight exit button in fullscreen mode
+ * - Fix activeline flickering
  */
 
 const Toolbar = styled.div`
     padding: 0 .75rem;
     background: var(--color-ultra-dark);
-    border-bottom: 2px solid var(--color-light-op-3);
+    border-bottom: 1.5px solid var(--color-light-op-3);
     border-radius: 1rem 1rem 0 0;
     display: flex;
     align-items: center;
@@ -50,7 +52,8 @@ const Toolbar = styled.div`
 const Placeholder = styled.div`
     height: 100vh;
     margin-bottom: 1.75rem;
-    background: var(--color-light-dark);
+    background: transparent;
+    border-radius: 1rem;
 `;
 
 const TextButton = styled.button`
@@ -323,10 +326,6 @@ pre, code {
   };
 
   useLayoutEffect(() => {
-    if (sandpackRef.current) {
-      sandpackRef.current.style.viewTransitionName = 'sandpack-container';
-    }
-
     // Initial theme set
     if (window.localStorage) {
       setTheme(localStorage?.getItem('theme') || 'dark');
