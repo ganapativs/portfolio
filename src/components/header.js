@@ -337,11 +337,19 @@ const Header = ({ location: { pathname } }) => {
     };
   }, []);
 
-  const onThemeChange = useCallback((theme, toggleTheme) => {
+  const onThemeChange = useCallback(async (theme, toggleTheme) => {
+    window.dispatchEvent(new Event('theme-change-start'));
+
     if (!document.startViewTransition) {
-      return switchTheme(theme, toggleTheme);
+      switchTheme(theme, toggleTheme);
+    } else {
+      const animation = document.startViewTransition(() =>
+        switchTheme(theme, toggleTheme),
+      );
+      await animation.finished;
     }
-    document.startViewTransition(() => switchTheme(theme, toggleTheme));
+
+    window.dispatchEvent(new Event('theme-change-end'));
   }, []);
 
   return (

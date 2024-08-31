@@ -39,6 +39,7 @@ const Toolbar = styled.div`
     justify-content: space-between;
     font-size: .8rem;
     color: var(--color-light-dark);
+    height: 34px;
 
     @media screen and (max-width: 767px) {
         border-radius: 0;
@@ -78,6 +79,10 @@ const SandpackContainer = styled.div`
     margin-right: -1.3125rem;
     position: relative;
     view-transition-name: sandpack-container;
+
+    &.disable-view-transition {
+      view-transition-name: unset !important;
+    }
 
     @media screen and (max-width: 767px) {
         margin-left: -1.11rem;
@@ -333,14 +338,28 @@ pre, code {
   }, []);
 
   useEffect(() => {
+    function handleThemeChangeStart() {
+      if (sandpackRef.current) {
+        sandpackRef.current.classList.add('disable-view-transition');
+      }
+    }
     function handleThemeChange() {
       setTheme(localStorage?.getItem('theme') || 'dark');
     }
+    function handleThemeChangeEnd() {
+      if (sandpackRef.current) {
+        sandpackRef.current.classList.remove('disable-view-transition');
+      }
+    }
 
+    window.addEventListener('theme-change-end', handleThemeChangeEnd);
     window.addEventListener('theme-change', handleThemeChange);
+    window.addEventListener('theme-change-start', handleThemeChangeStart);
 
     return () => {
+      window.removeEventListener('theme-change-start', handleThemeChangeStart);
       window.removeEventListener('theme-change', handleThemeChange);
+      window.removeEventListener('theme-change-end', handleThemeChangeEnd);
     };
   }, []);
 
