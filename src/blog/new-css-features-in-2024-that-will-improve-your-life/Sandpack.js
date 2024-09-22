@@ -17,29 +17,18 @@ import React, {
 } from 'react';
 import styled from 'styled-components';
 
-/**
- * TODO
- *
- * - Vertical sandbox layout in desktop also - https://www.joshwcomeau.com/react/next-level-playground/
- * - Resizable Sandpack when collapsed
- * - View transition off on theme change
- * - File explorer in fullscreen mode in desktop
- * - Fix mobile height
- * - Highlight exit button in fullscreen mode
- * - Fix activeline flickering
- */
-
 const Toolbar = styled.div`
     padding: 0 .75rem;
     background: var(--color-ultra-dark);
-    border-bottom: 1.5px solid var(--color-light-op-3);
+    box-shadow: inset 0px -1.5px var(--color-light-op-3);
+    height: 32px;
     border-radius: 1rem 1rem 0 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-size: .8rem;
     color: var(--color-light-dark);
-    height: 34px;
+    position: relative;
 
     @media screen and (max-width: 767px) {
         border-radius: 0;
@@ -60,7 +49,7 @@ const Placeholder = styled.div`
 const TextButton = styled.button`
     background: none;
     border: none;
-    color: currentColor;
+    color: var(--color-accent);
     font-size: small;
     cursor: pointer;
     padding: 0;
@@ -68,8 +57,18 @@ const TextButton = styled.button`
     transition: color 0.2s ease-in-out;
 
     &:hover {
-        color: var(--color-accent);
+        color: rgb(from var(--color-accent) r g b / 0.8);
     }
+`;
+
+const Backdrop = styled.div`
+    position: ${(props) => (props.$isFullscreen ? 'fixed' : 'absolute')};
+    inset: ${(props) => (props.$isFullscreen ? '0' : '2rem')};
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const SandpackContainer = styled.div`
@@ -78,28 +77,33 @@ const SandpackContainer = styled.div`
     margin-left: -1.3125rem;
     margin-right: -1.3125rem;
     position: relative;
-    view-transition-name: sandpack-container;
-
-    &.disable-view-transition {
-      view-transition-name: unset !important;
-    }
 
     @media screen and (max-width: 767px) {
-        margin-left: -1.11rem;
-        margin-right: -1.11rem;
-        border-radius: 0;
+        border-radius: 1rem;
+        margin-left: 0;
+        margin-right: 0;
+        overflow: hidden;
+    }
+
+    @media screen and (max-width: 991px) {
+        .sandpack-size-wrapper {
+          height: 100% !important;
+        }
     }
 
     &.fullscreen {
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
+        inset: 20px;
         z-index: 10000;
-        margin-bottom: 0;
-        margin-left: 0;
-        margin-right: 0;
+        overflow: auto;
+        max-width: 1800px;
+        margin: 0 auto;
+        border-radius: 1rem;
+        animation: fadeIn 0.25s ease-in-out;
+
+        @media screen and (min-width: 1200px) {
+            inset: 150px;
+        }
 
         ${Toolbar} {
             border-radius: 0 !important;
@@ -110,8 +114,11 @@ const SandpackContainer = styled.div`
         }
     }
 
-    .sandpack-editor-wrapper {
-        height: 100%;
+
+    @media screen and (min-width: 992px) {
+        .sandpack-editor-wrapper {
+            height: 100%;
+        }
     }
 
     .sandpack-editor-layout {
@@ -144,6 +151,10 @@ const SandpackContainer = styled.div`
 
     .sandpack-preview-iframe {
         max-height: 100% !important;
+    }
+
+    .sandpack-file-explorer {
+      height: 100% !important;
     }
 `;
 
@@ -189,14 +200,14 @@ function useMounted() {
   return isMounted;
 }
 
-function SandpackPlugin({ height = 400 }) {
+function SandpackPlugin({ height = 400, template = 'react', files = [] }) {
   const [theme, setTheme] = useState(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const isMounted = useMounted();
   const sandpackRef = useRef(null);
 
   const editorProps = {
-    template: 'react',
+    template,
     theme: getTheme(theme),
     options: {
       resizablePanels: true,
@@ -213,121 +224,10 @@ function SandpackPlugin({ height = 400 }) {
         'sp-pre-placeholder': 'sandpack-pre-placeholder',
         'sp-code-editor': 'sandpack-code-editor',
         'sp-preview-iframe': 'sandpack-preview-iframe',
+        'sp-file-explorer': 'sandpack-file-explorer',
       },
     },
-    files: {
-      '/App.js': {
-        code: `import React from "react";
-import "./styles.css";
-
-export default function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <code>Hello</code>
-      </header>
-    </div>
-  );
-}
-          `,
-      },
-      '/styles.css': {
-        code: `* {
-  box-sizing: border-box;
-}
-
-::selection {
-  color: #fff;
-  background: var(--color-accent);
-}
-
-html, body {
-  font-size: 18px;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: var(--color-dark);
-  color: var(--color-light);
-  line-height: 1.42857143;
-  /* transition: background 0.1s ease-in; */
-  font-family: 'Source Sans 3', sans-serif;
-}
-
-@media (print), (prefers-reduced-motion) {
-  * {
-    animation: unset !important;
-    transition: none !important;
-  }
-}
-
-body {
-    font-family: 'Source Sans 3', sans-serif;
-}
-
-pre, code {
-    font-family: 'Fira Code', monospace;
-}
-
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-          `,
-      },
-    },
+    files,
   };
 
   useLayoutEffect(() => {
@@ -338,60 +238,49 @@ pre, code {
   }, []);
 
   useEffect(() => {
-    function handleThemeChangeStart() {
-      if (sandpackRef.current) {
-        sandpackRef.current.classList.add('disable-view-transition');
-      }
-    }
     function handleThemeChange() {
       setTheme(localStorage?.getItem('theme') || 'dark');
     }
-    function handleThemeChangeEnd() {
-      if (sandpackRef.current) {
-        sandpackRef.current.classList.remove('disable-view-transition');
-      }
-    }
 
-    window.addEventListener('theme-change-end', handleThemeChangeEnd);
-    window.addEventListener('theme-change', handleThemeChange);
-    window.addEventListener('theme-change-start', handleThemeChangeStart);
+    window.addEventListener('theme-change', handleThemeChange, true);
 
     return () => {
-      window.removeEventListener('theme-change-start', handleThemeChangeStart);
-      window.removeEventListener('theme-change', handleThemeChange);
-      window.removeEventListener('theme-change-end', handleThemeChangeEnd);
+      window.removeEventListener('theme-change', handleThemeChange, true);
     };
   }, []);
 
-  const toggleFullscreen = useCallback(() => {
-    if (!document.startViewTransition) {
-      const nextFS = !isFullscreen;
-      setIsFullscreen(nextFS);
-      document.body.style.overflow = nextFS ? 'hidden' : '';
-      document.documentElement.style.overflow = nextFS ? 'hidden' : '';
-      return;
-    }
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isFullscreen) {
+        toggleFullscreen();
+      }
+    };
 
-    document.startViewTransition(() => {
-      setIsFullscreen((prev) => {
-        const nextFS = !prev;
-        document.body.style.overflow = nextFS ? 'hidden' : '';
-        document.documentElement.style.overflow = nextFS ? 'hidden' : '';
-        return nextFS;
-      });
-    });
+    document.addEventListener('keydown', handleKeyDown, true);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown, true);
+    };
+  });
+
+  const toggleFullscreen = useCallback(() => {
+    const nextFS = !isFullscreen;
+    setIsFullscreen(nextFS);
+    document.body.style.overflow = nextFS ? 'hidden' : '';
+    document.documentElement.style.overflow = nextFS ? 'hidden' : '';
   }, [isFullscreen]);
 
   return (
     <>
       {isFullscreen || !isMounted.current ? (
-        <Placeholder style={{ height: height + 34 }} />
+        <Placeholder style={{ height: height + 32 }} />
       ) : null}
       {isMounted.current && (
         <SandpackContainer
           ref={sandpackRef}
           className={`${isFullscreen ? 'fullscreen' : ''}`}
         >
+          <Backdrop onClick={toggleFullscreen} $isFullscreen={isFullscreen} />
           <Toolbar>
             <div className="left">Playground</div>
             <div className="right">
@@ -400,17 +289,19 @@ pre, code {
                 className="fullscreen-toggle"
                 type="button"
               >
-                {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+                {isFullscreen ? 'Close' : 'Expand'}
               </TextButton>
             </div>
           </Toolbar>
           <div
             style={{
-              height: isFullscreen ? 'calc(100vh - 34px)' : `${height}px`,
+              height: isFullscreen ? 'calc(100% - 32px)' : `${height}px`,
             }}
+            className="sandpack-size-wrapper"
           >
             <SandpackProvider {...editorProps}>
               <SandpackLayout style={{ height: '100%' }}>
+                {isFullscreen ? <SandpackFileExplorer /> : null}
                 <SandpackCodeEditor
                   showTabs
                   wrapContent={false}

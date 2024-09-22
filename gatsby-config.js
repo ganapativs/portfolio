@@ -1,6 +1,3 @@
-// TODO
-// - Make prism theme same as code sandbox theme
-// - Light mode on prism code?
 require('dotenv').config({
   path: '.env',
 });

@@ -464,43 +464,6 @@ span:has(.gatsby-code-title) {
   background: rgb(from var(--color-light-dark) r g b / calc(var(--opacity) / 4)) !important;
   border-radius: 2rem 2rem 0 0;
 }
-
-// Sandpack styles
-@keyframes fullscreen-open {
-    from {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-@keyframes fullscreen-close {
-    from {
-        transform: scale(1);
-        opacity: 1;
-    }
-    to {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-}
-
-::view-transition-new(sandpack-container) {
-  z-index: 2;
-  animation-duration: .3s;
-  animation-timing-function: ease-in;
-  animation-name: fullscreen-open;
-}
-
-::view-transition-old(sandpack-container) {
-  z-index: -1;
-  animation-duration: .15s;
-  animation-timing-function: ease-out;
-  animation-name: fullscreen-close;
-}
 `;
 
 export default React.memo(GlobalStyles);
