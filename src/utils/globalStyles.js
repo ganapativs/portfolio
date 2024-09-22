@@ -312,7 +312,7 @@ pre[data-line] {
 }
 
 ::view-transition-new(root) {
-  animation: reveal .4s cubic-bezier(0.77, 0, 0.175, 1);
+  animation: reveal .25s cubic-bezier(0.77, 0, 0.175, 1);
   z-index: 2;
 }
 
