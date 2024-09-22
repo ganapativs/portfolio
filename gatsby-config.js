@@ -207,11 +207,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
-        fonts: [
-          'Merriweather:700',
-          'Source Sans Pro:400',
-          'Fira Code:400,400i',
-        ],
+        fonts: ['Merriweather:700', 'Source Sans 3:400', 'Fira Code:400,400i'],
       },
     },
     {

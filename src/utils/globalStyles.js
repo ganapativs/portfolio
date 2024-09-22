@@ -69,7 +69,7 @@ body {
   color: var(--color-light);
   line-height: 1.42857143;
   /* transition: background 0.1s ease-in; */
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Source Sans 3', sans-serif;
 }
 
 @media (print), (prefers-reduced-motion) {
@@ -312,7 +312,7 @@ pre[data-line] {
 }
 
 ::view-transition-new(root) {
-  animation: reveal .4s cubic-bezier(0.77, 0, 0.175, 1);
+  animation: reveal .25s cubic-bezier(0.77, 0, 0.175, 1);
   z-index: 2;
 }
 

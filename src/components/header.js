@@ -15,6 +15,7 @@ const switchTheme = (theme, toggleTheme) => {
   // Add attribute to html tag, useful for view transition
   document.body.parentElement.setAttribute('data-theme', nextTheme);
   captureEvent(nextTheme, 'change', 'Theme');
+  window.dispatchEvent(new Event('theme-change'));
 };
 
 const HeaderRow = styled.header`
@@ -327,18 +328,28 @@ const Header = ({ location: { pathname } }) => {
       { threshold: [1] },
     );
 
-    observer.observe(el);
+    setTimeout(() => {
+      observer.observe(el);
+    }, 50);
 
     return () => {
       observer.disconnect();
     };
   }, []);
 
-  const onThemeChange = useCallback((theme, toggleTheme) => {
+  const onThemeChange = useCallback(async (theme, toggleTheme) => {
+    window.dispatchEvent(new Event('theme-change-start'));
+
     if (!document.startViewTransition) {
-      return switchTheme(theme, toggleTheme);
+      switchTheme(theme, toggleTheme);
+    } else {
+      const animation = document.startViewTransition(() =>
+        switchTheme(theme, toggleTheme),
+      );
+      await animation.finished;
     }
-    document.startViewTransition(() => switchTheme(theme, toggleTheme));
+
+    window.dispatchEvent(new Event('theme-change-end'));
   }, []);
 
   return (

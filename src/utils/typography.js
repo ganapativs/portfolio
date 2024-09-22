@@ -7,7 +7,7 @@ const theme = {
   scaleRatio: 1.6,
   baseFontSize: '18px',
   bodyColor: 'var(--color-light)',
-  bodyFontFamily: ['Source Sans Pro', 'sans-serif'],
+  bodyFontFamily: ['Source Sans 3', 'sans-serif'],
   headerFontFamily: ['Merriweather', 'serif'],
   headerWeight: '700',
   bodyWeight: 400,
@@ -54,7 +54,7 @@ const theme = {
     },
     blockquote: {
       color: 'inherit',
-      fontFamily: "'Source Sans Pro',sans-serif",
+      fontFamily: "'Source Sans 3',sans-serif",
       margin: '2rem auto',
       padding: '0 1.5rem',
       lineHeight: 'inherit',
